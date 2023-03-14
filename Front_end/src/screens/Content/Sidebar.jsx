@@ -15,10 +15,10 @@ const Sidebar = () => {
   return (
     <div className='border-r border-r-[#DBDBDB] flex flex-col'>
         <div className='flex-[80%] py-7 flex flex-col px-6 gap-5'>
-            {admin.map((item) => {
+            {admin.map((item,index) => {
                 const {name,path,icon} = item;
                 return(
-                    <Link path={path} name={name} icon={icon} />
+                    <Link key={index} path={path} name={name} icon={icon} />
                 )
             })}
         </div>

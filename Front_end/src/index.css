@@ -16,4 +16,23 @@
         background-image: url('./assets/Auth.png');
         background-size: contain;
     }
+    .main::-webkit-scrollbar{
+        display: none;
+    }
+    .card::after{
+        content: '';
+        width: 95%;
+        height: 95%;
+        right: 0px;
+        bottom: 0px;
+        background-color: #5030E5;
+        position: absolute;
+        z-index: -1;
+        border-radius: 8px;
+        transition: right 150ms ease, bottom 150ms ease;
+    }
+    .card:hover::after{
+        right: -6px;
+        bottom: -6px;
+    }
 }
