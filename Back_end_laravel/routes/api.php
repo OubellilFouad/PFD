@@ -15,3 +15,4 @@ use Illuminate\Suppor\Facades\Request;
 */
 
 Route::get('/test',[TestController::class,'test']);
+Route::post('/post',[TestController::class,'post']);
