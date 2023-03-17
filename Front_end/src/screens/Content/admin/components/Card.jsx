@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 const Card = () => {
   return (
@@ -8,7 +9,13 @@ const Card = () => {
                 <p className='text-xl font-bold'>Departement de l’informatique</p>
                 <span className='text-sm font-semibold'>Domain</span>
             </div>
-            <button className=' py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
+            <NavLink to={'info'} end state={{
+              name: 'Dashboard',
+              page: 'Info',
+              dep: 'Departement de l’informatique'
+            }}>
+              <button className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
+            </NavLink>
         </div>
     </div>
   )

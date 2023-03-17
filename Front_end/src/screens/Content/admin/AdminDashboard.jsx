@@ -1,7 +1,7 @@
 import React from 'react'
 import Card from './components/Card'
 
-const Dashboard = () => {
+const AdminDashboard = () => {
   return (
     <div className='flex flex-col gap-8'>
         <p className='text-xl font-bold'>Liste des departements</p>
@@ -14,4 +14,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default AdminDashboard

@@ -3,12 +3,12 @@ import {MdOutlineSpaceDashboard} from 'react-icons/md'
 import {HiOutlineUsers} from 'react-icons/hi'
 import { NavLink } from 'react-router-dom'
 import {BsThreeDots} from 'react-icons/bs'
-import Dep from './components/Dep'
-import Link from './components/NavLink'
+import Dep from './admin/components/Dep'
+import Link from './admin/components/NavLink'
 
 const admin = [
-    {path:'',name:'Dashboard',icon: <MdOutlineSpaceDashboard/>},
-    {path:'gestionair',name:'Les gestionair',icon: <HiOutlineUsers/>},
+    {path:'',name:'Dashboard',icon: <MdOutlineSpaceDashboard/>,page: 'Main'},
+    {path:'gestionair',name:'Les gestionair',icon: <HiOutlineUsers/>,page: 'Gestionair'},
 ]
 
 const Sidebar = () => {
@@ -16,9 +16,9 @@ const Sidebar = () => {
     <div className='border-r border-r-[#DBDBDB] flex flex-col'>
         <div className='flex-[80%] py-7 flex flex-col px-6 gap-5'>
             {admin.map((item,index) => {
-                const {name,path,icon} = item;
+                const {name,path,icon,page} = item;
                 return(
-                    <Link key={index} path={path} name={name} icon={icon} />
+                    <Link key={index} path={path} page={page} name={name} icon={icon} />
                 )
             })}
         </div>
@@ -27,8 +27,6 @@ const Sidebar = () => {
             <div className='flex flex-col gap-5'>
                 <p className='text-[#787486] text-xs font-bold uppercase'>Mes departement</p>
                 <div className='flex flex-col gap-4'>
-                    <Dep/>
-                    <Dep/>
                     <Dep/>
                 </div>
             </div>
