@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Input from './components/Input'
@@ -8,7 +9,7 @@ const Login = () => {
   const [confPassword,setConfPassword] = useState('');
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://127.0.0.1:8000/api/test').then((response) => console.log(response));
+    axios.get('http://127.0.0.1:8000/api/test').then((response) => console.log(response.data));
     console.log('email:' + email);
     console.log('password:' + password);
     console.log('confirm password:' + confPassword);
