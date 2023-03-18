@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\authController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Suppor\Facades\Request;
@@ -15,4 +16,4 @@ use Illuminate\Suppor\Facades\Request;
 */
 
 Route::get('/test',[TestController::class,'test']);
-Route::post('/post',[TestController::class,'post']);
+Route::post('/login',[authController::class,'login']);
