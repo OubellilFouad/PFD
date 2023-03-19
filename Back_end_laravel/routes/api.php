@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\authController;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\AuthController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Suppor\Facades\Request;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,5 +15,7 @@ use Illuminate\Suppor\Facades\Request;
 |
 */
 
-Route::get('/test',[TestController::class,'test']);
-Route::post('/login',[authController::class,'login']);
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+Route::post('login',[AuthController::class,'login']);
