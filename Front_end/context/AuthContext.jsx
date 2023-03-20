@@ -1,15 +1,12 @@
 import axios from 'axios';
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 
 const Auth = createContext();
-const loginUrl = 'http://localhost:8000/api/test';
-const userUrl = 'http://127.0.0.1:8000/api/user';
+const userUrl = 'http://localhost:8000/api/user';
 
 export const AuthContext = ({children}) => {
   const [user,setUser] = useState({});
-  const login = async (formData) => {
-    
-  }
+  
   const getUser = async () => {
     const userReq = await axios.get(userUrl,{
       withCredentials: true,
@@ -19,10 +16,13 @@ export const AuthContext = ({children}) => {
       }
     });
     const user = await userReq.data;
-    console.log(userReq);
+    setUser(user);
   }
+  useEffect(() => {
+    getUser();
+  },[])
   return (
-    <Auth.Provider value={{login}}>
+    <Auth.Provider value={{ user,getUser}}>
       {children}
     </Auth.Provider>
   )

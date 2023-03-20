@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { Outlet, useLocation, useNavigation } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import {AiOutlinePlus} from 'react-icons/ai'
-import { MdClose } from 'react-icons/md';
 import DepForm from './admin/components/DepForm';
+import { useAuth } from '../../../context/AuthContext';
 const Main = () => {
   const location = useLocation();
-  const navigation = useNavigation()
   const [title,setTitle] = useState('Dashboard');
   const [page,setPage] = useState('Main');
   const [open,setOpen] = useState(false);
   useEffect(() => {
     location.state?.name? setTitle(location.state.name):setTitle(title);
     location.state?.page? setPage(location.state.page):setPage(page);
-    console.log(page);
   },[location.state?.name,location.state?.page])  
   return (
     <div className='py-7 px-12 flex flex-col gap-8 overflow-x-scroll main'>

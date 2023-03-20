@@ -12,20 +12,23 @@ class AuthController extends Controller
         $credentials = $request->validate([
             "email" => ["required" , 'string'],
             "password" => ["required" , 'string'],
-            "userID" => ["required"]
+            "userID" => ["required", 'string']
         ]);
         $admin = Admin::where("email",$request->email)->first();
         if(!$admin) return response(["message" => "Invalid email"]);
         if($request->password != $admin->password) return response(["message" => "Invalid pw"]);
+        if($request->userID != $admin->userID) return response(["message" => "Invalid ID"]);
         // return $admin;
 
         // $token = csrf_token();
         $token = $admin->createToken('myApp')->plainTextToken;
         $cookie = cookie('jwt' , $token , 60);
         return response([
-            "admin" => $admin,
-            "token" => $token
+            "message"=> 'Success',
         ])->withCookie($cookie);
         
+    }
+    public function user(){
+        return Auth::user();
     }
 }

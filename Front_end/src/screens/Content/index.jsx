@@ -1,10 +1,15 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
+import { useAuth } from '../../../context/AuthContext'
 import Header from './Header'
-import Main from './Main'
 import Sidebar from './Sidebar'
 
 const Content = () => {
+  const {user} = useAuth();
+  const navigate = useNavigate();
+  if(!user){
+    navigate('/');
+  }
   return (
     <div className='grid grid-cols-[1fr_5fr] grid-rows-[1fr_8fr] h-screen'>
         <div className='flex items-center px-6 gap-3 border-b border-b-[#DBDBDB] border-r border-r-[#DBDBDB]'>
