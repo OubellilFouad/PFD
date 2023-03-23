@@ -9,7 +9,7 @@ const Auth = () => {
     if(user){
       navigate('/App');
     }
-  },[])
+  },[user])
   return (
     <div className='flex h-screen justify-center items-center'>
         <div className='w-2/3 aspect-video rounded-3xl flex overflow-hidden shadow-2xl'>

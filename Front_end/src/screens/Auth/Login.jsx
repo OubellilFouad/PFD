@@ -6,7 +6,7 @@ import Input from './components/Input'
 const loginUrl = 'http://localhost:8000/api/login';
 
 const Login = () => {
-  const {getUser} = useAuth();
+  const {getUser,user} = useAuth();
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
   const [userID,setUserID] = useState('');

@@ -1,6 +1,6 @@
 import React from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
-import { MdSchool } from 'react-icons/md'
+import { MdEdit, MdSchool } from 'react-icons/md'
 
 const ChefCard = () => {
   return (
@@ -19,8 +19,8 @@ const ChefCard = () => {
         </div>
         <div className='flex-1 flex justify-end items-center'>
             <button className='flex items-center text-base gap-2 py-2 px-4 border rounded-lg hover:text-main hover:border-main'>
-                <AiOutlinePlus className='p-1 bg-palerMain text-main text-xl rounded-md'/>
-                Add chef
+                <MdEdit className='p-1 bg-palerMain text-main text-xl rounded-md'/>
+                Edit chef
             </button>
         </div>
     </div>

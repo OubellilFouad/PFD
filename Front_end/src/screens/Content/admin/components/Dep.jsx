@@ -1,14 +1,20 @@
 import React from 'react'
+import { AiFillDelete } from 'react-icons/ai'
 import { BsThreeDots } from 'react-icons/bs'
+import { useAdmin } from '../context/AdminContext'
 
-const Dep = () => {
+const Dep = ({nom,domainid,depid}) => {
+  const {deleteDep} = useAdmin();
+  const handleDelete = () => {
+    deleteDep(depid);
+  }
   return (
-    <div className='flex items-center justify-between bg-palerMain px-3 py-1 rounded-lg'>
+    <div className='flex items-center justify-between bg-palerMain px-3 py-1 rounded-lg relative'>
         <div className='flex gap-3 items-center'>
             <span className='text-main text-3xl'>•</span>
-            <p className='text-base font-semibold'>Dep</p>
+            <p className='text-xs font-bold'>{nom}</p>
         </div>
-        <BsThreeDots className='text-xl cursor-pointer'/>
+        <AiFillDelete onClick={handleDelete} className='text-base text-red cursor-pointer'/>
     </div>
   )
 }

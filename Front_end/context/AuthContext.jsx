@@ -5,7 +5,7 @@ const Auth = createContext();
 const userUrl = 'http://localhost:8000/api/user';
 
 export const AuthContext = ({children}) => {
-  const [user,setUser] = useState({});
+  const [user,setUser] = useState(null);
   
   const getUser = async () => {
     const userReq = await axios.get(userUrl,{
@@ -16,7 +16,11 @@ export const AuthContext = ({children}) => {
       }
     });
     const user = await userReq.data;
-    setUser(user);
+    if(Object.keys(user).length !== 0){
+      setUser(user);
+    }else{
+      setUser(null);
+    }
   }
   useEffect(() => {
     getUser();

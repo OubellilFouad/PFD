@@ -19,7 +19,7 @@
         background-image: url('./assets/Auth.png');
         background-size: contain;
     }
-    .main::-webkit-scrollbar{
+    *::-webkit-scrollbar{
         display: none;
     }
     .card::after{
