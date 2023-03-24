@@ -12,12 +12,21 @@ Base = declarative_base()
 class dep(Base):
 	__tablename__ = 'dep'
 	depid = Column(Integer, primary_key=True, autoincrement=True)
-	nom = Column(String(length=100), nullable=False, unique=True)
-	domainid = Column(Integer, nullable=False)
+	nom = Column(String(length=100))
+	domainid = Column(Integer)
 
 class domain(Base):
 	__tablename__ = 'domain'
 	domainid = Column(Integer, primary_key=True, autoincrement=True)
-	nom = Column(String(length=100), nullable=False, unique=True)
+	nom = Column(String(length=100))
+
+class chambre(Base):
+	__tablename__ = 'chambre'
+	chambreid = Column(Integer, primary_key=True, autoincrement=True)
+	nom = Column(String(length=100))
+	depid = Column(Integer)
+	salleid = Column(Integer)
+	capacite = Column(Integer)
+	type = Column(String(length=100))
 
 Base.metadata.create_all(engine) ##create tables if they don't exist

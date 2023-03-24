@@ -19,8 +19,8 @@ def get_or_none(conn, model, **kwargs):
 def delete(conn, model, **kwargs):
 	instance = conn.execute(sql.delete(model).filter_by(**kwargs))
 
-def update(conn, model, **kwargs):
-	instance = conn.execute(insert(model).values(**kwargs).on_duplicate_key_update(**kwargs))
+def update(conn, model, data):
+	instance = conn.execute(insert(model).values(data).on_duplicate_key_update(data))
 	
 	return {"id": instance.inserted_primary_key[0]}
 
