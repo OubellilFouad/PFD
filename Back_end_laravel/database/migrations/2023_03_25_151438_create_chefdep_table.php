@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('userID')->unique();
             $table->date('dateNaiss');
+            $table->string('role');
+            $table->string('depID');
+        
             $table->timestamps();
         });
         
