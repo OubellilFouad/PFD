@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class AuthController extends Controller
 {
@@ -22,7 +23,7 @@ class AuthController extends Controller
 
         // $token = csrf_token();
         $token = $admin->createToken('myApp')->plainTextToken;
-        $cookie = cookie('jwt' , $token , 60);
+        $cookie = cookie('jwt' , $token , 3600);
         return response([
             "message"=> 'Success',
         ])->withCookie($cookie);
@@ -30,5 +31,11 @@ class AuthController extends Controller
     }
     public function user(){
         return Auth::user();
+    }
+    public function logout(Request $request){
+        $cookie = Cookie::forget('jwt');
+        return response([
+            'message' => 'Success'
+        ])->withCookie($cookie);
     }
 }

@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\authController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\authController;
+use App\Http\Controllers\adminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('login',[authController::class,'login']);
+Route::post('logout',[authController::class,'logout']);
 Route::middleware('auth:sanctum')->group(function(){
     Route::get('user',[authController::class,'user']);
+});
+
+
+Route::group(['prefix' => 'admin'], function() {
+    
+    Route::post('/ajouter-chefdep', [adminController::class,'ajouterChefDep'])->name('ajouter-chefdep');
+        
+    Route::put('/modifier-chefdep/{id}', [adminController::class,'modifierChefDep'])->name('modifier-chefdep');
+    
+    Route::get('/get-chefdep', [adminController::class,'getChefDep'])->name('get-chefdep');
+    
+    Route::delete('/supprimer-chefdep/{id}', [adminController::class,'deleteChefDep'])->name('supprimer-chefdep');
+    
 });
