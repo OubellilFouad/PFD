@@ -17,6 +17,7 @@ const chef = [
     {path:'',name:'Dashboard',icon: <MdOutlineSpaceDashboard/>,page: 'Main'},
     {path:'enseignant',name:'Les Enseignant',icon: <HiOutlineUsers/>,page: 'Enseignant'},
     {path:'sections',name:'Les Sections',icon: <HiOutlineUsers/>,page: 'Sections'},
+    {path:'modules',name:'Les Modules',icon: <HiOutlineUsers/>,page: 'Modules'},
 ]
 
 const Sidebar = () => {

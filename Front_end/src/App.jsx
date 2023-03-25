@@ -10,6 +10,7 @@ import DepInfo from './screens/Content/admin/DepInfo'
 import Gestionair from './screens/Content/admin/Gestionair'
 import ChefDashboard from './screens/Content/chefDep/ChefDashboard'
 import Enseingant from './screens/Content/chefDep/Enseingant'
+import Modules from './screens/Content/chefDep/Modules'
 import Sections from './screens/Content/chefDep/Sections'
 import Main from './screens/Content/Main'
 
@@ -32,6 +33,7 @@ function App() {
                 <Route path='' element={<ChefDashboard/>}/>
                 <Route path='enseignant' element={<Enseingant/>}/>
                 <Route path='sections' element={<Sections/>}/>
+                <Route path='modules' element={<Modules/>}/>
               </>
             )}
           </Route>
