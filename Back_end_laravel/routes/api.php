@@ -30,7 +30,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::put('/modifier-chefdep/{id}', [adminController::class,'modifierChefDep'])->name('modifier-chefdep');
     
     Route::get('/get-chefdep', [adminController::class,'getChefDep'])->name('get-chefdep');
-    Route::get('/get-chefdepbydepid', [adminController::class,'getChefDepByDepId'])->name('get-chefdepbydepid');
+    Route::get('/get-chefdepbydepid/{depId}', [adminController::class,'getChefDepByDepId'])->name('get-chefdepbydepid');
 
     
     Route::delete('/supprimer-chefdep/{id}', [adminController::class,'deleteChefDep'])->name('supprimer-chefdep');
