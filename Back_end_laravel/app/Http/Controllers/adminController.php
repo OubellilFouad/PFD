@@ -12,6 +12,9 @@ class adminController extends Controller
         $chefDep = ChefDep::all();
         return response()->json($chefDep);
     }
+    public function getChefDepByDepId($depId) {
+        return $this->where('depID', $depId)->pluck('chefdep')->first();
+      }
     public function ajouterChefDep(Request $request)
     {
         $validatedData = $request->validate([
