@@ -9,5 +9,5 @@ class ChefDep extends Model
 {
     use HasFactory;
     protected $table = 'chefdep';
-    protected $fillable = ['userName', 'email', 'userID', 'dateNaiss'];
+    protected $fillable = ['userName', 'email', 'userID', 'dateNaiss','role','userID'];
 }
