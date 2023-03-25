@@ -16,6 +16,7 @@ const deleteChefs = 'http://localhost:8000/api/admin/supprimer-chefdep/';
 export const AdminContext = ({children}) => {
   const [openGest,setOpenGest] = useState(false);
   const [openChef,setOpenChef] = useState(false);
+  const [openEdit,setOpenEdit] = useState(false);
   const [deps,setDeps] = useState([]);
   const [domains,setDomains] = useState([]);
   const getDeps = async () => {
@@ -34,7 +35,6 @@ export const AdminContext = ({children}) => {
   }
   const getDomains = async () => {
     const response = axios.get(getDomainsUrl);
-    console.log((await response).data)
     setDomains((await response).data);
   }
   const addDomain = async (formData) => {
@@ -49,35 +49,29 @@ export const AdminContext = ({children}) => {
   const getChef = async () => {
     const response = await axios.get(getChefs);
     const result = await response.data;
-    console.log(result)
   }
-  const userName = 'Chef';
-  const email = 'chef@gmail.com';
-  const userID = 1234;
-  const dateNaiss = '12/02/14';
-  const formData = {
-    userName,
-    email,
-    userID,
-    dateNaiss
-  }
-  const addChef = async () => {
+  
+  const addChef = async (formData) => {
     const response = await axios.post(addChefs,formData);
     const result = await response.data;
-    console.log(result);
+    getChef();
   }
-  const deleteChef = async () => {
-    const response = await axios.delete(`${deleteChefs}1`);
+  const deleteChef = async (id) => {
+    const response = await axios.delete(`${deleteChefs}${id}`);
+  }
+  const modifyChef = async (formData,id) => {
+    const response = await axios.put(`${modifyChefs}${id}`,formData);
   }
   useEffect(() => {
     getDeps();
     getDomains();
-    // getChef();
     // addChef();
+    // getChef();
     // deleteChef();
+    // getOneChef();
   },[])
   return (
-    <Admin.Provider value={{openGest,setOpenGest,openChef,setOpenChef,deps,getDeps,addDep,getDomains,domains,addDomain,deleteDep}}>
+    <Admin.Provider value={{openGest,setOpenGest,openChef,setOpenChef,deps,getDeps,addDep,getDomains,domains,addDomain,deleteDep, addChef, modifyChef,openEdit,setOpenEdit,deleteChef}}>
         {children}
     </Admin.Provider>
   )

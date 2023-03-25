@@ -27,13 +27,13 @@ function App() {
           <Route path='' element={<Main/>}>
             {user?.type === 0 && (
               <>
-                {/* <Route path='' element={<AdminDashboard/>}/>
+                <Route path='' element={<AdminDashboard/>}/>
                 <Route path='gestionair' element={<Gestionair/>}/>
-                <Route path='info' element={<DepInfo/>}/> */}
-                <Route path='' element={<ChefDashboard/>}/>
+                <Route path='info' element={<DepInfo/>}/>
+                {/* <Route path='' element={<ChefDashboard/>}/>
                 <Route path='enseignant' element={<Enseingant/>}/>
                 <Route path='sections' element={<Sections/>}/>
-                <Route path='modules' element={<Modules/>}/>
+                <Route path='modules' element={<Modules/>}/> */}
               </>
             )}
           </Route>

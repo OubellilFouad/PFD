@@ -40,7 +40,6 @@ const Main = () => {
         <Outlet/>
         <DepForm open={open} setOpen={setOpen}/>
         <GestForm/>
-        <ChefForm/>
         <SectionForm/>
         <GroupForm/>
     </div>

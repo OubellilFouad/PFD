@@ -13,7 +13,8 @@ class adminController extends Controller
         return response()->json($chefDep);
     }
     public function getChefDepByDepId($depId) {
-        return $this->where('depID', $depId)->pluck('chefdep')->first();
+        $oneChefDep = ChefDep::where('depID', $depId)->first();
+        return response()->json($oneChefDep);
       }
     public function ajouterChefDep(Request $request)
     {
@@ -61,8 +62,6 @@ class adminController extends Controller
             'email' => 'required|email|max:255|unique:chefdep,email,'.$id,
             'userID' => 'required|string|max:255|unique:chefdep,userID,'.$id,
             'dateNaiss' => 'required|date',
-            'role' => 'required',
-            'depID' => 'required'
         ]);
 
         
@@ -80,8 +79,6 @@ class adminController extends Controller
         $chefdep->email = $request->email;
         $chefdep->userID = $request->userID;
         $chefdep->dateNaiss = $request->dateNaiss;
-        $chefdep->role = $request->role;
-        $chefdep->depID = $request->depID;
         $chefdep->save();
 
         return response()->json([
