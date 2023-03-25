@@ -22,6 +22,8 @@ class adminController extends Controller
             'email' => 'required|email|unique:chefdep,email',
             'userID' => 'required|unique:chefdep,userID',
             'dateNaiss' => 'required|date',
+            'role' => 'required',
+            'depID' => 'required'
         ]);
 
         // Check if the user already exists
@@ -40,6 +42,8 @@ class adminController extends Controller
             'email' => $validatedData['email'],
             'userID' => $validatedData['userID'],
             'dateNaiss' => $validatedData['dateNaiss'],
+            'role' => $validatedData['role'],
+            'depID' => $validatedData['depID']
         ]);
 
         return response()->json([
@@ -57,6 +61,8 @@ class adminController extends Controller
             'email' => 'required|email|max:255|unique:chefdep,email,'.$id,
             'userID' => 'required|string|max:255|unique:chefdep,userID,'.$id,
             'dateNaiss' => 'required|date',
+            'role' => 'required',
+            'depID' => 'required'
         ]);
 
         
@@ -74,7 +80,8 @@ class adminController extends Controller
         $chefdep->email = $request->email;
         $chefdep->userID = $request->userID;
         $chefdep->dateNaiss = $request->dateNaiss;
-
+        $chefdep->role = $request->role;
+        $chefdep->depID = $request->depID;
         $chefdep->save();
 
         return response()->json([
