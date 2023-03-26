@@ -26,7 +26,7 @@ const Sidebar = () => {
   const [nav,setNav] = useState([]);  
   useEffect(() => {
     if(user?.type === 0){
-        setNav(chef);
+        setNav(admin);
     }
   },[user])  
   return (
