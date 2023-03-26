@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAdmin } from '../../Content/admin/context/AdminContext'
 
-const Drop = ({name,data,setData}) => {
+const Drop = ({name,setData}) => {
   const {domains} = useAdmin();
   return (
     <div className='flex flex-col w-full'>

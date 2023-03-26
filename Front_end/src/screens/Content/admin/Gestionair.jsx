@@ -5,12 +5,15 @@ import GestionairCard from './components/GestionairCard'
 import { useAdmin } from './context/AdminContext'
 
 const Gestionair = () => {
-  const {openGest,setOpenGest} = useAdmin();
+  const {openGest,setOpenGest, gestionairs} = useAdmin();
   return (
     <div className='flex flex-col gap-8'>
-        <GestionairCard/>
-        <GestionairCard/>
-        <GestionairCard/>
+       {gestionairs.map((gestionair) => {
+        const {userName,email,domain,type,userID,id} = gestionair;
+        return(
+          <GestionairCard key={userID} userName={userName} id={id} email={email} domain={domain} type={type} />
+        )
+       })}
         <div className='flex justify-between'>
             <div onClick={() => setOpenGest(true)} className='px-4 py-5 border-[#DADADA] flex-[40%] flex justify-center items-center border gap-4 rounded-lg cursor-pointer hover:text-main'>
                 <AiOutlinePlus className='text-xl'/>

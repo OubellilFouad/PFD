@@ -130,7 +130,7 @@ class adminController extends Controller
             'dateNaiss' => 'required|date',
             'role' => 'required',
             'type' => 'required',
-            'domain' => 'required',
+            'domain' => 'integer',
         ]);
 
         // Check if the gestionnaire already exists
@@ -171,7 +171,7 @@ class adminController extends Controller
             'dateNaiss' => 'date',
             'role' => 'string',
             'type' => 'string',
-            'domain' => 'string',
+            'domain' => 'integer',
         ]);
 
         
