@@ -116,11 +116,11 @@ class adminController extends Controller
         $validatedData = $request->validate([
             'userName' => 'required',
             'email' => 'required|email|unique:gestionnaire,email',
-            'password' => 'required|password',
             'userID' => 'required|unique:gestionnaire,userID',
             'dateNaiss' => 'required|date',
             'role' => 'required',
-            'type' => 'required'
+            'type' => 'required',
+            'domain' => 'required',
         ]);
 
         // Check if the gestionnaire already exists
@@ -137,11 +137,11 @@ class adminController extends Controller
         $gestionnaire = Gestionnaire::create([
             'userName' => $validatedData['userName'],
             'email' => $validatedData['email'],
-            'password' => $validatedData['password'],
             'userID' => $validatedData['userID'],
             'dateNaiss' => $validatedData['dateNaiss'],
             'role' => $validatedData['role'],
-            'type' => $validatedData['type']
+            'type' => $validatedData['type'],
+            'domain' => $validatedData['domain'],
         ]);
 
         return response()->json([
@@ -157,11 +157,11 @@ class adminController extends Controller
         $this->validate($request, [
             'userName' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:gestionnaire,email,'.$id,
-            'password' => 'required|password',
             'userID' => 'required|string|max:255|unique:gestionnaire,userID,'.$id,
             'dateNaiss' => 'required|date',
             'role' => 'required',
-            'type' => 'required'
+            'type' => 'required',
+            'domain' => 'required',
         ]);
 
         
@@ -177,11 +177,11 @@ class adminController extends Controller
         // Update the Gestionnaire model with the new data
         $gestionnaire->userName = $request->userName;
         $gestionnaire->email = $request->email;
-        $gestionnaire->password = $request->password;
         $gestionnaire->userID = $request->userID;
         $gestionnaire->dateNaiss = $request->dateNaiss;
         $gestionnaire->role = $request->role;
         $gestionnaire->type = $request->type;
+        $gestionnaire->domain = $request->domain;
         $gestionnaire->save();
 
         return response()->json([

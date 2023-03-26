@@ -2,23 +2,33 @@ import axios from 'axios';
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
 const Admin = createContext();
+// Deps URL
 const getUrl = 'https://pfeboumerdes.pythonanywhere.com/deps';
 const postUrl = 'https://pfeboumerdes.pythonanywhere.com/dep';
 const deleteUrl = 'https://pfeboumerdes.pythonanywhere.com/dep/';
+// Domains URL
 const getDomainsUrl = 'https://pfeboumerdes.pythonanywhere.com/domains';
 const postDomainUrl = 'https://pfeboumerdes.pythonanywhere.com/domain';
 const deleteDomainUrl = 'https://pfeboumerdes.pythonanywhere.com/domain/';
-
+// Chefs URL
 const getChefs = 'http://localhost:8000/api/admin/get-chefdep';
 const addChefs = 'http://localhost:8000/api/admin/ajouter-chefdep';
 const modifyChefs = 'http://localhost:8000/api/admin/modifier-chefdep/';
 const deleteChefs = 'http://localhost:8000/api/admin/supprimer-chefdep/';
+// Gestionairs URL*
+const getGestionairs = 'http://localhost:8000/api/admin/get-gestionnaire';
+const addGestionairs = 'http://localhost:8000/api/admin/ajouter-gestionnaire';
+const deleteGestionairs = 'http://localhost:8000/api/admin/supprimer-gestionnaire/';
+const ModifyGestionairs = 'http://localhost:8000/api/admin/modifier-gestionnaire/';
+
 export const AdminContext = ({children}) => {
   const [openGest,setOpenGest] = useState(false);
   const [openChef,setOpenChef] = useState(false);
   const [openEdit,setOpenEdit] = useState(false);
   const [deps,setDeps] = useState([]);
   const [domains,setDomains] = useState([]);
+  const [gestionairs,setgestionairs] = useState([]);
+  // Departement
   const getDeps = async () => {
     const response = await axios.get(getUrl);
     const result = await response.data;
@@ -33,6 +43,7 @@ export const AdminContext = ({children}) => {
     const response = await axios.delete(`${deleteUrl}${id}`);
     getDeps();
   }
+  // Domains
   const getDomains = async () => {
     const response = axios.get(getDomainsUrl);
     setDomains((await response).data);
@@ -46,11 +57,11 @@ export const AdminContext = ({children}) => {
     await axios.delete(`${deleteDomainUrl}2`);
     getDomains();
   }
+  // Chef
   const getChef = async () => {
     const response = await axios.get(getChefs);
     const result = await response.data;
   }
-  
   const addChef = async (formData) => {
     const response = await axios.post(addChefs,formData);
     const result = await response.data;
@@ -62,13 +73,49 @@ export const AdminContext = ({children}) => {
   const modifyChef = async (formData,id) => {
     const response = await axios.put(`${modifyChefs}${id}`,formData);
   }
+  // Gestionair
+  const getGestionair = async () => {
+    const response = await axios.get(getGestionairs);
+    const result = await response.data;
+    setgestionairs(result);
+  }
+  const userName = 'New Gestionair';
+  const email = 'gestionair@glai.coim';
+  const userID = '2222';
+  const dateNaiss = '2002/12/12';
+  const role = 2;
+  const type = 'domain';
+  const domain = 'MI';
+  const formData = {
+    userName,
+    email,
+    userID,
+    dateNaiss,
+    role,
+    type,
+    domain
+  }
+  const addGestionair = async () => {
+    const response = await axios.post(addGestionairs,formData);
+    const result = await response.data;
+    getGestionair()
+  }
+  const deleteGestionair = async () => {
+    const response = await axios.delete(`${deleteGestionairs}1`);
+    const result = await response.data;
+    console.log(result);
+  }
+  const modifyGestionair = async () => {
+    const response = await axios.put(`${ModifyGestionairs}2`,formData);
+    getGestionair();
+  }
   useEffect(() => {
     getDeps();
     getDomains();
-    // addChef();
-    // getChef();
-    // deleteChef();
-    // getOneChef();
+    getGestionair();
+    // addGestionair();
+    // deleteGestionair();
+    // modifyGestionair();
   },[])
   return (
     <Admin.Provider value={{openGest,setOpenGest,openChef,setOpenChef,deps,getDeps,addDep,getDomains,domains,addDomain,deleteDep, addChef, modifyChef,openEdit,setOpenEdit,deleteChef}}>
