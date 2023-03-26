@@ -59,10 +59,10 @@ class adminController extends Controller
     {
         
         $this->validate($request, [
-            'userName' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:chefdep,email,'.$id,
-            'userID' => 'required|string|max:255|unique:chefdep,userID,'.$id,
-            'dateNaiss' => 'required|date',
+            'userName' => 'string|max:255',
+            'email' => 'email|max:255|unique:chefdep,email,'.$id,
+            'userID' => 'string|max:255|unique:chefdep,userID,'.$id,
+            'dateNaiss' => 'date',
         ]);
 
         
@@ -155,13 +155,13 @@ class adminController extends Controller
     {
         
         $this->validate($request, [
-            'userName' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:gestionnaire,email,'.$id,
-            'userID' => 'required|string|max:255|unique:gestionnaire,userID,'.$id,
-            'dateNaiss' => 'required|date',
-            'role' => 'required',
-            'type' => 'required',
-            'domain' => 'required',
+            'userName' => 'string|max:255',
+            'email' => 'email|max:255|unique:gestionnaire,email,'.$id,
+            'userID' => 'string|max:255|unique:gestionnaire,userID,'.$id,
+            'dateNaiss' => 'date',
+            'role' => 'string',
+            'type' => 'string',
+            'domain' => 'string',
         ]);
 
         
