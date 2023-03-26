@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ChefDep;
+use App\Models\Gestionnaire;
 
 class adminController extends Controller
 {
@@ -100,5 +101,107 @@ class adminController extends Controller
         }
         $chefDep->delete();
         return response()->json(['message' => 'ChefDep deleted successfully']);
+    }
+
+
+
+
+    // gestionnaire 
+    public function getGestionnaire()
+    {
+        $gestionnaire = Gestionnaire::all();
+        return response()->json($gestionnaire);
+    }
+
+    
+    public function ajouterGestionnaire(Request $request)
+    {
+        $validatedData = $request->validate([
+            'userName' => 'required',
+            'email' => 'required|email|unique:gestionnaire,email',
+            'password' => 'required|password',
+            'userID' => 'required|unique:gestionnaire,userID',
+            'dateNaiss' => 'required|date',
+            'role' => 'required',
+            'type' => 'required'
+        ]);
+
+        // Check if the gestionnaire already exists
+        $userExists = Gestionnaire::where('email', $request->email)->orWhere('userID', $request->userID)->exists();
+
+        if ($userExists) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User already exists'
+            ]);
+        }
+
+        // Create the new user
+        $gestionnaire = Gestionnaire::create([
+            'userName' => $validatedData['userName'],
+            'email' => $validatedData['email'],
+            'password' => $validatedData['password'],
+            'userID' => $validatedData['userID'],
+            'dateNaiss' => $validatedData['dateNaiss'],
+            'role' => $validatedData['role'],
+            'type' => $validatedData['type']
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'User created successfully',
+            'data' => $gestionnaire
+        ]);
+    }
+
+    public function modifierGestionnaire(Request $request, $id)
+    {
+        
+        $this->validate($request, [
+            'userName' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:gestionnaire,email,'.$id,
+            'password' => 'required|password',
+            'userID' => 'required|string|max:255|unique:gestionnaire,userID,'.$id,
+            'dateNaiss' => 'required|date',
+            'role' => 'required',
+            'type' => 'required'
+        ]);
+
+        
+        $gestionnaire = Gestionnaire::find($id);
+
+        // Check if the Gestionnaire model exists
+        if (!$gestionnaire) {
+            return response()->json([
+                'error' => 'Gestionnaire not found'
+            ], 404);
+        }
+
+        // Update the Gestionnaire model with the new data
+        $gestionnaire->userName = $request->userName;
+        $gestionnaire->email = $request->email;
+        $gestionnaire->password = $request->password;
+        $gestionnaire->userID = $request->userID;
+        $gestionnaire->dateNaiss = $request->dateNaiss;
+        $gestionnaire->role = $request->role;
+        $gestionnaire->type = $request->type;
+        $gestionnaire->save();
+
+        return response()->json([
+            'message' => 'Gestionnaire updated successfully',
+            'gestionnaire' => $gestionnaire
+        ]);
+    }
+
+
+
+    public function deleteGestionnaire($id)
+    {
+        $gestionnaire =Gestionnaire::find($id);
+        if (!$gestionnaire) {
+            return response()->json(['error' => 'Gestionnaire not found'], 404);
+        }
+        $gestionnaire->delete();
+        return response()->json(['message' => 'Gestionnaire deleted successfully']);
     }
 }
