@@ -66,6 +66,7 @@ class adminController extends Controller
         ]);
 
         
+        
         $chefdep = ChefDep::find($id);
 
         // Check if the ChefDep model exists
@@ -76,10 +77,19 @@ class adminController extends Controller
         }
 
         // Update the ChefDep model with the new data
-        $chefdep->userName = $request->userName;
-        $chefdep->email = $request->email;
-        $chefdep->userID = $request->userID;
-        $chefdep->dateNaiss = $request->dateNaiss;
+        if(!empty($request->input('userName'))) {        
+            $chefdep->userName = $request->userName;
+        }
+        if(!empty($request->input('email'))) {        
+            $chefdep->email = $request->email;
+        }
+        if(!empty($request->input('password'))) {        
+            $chefdep->userID = $request->userID;
+
+        }
+        if(!empty($request->input('dateNaiss'))) {        
+            $chefdep->dateNaiss = $request->dateNaiss;
+        }
         $chefdep->save();
 
         return response()->json([
@@ -173,15 +183,35 @@ class adminController extends Controller
                 'error' => 'Gestionnaire not found'
             ], 404);
         }
-
         // Update the Gestionnaire model with the new data
-        $gestionnaire->userName = $request->userName;
-        $gestionnaire->email = $request->email;
-        $gestionnaire->userID = $request->userID;
-        $gestionnaire->dateNaiss = $request->dateNaiss;
-        $gestionnaire->role = $request->role;
-        $gestionnaire->type = $request->type;
-        $gestionnaire->domain = $request->domain;
+
+        if(!empty($request->input('userName'))) {        
+            $gestionnaire->userName = $request->userName;
+
+        }
+        if(!empty($request->input('email'))) {        
+            $gestionnaire->email = $request->email;
+
+        }
+        if(!empty($request->input('userID'))) {        
+            $gestionnaire->userID = $request->userID;
+
+        }
+        if(!empty($request->input('dateNaiss'))) {        
+            $gestionnaire->dateNaiss = $request->dateNaiss;
+        }
+        if(!empty($request->input('role'))) {        
+            $gestionnaire->role = $request->role;
+
+        }
+        if(!empty($request->input('type'))) {        
+            $gestionnaire->type = $request->type;
+
+        }
+        if(!empty($request->input('domain'))) {        
+            $gestionnaire->domain = $request->domain;
+
+        }
         $gestionnaire->save();
 
         return response()->json([
