@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { MdEdit, MdSchool } from 'react-icons/md'
+import { useAdmin } from '../context/AdminContext'
+import EditGestForm from './EditGestForm'
 
-const GestionairCard = () => {
+const GestionairCard = ({userName,email,type,domain,userID,id}) => {
+  const [openGestEdit,setOpenGestEdit] = useState(false);
   return (
     <div className='flex justify-between'>
         <div className='px-4 py-5 border-[#DADADA] flex-[40%] flex border gap-4 rounded-lg'>
@@ -10,18 +13,19 @@ const GestionairCard = () => {
             </div>
             <div className='flex flex-col justify-between'>
                 <span className='text-sm text-[#828282]'>Gestioanir</span>
-                <p className='text-2xl font-semibold'>User name</p>
+                <p className='text-2xl font-semibold'>{userName}</p>
             </div>
             <div className='flex items-end'>
-                <span className='text-sm text-[#828282]'>Email</span>
+                <span className='text-sm text-[#828282]'>{email}</span>
             </div>
         </div>
         <div className='flex-1 flex justify-end items-center'>
-            <button className='flex items-center text-base gap-2 py-2 px-4 border rounded-lg hover:text-main hover:border-main'>
+            <button onClick={() => setOpenGestEdit(true)} className='flex items-center text-base gap-2 py-2 px-4 border rounded-lg hover:text-main hover:border-main'>
                 <MdEdit className='p-1 bg-palerMain text-main text-xl rounded-md'/>
                 Edit
             </button>
         </div>
+        <EditGestForm id={id} openGestEdit={openGestEdit} setOpenGestEdit={setOpenGestEdit} />
     </div>
   )
 }

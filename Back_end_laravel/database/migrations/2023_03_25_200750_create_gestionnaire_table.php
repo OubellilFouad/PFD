@@ -22,7 +22,7 @@ return new class extends Migration
             $table->date('dateNaiss');
             $table->string('type');
             $table->string('role');
-            $table->string('domain');
+            $table->string('domain')->nullable();
             
             $table->timestamps();
         });

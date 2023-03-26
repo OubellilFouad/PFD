@@ -79,34 +79,18 @@ export const AdminContext = ({children}) => {
     const result = await response.data;
     setgestionairs(result);
   }
-  const userName = 'New Gestionair';
-  const email = 'gestionair@glai.coim';
-  const userID = '2222';
-  const dateNaiss = '2002/12/12';
-  const role = 2;
-  const type = 'domain';
-  const domain = 'MI';
-  const formData = {
-    userName,
-    email,
-    userID,
-    dateNaiss,
-    role,
-    type,
-    domain
-  }
-  const addGestionair = async () => {
+  const addGestionair = async (formData) => {
     const response = await axios.post(addGestionairs,formData);
     const result = await response.data;
     getGestionair()
   }
-  const deleteGestionair = async () => {
-    const response = await axios.delete(`${deleteGestionairs}1`);
+  const deleteGestionair = async (id) => {
+    const response = await axios.delete(`${deleteGestionairs}${id}`);
     const result = await response.data;
-    console.log(result);
+    getGestionair();
   }
-  const modifyGestionair = async () => {
-    const response = await axios.put(`${ModifyGestionairs}2`,formData);
+  const modifyGestionair = async (formData,id) => {
+    const response = await axios.put(`${ModifyGestionairs}${id}`,formData);
     getGestionair();
   }
   useEffect(() => {
@@ -118,7 +102,7 @@ export const AdminContext = ({children}) => {
     // modifyGestionair();
   },[])
   return (
-    <Admin.Provider value={{openGest,setOpenGest,openChef,setOpenChef,deps,getDeps,addDep,getDomains,domains,addDomain,deleteDep, addChef, modifyChef,openEdit,setOpenEdit,deleteChef}}>
+    <Admin.Provider value={{openGest,setOpenGest,openChef,setOpenChef,deps,getDeps,addDep,getDomains,domains,addDomain,deleteDep, addChef, modifyChef,openEdit,setOpenEdit,deleteChef, gestionairs, addGestionair,modifyGestionair,deleteGestionair}}>
         {children}
     </Admin.Provider>
   )
