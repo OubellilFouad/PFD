@@ -25,8 +25,27 @@ class chambre(Base):
 	chambreid = Column(Integer, primary_key=True, autoincrement=True)
 	nom = Column(String(length=100))
 	depid = Column(Integer)
-	salleid = Column(Integer)
 	capacite = Column(Integer)
 	type = Column(String(length=100))
+
+class filiere(Base):
+	__tablename__ = 'filiere'
+	fillid = Column(Integer, primary_key=True, autoincrement=True)
+	nom = Column(String(length=100))
+	depid = Column(Integer)
+
+class specialite(Base):
+	__tablename__ = 'specialite'
+	speid = Column(Integer, primary_key=True, autoincrement=True)
+	nom = Column(String(length=100))
+	fillid = Column(Integer)
+	annee = Column(Integer)
+
+class module(Base):
+	__tablename__ = 'module'
+	modid = Column(Integer, primary_key=True, autoincrement=True)
+	nom = Column(String(length=100))
+	speid = Column(Integer)
+	fillid = Column(Integer)
 
 Base.metadata.create_all(engine) ##create tables if they don't exist
