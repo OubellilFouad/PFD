@@ -8,11 +8,14 @@ import ChefForm from './admin/components/ChefForm';
 import SectionForm from './chefDep/components/SectionForm';
 import { useChef } from './chefDep/context/ChefContext';
 import GroupForm from './chefDep/components/GroupForm';
+import ModuleForm from './chefDep/components/ModuleForm';
+import SpeForm from './chefDep/components/SpeForm';
+import ChambreForm from './chefDep/components/ChambreForm';
 
 const Main = () => {
   const location = useLocation();
   const {user} = useAuth();
-  const {setOpenSec} = useChef();
+  const {setOpenSec,setOpenModule,setOpenSpe,setOpenSalle} = useChef();
   const [title,setTitle] = useState('Dashboard');
   const [page,setPage] = useState('Main');
   const [open,setOpen] = useState(false);
@@ -36,12 +39,33 @@ const Main = () => {
                     Add Section
                 </button>
             )}
+            {page === 'Modules' && (
+                <button onClick={() => setOpenModule(true)} className='flex items-center text-base gap-2 py-2 px-4 border rounded-lg hover:text-main hover:border-main'>
+                    <AiOutlinePlus className='p-1 bg-palerMain text-main text-xl rounded-md'/>
+                    Add Module
+                </button>
+            )}
+            {page === 'Spécialités' && (
+                <button onClick={() => setOpenSpe(true)} className='flex items-center text-base gap-2 py-2 px-4 border rounded-lg hover:text-main hover:border-main'>
+                    <AiOutlinePlus className='p-1 bg-palerMain text-main text-xl rounded-md'/>
+                    Add Spécialité
+                </button>
+            )}
+            {page === 'Salles' && (
+                <button onClick={() => setOpenSalle(true)} className='flex items-center text-base gap-2 py-2 px-4 border rounded-lg hover:text-main hover:border-main'>
+                    <AiOutlinePlus className='p-1 bg-palerMain text-main text-xl rounded-md'/>
+                    Add Chambre
+                </button>
+            )}
         </div>
         <Outlet/>
         <DepForm open={open} setOpen={setOpen}/>
         <GestForm/>
         <SectionForm/>
         <GroupForm/>
+        <ModuleForm/>
+        <SpeForm/>
+        <ChambreForm/>
     </div>
   )
 }

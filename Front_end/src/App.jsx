@@ -8,10 +8,13 @@ import Content from './screens/Content'
 import AdminDashboard from './screens/Content/admin/AdminDashboard'
 import DepInfo from './screens/Content/admin/DepInfo'
 import Gestionair from './screens/Content/admin/Gestionair'
+import Chambres from './screens/Content/chefDep/Chambres'
+import Charge from './screens/Content/chefDep/Charge'
 import ChefDashboard from './screens/Content/chefDep/ChefDashboard'
 import Enseingant from './screens/Content/chefDep/Enseingant'
 import Modules from './screens/Content/chefDep/Modules'
 import Sections from './screens/Content/chefDep/Sections'
+import Speciality from './screens/Content/chefDep/Speciality'
 import Main from './screens/Content/Main'
 
 function App() {
@@ -27,13 +30,16 @@ function App() {
           <Route path='' element={<Main/>}>
             {user?.type === 0 && (
               <>
-                <Route path='' element={<AdminDashboard/>}/>
+                {/* <Route path='' element={<AdminDashboard/>}/>
                 <Route path='gestionair' element={<Gestionair/>}/>
-                <Route path='info' element={<DepInfo/>}/>
-                {/* <Route path='' element={<ChefDashboard/>}/>
+                <Route path='info' element={<DepInfo/>}/> */}
+                <Route path='' element={<ChefDashboard/>}/>
                 <Route path='enseignant' element={<Enseingant/>}/>
                 <Route path='sections' element={<Sections/>}/>
-                <Route path='modules' element={<Modules/>}/> */}
+                <Route path='speciality' element={<Speciality/>}/>
+                <Route path='charge' element={<Charge/>}/>
+                <Route path='modules' element={<Modules/>}/>
+                <Route path='chambres' element={<Chambres/>}/>
               </>
             )}
           </Route>
