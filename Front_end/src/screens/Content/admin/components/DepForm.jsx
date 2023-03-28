@@ -11,18 +11,30 @@ const DepForm = ({open,setOpen}) => {
   const [domainid,setDomain] = useState(null);
   const [domainOpen,setDomainOpen] = useState(false);
   const [domainName,setDomainName] = useState('');
+  const [error,setError] = useState('');
   const handleAdd = () => {
     const formData = {
       nom,
       domainid,
     }
+    if(nom === ''){
+      setError('Name field must not be empty');
+      return;
+    }
     addDep(formData);
+    setError('');
+    setNom('');
+    setDomain(null)
     setOpen(false);
   }  
   const handleDomain = () => {
     const nom = domainName;
     const formData = {
       nom,
+    }
+    if(nom === ''){
+      setError('Domain Name field must not be empty');
+      return;
     }
     addDomain(formData);
     setDomainOpen(false)
@@ -47,7 +59,8 @@ const DepForm = ({open,setOpen}) => {
               <button onClick={handleDomain} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
             </div>
           </div>
-          <div className='flex-1 flex justify-end items-center px-3 pb-3'>
+          <div className='flex-1 flex justify-between items-center px-3 pb-3'>
+            <p className='text-red'>{error}</p>
             <button onClick={handleAdd} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
           </div>
         </div>

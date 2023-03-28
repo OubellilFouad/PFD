@@ -27,7 +27,7 @@ const Main = () => {
     <div className='py-7 px-12 flex flex-col gap-8 overflow-x-scroll main'>
         <div className='text-5xl font-semibold flex justify-between items-center'>
             <p>{title}</p>
-            {page === 'Main' && user?.type === 0 && (
+            {page === 'Main' && user?.role === 0 && (
                 <button onClick={() => setOpen(true)} className='flex items-center text-base gap-2 py-2 px-4 border rounded-lg hover:text-main hover:border-main'>
                     <AiOutlinePlus className='p-1 bg-palerMain text-main text-xl rounded-md'/>
                     Add Dep

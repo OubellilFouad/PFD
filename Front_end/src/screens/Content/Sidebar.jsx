@@ -29,8 +29,11 @@ const Sidebar = () => {
   const {getDeps,deps} = useAdmin();
   const [nav,setNav] = useState([]);  
   useEffect(() => {
-    if(user?.type === 0){
-        setNav(chef);
+    if(user?.role === 0){
+        setNav(admin);
+    }
+    if(user?.role === 1){
+        setNav(chef)
     }
   },[user])  
   return (
@@ -43,7 +46,7 @@ const Sidebar = () => {
                 )
             })}
         </div>
-        {user?.type === 0 && (
+        {user?.role === 0 && (
             <div className='flex-[50%] flex flex-col px-3 gap-7 overflow-x-scroll'>
                 <hr />
                 <div className='flex flex-col gap-5'>

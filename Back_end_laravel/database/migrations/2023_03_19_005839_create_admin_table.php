@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('userName');
             $table->string('password');
             $table->integer('userID')->unique();
-            $table->integer('type');
+            $table->integer('role');
             
             $table->timestamps();
         });

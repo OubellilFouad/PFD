@@ -12,12 +12,12 @@ const GestForm = () => {
   const [date,setDate] = useState('');
   const [domainState,setDomain] = useState('');
   const [type,setType] = useState('');
+  const [error,setError] = useState('');
   const handleAdd = () => {
     const userID = matricule;
     const role = 2;
     const dateNaiss = date;
     let domain;
-    console.log(domainState === '')
     if(domainState === ''){
       domain = 0;
     }else{
@@ -32,8 +32,32 @@ const GestForm = () => {
       type,
       domain
     }
-    console.log(formData)
+    if(userName === ''){
+      setError('Name field must not be empty');
+      return;
+    }
+    if(email === ''){
+      setError('Email field must not be empty');
+      return;
+    }
+    if(userID === ''){
+      setError('UserID field must not be empty');
+      return;
+    }
+    if(dateNaiss === ''){
+      setError('Date field must not be empty');
+      return;
+    }
+    if(role === ''){
+      setError('Role field must not be empty');
+      return;
+    }
+    if(type === ''){
+      setError('type field must not be empty');
+      return;
+    }
     addGestionair(formData);
+    setError('');
     setOpenGest(false);
   }  
   return (
@@ -52,6 +76,7 @@ const GestForm = () => {
               <div className='flex flex-col w-full'>
                 <label htmlFor='type' className='text-paleMain text-base font-medium cursor-pointer'>Type</label>
                 <select onChange={(e) => setType(e.target.value)} name="dropDown" id='type' className='px-2 pb-2 h-8 border-b-paleMain text-main font-bold border-b-2 bg-transparent outline-none' placeholder='Domains'>
+                    <option className='bg-separator hover:bg-black text-black' unselectable>Type</option>
                     <option value="domain" className='bg-separator hover:bg-black text-black'>Domain</option>
                     <option value="trancC" className='bg-separator hover:bg-black text-black'>tranc commun</option>
                 </select>
@@ -59,7 +84,8 @@ const GestForm = () => {
               {type === 'domain' && (<Drop name={'Domain'} setData={setDomain} />)}
             </div>
           </div>
-          <div className='flex-1 flex justify-end items-center px-3 pb-3'>
+          <div className='flex-1 flex justify-between items-center px-3 pb-3'>
+            <p className='text-red'> {error} </p>
             <button onClick={handleAdd} className='py-2 px-5 rounded-lg text-white bg-main'>Add</button>
           </div>
         </div>
