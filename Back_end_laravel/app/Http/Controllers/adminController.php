@@ -164,15 +164,15 @@ class adminController extends Controller
     public function modifierGestionnaire(Request $request, $id)
     {
         
-        $this->validate($request, [
-            'userName' => 'string|max:255',
-            'email' => 'email|max:255|unique:gestionnaire,email,'.$id,
-            'userID' => 'string|max:255|unique:gestionnaire,userID,'.$id,
-            'dateNaiss' => 'date',
-            'role' => 'string',
-            'type' => 'string',
-            'domain' => 'integer',
-        ]);
+        // $this->validate($request, [
+        //     'userName' => 'string|max:255',
+        //     'email' => 'email|max:255|unique:gestionnaire,email,'.$id,
+        //     'userID' => 'string|max:255|unique:gestionnaire,userID,'.$id,
+        //     'dateNaiss' => 'date',
+        //     'role' => 'string',
+        //     'type' => 'string',
+        //     'domain' => 'integer',
+        // ]);
 
         
         $gestionnaire = Gestionnaire::find($id);
