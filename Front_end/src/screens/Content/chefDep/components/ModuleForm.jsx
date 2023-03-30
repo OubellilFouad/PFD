@@ -14,7 +14,6 @@ const ModuleForm = () => {
   const [speid,setSpeid] = useState('');
   // const [fillid,setFillid] = useState('');
   const [spe,setSpe] = useState({});
-  const [fil,setFil] = useState({});
   const getOneSpe = async (id) => {
     const response = await axios.get(`${getOneSpes}${id}`);
     const result = await response.data;

@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->string('userID')->unique();
             $table->date('dateNaiss');
-            $table->string('role');
-            $table->string('depID');
+            $table->integer('role');
+            $table->integer('depID');
         
             $table->timestamps();
         });

@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import { MdClose } from 'react-icons/md';
+import { useAuth } from '../../../../../context/AuthContext';
 import Input from '../../../Auth/components/Input';
 import { useChef } from '../context/ChefContext'
 
 const ChambreForm = () => {
   const {openSalle,setOpenSalle,addChambre} = useChef();  
+  const {user} = useAuth();
   const [nom,setNom] = useState('');
   const [capacite,setCapacite] = useState('');
   const [type,setType] = useState('');
   const handleAdd = () => {
-    const depid = 1;
+    const depid = user?.depID;
     const formData = {
       nom,
       depid,

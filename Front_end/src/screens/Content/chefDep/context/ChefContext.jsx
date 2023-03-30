@@ -70,6 +70,7 @@ export const ChefContext = ({children}) => {
     const response = await axios.get(getChambres);
     const result = await response.data;
     setChambre(result);
+    console.log(result)
   }
   const addChambre = async (formData) => {
     const response = await axios.post(addChambres,formData);
