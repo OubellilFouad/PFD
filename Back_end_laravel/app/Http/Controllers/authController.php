@@ -25,7 +25,9 @@ class AuthController extends Controller
         if($chefdep){
             $pw =  $chefdep->password;
             if($pw == null) {
+
                 $pw = Hash::make($password);
+                $chefdep->password = $pw;
                 $chefdep->save();
             }
             else{
@@ -47,6 +49,7 @@ class AuthController extends Controller
             $pw =  $gestionnaire->password;
             if($pw == null) {
                 $pw = Hash::make($password);
+                $gestionnaire->password = $pw;
                 $gestionnaire->save();
             }
             else{
