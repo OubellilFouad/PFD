@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import {MdOutlineSpaceDashboard} from 'react-icons/md'
+import {MdFolderSpecial, MdOutlineSpaceDashboard} from 'react-icons/md'
 import {HiOutlineUsers} from 'react-icons/hi'
-import { NavLink } from 'react-router-dom'
-import {BsThreeDots} from 'react-icons/bs'
+import {FaChalkboardTeacher} from 'react-icons/fa'
+import {ImBooks} from 'react-icons/im'
+import {GiTheater} from 'react-icons/gi'
 import Dep from './admin/components/Dep'
 import Link from './admin/components/NavLink'
 import { useAuth } from '../../../context/AuthContext'
 import { useAdmin } from './admin/context/AdminContext'
+import { BsFillCollectionFill } from 'react-icons/bs'
 
 const admin = [
     {path:'',name:'Dashboard',icon: <MdOutlineSpaceDashboard/>,page: 'Main'},
@@ -15,9 +17,11 @@ const admin = [
 
 const chef = [
     {path:'',name:'Dashboard',icon: <MdOutlineSpaceDashboard/>,page: 'Main'},
-    {path:'enseignant',name:'Les Enseignant',icon: <HiOutlineUsers/>,page: 'Enseignant'},
-    {path:'sections',name:'Les Sections',icon: <HiOutlineUsers/>,page: 'Sections'},
-    {path:'modules',name:'Les Modules',icon: <HiOutlineUsers/>,page: 'Modules'},
+    {path:'enseignant',name:'Les Enseignant',icon: <FaChalkboardTeacher/>,page: 'Enseignant'},
+    {path:'sections',name:'Les Sections',icon: <BsFillCollectionFill/>,page: 'Sections'},
+    {path:'speciality',name:'Les Spécialités',icon: <MdFolderSpecial/>,page: 'Spécialités'},
+    {path:'modules',name:'Les Modules',icon: <ImBooks/>,page: 'Modules'},
+    {path:'chambres',name:'Les Salles',icon: <GiTheater/>,page: 'Salles'},
 ]
 
 const Sidebar = () => {
@@ -25,8 +29,11 @@ const Sidebar = () => {
   const {getDeps,deps} = useAdmin();
   const [nav,setNav] = useState([]);  
   useEffect(() => {
-    if(user?.type === 0){
+    if(user?.role === 0){
         setNav(admin);
+    }
+    if(user?.role === 1){
+        setNav(chef)
     }
   },[user])  
   return (
@@ -39,7 +46,7 @@ const Sidebar = () => {
                 )
             })}
         </div>
-        {user?.type === 0 && (
+        {user?.role === 0 && (
             <div className='flex-[50%] flex flex-col px-3 gap-7 overflow-x-scroll'>
                 <hr />
                 <div className='flex flex-col gap-5'>

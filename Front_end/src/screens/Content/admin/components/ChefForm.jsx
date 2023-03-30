@@ -9,6 +9,7 @@ const ChefForm = ({depID,getOneChef}) => {
   const [email,setEmail] = useState('');
   const [matricule,setMatricule] = useState('');
   const [date,setDate] = useState('');
+  const [error,setError] = useState('');
   const handleAdd = () => {
     const userID = matricule;
     const role = 1;
@@ -20,6 +21,22 @@ const ChefForm = ({depID,getOneChef}) => {
       dateNaiss,
       role, 
       depID
+    }
+    if(userName === ''){
+      setError('Name field must not be empty');
+      return;
+    }
+    if(email === ''){
+      setError('Email field must not be empty');
+      return;
+    }
+    if(userID === ''){
+      setError('UserID field must not be empty');
+      return;
+    }
+    if(dateNaiss === ''){
+      setError('Date field must not be empty');
+      return;
     }
     addChef(formData);
     getOneChef(depID);
@@ -38,7 +55,8 @@ const ChefForm = ({depID,getOneChef}) => {
             <Input name={'Matricule'} type={'text'}  data={matricule} setData={setMatricule} />
             <Input name={'Date naissance'} type={'date'}  data={date} setData={setDate} />
           </div>
-          <div className='flex-1 flex justify-end items-center px-3 pb-3'>
+          <div className='flex-1 flex justify-between items-center px-3 pb-3'>
+            <p className='text-red'> {error} </p>
             <button onClick={handleAdd} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
           </div>
         </div>

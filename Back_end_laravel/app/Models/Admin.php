@@ -13,7 +13,7 @@ class Admin extends Model
 
 
     protected $table = 'admin';
-    protected $fillable = ['email','password','userID', 'userName', 'type'];
+    protected $fillable = ['email','password','userID', 'userName', 'role'];
 
     /**
      * The attributes that should be hidden for serialization.
