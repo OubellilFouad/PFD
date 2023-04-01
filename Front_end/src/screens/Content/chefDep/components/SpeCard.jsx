@@ -8,7 +8,7 @@ const SpeCard = ({nom,fillid,speid,annee}) => {
   const [fil,setFil] = useState({});
   useEffect(() => {
     getOnefil(fillid);
-  })
+  },[])
   const getOnefil = async (id) => {
     const response = await axios.get(`${getOneFils}${id}`);
     const result = await response.data;
