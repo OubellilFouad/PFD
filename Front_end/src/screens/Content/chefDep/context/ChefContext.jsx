@@ -39,9 +39,14 @@ export const ChefContext = ({children}) => {
     const response = await axios.get(getModules);
     const result = await response.data;
     setModules(result);
+    console.log(result)
   }
   const addModule = async (formData) => {
     const response = await axios.post(addModules,formData)
+    getModule();
+  }
+  const deleteModule = async (id) => {
+    await axios.delete(`${deleteModules}${id}`);
     getModule();
   }
   // Specialities
@@ -70,6 +75,7 @@ export const ChefContext = ({children}) => {
     const response = await axios.get(getChambres);
     const result = await response.data;
     setChambre(result);
+    console.log(result)
   }
   const addChambre = async (formData) => {
     const response = await axios.post(addChambres,formData);
@@ -86,7 +92,7 @@ export const ChefContext = ({children}) => {
     getChambre();
   },[])
   return (
-    <Chef.Provider value={{openSec,setOpenSec,setOpenGroup,openGroup,openModule,setOpenModule,openSpe,setOpenSpe,addSpe,spes,fils,addFil,addModule,modules,openSalle,setOpenSalle,addChambre,chambre,deleteChambre}}>
+    <Chef.Provider value={{openSec,setOpenSec,setOpenGroup,openGroup,openModule,setOpenModule,openSpe,setOpenSpe,addSpe,spes,fils,addFil,addModule,deleteModule,modules,openSalle,setOpenSalle,addChambre,chambre,deleteChambre}}>
         {children}
     </Chef.Provider>
   )

@@ -31,7 +31,7 @@ class AuthController extends Controller
                 $chefdep->save();
             }
             else{
-                if($request->password != $chefdep->password) return response(["message" => "Invalid pw"]);
+                if(!Hash::check($request->password, $chefdep->password)) return response(["message" => "Invalid pw"]);
                 if($request->email != $chefdep->email) return response(["message" => "Invalid email"]);
                 if($request->userID != $chefdep->userID) return response(["message" => "Invalid ID"]);
             
@@ -53,7 +53,7 @@ class AuthController extends Controller
                 $gestionnaire->save();
             }
             else{
-                if($request->password != $gestionnaire->password) return response(["message" => "Invalid pw"]);
+                if(!Hash::check($request->password, $gestionnaire->password)) return response(["message" => "Invalid pw"]);
                 if($request->email != $gestionnaire->email) return response(["message" => "Invalid email"]);
                 if($request->userID != $gestionnaire->userID) return response(["message" => "Invalid ID"]);
             

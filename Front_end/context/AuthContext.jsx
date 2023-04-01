@@ -19,6 +19,7 @@ export const AuthContext = ({children}) => {
     const user = await userReq.data;
     if(Object.keys(user).length !== 0){
       setUser(user);
+      console.log(user);
     }else{
       setUser(null);
     }

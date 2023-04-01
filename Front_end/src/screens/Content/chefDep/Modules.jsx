@@ -10,9 +10,9 @@ const Modules = () => {
         <p className='text-2xl font-bold'>List des Modules</p>
         <div className='grid grid-cols-3 gap-14'>
             {modules.map((module) => {
-              const {nom,speid,fillid} = module;
+              const {nom,speid,fillid,modid} = module;
               return (
-                <ModuleCard nom={nom} speid={speid} fillid={fillid} />
+                <ModuleCard nom={nom} speid={speid} fillid={fillid} moduleid={modid} />
               )
             })}
         </div>

@@ -14,7 +14,6 @@ const ModuleForm = () => {
   const [speid,setSpeid] = useState('');
   // const [fillid,setFillid] = useState('');
   const [spe,setSpe] = useState({});
-  const [fil,setFil] = useState({});
   const getOneSpe = async (id) => {
     const response = await axios.get(`${getOneSpes}${id}`);
     const result = await response.data;
@@ -46,7 +45,6 @@ const ModuleForm = () => {
           <div className='flex-[8] px-10 py-4 gap-6 flex flex-col'>
             <Input name={'Full name'} type={'text'} setData={setNom} />
             <SpeSelect name={'Spécialités'} setData={setSpeid} />
-            {/* <FillSelect name={'Filiére'} setData={setFillid} /> */}
           </div>
           <div className='flex-1 flex justify-end items-center px-3 pb-3 gap-3'>
             <p className={`text-red text-sm ${again?'block':'hidden'}`}>Click again!</p>

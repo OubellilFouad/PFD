@@ -1,9 +1,9 @@
 import React from 'react'
 import ChambreCard from './components/ChambreCard'
 import { useChef } from './context/ChefContext'
-
 const Chambres = () => {
   const {chambre} = useChef();
+  
   return (
     <div className='flex flex-col gap-8'>
         <p className='text-2xl font-bold'>List des Chambres</p>

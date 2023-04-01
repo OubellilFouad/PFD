@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai';
 import { MdClose } from 'react-icons/md';
+import { useAuth } from '../../../../../context/AuthContext';
 import Input from '../../../Auth/components/Input';
 import { useChef } from '../context/ChefContext'
 import FillSelect from './FillSelect';
@@ -8,6 +9,7 @@ import Select from './Select';
 
 const SpeForm = () => {
   const {openSpe,setOpenSpe,addSpe,addFil} = useChef();  
+  const {user} = useAuth();
   const [openFil,setopenFil] = useState(false);
   const [filName,setFilName] = useState('');
   const [nom,setNom] = useState('');
@@ -27,7 +29,7 @@ const SpeForm = () => {
   }
   const handleFil = () => {
     const nom = filName;
-    const depid = 1;
+    const depid = user?.depID;
     const formData = {
       nom,
       depid
