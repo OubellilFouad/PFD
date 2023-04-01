@@ -4,6 +4,7 @@ import models as db
 from utils import *
 
 app = Flask(__name__)
+app.url_map.strict_slashes = False
 CORS(app)
 
 def delete_empty_values(d):
@@ -47,6 +48,19 @@ documentation:<br><br>
 /module -> POST(nom,speid,fillid)<br>
 /module/int:modid -> GET, DELETE, PUT(nom,speid,fillid)<br>
 /modules -> GET
+
+<br><br>
+
+/section -> POST(nom,speid,capacite)<br>
+/section/int:secid -> GET, DELETE, PUT(nom,speid,capacite)<br>
+/sections -> GET
+
+<br><br>
+
+/groupe -> POST(nom,speid,secid,capacite)<br>
+/groupe/int:grpid -> GET, DELETE, PUT(nom,speid,secid,capacite)<br>
+/groupes -> GET<br>
+/groupes/int:secid -> GET
 """
 
 ##DEP
@@ -374,3 +388,121 @@ def modules():
 	with db.engine.connect() as conn:
 		instances = get_all(conn, db.module)
 		return jsonify(instances)
+
+##SECTION
+
+@app.route('/section/<int:secid>', methods=['POST', 'GET', 'DELETE', 'PUT'])
+@app.route('/section', methods=['POST', 'GET', 'DELETE', 'PUT'])
+def section(secid=None):
+	with db.engine.connect() as conn:
+
+		if request.method == 'GET':
+			if secid is None:
+				return jsonify({"message": "secid required in GET request.", "route":"/section/<int:secid>"})
+
+			instance = get_or_none(conn, db.section, secid=secid)
+			if instance:
+				return jsonify(instance)
+			else:
+				return jsonify({"message": "instance not found"})
+
+		if request.method == 'POST':
+			data = request.get_json()
+			if not 'nom' in data or not 'speid' in data or not 'capacite' in data:
+				return jsonify({"message": "'nom' and 'speid' and 'capacite' are required"})
+
+			nom = data['nom']
+			speid = data['speid']
+			capacite = data['capacite']
+
+			instance = get_or_create(conn, db.section, nom=nom, speid=speid, capacite=capacite)
+			return jsonify(instance)
+
+		if request.method == 'DELETE':
+			if secid is None:
+				return jsonify({"message": "secid required in DELETE request.", "route":"/section/<int:secid>"})
+
+			delete(conn, db.section, secid=secid)
+			return jsonify({"message":"success"})
+
+		if request.method == 'PUT':
+			if secid is None:
+				return jsonify({"message": "secid required in PUT request.", "route":"/section/<int:secid>"})
+
+			data = delete_empty_values(request.get_json())
+			if sum(['nom' in data, 'speid' in data, 'capacite' in data]) == 0:
+				return jsonify({"message": "at least one of :'nom', 'speid', 'capacite' are required"})
+
+			data["secid"] = secid
+			instance = update(conn, db.section, data)
+
+			return jsonify(instance)
+
+@app.route('/sections', methods=['GET'])
+def sections():
+	with db.engine.connect() as conn:
+		instances = get_all(conn, db.section)
+		return jsonify(instances)
+
+##GROUPE
+
+@app.route('/groupe/<int:grpid>', methods=['POST', 'GET', 'DELETE', 'PUT'])
+@app.route('/groupe', methods=['POST', 'GET', 'DELETE', 'PUT'])
+def groupe(grpid=None):
+	with db.engine.connect() as conn:
+
+		if request.method == 'GET':
+			if grpid is None:
+				return jsonify({"message": "grpid required in GET request.", "route":"/groupe/<int:grpid>"})
+			
+			instance = get_or_none(conn, db.groupe, grpid=grpid)	
+			if instance:
+				return jsonify(instance)
+			else:
+				return jsonify({"message": "instance not found"})
+
+		if request.method == 'POST':
+			data = request.get_json()
+			if not 'nom' in data or not 'speid' in data or not 'capacite' in data or not 'secid' in data:
+				return jsonify({"message": "'nom' and 'speid' and 'secid' and 'capacite' are required"})
+
+			nom = data['nom']
+			speid = data['speid']
+			secid = data['secid']
+			capacite = data['capacite']
+
+			instance = get_or_create(conn, db.groupe, nom=nom, speid=speid, secid=secid, capacite=capacite)
+			return jsonify(instance)
+
+		if request.method == 'DELETE':
+			if grpid is None:
+				return jsonify({"message": "grpid required in DELETE request.", "route":"/groupe/<int:grpid>"})
+
+			delete(conn, db.groupe, grpid=grpid)
+			return jsonify({"message":"success"})
+
+		if request.method == 'PUT':
+			if grpid is None:
+				return jsonify({"message": "grpid required in PUT request.", "route":"/groupe/<int:grpid>"})
+
+			data = delete_empty_values(request.get_json())
+			if sum(['nom' in data, 'speid' in data, 'secid' in data, 'capacite' in data]) == 0:
+				return jsonify({"message": "at least one of :'nom', 'speid', 'secid', 'capacite' are required"})
+
+			data["grpid"] = grpid
+			instance = update(conn, db.groupe, data)
+
+			return jsonify(instance)
+
+@app.route('/groupes/<int:secid>', methods=['GET'])
+@app.route('/groupes', methods=['GET'])
+def groupes(secid=None):
+	with db.engine.connect() as conn:
+		if secid is not None:
+			instances = get_all(conn, db.groupe, secid=secid)
+		else:
+			instances = get_all(conn, db.groupe)
+		return jsonify(instances)
+
+# if __name__=="__main__":
+	# app.run()

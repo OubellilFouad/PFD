@@ -24,6 +24,10 @@ def update(conn, model, data):
 	
 	return {"id": instance.inserted_primary_key[0]}
 
-def get_all(conn, model):
-	instances = conn.execute(sql.select(model)).all()
+def get_all(conn, model, **kwargs):
+	if kwargs:
+		instances = conn.execute(sql.select(model).filter_by(**kwargs)).all()
+	else:
+		instances = conn.execute(sql.select(model)).all()
+		
 	return [dict(row) for row in instances]

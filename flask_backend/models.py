@@ -48,4 +48,19 @@ class module(Base):
 	speid = Column(Integer)
 	fillid = Column(Integer)
 
+class section(Base):
+	__tablename__ = 'section'
+	secid = Column(Integer, primary_key=True, autoincrement=True)
+	nom = Column(String(length=100))
+	speid = Column(Integer)
+	capacite = Column(Integer)
+
+class groupe(Base):
+	__tablename__ = 'groupe'
+	grpid = Column(Integer, primary_key=True, autoincrement=True)
+	nom = Column(String(length=100))
+	speid = Column(Integer)
+	secid = Column(Integer)
+	capacite = Column(Integer)
+
 Base.metadata.create_all(engine) ##create tables if they don't exist
