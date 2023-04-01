@@ -1,0 +1,108 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Enseignant;
+use Illuminate\Http\Request;
+
+class ChefDepController extends Controller
+{
+    public function getEnseignant()
+    {
+        $enseignant = Enseignant::all();
+    }
+    public function ajouterEnseignant(Request $request)
+    {
+        $validatedData = $request->validate([
+            'userName' => 'required',
+            'email' => 'required|email|unique:enseignant,email',
+            'userID' => 'required|unique:enseignant,userID',
+            'dateNaiss' => 'required|date',
+            'depID' => 'required',
+            'grad' => 'required',
+            'voeux' => 'required',
+            'cours' => 'required',
+            
+        ]);
+
+        // Check if the user already exists
+        $userExists = Enseignant::where('email', $request->email)->orWhere('userID', $request->userID)->exists();
+
+        if ($userExists) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Enseignant already exists'
+            ]);
+        }
+
+        // Create the new user
+        $enseignant = Enseignant::create([
+            'userName' => $validatedData['userName'],
+            'email' => $validatedData['email'],
+            'userID' => $validatedData['userID'],
+            'dateNaiss' => $validatedData['dateNaiss'],
+            'role' => $validatedData['role'],
+            'depID' => $validatedData['depID'],
+            'grad' => $validatedData['grad'],
+            'voeux' => $validatedData['voeux'],
+            'cours' => $validatedData['cours'],
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'User created successfully',
+            'data' => $enseignant
+        ]);
+    }
+    public function modifierEnseignant(Request $request, $id)
+    {
+        
+        $this->validate($request, [
+            'userName' => 'string|max:255',
+            'email' => 'email|max:255|unique:enseignant,email,'.$id,
+            'userID' => 'string|max:255|unique:enseignant,userID,'.$id,
+            'dateNaiss' => 'date',
+        ]);
+
+        
+        
+        $enseignant = Enseignant::find($id);
+
+        // Check if the ChefDep model exists
+        if (!$enseignant) {
+            return response()->json([
+                'error' => 'ChefDep not found'
+            ], 404);
+        }
+
+        // Update the ChefDep model with the new data
+        if(!empty($request->input('userName'))) {        
+            $enseignant->userName = $request->userName;
+        }
+        if(!empty($request->input('email'))) {        
+            $enseignant->email = $request->email;
+        }
+        if(!empty($request->input('password'))) {        
+            $enseignant->userID = $request->userID;
+
+        }
+        if(!empty($request->input('dateNaiss'))) {        
+            $enseignant->dateNaiss = $request->dateNaiss;
+        }
+        $enseignant->save();
+
+        return response()->json([
+            'message' => 'ChefDep updated successfully',
+            'enseignant' => $enseignant
+        ]);
+    }
+    public function deleteEnseignant($id)
+    {
+        $enseignant = Enseignant::find($id);
+        if (!$enseignant) {
+            return response()->json(['error' => 'Enseignant not found'], 404);
+        }
+        $enseignant->delete();
+        return response()->json(['message' => 'Enseignant deleted successfully']);
+    }    
+}

@@ -42,3 +42,11 @@ Route::group(['prefix' => 'admin'], function() {
 
   
 });
+Route::group(['prefix' => 'chefdep'], function() {
+    
+    Route::post('/ajouter-enseignant', [adminController::class,'ajouterEnseignant'])->name('ajouter-enseignant');
+    Route::put('/modifier-enseignant/{id}', [adminController::class,'modifierEnseignant'])->name('modifier-enseignant');
+    Route::get('/get-enseignant', [adminController::class,'getEnseignant'])->name('get-enseignant');
+    Route::delete('/supprimer-enseignant/{id}', [adminController::class,'deleteEnseignant'])->name('supprimer-enseignant');
+
+});
