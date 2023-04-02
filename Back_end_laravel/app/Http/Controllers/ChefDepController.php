@@ -19,10 +19,7 @@ class ChefDepController extends Controller
             'userID' => 'required|unique:enseignant,userID',
             'dateNaiss' => 'required|date',
             'depID' => 'required',
-            'grad' => 'required',
-            'voeux' => 'required',
-            'cours' => 'required',
-            
+            'grad' => 'required',            
         ]);
 
         // Check if the user already exists
@@ -44,8 +41,6 @@ class ChefDepController extends Controller
             'role' => $validatedData['role'],
             'depID' => $validatedData['depID'],
             'grad' => $validatedData['grad'],
-            'voeux' => $validatedData['voeux'],
-            'cours' => $validatedData['cours'],
         ]);
 
         return response()->json([

@@ -117,6 +117,10 @@ export const ChefContext = ({children}) => {
     await axios.post(addGroupes,formData);
     getGroup();
   }
+  const deleteGroup = async (id) => {
+    await axios.delete(`${deleteGroupes}${id}`)
+    getGroup();
+  }
   useEffect(() => {
     getSpe();
     getFil();
@@ -126,7 +130,7 @@ export const ChefContext = ({children}) => {
     getGroup();
   },[])
   return (
-    <Chef.Provider value={{openSec,setOpenSec,setOpenGroup,openGroup,openModule,setOpenModule,openSpe,setOpenSpe,addSpe,spes,fils,addFil,addModule,deleteModule,modules,openSalle,setOpenSalle,addChambre,chambre,deleteChambre,sections,addSection,addGroupe,groupes}}>
+    <Chef.Provider value={{openSec,setOpenSec,setOpenGroup,openGroup,openModule,setOpenModule,openSpe,setOpenSpe,addSpe,spes,fils,addFil,addModule,deleteModule,modules,openSalle,setOpenSalle,addChambre,chambre,deleteChambre,sections,addSection,addGroupe,groupes,deleteGroup}}>
         {children}
     </Chef.Provider>
   )

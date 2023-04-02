@@ -39,7 +39,7 @@ const SectionCard = ({nom,capacite,speid,secid}) => {
             {groupesSec.map((group) => {
                 const {nom,secid,speid,capacite,grpid} = group;
                 return(
-                    <GroupCard key={grpid} nom={nom} speid={speid} secid={secid} capacite={capacite}  />
+                    <GroupCard key={grpid} grpid={grpid} nom={nom} speid={speid} secid={secid} capacite={capacite}  />
                 )
             })}
             <div onClick={() => setOpenGroup(true)} className='rounded-xl group hover:border-main border-2 border-separator h-20 flex justify-center items-center cursor-pointer'>

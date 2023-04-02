@@ -22,8 +22,8 @@ return new class extends Migration
             $table->date('dateNaiss');
             $table->string('depID');
             $table->string('grad');
-            $table->string('voeux');
-            $table->string('cours');
+            $table->string('voeux')->nullable();
+            $table->string('cours')->nullable();
             $table->timestamps();
         });
     }
