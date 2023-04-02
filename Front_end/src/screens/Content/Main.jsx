@@ -11,6 +11,7 @@ import GroupForm from './chefDep/components/GroupForm';
 import ModuleForm from './chefDep/components/ModuleForm';
 import SpeForm from './chefDep/components/SpeForm';
 import ChambreForm from './chefDep/components/ChambreForm';
+import ProfForm from './chefDep/components/ProfForm';
 
 const Main = () => {
   const location = useLocation();
@@ -65,6 +66,7 @@ const Main = () => {
         <ModuleForm/>
         <SpeForm/>
         <ChambreForm/>
+        <ProfForm/>
     </div>
   )
 }

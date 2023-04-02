@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\adminController;
-
+use App\Http\Controllers\ChefDepController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -44,9 +44,9 @@ Route::group(['prefix' => 'admin'], function() {
 });
 Route::group(['prefix' => 'chefdep'], function() {
     
-    Route::post('/ajouter-enseignant', [adminController::class,'ajouterEnseignant'])->name('ajouter-enseignant');
-    Route::put('/modifier-enseignant/{id}', [adminController::class,'modifierEnseignant'])->name('modifier-enseignant');
-    Route::get('/get-enseignant', [adminController::class,'getEnseignant'])->name('get-enseignant');
-    Route::delete('/supprimer-enseignant/{id}', [adminController::class,'deleteEnseignant'])->name('supprimer-enseignant');
+    Route::post('/ajouter-enseignant', [ChefDepController::class,'ajouterEnseignant'])->name('ajouter-enseignant');
+    Route::put('/modifier-enseignant/{id}', [ChefDepController::class,'modifierEnseignant'])->name('modifier-enseignant');
+    Route::get('/get-enseignant', [ChefDepController::class,'getEnseignant'])->name('get-enseignant');
+    Route::delete('/supprimer-enseignant/{id}', [ChefDepController::class,'deleteEnseignant'])->name('supprimer-enseignant');
 
 });

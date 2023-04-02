@@ -10,6 +10,7 @@ class ChefDepController extends Controller
     public function getEnseignant()
     {
         $enseignant = Enseignant::all();
+        return response()->json($enseignant);
     }
     public function ajouterEnseignant(Request $request)
     {
@@ -20,6 +21,7 @@ class ChefDepController extends Controller
             'dateNaiss' => 'required|date',
             'depID' => 'required',
             'grad' => 'required',            
+            'role' => 'required',            
         ]);
 
         // Check if the user already exists
@@ -41,6 +43,7 @@ class ChefDepController extends Controller
             'role' => $validatedData['role'],
             'depID' => $validatedData['depID'],
             'grad' => $validatedData['grad'],
+            'role' => $validatedData['role'],
         ]);
 
         return response()->json([

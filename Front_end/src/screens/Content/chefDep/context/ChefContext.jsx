@@ -36,18 +36,24 @@ const addGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupe';
 const getOneGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupe/';
 const deleteGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupe/';
 const editGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupe/';
+// Profs 
+const getProfs = 'http://127.0.0.1:8000/api/chefdep/get-enseignant';
+const addProfs = 'http://127.0.0.1:8000/api/chefdep/ajouter-enseignant';
+const deleteProfs = 'http://127.0.0.1:8000/api/chefdep/supprimer-enseignant/';
 export const ChefContext = ({children}) => {
   const [openSec,setOpenSec] = useState(false);  
   const [openGroup,setOpenGroup] = useState(false);  
   const [openModule,setOpenModule] = useState(false);
   const [openSpe,setOpenSpe] = useState(false);
   const [openSalle,setOpenSalle] = useState(false);
+  const [openProf,setOpenProf] = useState(false);
   const [spes,setSpes] = useState([]);
   const [fils,setFils] = useState([]);
   const [modules,setModules] = useState([]);
   const [chambre,setChambre] = useState([]);
   const [sections,setSections] = useState([]);
   const [groupes,setGroupes] = useState([]);
+  const [profs,setProfs] = useState([]);
   // Modules
   const getModule = async () => {
     const response = await axios.get(getModules);
@@ -121,6 +127,19 @@ export const ChefContext = ({children}) => {
     await axios.delete(`${deleteGroupes}${id}`)
     getGroup();
   }
+  // Profs
+  const getProf = async () => {
+    const {data} = await axios.get(getProfs);
+    setProfs(data);
+  }
+  const addProf = async (formData) => {
+    await axios.post(addProfs,formData);
+    getProf();
+  }
+  const deleteProf = async (id) => {
+    await axios.delete(`${deleteProfs}${id}`);
+    getProf();
+  }
   useEffect(() => {
     getSpe();
     getFil();
@@ -128,9 +147,10 @@ export const ChefContext = ({children}) => {
     getChambre();
     getSection();
     getGroup();
+    getProf();
   },[])
   return (
-    <Chef.Provider value={{openSec,setOpenSec,setOpenGroup,openGroup,openModule,setOpenModule,openSpe,setOpenSpe,addSpe,spes,fils,addFil,addModule,deleteModule,modules,openSalle,setOpenSalle,addChambre,chambre,deleteChambre,sections,addSection,addGroupe,groupes,deleteGroup}}>
+    <Chef.Provider value={{openSec,setOpenSec,setOpenGroup,openGroup,openModule,setOpenModule,openSpe,setOpenSpe,addSpe,spes,fils,addFil,addModule,deleteModule,modules,openSalle,setOpenSalle,addChambre,chambre,deleteChambre,sections,addSection,addGroupe,groupes,deleteGroup,openProf,setOpenProf,addProf,profs,deleteProf}}>
         {children}
     </Chef.Provider>
   )

@@ -18,10 +18,11 @@ return new class extends Migration
             $table->string('userName');
             $table->string('email')->unique();
             $table->string('password')->nullable();
-            $table->string('userID')->unique();
+            $table->integer('userID')->unique();
             $table->date('dateNaiss');
-            $table->string('depID');
+            $table->integer('depID');
             $table->string('grad');
+            $table->string('role');
             $table->string('voeux')->nullable();
             $table->string('cours')->nullable();
             $table->timestamps();
