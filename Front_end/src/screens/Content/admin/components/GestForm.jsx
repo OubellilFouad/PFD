@@ -76,7 +76,7 @@ const GestForm = () => {
               <div className='flex flex-col w-full'>
                 <label htmlFor='type' className='text-paleMain text-base font-medium cursor-pointer'>Type</label>
                 <select onChange={(e) => setType(e.target.value)} name="dropDown" id='type' className='px-2 pb-2 h-8 border-b-paleMain text-main font-bold border-b-2 bg-transparent outline-none' placeholder='Domains'>
-                    <option className='bg-separator hover:bg-black text-black' unselectable>Type</option>
+                    <option className='bg-separator hover:bg-black text-black' unselectable='on'>Type</option>
                     <option value="domain" className='bg-separator hover:bg-black text-black'>Domain</option>
                     <option value="trancC" className='bg-separator hover:bg-black text-black'>tranc commun</option>
                 </select>

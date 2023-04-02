@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { MdClose } from 'react-icons/md';
 import Input from '../../../Auth/components/Input';
 import { useChef } from '../context/ChefContext'
 
-const GroupForm = () => {
-  const {openGroup,setOpenGroup} = useChef();  
+const GroupForm = ({speid,secid}) => {
+  const {openGroup,setOpenGroup,addGroupe} = useChef();  
+  const [nom,setNom] = useState('');
+  const [capacite,setCapacite] = useState(0);
   const handleAdd = () => {
+    const formData = {
+      nom,
+      speid,
+      secid,
+      capacite,
+    }
+    addGroupe(formData)
     setOpenGroup(false);
   }
   return (
@@ -16,7 +25,8 @@ const GroupForm = () => {
             <MdClose onClick={() => setOpenGroup(false)} className='text-2xl cursor-pointer'/>
           </div>
           <div className='flex-[8] px-10 py-4 gap-6 flex flex-col'>
-            <Input name={'Full name'} type={'text'} />
+            <Input name={'Nom'} type={'text'} data={nom} setData={setNom} />
+            <Input name={'Capacité'} type={'number'} data={capacite} setData={setCapacite} />
           </div>
           <div className='flex-1 flex justify-end items-center px-3 pb-3'>
             <button onClick={handleAdd} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>

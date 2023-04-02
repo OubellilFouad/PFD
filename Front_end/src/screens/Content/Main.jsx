@@ -62,7 +62,6 @@ const Main = () => {
         <DepForm open={open} setOpen={setOpen}/>
         <GestForm/>
         <SectionForm/>
-        <GroupForm/>
         <ModuleForm/>
         <SpeForm/>
         <ChambreForm/>

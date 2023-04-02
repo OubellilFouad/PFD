@@ -24,6 +24,18 @@ const addChambres = 'https://pfeboumerdes.pythonanywhere.com/chambre';
 const getOneChambres = 'https://pfeboumerdes.pythonanywhere.com/chambre/';
 const deleteChambres = 'https://pfeboumerdes.pythonanywhere.com/chambre/';
 const editChambres = 'https://pfeboumerdes.pythonanywhere.com/chambre/';
+// Sections
+const getSections = 'https://pfeboumerdes.pythonanywhere.com/sections';
+const addSections = 'https://pfeboumerdes.pythonanywhere.com/section';
+const get0neSections = 'https://pfeboumerdes.pythonanywhere.com/section/';
+const deleteSections = 'https://pfeboumerdes.pythonanywhere.com/section/';
+const editSections = 'https://pfeboumerdes.pythonanywhere.com/section/';
+// Groupes 
+const getGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupes';
+const addGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupe';
+const getOneGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupe/';
+const deleteGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupe/';
+const editGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupe/';
 export const ChefContext = ({children}) => {
   const [openSec,setOpenSec] = useState(false);  
   const [openGroup,setOpenGroup] = useState(false);  
@@ -34,12 +46,13 @@ export const ChefContext = ({children}) => {
   const [fils,setFils] = useState([]);
   const [modules,setModules] = useState([]);
   const [chambre,setChambre] = useState([]);
+  const [sections,setSections] = useState([]);
+  const [groupes,setGroupes] = useState([]);
   // Modules
   const getModule = async () => {
     const response = await axios.get(getModules);
     const result = await response.data;
     setModules(result);
-    console.log(result)
   }
   const addModule = async (formData) => {
     const response = await axios.post(addModules,formData)
@@ -75,7 +88,6 @@ export const ChefContext = ({children}) => {
     const response = await axios.get(getChambres);
     const result = await response.data;
     setChambre(result);
-    console.log(result)
   }
   const addChambre = async (formData) => {
     const response = await axios.post(addChambres,formData);
@@ -85,14 +97,36 @@ export const ChefContext = ({children}) => {
     await axios.delete(`${deleteChambres}${id}`);
     getChambre();
   }
+  // Sections
+  const getSection = async () => {
+    const response = await axios.get(getSections);
+    const result = await response.data;
+    setSections(result);
+  }
+  const addSection = async (formData) => {
+    await axios.post(addSections,formData)
+    getSection();
+  }
+  // Groupes
+  const getGroup = async () => {
+    const response = await axios.get(getGroupes);
+    const result = await response.data;
+    setGroupes(result);
+  }
+  const addGroupe = async (formData) => {
+    await axios.post(addGroupes,formData);
+    getGroup();
+  }
   useEffect(() => {
     getSpe();
     getFil();
     getModule();
     getChambre();
+    getSection();
+    getGroup();
   },[])
   return (
-    <Chef.Provider value={{openSec,setOpenSec,setOpenGroup,openGroup,openModule,setOpenModule,openSpe,setOpenSpe,addSpe,spes,fils,addFil,addModule,deleteModule,modules,openSalle,setOpenSalle,addChambre,chambre,deleteChambre}}>
+    <Chef.Provider value={{openSec,setOpenSec,setOpenGroup,openGroup,openModule,setOpenModule,openSpe,setOpenSpe,addSpe,spes,fils,addFil,addModule,deleteModule,modules,openSalle,setOpenSalle,addChambre,chambre,deleteChambre,sections,addSection,addGroupe,groupes}}>
         {children}
     </Chef.Provider>
   )
