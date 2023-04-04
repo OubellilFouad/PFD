@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\ChefDep;
+use App\Models\Enseignant;
 use App\Models\Gestionnaire;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +22,28 @@ class AuthController extends Controller
         $email = $request->email;
         $password = $request->password;
 
+        $enseignant = Enseignant::where('email', $request->email)->orWhere('userID', $request->userID)->first();        
+        if($enseignant){
+            $pw =  $enseignant->password;
+            if($pw == null) {
+
+                $pw = Hash::make($password);
+                $enseignant->password = $pw;
+                $enseignant->save();
+            }
+            else{
+                if(!Hash::check($request->password, $enseignant->password)) return response(["message" => "Invalid pw"]);
+                if($request->email != $enseignant->email) return response(["message" => "Invalid email"]);
+                if($request->userID != $enseignant->userID) return response(["message" => "Invalid ID"]);
+            
+            }
+            $token = $enseignant->createToken('myApp')->plainTextToken;
+            $cookie = cookie('jwt' , $token , 3600);
+            return response([
+                "message"=> 'Success',
+            ])->withCookie($cookie);
+            
+        }
         $chefdep = ChefDep::where('email', $request->email)->orWhere('userID', $request->userID)->first();        
         if($chefdep){
             $pw =  $chefdep->password;

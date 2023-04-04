@@ -12,6 +12,10 @@ class ChefDepController extends Controller
         $enseignant = Enseignant::all();
         return response()->json($enseignant);
     }
+    public function getEnseignantByDepId($depId) {
+        $enseignants = Enseignant::where('depID', $depId)->first();
+        return response()->json($enseignants);
+      }
     public function ajouterEnseignant(Request $request)
     {
         $validatedData = $request->validate([
