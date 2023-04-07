@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\ChefDepController;
+use App\Http\Controllers\EnseignantController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -49,5 +51,10 @@ Route::group(['prefix' => 'chefdep'], function() {
     Route::get('/get-enseignant', [ChefDepController::class,'getEnseignant'])->name('get-enseignant');
     Route::delete('/supprimer-enseignant/{id}', [ChefDepController::class,'deleteEnseignant'])->name('supprimer-enseignant');
     Route::get('/get-enseignantbydepid/{depId}', [ChefDepController::class,'getEnseignantByDepId'])->name('get-enseignantbydepid');
+
+});
+Route::group(['prefix' => 'chefdep'], function() {
+    Route::post('/choixmodules-enseignant', [EnseignantController::class,'choixmodules'])->name('choixmodules-enseignant');
+    
 
 });
