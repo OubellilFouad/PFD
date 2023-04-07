@@ -14,7 +14,7 @@ class EnseignantController extends Controller
     {
 
        
-        $enseignant = Enseignant::where('email', $request->email)->orWhere('userID', $request->userID)->exists();
+        $enseignant = Enseignant::where('userID', $request->userID)->exists();
 
         if (!$enseignant) {
             return response()->json(['error' => 'Enseignant not found'], 404);
@@ -33,7 +33,7 @@ class EnseignantController extends Controller
     }
     public function disponibilité(Request $request)
     {
-    $enseignant = Enseignant::where('email', $request->email)->orWhere('userID', $request->userID)->exists();
+    $enseignant = Enseignant::where('userID', $request->userID)->exists();
 
     if (!$enseignant) {
         return response()->json(['error' => 'Enseignant not found'], 404);
@@ -49,5 +49,5 @@ class EnseignantController extends Controller
     $enseignant->save();
 
     return response()->json(['success' => true]);
-    }
+}
 }
