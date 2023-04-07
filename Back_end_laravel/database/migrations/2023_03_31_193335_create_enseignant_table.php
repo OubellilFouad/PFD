@@ -25,6 +25,9 @@ return new class extends Migration
             $table->string('role');
             $table->string('voeux')->nullable();
             $table->string('cours')->nullable();
+            $table->string('choix')->nullable();
+            $table->string('disponibilité')->nullable();
+            
             $table->timestamps();
         });
     }
