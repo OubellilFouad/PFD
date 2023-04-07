@@ -12,7 +12,9 @@ class EnseignantController extends Controller
    
     public function choixmodule(Request $request)
     {
-        $enseignant = Enseignant::find($request->input('enseignant_id'));
+
+       
+        $enseignant = Enseignant::where('email', $request->email)->orWhere('userID', $request->userID)->exists();
 
         if (!$enseignant) {
             return response()->json(['error' => 'Enseignant not found'], 404);
@@ -30,8 +32,8 @@ class EnseignantController extends Controller
         return response()->json(['success' => true]);
     }
     public function disponibilité(Request $request)
-{
-    $enseignant = Enseignant::find($request->input('enseignant_id'));
+    {
+    $enseignant = Enseignant::where('email', $request->email)->orWhere('userID', $request->userID)->exists();
 
     if (!$enseignant) {
         return response()->json(['error' => 'Enseignant not found'], 404);
@@ -47,5 +49,5 @@ class EnseignantController extends Controller
     $enseignant->save();
 
     return response()->json(['success' => true]);
-}
+    }
 }
