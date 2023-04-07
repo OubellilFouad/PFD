@@ -3,17 +3,21 @@ import { MdClose } from 'react-icons/md';
 import Input from '../../../Auth/components/Input';
 import { useChef } from '../context/ChefContext'
 import SpeSelect from './SpeSelect';
+import { useAuth } from '../../../../../context/AuthContext';
 
 const SectionForm = () => {
   const {openSec,setOpenSec,addSection} = useChef(); 
+  const {user} = useAuth();
   const [nom,setNom] = useState(''); 
   const [capacite,setCapacite] = useState(0); 
   const [speid,setSpeid] = useState(0); 
   const handleAdd = () => {
+    const depid = user?.depID;
     const formData = {
       nom,
       capacite,
-      speid
+      speid,
+      depid
     }
     addSection(formData);
     setNom('');

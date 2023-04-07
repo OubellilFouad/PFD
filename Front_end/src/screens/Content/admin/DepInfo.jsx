@@ -1,29 +1,32 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai';
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import ChefCard from './components/ChefCard';
 import ChefForm from './components/ChefForm';
 import EditForm from './components/EditForm';
 import GestionairCard from './components/GestionairCard';
 import TableRow from './components/TableRow';
 import { useAdmin } from './context/AdminContext';
+import { useAuth } from '../../../../context/AuthContext';
 const getOneUrl = 'https://pfeboumerdes.pythonanywhere.com/dep/';
 const getOneChefs = 'http://localhost:8000/api/admin/get-chefdepbydepid/';
 
 const DepInfo = () => {
-  const {setOpenChef,openChef,openEdit} = useAdmin();
+  const {setOpenChef,openChef,openEdit,chefs} = useAdmin();
+  const  {user} = useAuth();
   const location = useLocation();
   const [dep,setDep] = useState('');
   const [chef,setChef] = useState(null);
   useEffect(() => {
     setDep(location.state.dep);
     getOneChef(location.state.depid);
-    console.log(chef);
-  },[location.state.dep,openChef,openEdit])
+  },[location.state.dep,openChef,openEdit,chefs])
+
   const getOneDep = async (depID) => {
     const result = await axios.get(`${getOneUrl}${depID}`)
   }
+
   const getOneChef = async (id) => {
     const response = await axios.get(`${getOneChefs}${id}`)
     const result = await response.data;

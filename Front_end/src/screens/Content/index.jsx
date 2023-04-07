@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../context/AuthContext'
 import Header from './Header'
 import Sidebar from './Sidebar'
@@ -7,11 +7,18 @@ import Sidebar from './Sidebar'
 const Content = () => {
   const {user} = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   useEffect(() => {
-    if(user === null){
-      navigate('/');
+    if(!user){
+      console.log(location)
+      if(location.pathname === "/App"){
+        navigate('/');
+      }else{
+        console.log('tt')
+        navigate('/App');
+      }
     }
-  },[])
+  },[user])
   return (
     <div className='grid grid-cols-[1fr_5fr] grid-rows-[1fr_8fr] h-screen'>
         <div className='flex items-center px-6 gap-3 border-b border-b-[#DBDBDB] border-r border-r-[#DBDBDB]'>

@@ -6,7 +6,7 @@ import { useChef } from '../context/ChefContext'
 import GroupCard from './GroupCard'
 import GroupForm from './GroupForm'
 import axios from 'axios'
-const getGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupes/';
+const getGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupes/sec/';
 
 const SectionCard = ({nom,capacite,speid,secid}) => {
   const {setOpenGroup,groupes} = useChef();  

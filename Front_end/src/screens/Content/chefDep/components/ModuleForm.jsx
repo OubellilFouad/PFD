@@ -5,10 +5,12 @@ import Input from '../../../Auth/components/Input';
 import { useChef } from '../context/ChefContext'
 import FillSelect from './FillSelect';
 import SpeSelect from './SpeSelect';
+import { useAuth } from '../../../../../context/AuthContext';
 const getOneSpes = 'https://pfeboumerdes.pythonanywhere.com/specialite/';
 
 const ModuleForm = () => {
   const {openModule,setOpenModule,addModule} = useChef();
+  const {user} = useAuth();
   const [again,setAgain] = useState(false);  
   const [nom,setNom] = useState('');
   const [speid,setSpeid] = useState('');
@@ -22,10 +24,12 @@ const ModuleForm = () => {
   const handleAdd = async () => {
     await getOneSpe(speid);
     const fillid = await spe.fillid;
+    const depid = user?.depID;
     const formData = {
       nom,
       speid,
-      fillid
+      fillid,
+      depid
     }
     if(formData.fillid === undefined){
       setAgain(true);

@@ -27,7 +27,7 @@ const editChambres = 'https://pfeboumerdes.pythonanywhere.com/chambre/';
 // Sections
 const getSections = 'https://pfeboumerdes.pythonanywhere.com/sections';
 const addSections = 'https://pfeboumerdes.pythonanywhere.com/section';
-const get0neSections = 'https://pfeboumerdes.pythonanywhere.com/section/';
+const getOneSections = 'https://pfeboumerdes.pythonanywhere.com/section/';
 const deleteSections = 'https://pfeboumerdes.pythonanywhere.com/section/';
 const editSections = 'https://pfeboumerdes.pythonanywhere.com/section/';
 // Groupes 
@@ -73,6 +73,7 @@ export const ChefContext = ({children}) => {
     const response = await axios.get(getSpes);
     const result = await response.data;
     setSpes(result);
+    console.log(result)
   }
   const addSpe = async (formData) => {
     const response = await axios.post(addSpes,formData);

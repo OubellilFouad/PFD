@@ -17,9 +17,9 @@ use App\Http\Controllers\ChefDepController;
 */
 
 Route::post('login',[authController::class,'login']);
-Route::post('logout',[authController::class,'logout']);
 Route::middleware('auth:sanctum')->group(function(){
     Route::get('user',[authController::class,'user']);
+    Route::get('logout',[authController::class,'logout']);
 });
 
 

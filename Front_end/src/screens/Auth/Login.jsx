@@ -19,6 +19,7 @@ const Login = () => {
         },
         withCredentials: true
       });
+      console.log(await response.data)
       if(response.data.message === 'Success'){
         getUser();
         navigate('/App');
@@ -34,6 +35,7 @@ const Login = () => {
       password,
       userID
     }
+    console.log(formData)
     login(formData);
     setEmail('');
     setPassword('');

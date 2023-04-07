@@ -16,6 +16,8 @@ import Modules from './screens/Content/chefDep/Modules'
 import Sections from './screens/Content/chefDep/Sections'
 import Speciality from './screens/Content/chefDep/Speciality'
 import Main from './screens/Content/Main'
+import Desponibilité from './screens/Content/Prof/Desponibilité'
+import Choix from './screens/Content/Prof/Choix'
 
 function App() {
   const {user} = useAuth();
@@ -44,6 +46,12 @@ function App() {
                 <Route path='charge' element={<Charge/>}/>
                 <Route path='modules' element={<Modules/>}/>
                 <Route path='chambres' element={<Chambres/>}/>
+              </>
+            )}
+            {user?.role === 3 && (
+              <>
+                <Route path='' element={<Desponibilité/>}/>
+                <Route path='choix' element={<Choix/>}/>
               </>
             )}
           </Route>

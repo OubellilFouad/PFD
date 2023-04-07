@@ -55,7 +55,7 @@ class AuthController extends Controller
             }
             else{
                 if(!Hash::check($request->password, $chefdep->password)) return response(["message" => "Invalid pw"]);
-                if($request->email != $chefdep->email) return response(["message" => "Invalid email"]);
+                if($request->email != $chefdep->email) return response(["message" => $chefdep->email]);
                 if($request->userID != $chefdep->userID) return response(["message" => "Invalid ID"]);
             
             }

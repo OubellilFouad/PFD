@@ -28,6 +28,7 @@ export const AdminContext = ({children}) => {
   const [deps,setDeps] = useState([]);
   const [domains,setDomains] = useState([]);
   const [gestionairs,setgestionairs] = useState([]);
+  const [chefs,setChefs] = useState([]);
   // Departement
   const getDeps = async () => {
     const response = await axios.get(getUrl);
@@ -61,6 +62,7 @@ export const AdminContext = ({children}) => {
   const getChef = async () => {
     const response = await axios.get(getChefs);
     const result = await response.data;
+    setChefs(result);
   }
   const addChef = async (formData) => {
     const response = await axios.post(addChefs,formData);
@@ -69,9 +71,11 @@ export const AdminContext = ({children}) => {
   }
   const deleteChef = async (id) => {
     const response = await axios.delete(`${deleteChefs}${id}`);
+    getChef();
   }
   const modifyChef = async (formData,id) => {
     const response = await axios.put(`${modifyChefs}${id}`,formData);
+    getChef();
   }
   // Gestionair
   const getGestionair = async () => {
@@ -102,7 +106,7 @@ export const AdminContext = ({children}) => {
     // modifyGestionair();
   },[])
   return (
-    <Admin.Provider value={{openGest,setOpenGest,openChef,setOpenChef,deps,getDeps,addDep,getDomains,domains,addDomain,deleteDep, addChef, modifyChef,openEdit,setOpenEdit,deleteChef, gestionairs, addGestionair,modifyGestionair,deleteGestionair}}>
+    <Admin.Provider value={{openGest,setOpenGest,openChef,setOpenChef,deps,getDeps,addDep,getDomains,domains,addDomain,deleteDep, addChef, modifyChef,openEdit,setOpenEdit,deleteChef, gestionairs, addGestionair,modifyGestionair,deleteGestionair,chefs}}>
         {children}
     </Admin.Provider>
   )

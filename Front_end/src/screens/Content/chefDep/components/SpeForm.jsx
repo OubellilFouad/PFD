@@ -16,10 +16,12 @@ const SpeForm = () => {
   const [fillid,setFillid] = useState(0);
   const [annee,setAnnee] = useState(0);
   const handleAdd = () => {
+    const depid = user?.depID;
     const formData = {
       nom,
       fillid,
-      annee
+      annee,
+      depid
     }
     addSpe(formData);
     setAnnee('');

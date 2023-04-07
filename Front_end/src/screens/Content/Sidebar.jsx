@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {MdFolderSpecial, MdOutlineSpaceDashboard} from 'react-icons/md'
+import {MdEventAvailable, MdFolderSpecial, MdOutlineSpaceDashboard} from 'react-icons/md'
 import {HiOutlineUsers} from 'react-icons/hi'
 import {FaChalkboardTeacher} from 'react-icons/fa'
 import {ImBooks} from 'react-icons/im'
@@ -8,7 +8,7 @@ import Dep from './admin/components/Dep'
 import Link from './admin/components/NavLink'
 import { useAuth } from '../../../context/AuthContext'
 import { useAdmin } from './admin/context/AdminContext'
-import { BsFillCollectionFill } from 'react-icons/bs'
+import { BsFillCollectionFill, BsListCheck } from 'react-icons/bs'
 
 const admin = [
     {path:'',name:'Dashboard',icon: <MdOutlineSpaceDashboard/>,page: 'Main'},
@@ -24,6 +24,11 @@ const chef = [
     {path:'chambres',name:'Les Salles',icon: <GiTheater/>,page: 'Salles'},
 ]
 
+const prof = [
+    {path:'',name:'Disponibilité',icon: <MdEventAvailable/>,page: 'Disponibilité'},
+    {path:'choix',name:'Choix de modules',icon: <BsListCheck/>,page: 'Choix'},
+]
+
 const Sidebar = () => {
   const {user} = useAuth();
   const {getDeps,deps} = useAdmin();
@@ -34,6 +39,9 @@ const Sidebar = () => {
     }
     if(user?.role === 1){
         setNav(chef)
+    }
+    if(user?.role === 3){
+        setNav(prof)
     }
   },[user])  
   return (

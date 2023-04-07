@@ -2,17 +2,21 @@ import React, { useState } from 'react'
 import { MdClose } from 'react-icons/md';
 import Input from '../../../Auth/components/Input';
 import { useChef } from '../context/ChefContext'
+import { useAuth } from '../../../../../context/AuthContext';
 
 const GroupForm = ({speid,secid}) => {
   const {openGroup,setOpenGroup,addGroupe} = useChef();  
+  const {user} = useAuth();
   const [nom,setNom] = useState('');
   const [capacite,setCapacite] = useState(0);
   const handleAdd = () => {
+    const depid = user?.depID;
     const formData = {
       nom,
       speid,
       secid,
       capacite,
+      depid
     }
     addGroupe(formData)
     setOpenGroup(false);

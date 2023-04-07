@@ -3,9 +3,15 @@ import {FiSearch} from 'react-icons/fi'
 import userImg from '../../assets/user.jpg'
 import { useAuth } from '../../../context/AuthContext'
 import { HiLogout } from 'react-icons/hi'
+import { useNavigate } from 'react-router-dom'
 
 const Header = ({user}) => {
   const {logOut} = useAuth();
+  const navigate = useNavigate(); 
+  const handleLogout = () => {
+    navigate('/');
+    logOut();
+  }
   return (
     <div className='border-b border-b-[#DBDBDB] px-12 flex items-center justify-between relative'>
         <div>
@@ -20,7 +26,7 @@ const Header = ({user}) => {
             <div className='flex items-center gap-3 cursor-pointer'>
                 <div style={{backgroundImage: `url(${userImg})`}} className='w-10 h-10 rounded-full overflow-hidden bg-cover bg-center flex justify-center items-center'>
                 </div>
-                <HiLogout onClick={()=>logOut()} className={`text-xl hover:scale-110`}/>
+                <HiLogout onClick={()=>handleLogout()} className={`text-xl hover:scale-110`}/>
             </div>
         </div>
     </div>
