@@ -22,8 +22,7 @@ return new class extends Migration
             $table->date('dateNaiss');
             $table->integer('depID');
             $table->string('grad');
-            $table->string('role');
-            $table->string('voeux')->nullable();
+            $table->integer('role');
             $table->string('cours')->nullable();
             $table->string('choix')->nullable();
             $table->string('disponibilité')->nullable();

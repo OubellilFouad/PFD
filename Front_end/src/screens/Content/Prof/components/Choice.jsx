@@ -19,14 +19,12 @@ const Choice = ({setModule,modules,module,type,setType}) => {
     if(e.target.checked){
         arr.push(e.target.value);
         setType(arr);
-        console.log(arr)
     }else{
         let newArr = arr.filter((data) => {
             if(data !== e.target.value){
                 return data;
             }
         })
-        console.log(newArr)
         setType(newArr);
     }
   }
@@ -46,15 +44,15 @@ const Choice = ({setModule,modules,module,type,setType}) => {
       </div>
       <div className='flex gap-6'>
         <div className='flex flex-col'>
-          <label htmlFor="cours">Cours</label>
+          <label htmlFor="">Cours</label>
           <input onChange={(e)=>handleChange(e)} type="checkbox" className='accent-main h-4' name="choice" id="cours" value={'cours'} />
         </div>
         <div className='flex flex-col'>
-          <label htmlFor="tp">TP</label>
+          <label htmlFor="">TP</label>
           <input onChange={(e)=>handleChange(e)} type="checkbox" className='accent-main h-4' name="choice" id="tp" value={'tp'} />
         </div>
         <div className='flex flex-col'>
-          <label htmlFor="td">TD</label>
+          <label htmlFor="">TD</label>
           <input onChange={(e)=>handleChange(e)} type="checkbox" className='accent-main h-4' name="choice" id="td" value={'td'} />
         </div>
       </div>

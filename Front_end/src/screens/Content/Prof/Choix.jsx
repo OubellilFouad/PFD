@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react'
 import {CgSelectR} from 'react-icons/cg'
 import Choice from './components/Choice'
 import { useChef } from '../chefDep/context/ChefContext'
+import axios from 'axios';
+import { useAuth } from '../../../../context/AuthContext';
+const addChoices = 'http://localhost:8000/api/prof/choixmodules-enseignant/';
 
 const Choix = () => {
   const {modules} = useChef(); 
+  const {user} = useAuth();
   const [module,setModule] = useState([]);
   const [mod1,setMod1] = useState(null);
   const [mod2,setMod2] = useState(null);
@@ -17,6 +21,11 @@ const Choix = () => {
   const [type3,setType3] = useState([]);
   const [type4,setType4] = useState([]);
   const [type5,setType5] = useState([]);
+  const addChoice = async (formData) => {
+    const {data,status} = await axios.post(`${addChoices}${user?.id}`,formData);
+    console.log('data:',data);
+    console.log('status:',status);
+  }
   useEffect(() => {
     setModule(modules.filter((module) => {
         if(module.modid !== mod1 && module.modid !== mod2 && module.modid !== mod3 && module.modid !== mod4 && module.modid !== mod5){
@@ -47,7 +56,10 @@ const Choix = () => {
             type:type5,
         }
     }
-    console.log(formData);
+    const result = {
+        choix: JSON.stringify(formData)
+    }
+    addChoice(result);
   }
   return (
     <div className='flex flex-col gap-8'>

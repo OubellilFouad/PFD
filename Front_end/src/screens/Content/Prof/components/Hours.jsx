@@ -1,6 +1,14 @@
 import React from 'react'
+import { useAuth } from '../../../../../context/AuthContext';
+import axios from 'axios';
+const addDes = 'http://localhost:8000/api/prof/disponibilité-enseignant/';
 
 const Hours = ({first,second,third,fourth,fifth}) => {
+  const {user} = useAuth();
+  const  add = async (formData) => {
+    const {data,status} = await axios.post(`${addDes}${user?.id}`,formData);
+    console.log(data);
+  }
   const handleSubmit = () => {
     const formData = {
         first,
@@ -9,7 +17,10 @@ const Hours = ({first,second,third,fourth,fifth}) => {
         fourth,
         fifth
     }
-    console.log(formData);
+    const result = {
+        disponibility: JSON.stringify(formData)
+    }
+    add(result);
   }  
   return (
     <>

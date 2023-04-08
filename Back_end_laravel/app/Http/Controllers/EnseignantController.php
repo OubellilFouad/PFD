@@ -10,12 +10,8 @@ use App\Models\Enseignant;
 class EnseignantController extends Controller
 {
    
-    public function choixmodule(Request $request)
-    {
-
-       
-        $enseignant = Enseignant::where('userID', $request->userID)->exists();
-
+    public function choixmodule(Request $request,$id){
+        $enseignant = Enseignant::find($id);
         if (!$enseignant) {
             return response()->json(['error' => 'Enseignant not found'], 404);
         }
@@ -31,23 +27,23 @@ class EnseignantController extends Controller
 
         return response()->json(['success' => true]);
     }
-    public function disponibilité(Request $request)
-    {
-    $enseignant = Enseignant::where('userID', $request->userID)->exists();
+    public function disponibilité(Request $request, $id){
 
-    if (!$enseignant) {
-        return response()->json(['error' => 'Enseignant not found'], 404);
+        $enseignant = Enseignant::find($id);
+
+        if (!$enseignant) {
+            return response()->json(['error' => 'Enseignant not found'], 404);
+        }
+
+        $disponibility = $request->input('disponibility');
+
+        if (empty($disponibility)) {
+            return response()->json(['error' => 'No disponibility provided'], 400);
+        }
+
+        $enseignant->disponibilité = $disponibility;
+        $enseignant->save();
+
+        return response()->json(['success' => true]);
     }
-
-    $disponibility = $request->input('disponibility');
-
-    if (empty($disponibility)) {
-        return response()->json(['error' => 'No disponibility provided'], 400);
-    }
-
-    $enseignant->disponibilité = $disponibility;
-    $enseignant->save();
-
-    return response()->json(['success' => true]);
-}
 }

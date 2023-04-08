@@ -53,8 +53,7 @@ Route::group(['prefix' => 'chefdep'], function() {
     Route::get('/get-enseignantbydepid/{depId}', [ChefDepController::class,'getEnseignantByDepId'])->name('get-enseignantbydepid');
 
 });
-Route::group(['prefix' => 'chefdep'], function() {
-    Route::post('/choixmodules-enseignant', [EnseignantController::class,'choixmodules'])->name('choixmodules-enseignant');
-    
-
+Route::group(['prefix' => 'prof'], function() {
+    Route::post('/choixmodules-enseignant/{id}', [EnseignantController::class,'choixmodule'])->name('choixmodules-enseignant');
+    Route::post('/disponibilité-enseignant/{id}', [EnseignantController::class,'disponibilité'])->name('disponibilité-enseignant');
 });

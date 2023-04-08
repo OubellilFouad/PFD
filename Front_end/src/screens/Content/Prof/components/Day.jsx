@@ -24,19 +24,19 @@ const Day = ({day,data,setData}) => {
   return (
     <>
         <div className='flex justify-center py-5 border border-gray-300'>{day}</div>
-        <div onClick={(e) => handleChange(e,setFirst,first)} data-value='08h00-09h30' className={`flex justify-center border-gray-300 border items-center font-bold cursor-pointer text-white ${first&&'bg-main'}`}>
+        <div onClick={(e) => handleChange(e,setFirst,first)} data-value='08h00-09h30' className={`flex justify-center border-gray-300 border items-center font-bold cursor-pointer hover:bg-paleMain text-white ${first&&'bg-main'}`}>
             Selected
         </div>
-        <div onClick={(e) => handleChange(e,setSecond,second)} data-value='09h40-11h10' className={`flex justify-center border-gray-300 border items-center font-bold cursor-pointer text-white ${second&&'bg-main'}`}>
+        <div onClick={(e) => handleChange(e,setSecond,second)} data-value='09h40-11h10' className={`flex justify-center border-gray-300 border items-center font-bold cursor-pointer hover:bg-paleMain text-white ${second&&'bg-main'}`}>
             Selected
         </div>
-        <div onClick={(e) => handleChange(e,setThird,third)} data-value='11h20-12h50' className={`flex justify-center border-gray-300 border items-center font-bold cursor-pointer text-white ${third&&'bg-main'}`}>
+        <div onClick={(e) => handleChange(e,setThird,third)} data-value='11h20-12h50' className={`flex justify-center border-gray-300 border items-center font-bold cursor-pointer hover:bg-paleMain text-white ${third&&'bg-main'}`}>
             Selected
         </div>
-        <div onClick={(e) => handleChange(e,setFourth,fourth)} data-value='13h00-14h30' className={`flex justify-center border-gray-300 border items-center font-bold cursor-pointer text-white ${fourth&&'bg-main'}`}>
+        <div onClick={(e) => handleChange(e,setFourth,fourth)} data-value='13h00-14h30' className={`flex justify-center border-gray-300 border items-center font-bold cursor-pointer hover:bg-paleMain text-white ${fourth&&'bg-main'}`}>
             Selected
         </div>
-        <div onClick={(e) => handleChange(e,setFifth,fifth)} data-value='14h40-16h10' className={`flex justify-center border-gray-300 border items-center font-bold cursor-pointer text-white ${fifth&&'bg-main'}`}>
+        <div onClick={(e) => handleChange(e,setFifth,fifth)} data-value='14h40-16h10' className={`flex justify-center border-gray-300 border items-center font-bold cursor-pointer hover:bg-paleMain text-white ${fifth&&'bg-main'}`}>
             Selected
         </div>
     </>
