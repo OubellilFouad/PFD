@@ -59,4 +59,7 @@ Route::group(['prefix' => 'prof'], function() {
     Route::get('/get-enseignantdisponibilité', [EnseignantController::class,'getEnseignantDisponibility'])->name('get-enseignantdisponibilité');
     Route::post('/choixmodules-enseignant/{id}', [EnseignantController::class,'choixmodule'])->name('choixmodules-enseignant');
     Route::post('/disponibilité-enseignant/{id}', [EnseignantController::class,'disponibilité'])->name('disponibilité-enseignant');
+    Route::get('/enseignants/{enseignantId}/choix', [EnseignantController::class,'getChoixByEnseignantId']);
+    Route::get('/enseignants/{enseignantId}/disponibilité', [EnseignantController::class,'getDisponibiliteByEnseignantId']);
+
 });

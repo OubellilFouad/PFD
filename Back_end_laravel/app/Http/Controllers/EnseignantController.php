@@ -9,7 +9,8 @@ use App\Models\Enseignant;
 
 class EnseignantController extends Controller
 {
-   
+       // get Choix
+
     public function getEnseignantChoix()
     {
         $enseignants = Enseignant::all();
@@ -25,6 +26,21 @@ class EnseignantController extends Controller
 
         return response()->json($enseignantChoix);
     }
+        // get Choix by enseignant id
+
+    public function getChoixByEnseignantId($enseignantId)
+    {
+        $enseignant = Enseignant::find($enseignantId);
+
+        if (!$enseignant) {
+            return response()->json(['error' => 'Enseignant not found'], 404);
+        }
+
+        $choix = explode(',', $enseignant->choix);
+
+        return response()->json(['choices' => $choix]);
+    }
+    // get Disponibilité 
 
     public function getEnseignantDisponibility()
     {
@@ -40,6 +56,19 @@ class EnseignantController extends Controller
         }
 
         return response()->json($enseignantDisponibility);
+    }
+    // get Disponibilité by enseignant id
+    public function getDisponibiliteByEnseignantId($enseignantId)
+    {
+        $enseignant = Enseignant::find($enseignantId);
+
+        if (!$enseignant) {
+            return response()->json(['error' => 'Enseignant not found'], 404);
+        }
+
+        $disponibilite = $enseignant->disponibilité;
+
+        return response()->json(['disponibilite' => $disponibilite]);
     }
     public function choixmodule(Request $request,$id){
         $enseignant = Enseignant::find($id);
