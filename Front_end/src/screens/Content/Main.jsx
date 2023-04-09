@@ -12,6 +12,7 @@ import ModuleForm from './chefDep/components/ModuleForm';
 import SpeForm from './chefDep/components/SpeForm';
 import ChambreForm from './chefDep/components/ChambreForm';
 import ProfForm from './chefDep/components/ProfForm';
+import AddMessage from './AddMessage';
 
 const Main = () => {
   const location = useLocation();
@@ -67,6 +68,7 @@ const Main = () => {
         <SpeForm/>
         <ChambreForm/>
         <ProfForm/>
+        <AddMessage/>
     </div>
   )
 }

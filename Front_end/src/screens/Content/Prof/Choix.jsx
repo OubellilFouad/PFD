@@ -8,7 +8,7 @@ const addChoices = 'http://localhost:8000/api/prof/choixmodules-enseignant/';
 
 const Choix = () => {
   const {modules} = useChef(); 
-  const {user} = useAuth();
+  const {user,setShow,setAddMessage,setColor} = useAuth();
   const [module,setModule] = useState([]);
   const [mod1,setMod1] = useState(null);
   const [mod2,setMod2] = useState(null);
@@ -59,7 +59,16 @@ const Choix = () => {
     const result = {
         choix: JSON.stringify(formData)
     }
-    addChoice(result);
+    if(mod1 === null && mod2 === null && mod3 === null && mod4 === null && mod5 === null){
+        setShow(true);
+        setAddMessage('Choose 5 modules first');
+        setColor(false);
+    }else{
+        addChoice(result);
+        setShow(true);
+        setAddMessage('Added choice successfuly');
+        setColor(true);
+    }
   }
   return (
     <div className='flex flex-col gap-8'>

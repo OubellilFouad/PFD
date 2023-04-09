@@ -7,6 +7,9 @@ const logOutUrl = 'http://localhost:8000/api/logout';
 
 export const AuthContext = ({children}) => {
   const [user,setUser] = useState(null);
+  const [show,setShow] = useState(false);
+  const [addMessage,setAddMessage] = useState('');
+  const [color,setColor] = useState(true);
   const getUser = async () => {
     try {
       const userReq = await axios.get(userUrl,{
@@ -42,7 +45,7 @@ export const AuthContext = ({children}) => {
     getUser();
   },[])
   return (
-    <Auth.Provider value={{ user,getUser,logOut}}>
+    <Auth.Provider value={{ user,getUser,logOut,show,setShow,addMessage,setAddMessage,color,setColor}}>
       {children}
     </Auth.Provider>
   )

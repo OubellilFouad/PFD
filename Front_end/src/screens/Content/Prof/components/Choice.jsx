@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { useAuth } from '../../../../../context/AuthContext';
 const getOneModule = 'https://pfeboumerdes.pythonanywhere.com/module/';
 
 const Choice = ({setModule,modules,module,type,setType}) => {
