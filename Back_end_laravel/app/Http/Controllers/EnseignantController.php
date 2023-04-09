@@ -10,6 +10,37 @@ use App\Models\Enseignant;
 class EnseignantController extends Controller
 {
    
+    public function getEnseignantChoix()
+    {
+        $enseignants = Enseignant::all();
+        $enseignantChoix = [];
+
+        foreach ($enseignants as $enseignant) {
+            $choix = explode(',', $enseignant->choix);
+            $enseignantChoix[] = [
+                'Enseignant' => $enseignant->name,
+                'choix' => $choix,
+            ];
+        }
+
+        return response()->json($enseignantChoix);
+    }
+
+    public function getEnseignantDisponibility()
+    {
+        $enseignants = Enseignant::all();
+        $enseignantDisponibility = [];
+
+        foreach ($enseignants as $enseignant) {
+            $disponibility = explode(',', $enseignant->disponibilité);
+            $enseignantDisponibility[] = [
+                'teacher_name' => $enseignant->name,
+                'availability' => $disponibility,
+            ];
+        }
+
+        return response()->json($enseignantDisponibility);
+    }
     public function choixmodule(Request $request,$id){
         $enseignant = Enseignant::find($id);
         if (!$enseignant) {
