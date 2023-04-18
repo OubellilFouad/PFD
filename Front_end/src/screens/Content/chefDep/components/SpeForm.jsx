@@ -9,25 +9,29 @@ import Select from './Select';
 
 const SpeForm = () => {
   const {openSpe,setOpenSpe,addSpe,addFil} = useChef();  
-  const {user} = useAuth();
+  const {user,setShow,setAddMessage,setColor} = useAuth();
   const [openFil,setopenFil] = useState(false);
   const [filName,setFilName] = useState('');
   const [nom,setNom] = useState('');
   const [fillid,setFillid] = useState(0);
-  const [annee,setAnnee] = useState(0);
+  const [cycle,setCycle] = useState('');
+  const cycleArr = ['Licence','Master'];
   const handleAdd = () => {
     const depid = user?.depID;
     const formData = {
       nom,
       fillid,
-      annee,
+      cycle,
       depid
     }
     addSpe(formData);
-    setAnnee('');
+    setCycle('');
     setFillid('');
     setNom('');
     setOpenSpe(false);
+    setShow(true);
+    setAddMessage('Added speciality successfuly');
+    setColor(true);
   }
   const handleFil = () => {
     const nom = filName;
@@ -48,14 +52,14 @@ const SpeForm = () => {
           </div>
           <div className='flex-[8] px-10 py-4 items-center gap-6 flex flex-col'>
             <Input name={'Nom'} type={'text'} data={nom} setData={setNom} />
-            <Select name={'Annees'} setData={setAnnee} />
+            <div className='flex w-full'><Select name={'Cycle'} setData={setCycle} array={cycleArr}/></div>
             <div className='flex w-full items-end gap-5'>
               <FillSelect name={'Filliérs'} setData={setFillid} />
               <button onClick={() => setopenFil(!openFil)} className='flex items-center text-base gap-2 py-2 px-4 border rounded-lg hover:text-main hover:border-main'>
                   <AiOutlinePlus className='p-1 bg-palerMain text-main text-xl rounded-md'/>
               </button>
             </div>
-            <div className={`p-4 w-2/3 bottom-20 gap-4 ${openFil?'flex':'hidden'} flex-col border rounded-lg absolute`}>
+            <div className={`p-4 w-2/3 bottom-16 gap-4 ${openFil?'flex':'hidden'} flex-col border rounded-lg absolute`}>
               <Input name={'Filliére'} type='text' data={filName} setData={setFilName} />
               <button onClick={handleFil} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
             </div>

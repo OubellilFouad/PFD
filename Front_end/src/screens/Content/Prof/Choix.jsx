@@ -5,10 +5,11 @@ import { useChef } from '../chefDep/context/ChefContext'
 import axios from 'axios';
 import { useAuth } from '../../../../context/AuthContext';
 const addChoices = 'http://localhost:8000/api/prof/choixmodules-enseignant/';
-
+const getChoices = 'http://localhost:8000/api/prof/enseignant-choix/';
 const Choix = () => {
   const {modules} = useChef(); 
   const {user,setShow,setAddMessage,setColor} = useAuth();
+  const [choices,setChoices] = useState({});
   const [module,setModule] = useState([]);
   const [mod1,setMod1] = useState(null);
   const [mod2,setMod2] = useState(null);
@@ -22,10 +23,30 @@ const Choix = () => {
   const [type4,setType4] = useState([]);
   const [type5,setType5] = useState([]);
   const addChoice = async (formData) => {
-    const {data,status} = await axios.post(`${addChoices}${user?.id}`,formData);
-    console.log('data:',data);
-    console.log('status:',status);
+    await axios.post(`${addChoices}${user?.id}`,formData);
   }
+  const getChoice = async () => {
+    const {data} = await axios.get(`${getChoices}${user?.id}`);
+    setChoices(JSON.parse(data.choices));
+  }
+  useEffect(() => {
+    getChoice();
+  },[])
+  useEffect(() => {
+    if(choices){
+        const {choix1,choix2,choix3,choix4,choix5} = choices;
+        setMod1(choix1?.moduleID?choix1.moduleID:null);
+        setMod2(choix2?.moduleID?choix2.moduleID:null);
+        setMod3(choix3?.moduleID?choix3.moduleID:null);
+        setMod4(choix4?.moduleID?choix4.moduleID:null);
+        setMod5(choix5?.moduleID?choix5.moduleID:null);
+        setType1(choix1?.type);
+        setType2(choix2?.type);
+        setType3(choix3?.type);
+        setType4(choix4?.type);
+        setType5(choix5?.type);
+    }
+  },[choices])
   useEffect(() => {
     setModule(modules.filter((module) => {
         if(module.modid !== mod1 && module.modid !== mod2 && module.modid !== mod3 && module.modid !== mod4 && module.modid !== mod5){
@@ -36,30 +57,33 @@ const Choix = () => {
   const handleSubmit = () => {
     const formData = {
         choix1:{
-            moduleID: mod1,
-            type:type1,
+            moduleID: mod1 || null,
+            type:type1 || [],
         },
         choix2:{
-            moduleID: mod2,
-            type:type2,
+            moduleID: mod2 || null,
+            type:type2 || [],
         },
         choix3:{
-            moduleID: mod3,
-            type:type3,
+            moduleID: mod3 || null,
+            type:type3 || [],
         },
         choix4:{
-            moduleID: mod4,
-            type:type4,
+            moduleID: mod4 || null,
+            type:type4 || [],
         },
         choix5:{
-            moduleID: mod5,
-            type:type5,
+            moduleID: mod5 || null,
+            type:type5 || [],
         }
     }
     const result = {
         choix: JSON.stringify(formData)
     }
-    if(mod1 === null && mod2 === null && mod3 === null && mod4 === null && mod5 === null){
+    console.log(formData)
+    console.log(mod1,mod2,mod3,mod4,mod5)
+    if(mod1 === null || mod2 === null || mod3 === null || mod4 === null || mod5 === null){
+        console.log('empty')
         setShow(true);
         setAddMessage('Choose 5 modules first');
         setColor(false);

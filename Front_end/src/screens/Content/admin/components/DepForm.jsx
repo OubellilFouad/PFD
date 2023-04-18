@@ -4,9 +4,11 @@ import { MdClose } from 'react-icons/md'
 import Drop from '../../../Auth/components/Drop';
 import Input from '../../../Auth/components/Input';
 import { useAdmin } from '../context/AdminContext';
+import { useAuth } from '../../../../../context/AuthContext';
 
 const DepForm = ({open,setOpen}) => {
   const {addDep,addDomain} = useAdmin();
+  const {setShow,setAddMessage,setColor} = useAuth();
   const [nom,setNom] = useState('');
   const [domainid,setDomain] = useState(null);
   const [domainOpen,setDomainOpen] = useState(false);
@@ -26,6 +28,9 @@ const DepForm = ({open,setOpen}) => {
     setNom('');
     setDomain(null)
     setOpen(false);
+    setShow(true);
+    setAddMessage('Added department successfully');
+    setColor(true);
   }  
   const handleDomain = () => {
     const nom = domainName;

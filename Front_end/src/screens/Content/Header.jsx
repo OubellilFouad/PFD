@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {FiSearch} from 'react-icons/fi'
-import userImg from '../../assets/user.jpg'
+import userImg from '../../assets/user.png'
 import { useAuth } from '../../../context/AuthContext'
 import { HiLogout } from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
@@ -24,7 +24,7 @@ const Header = ({user}) => {
                 <span className='text-sm text-[#787486]'>{user?.email}</span>
             </div>
             <div className='flex items-center gap-3 cursor-pointer'>
-                <div style={{backgroundImage: `url(${userImg})`}} className='w-10 h-10 rounded-full overflow-hidden bg-cover bg-center flex justify-center items-center'>
+                <div style={{backgroundImage: `url(${userImg})`}} className='w-10 h-10 rounded-full overflow-hidden bg-contain bg-center flex justify-center items-center'>
                 </div>
                 <HiLogout onClick={()=>handleLogout()} className={`text-xl hover:scale-110`}/>
             </div>

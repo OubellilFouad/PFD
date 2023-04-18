@@ -17,7 +17,7 @@ import AddMessage from './AddMessage';
 const Main = () => {
   const location = useLocation();
   const {user} = useAuth();
-  const {setOpenSec,setOpenModule,setOpenSpe,setOpenSalle} = useChef();
+  const {setOpenSec,setOpenModule,setOpenSpe,setOpenSalle,setOpenPalier} = useChef();
   const [title,setTitle] = useState('Dashboard');
   const [page,setPage] = useState('Main');
   const [open,setOpen] = useState(false);
@@ -26,7 +26,7 @@ const Main = () => {
     location.state?.page? setPage(location.state.page):setPage(page);
   },[location.state?.name,location.state?.page])  
   return (
-    <div className='py-7 px-12 flex flex-col gap-8 overflow-x-scroll main'>
+    <div className='pt-7 pb-2 px-12 flex flex-col gap-8 overflow-hidden main'>
         <div className='text-5xl font-semibold flex justify-between items-center'>
             <p>{title}</p>
             {page === 'Main' && user?.role === 0 && (
@@ -47,16 +47,22 @@ const Main = () => {
                     Add Module
                 </button>
             )}
-            {page === 'Spécialités' && (
+            {page === 'Formations' && (
                 <button onClick={() => setOpenSpe(true)} className='flex items-center text-base gap-2 py-2 px-4 border rounded-lg hover:text-main hover:border-main'>
                     <AiOutlinePlus className='p-1 bg-palerMain text-main text-xl rounded-md'/>
-                    Add Spécialité
+                    Add Formations
                 </button>
             )}
-            {page === 'Salles' && (
+            {page === 'Resource' && (
                 <button onClick={() => setOpenSalle(true)} className='flex items-center text-base gap-2 py-2 px-4 border rounded-lg hover:text-main hover:border-main'>
                     <AiOutlinePlus className='p-1 bg-palerMain text-main text-xl rounded-md'/>
                     Add Chambre
+                </button>
+            )}
+            {page === 'paliers' && (
+                <button onClick={() => setOpenPalier(true)} className='flex items-center text-base gap-2 py-2 px-4 border rounded-lg hover:text-main hover:border-main'>
+                    <AiOutlinePlus className='p-1 bg-palerMain text-main text-xl rounded-md'/>
+                    Add Paliers
                 </button>
             )}
         </div>

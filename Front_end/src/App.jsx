@@ -18,6 +18,8 @@ import Speciality from './screens/Content/chefDep/Speciality'
 import Main from './screens/Content/Main'
 import Desponibilité from './screens/Content/Prof/Desponibilité'
 import Choix from './screens/Content/Prof/Choix'
+import Paliers from './screens/Content/chefDep/Paliers'
+import ChargeTest from './screens/Content/chefDep/ChargeTest'
 
 function App() {
   const {user} = useAuth();
@@ -33,8 +35,9 @@ function App() {
             {user?.role === 0 && (
               <>
                 <Route path='' element={<AdminDashboard/>}/>
-                <Route path='gestionair' element={<Gestionair/>}/>
+                <Route path='gestionnaire' element={<Gestionair/>}/>
                 <Route path='info' element={<DepInfo/>}/>
+                <Route path='resource' element={<Chambres/>}/>
               </>
             )}
             {user?.role === 1 && (
@@ -44,8 +47,9 @@ function App() {
                 <Route path='sections' element={<Sections/>}/>
                 <Route path='speciality' element={<Speciality/>}/>
                 <Route path='charge' element={<Charge/>}/>
+                <Route path='paliers' element={<Paliers/>}/>
                 <Route path='modules' element={<Modules/>}/>
-                <Route path='chambres' element={<Chambres/>}/>
+                <Route path='test' element={<ChargeTest/>}/>
               </>
             )}
             {user?.role === 3 && (

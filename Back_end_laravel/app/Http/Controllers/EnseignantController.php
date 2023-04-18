@@ -28,15 +28,15 @@ class EnseignantController extends Controller
     }
         // get Choix by enseignant id
 
-    public function getChoixByEnseignantId($enseignantId)
+    public function getChoixByEnseignantId($id)
     {
-        $enseignant = Enseignant::find($enseignantId);
+        $enseignant = Enseignant::find($id);
 
         if (!$enseignant) {
             return response()->json(['error' => 'Enseignant not found'], 404);
         }
 
-        $choix = explode(',', $enseignant->choix);
+        $choix = $enseignant->choix;
 
         return response()->json(['choices' => $choix]);
     }
@@ -105,5 +105,34 @@ class EnseignantController extends Controller
         $enseignant->save();
 
         return response()->json(['success' => true]);
+    }
+    public function cours(Request $request,$id){
+        $enseignant = Enseignant::find($id);
+        if (!$enseignant) {
+            return response()->json(['error' => 'Enseignant not found'], 404);
+        }
+
+        $cours = $request->input('cours');
+
+        if (empty($cours)) {
+            return response()->json(['error' => 'No choix provided'], 400);
+        }
+
+        $enseignant->cours = $cours;
+        $enseignant->save();
+
+        return response()->json(['success' => true]);
+    }
+    public function getCourByEnseignantId($id)
+    {
+        $enseignant = Enseignant::find($id);
+
+        if (!$enseignant) {
+            return response()->json(['error' => 'Enseignant not found'], 404);
+        }
+
+        $cours = $enseignant->cours;
+
+        return response()->json(['cours' => $cours]);
     }
 }

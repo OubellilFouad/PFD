@@ -6,7 +6,7 @@ import { useAuth } from '../../../../../context/AuthContext';
 
 const GroupForm = ({speid,secid}) => {
   const {openGroup,setOpenGroup,addGroupe} = useChef();  
-  const {user} = useAuth();
+  const {user,setShow,setAddMessage,setColor} = useAuth();
   const [nom,setNom] = useState('');
   const [capacite,setCapacite] = useState(0);
   const handleAdd = () => {
@@ -20,6 +20,9 @@ const GroupForm = ({speid,secid}) => {
     }
     addGroupe(formData)
     setOpenGroup(false);
+    setShow(true);
+    setAddMessage('Added group successfuly');
+    setColor(true);
   }
   return (
     <div className={`w-full h-full absolute z-30 bg-[rgba(0,0,0,0.5)] top-0 left-0 ${openGroup?'flex':'hidden'} justify-center items-center`}>

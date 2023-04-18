@@ -11,16 +11,16 @@ const Sections = () => {
   const {user} = useAuth();
   const [section,setSection] = useState([]);
   const getSpeSections = async () => {
-    const {data} = await axios.get(`${getSections}${user?.depID}`);
+    const {data} = await axios.get(`${getSections}dep/${user?.depID}`);
     setSection(data);
   }
   useEffect(() => {
     getSpeSections();
   },[sections])
   return (
-    <div className='flex flex-col gap-8'>
+    <div className='flex flex-col gap-8 overflow-hidden'>
         <p className='text-2xl font-bold'>List des Sections</p>
-        <div className='flex flex-col gap-8'>
+        <div className='flex flex-col gap-8 overflow-x-scroll'>
             {section.map((section) => {
               const {nom,speid,capacite,secid} = section; 
                 return (

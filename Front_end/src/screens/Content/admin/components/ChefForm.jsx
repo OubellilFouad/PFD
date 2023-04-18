@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { MdClose } from 'react-icons/md';
 import Input from '../../../Auth/components/Input';
 import { useAdmin } from '../context/AdminContext';
+import { useAuth } from '../../../../../context/AuthContext';
 
 const ChefForm = ({depID,getOneChef}) => {
   const {openChef,setOpenChef, addChef} = useAdmin();
+  const {setShow,setAddMessage,setColor} = useAuth();
   const [userName,setUserName] = useState('');
   const [email,setEmail] = useState('');
   const [matricule,setMatricule] = useState('');
@@ -41,6 +43,9 @@ const ChefForm = ({depID,getOneChef}) => {
     addChef(formData);
     getOneChef(depID);
     setOpenChef(false);
+    setShow(true);
+    setAddMessage('Added chef dep successfuly');
+    setColor(true);
   }  
   return (
     <div className={`w-full h-full absolute z-30 bg-[rgba(0,0,0,0.5)] top-0 left-0 ${openChef?'flex':'hidden'} justify-center items-center`}>

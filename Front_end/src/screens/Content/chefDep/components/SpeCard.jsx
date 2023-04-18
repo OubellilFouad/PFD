@@ -21,11 +21,11 @@ const SpeCard = ({nom,fillid,speid,annee}) => {
                 <p className='text-xl font-bold'>{nom}</p>
                 <span className='text-sm font-semibold'>{fil.nom}</span>
             </div>
-            <NavLink to={'../charge'} end state={{
-              name: 'Charge Pedagogic',
-              speid : speid,
-              page: 'charge',
-              spe: nom
+            <NavLink to={'../paliers'} end state={{
+              name: 'Les paliers',
+              page: 'paliers',
+              spe: nom,
+              speid
             }}>
               <button className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
             </NavLink>

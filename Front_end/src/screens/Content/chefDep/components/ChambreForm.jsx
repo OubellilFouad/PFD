@@ -6,20 +6,21 @@ import { useChef } from '../context/ChefContext'
 
 const ChambreForm = () => {
   const {openSalle,setOpenSalle,addChambre} = useChef();  
-  const {user} = useAuth();
+  const {setShow,setAddMessage,setColor} = useAuth();
   const [nom,setNom] = useState('');
   const [capacite,setCapacite] = useState('');
   const [type,setType] = useState('');
   const handleAdd = () => {
-    const depid = user?.depID;
     const formData = {
       nom,
-      depid,
       capacite,
       type
     }
     addChambre(formData);
     setOpenSalle(false);
+    setShow(true);
+    setAddMessage('Added chambre successfuly');
+    setColor(true);
   }
   return (
     <div className={`w-full h-full absolute z-30 bg-[rgba(0,0,0,0.5)] top-0 left-0 ${openSalle?'flex':'hidden'} justify-center items-center`}>

@@ -7,7 +7,7 @@ import { useAuth } from '../../../../../context/AuthContext';
 
 const SectionForm = () => {
   const {openSec,setOpenSec,addSection} = useChef(); 
-  const {user} = useAuth();
+  const {user,setShow,setAddMessage,setColor} = useAuth();
   const [nom,setNom] = useState(''); 
   const [capacite,setCapacite] = useState(0); 
   const [speid,setSpeid] = useState(0); 
@@ -24,6 +24,9 @@ const SectionForm = () => {
     setCapacite(0);
     setSpeid(0);
     setOpenSec(false);
+    setShow(true);
+    setAddMessage('Added section successfuly');
+    setColor(true);
   }
   return (
     <div className={`w-full h-full absolute z-30 bg-[rgba(0,0,0,0.5)] top-0 left-0 ${openSec?'flex':'hidden'} justify-center items-center`}>

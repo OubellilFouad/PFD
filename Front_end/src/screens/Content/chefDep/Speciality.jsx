@@ -17,13 +17,13 @@ const Speciality = () => {
     getSpeSpes();
   },[spes])
   return (
-    <div className='flex flex-col gap-8'>
-        <p className='text-2xl font-bold'>List des Spécialités</p>
-        <div className='grid grid-cols-3 gap-14'>
+    <div className='flex flex-col gap-8 overflow-hidden'>
+        <p className='text-2xl font-bold'>List des Formations</p>
+        <div className='grid grid-cols-3 pb-4 gap-14 overflow-x-scroll'>
             {spe.map((spe) => {
               const {nom,fillid,speid,annee} = spe;
               return(
-                <SpeCard nom={nom} fillid={fillid} speid={speid} annee={annee} />
+                <SpeCard key={speid} nom={nom} fillid={fillid} speid={speid} annee={annee} />
               )
             })}
         </div>

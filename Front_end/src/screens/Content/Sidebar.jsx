@@ -12,16 +12,17 @@ import { BsFillCollectionFill, BsListCheck } from 'react-icons/bs'
 
 const admin = [
     {path:'',name:'Dashboard',icon: <MdOutlineSpaceDashboard/>,page: 'Main'},
-    {path:'gestionair',name:'Les gestionair',icon: <HiOutlineUsers/>,page: 'Gestionair'},
+    {path:'gestionnaire',name:'Les gestionnaires',icon: <HiOutlineUsers/>,page: 'Gestionnaire'},
+    {path:'resource',name:'Les Resources',icon: <GiTheater/>,page: 'Resource'},
 ]
 
 const chef = [
     {path:'',name:'Dashboard',icon: <MdOutlineSpaceDashboard/>,page: 'Main'},
-    {path:'enseignant',name:'Les Enseignant',icon: <FaChalkboardTeacher/>,page: 'Enseignant'},
+    {path:'enseignant',name:'Les Enseignants',icon: <FaChalkboardTeacher/>,page: 'Enseignants'},
+    {path:'speciality',name:'Les Formations',icon: <MdFolderSpecial/>,page: 'Formations'},
     {path:'sections',name:'Les Sections',icon: <BsFillCollectionFill/>,page: 'Sections'},
-    {path:'speciality',name:'Les Spécialités',icon: <MdFolderSpecial/>,page: 'Spécialités'},
     {path:'modules',name:'Les Modules',icon: <ImBooks/>,page: 'Modules'},
-    {path:'chambres',name:'Les Salles',icon: <GiTheater/>,page: 'Salles'},
+    {path:'test',name:'La charge',icon: <ImBooks/>,page: 'Charge'},
 ]
 
 const prof = [

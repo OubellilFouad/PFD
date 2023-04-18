@@ -7,7 +7,7 @@ import { useAdmin } from '../../admin/context/AdminContext';
 import { useChef } from '../context/ChefContext';
 
 const ProfForm = () => {
-  const {user} = useAuth();  
+  const {user,setShow,setAddMessage,setColor} = useAuth();  
   const {openProf,setOpenProf,addProf} = useChef();
   const [userName,setUserName] = useState('');
   const [email,setEmail] = useState('');
@@ -61,6 +61,9 @@ const ProfForm = () => {
     setMatricule('');
     setUserName('');
     setOpenProf(false);
+    setShow(true);
+    setAddMessage('Added prof successfuly');
+    setColor(true);
   }  
   return (
     <div className={`w-full h-full absolute z-30 bg-[rgba(0,0,0,0.5)] top-0 left-0 ${openProf?'flex':'hidden'} justify-center items-center`}>

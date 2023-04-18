@@ -11,20 +11,21 @@ const Modules = () => {
   const {user} = useAuth();
   const [module,setModule] = useState([]);
   const getSpeModules = async () => {
-    const {data} = await axios.get(`${getModules}${user?.depID}`);
+    const {data} = await axios.get(`${getModules}dep/${user?.depID}`);
+    console.log(data)
     setModule(data);
   }
   useEffect(() => {
     getSpeModules();
   },[modules])
   return (
-    <div className='flex flex-col gap-8'>
+    <div className='flex flex-col gap-8 overflow-hidden'>
         <p className='text-2xl font-bold'>List des Modules</p>
-        <div className='grid grid-cols-3 gap-14'>
+        <div className='grid grid-cols-3 gap-14 overflow-x-scroll'>
             {module.map((module) => {
               const {nom,speid,fillid,modid} = module;
               return (
-                <ModuleCard nom={nom} speid={speid} fillid={fillid} moduleid={modid} />
+                <ModuleCard key={modid} nom={nom} speid={speid} fillid={fillid} moduleid={modid} />
               )
             })}
         </div>

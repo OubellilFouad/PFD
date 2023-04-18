@@ -3,9 +3,11 @@ import { MdClose } from 'react-icons/md';
 import Drop from '../../../Auth/components/Drop';
 import Input from '../../../Auth/components/Input';
 import { useAdmin } from '../context/AdminContext';
+import { useAuth } from '../../../../../context/AuthContext';
 
 const GestForm = () => {
   const {openGest,setOpenGest, addGestionair} = useAdmin();
+  const {setShow,setAddMessage,setColor} = useAuth();
   const [userName,setUserName] = useState('');
   const [email,setEmail] = useState('');
   const [matricule,setMatricule] = useState('');
@@ -59,6 +61,9 @@ const GestForm = () => {
     addGestionair(formData);
     setError('');
     setOpenGest(false);
+    setShow(true);
+    setAddMessage('Added gestionair successfuly');
+    setColor(true);
   }  
   return (
     <div className={`w-full h-full absolute z-30 bg-[rgba(0,0,0,0.5)] top-0 left-0 ${openGest?'flex':'hidden'} justify-center items-center`}>
