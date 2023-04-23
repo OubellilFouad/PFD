@@ -20,15 +20,48 @@ const getGestionairs = 'http://localhost:8000/api/admin/get-gestionnaire';
 const addGestionairs = 'http://localhost:8000/api/admin/ajouter-gestionnaire';
 const deleteGestionairs = 'http://localhost:8000/api/admin/supprimer-gestionnaire/';
 const ModifyGestionairs = 'http://localhost:8000/api/admin/modifier-gestionnaire/';
+// TCFormation
+const getTCFormation = 'https://pfeboumerdes.pythonanywhere.com/formationstc';
+const addTCFormation = 'https://pfeboumerdes.pythonanywhere.com/formationtc';
+const deleteTCFormation = 'https://pfeboumerdes.pythonanywhere.com/formationtc/';
+// TCPalier
+const getTCPalier = 'https://pfeboumerdes.pythonanywhere.com/palierstc';
+const addTCPalier = 'https://pfeboumerdes.pythonanywhere.com/paliertc';
+const deleteTCPalier = 'https://pfeboumerdes.pythonanywhere.com/paliertc/';
+// Sections
+const getTCSections = 'https://pfeboumerdes.pythonanywhere.com/sectionstc';
+const addTCSections = 'https://pfeboumerdes.pythonanywhere.com/sectiontc';
+// Groupes
+const getTcGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupestc';
+const addTcGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupetc';
+const deleteTcGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupetc/';
+// GestDep
+const getGestDep = 'https://pfeboumerdes.pythonanywhere.com/gestdeps';
+const addGestDep = 'https://pfeboumerdes.pythonanywhere.com/gestdep';
+const deleteGestDep = 'https://pfeboumerdes.pythonanywhere.com/gestdep/';
+// Modules
+const getTcModules = 'https://pfeboumerdes.pythonanywhere.com/modulestc';
+const addTcModules = 'https://pfeboumerdes.pythonanywhere.com/moduletc';
+const deleteTcModules = 'https://pfeboumerdes.pythonanywhere.com/moduletc/';
 
 export const AdminContext = ({children}) => {
   const [openGest,setOpenGest] = useState(false);
   const [openChef,setOpenChef] = useState(false);
   const [openEdit,setOpenEdit] = useState(false);
+  const [openForm,setOpenForm] = useState(false);
+  const [openPalier,setOpenPaliers] = useState(false);
+  const [openSection,setOpenSections] = useState(false);
+  const [openTcModules,setOpenTcModules] = useState(false);
   const [deps,setDeps] = useState([]);
   const [domains,setDomains] = useState([]);
   const [gestionairs,setgestionairs] = useState([]);
   const [chefs,setChefs] = useState([]);
+  const [tcform,setTcform] = useState([]);
+  const [tcPal,setTcPal] = useState([]);
+  const [tcSections,setTcSections] = useState([]);
+  const [tcGroupes,setTcGroupes] = useState([]);
+  const [tcModules,setTcModules] = useState([]);
+  const [gestDep,setGestDep] = useState([]);
   // Departement
   const getDeps = async () => {
     const response = await axios.get(getUrl);
@@ -97,16 +130,98 @@ export const AdminContext = ({children}) => {
     const response = await axios.put(`${ModifyGestionairs}${id}`,formData);
     getGestionair();
   }
+  // TCFormation
+  const getFormation = async () => {
+    const {data} = await axios.get(getTCFormation);
+    setTcform(data);
+    console.log(data);
+  }
+  const addFormation = async (formData) => {
+    const {data} = await axios.post(addTCFormation,formData)
+    console.log(data)
+    getFormation();
+  }
+  const deleteFormation = async (id) => {
+    await axios.delete(`${deleteTCFormation}${id}`);
+    getFormation();
+  }
+  // TCPalier
+  const getPaliers = async () => {
+    const {data} = await axios.get(getTCPalier);
+    console.log(data)
+    setTcPal(data);
+  }
+  const addPaliers = async (formData) => {
+    const {data} = await axios.post(addTCPalier,formData);
+    console.log(data)
+    getPaliers();
+  }
+  const deletePaliers = async (id) => {
+    await axios.delete(`${deleteTCPalier}${id}`);
+    getPaliers();
+  }
+  // TCSections
+  const getTcSec = async () => {
+    const {data} = await axios.get(getTCSections);
+    setTcSections(data);
+  }
+  const addTcSec = async (formData) => {
+    await axios.post(addTCSections,formData)
+    getTcSec();
+  }
+  // TcGroupes
+  const getTcGroupe = async () => {
+    const {data} = await axios.get(getTcGroupes);
+    setTcGroupes(data);
+  }
+  const addTcGroup = async (formData) => {
+    await axios.post(addTcGroupes,formData);
+    getTcGroupe();
+  }
+  const deleteGroup = async (id) => {
+    await axios.delete(`${deleteTcGroupes}${id}`);
+    getTcGroupe();
+  }
+  // GestDep
+  const getGestDeps = async () => {
+    const {data} = await axios.get(getGestDep);
+    setGestDep(data);
+    console.log(data)
+  }
+  const addGestDeps = async (formData) => {
+    const {data} = await axios.post(addGestDep,formData);
+    console.log(data);
+    getGestDeps();
+  }
+  const deleteGestDeps = async (id) => {
+    await axios.delete(`${deleteGestDep}${id}`)
+    getGestDeps();
+  }
+  // Modules
+  const getTcMod = async () => {
+    const {data} = await axios.get(getTcModules);
+    setTcModules(data)
+  }
+  const addTcMod = async (formData) => {
+    await axios.post(addTcModules,formData)
+    getTcMod();
+  }
+  const deleteTcMod = async (id) => {
+    await axios.delete(`${deleteTcModules}${id}`);
+    getTcMod();
+  }
   useEffect(() => {
     getDeps();
     getDomains();
     getGestionair();
-    // addGestionair();
-    // deleteGestionair();
-    // modifyGestionair();
+    getFormation();
+    getGestDeps();
+    getPaliers();
+    getTcSec();
+    getTcMod();
   },[])
   return (
-    <Admin.Provider value={{openGest,setOpenGest,openChef,setOpenChef,deps,getDeps,addDep,getDomains,domains,addDomain,deleteDep, addChef, modifyChef,openEdit,setOpenEdit,deleteChef, gestionairs, addGestionair,modifyGestionair,deleteGestionair,chefs}}>
+    <Admin.Provider value={{openGest,setOpenGest,openChef,setOpenChef,deps,getDeps,addDep,getDomains,domains,addDomain,deleteDep, addChef, modifyChef,openEdit,setOpenEdit,deleteChef, gestionairs, addGestionair,modifyGestionair,deleteGestionair,chefs,tcform,addFormation,openForm,setOpenForm,gestDep,addGestDeps,deleteGestDeps,tcPal,addPaliers,openPalier,setOpenPaliers,deletePaliers,deleteFormation,tcSections,addTcSec,setOpenSections,openSection,tcGroupes,addTcGroup,deleteGroup,tcModules,addTcMod,setOpenTcModules,openTcModules,deleteTcMod}}>
         {children}
     </Admin.Provider>
   )

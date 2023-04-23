@@ -51,6 +51,7 @@ Route::group(['prefix' => 'chefdep'], function() {
     Route::get('/get-enseignant', [ChefDepController::class,'getEnseignant'])->name('get-enseignant');
     Route::delete('/supprimer-enseignant/{id}', [ChefDepController::class,'deleteEnseignant'])->name('supprimer-enseignant');
     Route::get('/get-enseignantbydepid/{depId}', [ChefDepController::class,'getEnseignantByDepId'])->name('get-enseignantbydepid');
+    Route::get('/get-enseignantbyid/{userID}', [ChefDepController::class,'getEnseignantById'])->name('get-enseignantbyid');
 
 });
 Route::group(['prefix' => 'prof'], function() {

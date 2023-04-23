@@ -130,7 +130,6 @@ class adminController extends Controller
             'dateNaiss' => 'required|date',
             'role' => 'required',
             'type' => 'required',
-            'domain' => 'integer',
         ]);
 
         // Check if the gestionnaire already exists
@@ -151,7 +150,6 @@ class adminController extends Controller
             'dateNaiss' => $validatedData['dateNaiss'],
             'role' => $validatedData['role'],
             'type' => $validatedData['type'],
-            'domain' => $validatedData['domain'],
         ]);
 
         return response()->json([
@@ -171,7 +169,6 @@ class adminController extends Controller
         //     'dateNaiss' => 'date',
         //     'role' => 'string',
         //     'type' => 'string',
-        //     'domain' => 'integer',
         // ]);
 
         
@@ -206,11 +203,6 @@ class adminController extends Controller
         }
         if(!empty($request->input('type'))) {        
             $gestionnaire->type = $request->type;
-
-        }
-        if(!empty($request->input('domain'))) {        
-            $gestionnaire->domain = $request->domain;
-
         }
         $gestionnaire->save();
 

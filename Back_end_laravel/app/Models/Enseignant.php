@@ -10,5 +10,5 @@ class Enseignant extends Model
 {
     use HasFactory , HasApiTokens;
     protected $table = 'enseignant';
-    protected $fillable = ['userName', 'email', 'password', 'userID', 'dateNaiss', 'depID', 'grad', 'role','cours', 'choix', 'disponibilité'];
+    protected $fillable = ['userName', 'email', 'password', 'userID', 'dateNaiss', 'depID', 'grad', 'role','cours', 'choix', 'disponibilité','type'];
 }

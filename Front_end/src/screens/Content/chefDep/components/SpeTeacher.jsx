@@ -4,20 +4,27 @@ import { FiPlus } from 'react-icons/fi';
 import ChargeCard from './ChargeCard';
 import ChargeForm from './ChargeForm';
 import { useChef } from '../context/ChefContext';
-import {useAuth} from '../../../../../context/AuthContext'
 import axios from 'axios';
-import { useProf } from '../../Prof/context/ProfContext';
 const getSpeCours = 'https://pfeboumerdes.pythonanywhere.com/affectations/';
-
-const Teacher = ({nom,speid,annee,palid,one,semester,profid,tc}) => {
+const getTeacher = 'http://localhost:8000/api/chefdep/get-enseignantbyid/';
+const SpeTeacher = ({speid,annee,palid,one,semester,profid}) => {
   const [cour,setCour] = useState([]);
   const {afects} = useChef();
   const [openCharge,setOpenCharge] = useState(false);
   const [number,setNumber] = useState(0);
+  const [teacher,setTeacher] = useState({});
   const getSpeCour = async () => {
     const {data} = await axios.get(`${getSpeCours}${profid}`)
     setCour(data)
   }
+  const getOneTeacher = async () => {
+    const {data} = await axios.get(`${getTeacher}${profid}`);
+    setTeacher(data);
+    console.log(data);
+  }
+  useEffect(() => {
+    getOneTeacher();
+  },[])
   useEffect(() => {
     getSpeCour();
   },[afects])
@@ -44,7 +51,7 @@ const Teacher = ({nom,speid,annee,palid,one,semester,profid,tc}) => {
     }
   },[cour,afects])
   return (
-    <div className='flex justify-between flex-col border rounded-lg px-4 py-3 gap-2' id={profid}>
+    <div className='flex justify-between flex-col border rounded-lg px-4 py-5 gap-4'>
         <div className='border-[#DADADA] flex-[40%] flex gap-4'>
             <div className='p-4 bg-[#F4F4F4] text-2xl rounded-lg text-black'>
                 <BsFillCollectionFill/>
@@ -52,7 +59,7 @@ const Teacher = ({nom,speid,annee,palid,one,semester,profid,tc}) => {
             <div className='flex justify-between items-center'>
                 <div className='flex flex-col justify-between'>
                     <span className='text-sm text-[#828282]'>Teacher</span>
-                    <p className='text-2xl font-semibold'>{nom}</p>
+                    <p className='text-2xl font-semibold'>{teacher?.userName}</p>
                 </div>
             </div>
             <div className='flex items-end text-xs'>
@@ -71,9 +78,9 @@ const Teacher = ({nom,speid,annee,palid,one,semester,profid,tc}) => {
                 <FiPlus className='text-2xl group-hover:text-main'/>
             </div>
         </div>
-        <ChargeForm setOpenCharge={setOpenCharge} tc={tc} openCharge={openCharge} one={one} palid={palid} annee={annee} speid={speid} cours={cour} profid={profid} setCour={setCour} semestre={semester} cour={cour} />
+        <ChargeForm setOpenCharge={setOpenCharge} openCharge={openCharge} one={one} palid={palid} annee={annee} speid={speid} cours={cour} profid={profid} setCour={setCour} semestre={semester} cour={cour} />
     </div>
   )
 }
 
-export default Teacher
+export default SpeTeacher

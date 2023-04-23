@@ -3,8 +3,10 @@ import { MdClose } from 'react-icons/md';
 import Input from '../../../Auth/components/Input';
 import { useChef } from '../context/ChefContext'
 import { useAuth } from '../../../../../context/AuthContext';
+import { useAdmin } from '../../admin/context/AdminContext';
 
-const GroupForm = ({speid,secid}) => {
+const GroupForm = ({speid,secid,type}) => {
+  const {addTcGroup} = useAdmin();
   const {openGroup,setOpenGroup,addGroupe} = useChef();  
   const {user,setShow,setAddMessage,setColor} = useAuth();
   const [nom,setNom] = useState('');
@@ -18,7 +20,11 @@ const GroupForm = ({speid,secid}) => {
       capacite,
       depid
     }
-    addGroupe(formData)
+    if(type === 'commun'){
+      addTcGroup(formData)
+    }else{
+      addGroupe(formData)
+    }
     setOpenGroup(false);
     setShow(true);
     setAddMessage('Added group successfuly');

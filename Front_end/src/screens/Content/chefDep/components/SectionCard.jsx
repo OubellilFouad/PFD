@@ -6,9 +6,14 @@ import { useChef } from '../context/ChefContext'
 import GroupCard from './GroupCard'
 import GroupForm from './GroupForm'
 import axios from 'axios'
+import { useAdmin } from '../../admin/context/AdminContext'
+import { useAuth } from '../../../../../context/AuthContext'
 const getGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupes/sec/';
+const getTcGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupestc/';
 
-const SectionCard = ({nom,capacite,speid,secid}) => {
+const SectionCard = ({nom,capacite,speid,secid,type}) => {
+  const {user} = useAuth();
+  const {tcGroupes} = useAdmin();  
   const {setOpenGroup,groupes} = useChef();  
   const [groupesSec,setGroupesSec] = useState([]);
   const getGroup = async (id) => {
@@ -17,9 +22,17 @@ const SectionCard = ({nom,capacite,speid,secid}) => {
     setGroupesSec(result);
     console.log(result)
   }
+  const getTcGroup = async () => {
+    const {data} = await axios.get(`${getTcGroupes}${secid}`);
+    setGroupesSec(data);
+  }
   useEffect(() => {
-    getGroup(secid);
-  },[groupes])
+    if(type === 'commun'){
+      getTcGroup();
+    }else{
+      getGroup(secid);
+    }
+  },[groupes,tcGroupes])
   return (
     <div className='flex justify-between flex-col border rounded-lg px-4 py-5 gap-4'>
         <div className='border-[#DADADA] flex-[40%] flex gap-4'>
@@ -39,14 +52,14 @@ const SectionCard = ({nom,capacite,speid,secid}) => {
             {groupesSec.map((group) => {
                 const {nom,secid,speid,capacite,grpid} = group;
                 return(
-                    <GroupCard key={grpid} grpid={grpid} nom={nom} speid={speid} secid={secid} capacite={capacite}  />
+                    <GroupCard key={grpid} type={type} grpid={grpid} nom={nom} speid={speid} secid={secid} capacite={capacite}  />
                 )
             })}
-            <div onClick={() => setOpenGroup(true)} className='rounded-xl group hover:border-main border-2 border-separator h-20 flex justify-center items-center cursor-pointer'>
+            {type !== 'commun' && user?.role !== 0 && (<div onClick={() => setOpenGroup(true)} className='rounded-xl group hover:border-main border-2 border-separator h-20 flex justify-center items-center cursor-pointer'>
                 <FiPlus className='text-2xl group-hover:text-main'/>
-            </div>
+            </div>)}
         </div>
-        <GroupForm speid={speid} secid={secid} />
+        <GroupForm speid={speid} secid={secid} type={type} />
     </div>
   )
 }

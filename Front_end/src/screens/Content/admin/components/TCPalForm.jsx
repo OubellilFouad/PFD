@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { AiOutlinePlus } from 'react-icons/ai';
 import { MdClose } from 'react-icons/md';
 import { useAuth } from '../../../../../context/AuthContext';
 import Input from '../../../Auth/components/Input';
-import { useChef } from '../context/ChefContext'
-import Select from './Select';
-import SpeSelect from './SpeSelect'
+import { useAdmin } from '../context/AdminContext';
 
-const PalierForm = ({speid,array,obj}) => {
-  const {openPalier,setOpenPalier,addPalier} = useChef();  
+const TCPalForm = ({speid,obj}) => {
+  const {openPalier,setOpenPaliers,addPaliers} = useAdmin();  
   const {setShow,setAddMessage,setColor} = useAuth();
   const [nom,setNom] = useState('');
   const [annees,setAnnee] = useState(null);
   const [arr,setArr] = useState([]);
   const [nbrsec,setNbrsec] = useState(null);
   const [nbrgrp,setNbrgrp] = useState(null);
-  let an = [1,2,3,4,5];
+  let an = [1,2];
   let annee = [];
   let intersection;
   const handleAdd = () => {
@@ -27,11 +24,11 @@ const PalierForm = ({speid,array,obj}) => {
       nbrsec,
       nbrgrp
     }
-    addPalier(formData);
+    addPaliers(formData);
     console.log(formData)
     setAnnee(null);
     setNom('');
-    setOpenPalier(false);
+    setOpenPaliers(false);
     setShow(true);
     setAddMessage('Added paliers successfuly');
     setColor(true);
@@ -49,7 +46,7 @@ const PalierForm = ({speid,array,obj}) => {
         <div className='h-[80%] aspect-[9/10] bg-white justify-between rounded-xl flex flex-col relative'>
           <div className='flex-1 flex justify-between px-3 items-center'>
             <p className='text-base py-4 font-bold'>Add Palier</p>
-            <MdClose onClick={() => setOpenPalier(false)} className='text-2xl cursor-pointer'/>
+            <MdClose onClick={() => setOpenPaliers(false)} className='text-2xl cursor-pointer'/>
           </div>
           <div className='flex-[8] px-10 py-4 items-center gap-6 flex flex-col'>
             <Input name={'Nom'} type={'text'} data={nom} setData={setNom} />
@@ -75,4 +72,4 @@ const PalierForm = ({speid,array,obj}) => {
   )
 }
 
-export default PalierForm
+export default TCPalForm

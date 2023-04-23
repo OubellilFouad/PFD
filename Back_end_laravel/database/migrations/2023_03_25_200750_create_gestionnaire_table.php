@@ -21,9 +21,7 @@ return new class extends Migration
             $table->string('userID')->unique();
             $table->date('dateNaiss');
             $table->string('type');
-            $table->integer('role');
-            $table->string('domain')->nullable();
-            
+            $table->integer('role');            
             $table->timestamps();
         });
     }

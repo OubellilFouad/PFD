@@ -1,23 +1,18 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { MdClose } from 'react-icons/md';
-import Input from '../../../Auth/components/Input';
-import { useChef } from '../context/ChefContext'
-import FillSelect from './FillSelect';
-import SpeSelect from './SpeSelect';
 import { useAuth } from '../../../../../context/AuthContext';
-import MiniInput from './MiniInput';
-import Select from './Select';
-const getOneSpes = 'https://pfeboumerdes.pythonanywhere.com/specialite/';
-const getSpes = 'https://pfeboumerdes.pythonanywhere.com/specialites/';
-const getTcSpes = 'https://pfeboumerdes.pythonanywhere.com/formationstc/';
-const getPalier = 'https://pfeboumerdes.pythonanywhere.com/paliers/';
+import Input from '../../../Auth/components/Input';
+import Select from '../../chefDep/components/Select';
+import { useAdmin } from '../context/AdminContext';
+import DepSelect from './DepSelect';
+const getTcSpes = 'https://pfeboumerdes.pythonanywhere.com/formationstc';
 const getTcPalier = 'https://pfeboumerdes.pythonanywhere.com/palierstc/';
 const getOnePalier = 'https://pfeboumerdes.pythonanywhere.com/palier/';
 
-const ModuleForm = () => {
-  const {openModule,setOpenModule,addModule} = useChef();
-  const {user,setShow,setAddMessage,setColor} = useAuth();
+const TcModForm = () => {
+  const {openTcModules,setOpenTcModules,addTcMod} = useAdmin();
+  const {setShow,setAddMessage,setColor} = useAuth();
   const [again,setAgain] = useState(false);  
   const [nom,setNom] = useState('');
   const [speid,setSpeid] = useState(null);
@@ -28,56 +23,44 @@ const ModuleForm = () => {
   const [abbr,setAbbr] = useState('');
   const [semestre,setSemestre] = useState(null);
   const [palid,setPalid] = useState(null);
-  const [spe,setSpe] = useState({});
   const [onePal,setOnePal] = useState({});
   const [pal,setPal] = useState([]);
-  const [spes,setSpes] = useState([]);
+  const [tcspes,setTcSpes] = useState([]);
   const [semestreArr,setSemestreArr] = useState([]);
+  const [dep1,setDep1] = useState(null);
+  const [dep2,setDep2] = useState(null);
+  const [dep3,setDep3] = useState(null);
   const semestre1 = [1,2];
   const semestre2 = [3,4];
-  const semestre3 = [5,6];
-  const getSpe = async () => {
-    const {data} = await axios.get(`${getSpes}${user?.depID}`);
-    setSpes(data);
-  }
-  const getOneSpe = async (id) => {
-    const response = await axios.get(`${getOneSpes}${id}`);
-    const result = await response.data;
-    setSpe(result);
-  }
-  const getPal = async () => {
-    const {data} = await axios.get(`${getPalier}${speid}`);
+  const getTcPal = async () => {
+    const {data} = await axios.get(`${getTcPalier}${speid}`);
     setPal(data);
   }
   const getOnePal = async () => {
     const {data} = await axios.get(`${getOnePalier}${palid}`);
     setOnePal(data);
   }
+  const getTcSpe = async () => {
+    const {data} = await axios.get(getTcSpes);
+    setTcSpes(data);
+  }
   const handleAdd = async () => {
-    await getOneSpe(speid);
-    const fillid = await spe.fillid;
-    const depid = user?.depID;
     const formData = {
       nom,
-      speid,
-      fillid,
-      depid,
-      vhg,
-      hcour,
-      htp,
-      htd,
+      speid: parseInt(speid),
+      vhg: parseInt(vhg),
+      hcour: parseInt(hcour),
+      htp: parseInt(htp),
+      htd: parseInt(htd),
       abbr,
-      semestre,
-      palid
+      semestre: parseInt(semestre),
+      palid: parseInt(palid),
+      dep1: parseInt(dep1),
+      dep2: parseInt(dep2),
+      dep3: parseInt(dep3)
     }
-    if(formData.fillid === undefined){
-      setAgain(true);
-      return;
-    }
-    setAgain(false)
-    console.log(formData)
-    addModule(formData)
-    setOpenModule(false);
+    addTcMod(formData)
+    setOpenTcModules(false);
     setShow(true);
     setAddMessage('Added module successfuly');
     setColor(true);
@@ -92,11 +75,11 @@ const ModuleForm = () => {
     setPalid(null)
   }
   useEffect(() => {
-    getSpe();
+    getTcSpe();
   },[])
   useEffect(() => {
     if(speid){
-      getPal();
+      getTcPal();
     }
   },[speid])
   useEffect(() => {
@@ -112,49 +95,42 @@ const ModuleForm = () => {
       if(onePal.annee === 2){
         setSemestreArr(semestre2);
       }
-      if(onePal.annee === 3){
-        setSemestreArr(semestre3);
-      }
-      if(onePal.annee === 4){
-        setSemestreArr(semestre1);
-      }
-      if(onePal.annee === 5){
-        setSemestreArr(semestre2);
-      }
     }
   },[onePal])
   return (
-    <div className={`w-full h-full absolute z-30 bg-[rgba(0,0,0,0.5)] top-0 left-0 ${openModule?'flex':'hidden'} justify-center items-center`}>
+    <div className={`w-full h-full absolute z-30 bg-[rgba(0,0,0,0.5)] top-0 left-0 ${openTcModules?'flex':'hidden'} justify-center items-center`}>
         <div className='h-[95%] aspect-[9/10] bg-white justify-between rounded-xl flex flex-col'>
           <div className='flex-1 flex justify-between px-3 items-center'>
-            <p className='text-base py-4 font-bold'>Add Module</p>
-            <MdClose onClick={() => setOpenModule(false)} className='text-2xl cursor-pointer'/>
+            <p className='text-base py-4 font-bold'>Add TC Module</p>
+            <MdClose onClick={() => setOpenTcModules(false)} className='text-2xl cursor-pointer'/>
           </div>
           <div className='flex-[8] px-10 py-4 gap-3 flex flex-col'>
             <Input name={'Full name'} data={nom} type={'text'} setData={setNom} />
-            <div className='flex flex-col w-full'>
-                <label htmlFor={'pallier'} className='text-paleMain text-base font-medium cursor-pointer'>Specialities</label>
-                <select onChange={(e) => setSpeid(e.target.value)} name="dropDown" id={'pallier'} className='px-2 pb-2 h-8 border-b-paleMain text-main font-bold border-b-2 bg-transparent outline-none' placeholder='Domains'>
-                    <option value="First" className='bg-separator hover:bg-black text-black' unselectable='on'>Specialities</option>
-                    {spes?.map((spe) => {
-                      const {nom,speid} = spe;
-                        return(
-                            <option key={speid} value={speid} className='bg-separator hover:bg-black text-black' >{nom}</option>
-                        )
-                    })}
-                </select>
-            </div>
-            <div className='flex flex-col w-full'>
-                <label htmlFor={'pallier'} className='text-paleMain text-base font-medium cursor-pointer'>Palier</label>
-                <select onChange={(e) => setPalid(e.target.value)} name="dropDown" id={'pallier'} className='px-2 pb-2 h-8 border-b-paleMain text-main font-bold border-b-2 bg-transparent outline-none' placeholder='Domains'>
-                    <option value="First" className='bg-separator hover:bg-black text-black' unselectable='on'>Paliers</option>
-                    {pal?.map((pal) => {
-                      const {nom,palid} = pal;
-                        return(
-                            <option key={palid} value={palid} className='bg-separator hover:bg-black text-black' >{nom}</option>
-                        )
-                    })}
-                </select>
+            <div className='flex gap-4'>
+                <div className='flex flex-col w-full'>
+                    <label htmlFor={'pallier'} className='text-paleMain text-base font-medium cursor-pointer'>Specialities</label>
+                    <select onChange={(e) => setSpeid(e.target.value)} name="dropDown" id={'pallier'} className='px-2 pb-2 h-8 border-b-paleMain text-main font-bold border-b-2 bg-transparent outline-none' placeholder='Domains'>
+                        <option value="First" className='bg-separator hover:bg-black text-black' unselectable='on'>Specialities</option>
+                        {tcspes?.map((spe) => {
+                        const {nom,ftcid} = spe;
+                            return(
+                                <option data-type='commun' key={ftcid} value={ftcid} className='bg-separator hover:bg-black text-black' >{nom}</option>
+                            )
+                        })}
+                    </select>
+                </div>
+                <div className='flex flex-col w-full'>
+                    <label htmlFor={'pallier'} className='text-paleMain text-base font-medium cursor-pointer'>Palier</label>
+                    <select onChange={(e) => setPalid(e.target.value)} name="dropDown" id={'pallier'} className='px-2 pb-2 h-8 border-b-paleMain text-main font-bold border-b-2 bg-transparent outline-none' placeholder='Domains'>
+                        <option value="First" className='bg-separator hover:bg-black text-black' unselectable='on'>Paliers</option>
+                        {pal?.map((pal) => {
+                        const {nom,palid} = pal;
+                            return(
+                                <option key={palid} value={palid} className='bg-separator hover:bg-black text-black' >{nom}</option>
+                            )
+                        })}
+                    </select>
+                </div>
             </div>
             <Input name={'Volume horaire general'} data={vhg} type={'number'} setData={setvhg} />
             <div className='flex gap-3'>
@@ -173,6 +149,11 @@ const ModuleForm = () => {
             </div>
             <Input name={'Abbreviation'} data={abbr} type={'text'} setData={setAbbr} />
             <Select name={'Le semestre'} data={semestre} setData={setSemestre} array={semestreArr}/>
+            <div className='flex gap-4 items-center w-full'>
+                <DepSelect name={'Departments'} setData={setDep1}/>
+                <DepSelect name={'Departments'} setData={setDep2}/>
+                <DepSelect name={'Departments'} setData={setDep3}/>
+            </div>
           </div>
           <div className='flex-1 flex justify-end items-center px-3 pb-3 gap-3'>
             <p className={`text-red text-sm ${again?'block':'hidden'}`}>Click again!</p>
@@ -183,4 +164,4 @@ const ModuleForm = () => {
   )
 }
 
-export default ModuleForm
+export default TcModForm

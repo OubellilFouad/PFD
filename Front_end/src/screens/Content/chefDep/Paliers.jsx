@@ -5,20 +5,29 @@ import PalierCard from './components/PalierCard'
 import axios from 'axios'
 import { useChef } from './context/ChefContext'
 const getPalier = 'https://pfeboumerdes.pythonanywhere.com/paliers/';
+const getTcPaliers = 'https://pfeboumerdes.pythonanywhere.com/palierstc/';
 
 const Paliers = () => {
   const {palier} = useChef();  
   const location = useLocation()  
   const [speid,setSpeid] = useState(location.state.speid);
   const [paliers,setPaliers] = useState([]);
-  const [array,setArray] = useState([])
+  const [tcpaliers,setTcPaliers] = useState([]);
   useEffect(() => {
     setSpeid(location.state.speid);
-    getSpePalier();
+    if(location.state.type === 'commun'){
+      getTcPalier();
+    }else{
+      getSpePalier();
+    }
   },[palier]) 
   const getSpePalier = async () => {
     const {data} = await axios.get(`${getPalier}${speid}`);
     setPaliers(data);
+  }
+  const getTcPalier = async () => {
+    const {data} = await axios.get(`${getTcPaliers}${speid}`);
+    setTcPaliers(data)
   }
   return (
     <>
@@ -29,6 +38,12 @@ const Paliers = () => {
                     const {palid,speid,nom,annee} = pal;
                     return(
                         <PalierCard key={palid} nom={nom} speid={speid} palid={palid} annee={annee} />
+                    )
+                })}
+                {tcpaliers.map((pal) => {
+                    const {palid,speid,nom,annee} = pal;
+                    return(
+                        <PalierCard key={palid} type='commun' nom={nom} speid={speid} palid={palid} annee={annee} />
                     )
                 })}
             </div>

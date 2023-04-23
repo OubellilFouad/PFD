@@ -6,12 +6,15 @@ import App from './App'
 import './index.css'
 import {AdminContext} from './screens/Content/admin/context/AdminContext'
 import { ChefContext } from './screens/Content/chefDep/context/ChefContext'
+import { ProfContext } from './screens/Content/Prof/context/ProfContext'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <AuthContext>
         <AdminContext>
             <ChefContext>
-                <App />
+                <ProfContext>
+                    <App />
+                </ProfContext>
             </ChefContext>
         </AdminContext>
     </AuthContext>

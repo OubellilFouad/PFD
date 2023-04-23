@@ -1,95 +1,78 @@
 import React, { useEffect, useState } from 'react'
 import { MdClose } from 'react-icons/md';
-import Input from '../../../Auth/components/Input';
-import { useChef } from '../context/ChefContext'
-import SpeSelect from './SpeSelect';
-import { useAuth } from '../../../../../context/AuthContext';
 import axios from 'axios';
-const getPal = 'https://pfeboumerdes.pythonanywhere.com/paliers/';
+import { useAdmin } from '../context/AdminContext';
+import { useAuth } from '../../../../../context/AuthContext';
+import Input from '../../../Auth/components/Input';
+import DepSelect from './DepSelect';
 const getTcPal = 'https://pfeboumerdes.pythonanywhere.com/palierstc/';
-const getSpe = 'https://pfeboumerdes.pythonanywhere.com/specialites/';
-const getTcSpe = 'https://pfeboumerdes.pythonanywhere.com/formationstc/';
+const getTcSpe = 'https://pfeboumerdes.pythonanywhere.com/formationstc';
 
-const SectionForm = () => {
-  const {openSec,setOpenSec,addSection,spes} = useChef(); 
-  const {user,setShow,setAddMessage,setColor} = useAuth();
+const TcSectionForm = () => {
+  const {openSection,setOpenSections,addTcSec,tcform} = useAdmin(); 
+  const {setShow,setAddMessage,setColor} = useAuth();
   const [nom,setNom] = useState(''); 
   const [capacite,setCapacite] = useState(0); 
   const [speid,setSpeid] = useState(null); 
-  const [tc,setTc] = useState(false);
   const [pals,setPals] = useState([]);
-  const [spe,setSpe] = useState([]);
   const [tcspe,setTcSpe] = useState([]);
   const [palid,setPalid] = useState(null);
+  const [dep1,setDep1] = useState(null);
+  const [dep2,setDep2] = useState(null);
+  const [dep3,setDep3] = useState(null);
   const handleAdd = () => {
-    const depid = user?.depID;
     const formData = {
       nom,
-      capacite,
-      speid,
-      depid,
-      palid
+      capacite: parseInt(capacite),
+      speid: parseInt(speid),
+      palid: parseInt(palid),
+      dep1: parseInt(dep1),
+      dep2: parseInt(dep2),
+      dep3: parseInt(dep3)
     }
-    addSection(formData);
+    addTcSec(formData);
     setNom('');
     setCapacite(0);
     setSpeid(0);
-    setOpenSec(false);
+    setOpenSections(false);
     setShow(true);
     setAddMessage('Added section successfuly');
     setColor(true);
-  }
-  const getPals = async () => {
-    const {data} = await axios.get(`${getPal}${speid}`);
-    setPals(data);
   }
   const getTcPals = async () => {
     const {data} = await axios.get(`${getTcPal}${speid}`);
     setPals(data);
   }
-  const getSpes = async () => {
-    const {data} = await axios.get(`${getSpe}${user?.depID}`);
-    setSpe(data);
-  }
   const getTcSpes = async () => {
-    const {data} = await axios.get(`${getTcSpe}${user?.depID}`);
+    const {data} = await axios.get(getTcSpe);
     setTcSpe(data);
   }
   useEffect(() => {
     if(speid){
-      if(tc){
         getTcPals();
-        console.log(tc)
-      }else{
-        getPals();
-      }
     }
   },[speid])
   useEffect(() => {
-    getSpes();
     getTcSpes();
-  },[spes])
+  },[tcform])
   return (
-    <div className={`w-full h-full absolute z-30 bg-[rgba(0,0,0,0.5)] top-0 left-0 ${openSec?'flex':'hidden'} justify-center items-center`}>
-        <div className='h-[90%] aspect-[9/10] bg-white justify-between rounded-xl flex flex-col'>
+    <div className={`w-full h-full absolute z-30 bg-[rgba(0,0,0,0.5)] top-0 left-0 ${openSection?'flex':'hidden'} justify-center items-center`}>
+        <div className='h-[95%] aspect-[9/10] bg-white justify-between rounded-xl flex flex-col'>
           <div className='flex-1 flex justify-between px-3 items-center'>
             <p className='text-base py-4 font-bold'>Add Section</p>
-            <MdClose onClick={() => setOpenSec(false)} className='text-2xl cursor-pointer'/>
+            <MdClose onClick={() => setOpenSections(false)} className='text-2xl cursor-pointer'/>
           </div>
           <div className='flex-[8] px-10 py-4 gap-6 flex flex-col'>
             <Input name={'Nom'} type={'text'} setData={setNom} data={nom} />
             <Input name={'Capacité'} type={'number'} setData={setCapacite} data={capacite} />
             <div className='flex flex-col w-full'>
-              <label htmlFor={'pals'} className='text-paleMain text-base font-medium cursor-pointer'>Specialities</label>
-              <select onChange={(e) => {
-                setSpeid(e.target.value);
-                setTc(false);
-              }} name="dropDown" id={'pals'} className='px-2 pb-2 h-8 border-b-paleMain text-main font-bold border-b-2 bg-transparent outline-none' placeholder='Domains'>
+              <label htmlFor={'pals'} className='text-paleMain text-base font-medium cursor-pointer'>Specialities Tranc commun</label>
+              <select onChange={(e) => setSpeid(e.target.value)} name="dropDown" id={'pals'} className='px-2 pb-2 h-8 border-b-paleMain text-main font-bold border-b-2 bg-transparent outline-none' placeholder='Domains'>
                   <option value="First" className='bg-separator hover:bg-black text-black' unselectable='Specialité'>Specialities</option>
-                  {spe.map((spe) => {
-                      const {nom,speid} = spe;
+                  {tcspe.map((tcspe) => {
+                      const {nom,ftcid} = tcspe;
                       return(
-                          <option key={speid} value={speid} onClick={() => setTc(false)} className='bg-separator hover:bg-black text-black' >{nom}</option>
+                          <option key={ftcid} onClick={() => setTc(true)} value={ftcid} className='bg-separator hover:bg-black text-black' >{nom}</option>
                       )
                   })}
               </select>
@@ -106,6 +89,11 @@ const SectionForm = () => {
                   })}
               </select>
             </div>
+            <div className='flex gap-4 items-center w-full'>
+                <DepSelect name={'Departments'} setData={setDep1}/>
+                <DepSelect name={'Departments'} setData={setDep2}/>
+                <DepSelect name={'Departments'} setData={setDep3}/>
+            </div>
           </div>
           <div className='flex-1 flex justify-end items-center px-3 pb-3'>
             <button onClick={handleAdd} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
@@ -115,4 +103,4 @@ const SectionForm = () => {
   )
 }
 
-export default SectionForm
+export default TcSectionForm

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {MdEventAvailable, MdFolderSpecial, MdOutlineSpaceDashboard} from 'react-icons/md'
+import {MdEventAvailable, MdFolderSpecial, MdOutlineCollectionsBookmark, MdOutlineSpaceDashboard, MdWork} from 'react-icons/md'
 import {HiOutlineUsers} from 'react-icons/hi'
 import {FaChalkboardTeacher} from 'react-icons/fa'
 import {ImBooks} from 'react-icons/im'
@@ -14,6 +14,9 @@ const admin = [
     {path:'',name:'Dashboard',icon: <MdOutlineSpaceDashboard/>,page: 'Main'},
     {path:'gestionnaire',name:'Les gestionnaires',icon: <HiOutlineUsers/>,page: 'Gestionnaire'},
     {path:'resource',name:'Les Resources',icon: <GiTheater/>,page: 'Resource'},
+    {path:'tcformation',name:'Les Formations',icon: <MdOutlineCollectionsBookmark/>,page: 'TCFormations'},
+    {path:'tcsec',name:'Les Sections',icon: <BsFillCollectionFill/>,page: 'TCSections'},
+    {path:'tcmod',name:'Les Modules',icon: <ImBooks/>,page: 'TCModules'},
 ]
 
 const chef = [
@@ -22,7 +25,7 @@ const chef = [
     {path:'speciality',name:'Les Formations',icon: <MdFolderSpecial/>,page: 'Formations'},
     {path:'sections',name:'Les Sections',icon: <BsFillCollectionFill/>,page: 'Sections'},
     {path:'modules',name:'Les Modules',icon: <ImBooks/>,page: 'Modules'},
-    {path:'test',name:'La charge',icon: <ImBooks/>,page: 'Charge'},
+    {path:'charge',name:'La charge',icon: <MdWork/>,page: 'Charge'},
 ]
 
 const prof = [
@@ -55,12 +58,12 @@ const Sidebar = () => {
                 )
             })}
         </div>
-        {user?.role === 0 && (
-            <div className='flex-[50%] flex flex-col px-3 gap-7 overflow-x-scroll'>
+        {/* {user?.role === 0 && (
+            <div className='flex-[50%] flex flex-col px-3 pb-4 gap-7'>
                 <hr />
                 <div className='flex flex-col gap-5'>
                     <p className='text-[#787486] text-xs font-bold uppercase'>Mes departement</p>
-                    <div className='flex flex-col gap-4'>
+                    <div className='flex flex-col gap-4 overflow-x-scroll'>
                         {deps.map((dep) => {
                             const {nom,domainid,depid} = dep;
                             return(
@@ -70,7 +73,7 @@ const Sidebar = () => {
                     </div>
                 </div>
             </div>
-        )}
+        )} */}
     </div>
   )
 }

@@ -9,7 +9,6 @@ import AdminDashboard from './screens/Content/admin/AdminDashboard'
 import DepInfo from './screens/Content/admin/DepInfo'
 import Gestionair from './screens/Content/admin/Gestionair'
 import Chambres from './screens/Content/chefDep/Chambres'
-import Charge from './screens/Content/chefDep/Charge'
 import ChefDashboard from './screens/Content/chefDep/ChefDashboard'
 import Enseingant from './screens/Content/chefDep/Enseingant'
 import Modules from './screens/Content/chefDep/Modules'
@@ -20,6 +19,10 @@ import Desponibilité from './screens/Content/Prof/Desponibilité'
 import Choix from './screens/Content/Prof/Choix'
 import Paliers from './screens/Content/chefDep/Paliers'
 import ChargeTest from './screens/Content/chefDep/ChargeTest'
+import TCformation from './screens/Content/admin/TCformation'
+import TCPaliers from './screens/Content/admin/TCPalier'
+import TcSection from './screens/Content/admin/TcSection'
+import TcModule from './screens/Content/admin/TcModule'
 
 function App() {
   const {user} = useAuth();
@@ -38,6 +41,10 @@ function App() {
                 <Route path='gestionnaire' element={<Gestionair/>}/>
                 <Route path='info' element={<DepInfo/>}/>
                 <Route path='resource' element={<Chambres/>}/>
+                <Route path='tcformation' element={<TCformation/>}/>
+                <Route path='tcpal' element={<TCPaliers/>}/>
+                <Route path='tcsec' element={<TcSection/>}/>
+                <Route path='tcmod' element={<TcModule/>}/>
               </>
             )}
             {user?.role === 1 && (
@@ -46,10 +53,9 @@ function App() {
                 <Route path='enseignant' element={<Enseingant/>}/>
                 <Route path='sections' element={<Sections/>}/>
                 <Route path='speciality' element={<Speciality/>}/>
-                <Route path='charge' element={<Charge/>}/>
                 <Route path='paliers' element={<Paliers/>}/>
                 <Route path='modules' element={<Modules/>}/>
-                <Route path='test' element={<ChargeTest/>}/>
+                <Route path='charge' element={<ChargeTest/>}/>
               </>
             )}
             {user?.role === 3 && (

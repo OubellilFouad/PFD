@@ -4,11 +4,13 @@ import Choice from './components/Choice'
 import { useChef } from '../chefDep/context/ChefContext'
 import axios from 'axios';
 import { useAuth } from '../../../../context/AuthContext';
-const addChoices = 'http://localhost:8000/api/prof/choixmodules-enseignant/';
-const getChoices = 'http://localhost:8000/api/prof/enseignant-choix/';
+import { useProf } from './context/ProfContext';
+const getOneChoix = 'https://pfeboumerdes.pythonanywhere.com/veuxs/';
+
 const Choix = () => {
   const {modules} = useChef(); 
   const {user,setShow,setAddMessage,setColor} = useAuth();
+  const {addChoice,choix,deleteChoice} = useProf()
   const [choices,setChoices] = useState({});
   const [module,setModule] = useState([]);
   const [mod1,setMod1] = useState(null);
@@ -22,31 +24,54 @@ const Choix = () => {
   const [type3,setType3] = useState([]);
   const [type4,setType4] = useState([]);
   const [type5,setType5] = useState([]);
-  const addChoice = async (formData) => {
-    await axios.post(`${addChoices}${user?.id}`,formData);
-  }
-  const getChoice = async () => {
-    const {data} = await axios.get(`${getChoices}${user?.id}`);
-    setChoices(JSON.parse(data.choices));
+
+  const [palid1,setPalid1] = useState(null);
+  const [palid2,setPalid2] = useState(null);
+  const [palid3,setPalid3] = useState(null);
+  const [palid4,setPalid4] = useState(null);
+  const [palid5,setPalid5] = useState(null);
+
+  const [speid1,setSpeid1] = useState(null);
+  const [speid2,setSpeid2] = useState(null);
+  const [speid3,setSpeid3] = useState(null);
+  const [speid4,setSpeid4] = useState(null);
+  const [speid5,setSpeid5] = useState(null);
+
+  const getOneChoice = async () => {
+    const {data} = await axios.get(`${getOneChoix}${user?.userID}`);
+    console.log(data);
+    setChoices(data);
   }
   useEffect(() => {
-    getChoice();
-  },[])
+    getOneChoice();
+  },[choix])
   useEffect(() => {
     if(choices){
         const {choix1,choix2,choix3,choix4,choix5} = choices;
-        setMod1(choix1?.moduleID?choix1.moduleID:null);
-        setMod2(choix2?.moduleID?choix2.moduleID:null);
-        setMod3(choix3?.moduleID?choix3.moduleID:null);
-        setMod4(choix4?.moduleID?choix4.moduleID:null);
-        setMod5(choix5?.moduleID?choix5.moduleID:null);
-        setType1(choix1?.type);
-        setType2(choix2?.type);
-        setType3(choix3?.type);
-        setType4(choix4?.type);
-        setType5(choix5?.type);
+        console.log(choix1 && JSON.parse(choix1).type)
+        setMod1(choix1?JSON.parse(choix1).moduleID:null);
+        setMod2(choix2?JSON.parse(choix2).moduleID:null);
+        setMod3(choix3?JSON.parse(choix3).moduleID:null);
+        setMod4(choix4?JSON.parse(choix4).moduleID:null);
+        setMod5(choix5?JSON.parse(choix5).moduleID:null);
+        setType1(choix1 && JSON.parse(choix1).type);
+        setType2(choix2 && JSON.parse(choix2).type);
+        setType3(choix3 && JSON.parse(choix3).type);
+        setType4(choix4 && JSON.parse(choix4).type);
+        setType5(choix5 && JSON.parse(choix5).type);
+    }else{
+        setMod1(null);
+        setMod2(null);
+        setMod3(null);
+        setMod4(null);
+        setMod5(null);
+        setType1(null);
+        setType2(null);
+        setType3(null);
+        setType4(null);
+        setType5(null);
     }
-  },[choices])
+  },[choices,choix])
   useEffect(() => {
     setModule(modules.filter((module) => {
         if(module.modid !== mod1 && module.modid !== mod2 && module.modid !== mod3 && module.modid !== mod4 && module.modid !== mod5){
@@ -56,64 +81,76 @@ const Choix = () => {
   },[mod1,mod2,mod3,mod4,mod5])
   const handleSubmit = () => {
     const formData = {
-        choix1:{
+        teacherid: user?.userID,
+        choix1:JSON.stringify({
             moduleID: mod1 || null,
             type:type1 || [],
-        },
-        choix2:{
+            palid:palid1,
+            speid: speid1
+        }),
+        choix2:JSON.stringify({
             moduleID: mod2 || null,
             type:type2 || [],
-        },
-        choix3:{
+            palid:palid2,
+            speid: speid2
+        }),
+        choix3:JSON.stringify({
             moduleID: mod3 || null,
             type:type3 || [],
-        },
-        choix4:{
+            palid:palid3,
+            speid: speid3
+        }),
+        choix4:JSON.stringify({
             moduleID: mod4 || null,
             type:type4 || [],
-        },
-        choix5:{
+            palid:palid4,
+            speid: speid4
+        }),
+        choix5:JSON.stringify({
             moduleID: mod5 || null,
             type:type5 || [],
-        }
+            palid:palid5,
+            speid: speid5
+        })
     }
-    const result = {
-        choix: JSON.stringify(formData)
-    }
-    console.log(formData)
-    console.log(mod1,mod2,mod3,mod4,mod5)
     if(mod1 === null || mod2 === null || mod3 === null || mod4 === null || mod5 === null){
-        console.log('empty')
         setShow(true);
         setAddMessage('Choose 5 modules first');
         setColor(false);
     }else{
-        addChoice(result);
+        addChoice(formData)
         setShow(true);
         setAddMessage('Added choice successfuly');
         setColor(true);
     }
   }
   return (
-    <div className='flex flex-col gap-8'>
+    <div className='flex flex-col gap-8 overflow-hidden'>
         <p className='text-xl font-bold'>Choisissez les modules que vous souhaitez enseigner, l'ordre sera pris en considération</p>
-        <div className='flex justify-between flex-col border rounded-lg px-4 py-5 gap-4'>
+        <div className='flex justify-between flex-col border rounded-lg px-4 py-5 gap-4 overflow-x-scroll'>
             <div className='border-[#DADADA] items-center flex-[40%] flex gap-4'>
                 <div className='p-4 bg-[#F4F4F4] text-2xl rounded-lg text-black'>
                     <CgSelectR/>
                 </div>
-                <div className='flex flex-col justify-between'>
+                <div className='flex items-center justify-between w-full'>
                     <p className='text-2xl font-semibold'>Les choix</p>
+                    {Object.keys(choices).length !== 0 && (
+                        <div className='flex justify-center'>
+                            <button onClick={()=>deleteChoice(choices?.veuxid)} className='rounded-l text-red text-lg font-semibold'>Reset</button>
+                        </div>
+                    )}
                 </div>
             </div>
-            <Choice modules={module} setModule={setMod1} module={mod1} type={type1} setType={setType1} />
-            <Choice modules={module} setModule={setMod2} module={mod2} type={type2} setType={setType2} />
-            <Choice modules={module} setModule={setMod3} module={mod3} type={type3} setType={setType3} />
-            <Choice modules={module} setModule={setMod4} module={mod4} type={type4} setType={setType4} />
-            <Choice modules={module} setModule={setMod5} module={mod5} type={type5} setType={setType5} />
-            <div className='flex justify-end pt-4'>
-                <button onClick={()=>handleSubmit()} className='py-2 px-5 rounded-lg text-white bg-main'>Submit</button>
-            </div>
+            <Choice modules={module} setModule={setMod1} module={mod1} type={type1} setType={setType1} setPalid={setPalid1} setSpeid={setSpeid1} />
+            <Choice modules={module} setModule={setMod2} module={mod2} type={type2} setType={setType2} setPalid={setPalid2} setSpeid={setSpeid2} />
+            <Choice modules={module} setModule={setMod3} module={mod3} type={type3} setType={setType3} setPalid={setPalid3} setSpeid={setSpeid3} />
+            <Choice modules={module} setModule={setMod4} module={mod4} type={type4} setType={setType4} setPalid={setPalid4} setSpeid={setSpeid4} />
+            <Choice modules={module} setModule={setMod5} module={mod5} type={type5} setType={setType5} setPalid={setPalid5} setSpeid={setSpeid5} />
+            {Object.keys(choices).length === 0 && (
+                <div className='flex justify-end pt-4'>
+                    <button onClick={()=>handleSubmit()} className='py-2 px-5 rounded-lg text-white bg-main'>Submit</button>
+                </div>
+            )}
         </div>
     </div>
   )

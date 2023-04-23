@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useAuth } from '../../../../../context/AuthContext';
 const getOneModule = 'https://pfeboumerdes.pythonanywhere.com/module/';
 
-const Choice = ({setModule,modules,module,type,setType}) => {
+const Choice = ({setModule,modules,module,type,setType,setPalid,setSpeid}) => {
   const [speModule,setSpeModule] = useState({});
   const cours = useRef();
   const tp = useRef();
@@ -16,14 +16,24 @@ const Choice = ({setModule,modules,module,type,setType}) => {
   useEffect(() => {
     if(type?.includes(cours.current.value)){
       cours.current.checked = true;
+    }else{
+      cours.current.checked = false;
     }
     if(type?.includes(tp.current.value)){
       tp.current.checked = true;
+    }else{
+      tp.current.checked = false;
     }
     if(type?.includes(td.current.value)){
       td.current.checked = true;
+    }else{
+      td.current.checked = false;
     }
   },[type])
+  useEffect(() => {
+    setPalid(speModule.palid);
+    setSpeid(speModule.speid);
+  },[speModule])
   const getOne = async () => {
     const {data} = await axios.get(`${getOneModule}${module}`);
     setSpeModule(data);

@@ -7,11 +7,11 @@ import { useAdmin } from './context/AdminContext'
 const Gestionair = () => {
   const {openGest,setOpenGest, gestionairs} = useAdmin();
   return (
-    <div className='flex flex-col gap-8'>
+    <div className='flex flex-col gap-6 overflow-x-scroll pb-4'>
        {gestionairs.map((gestionair) => {
         const {userName,email,domain,type,userID,id} = gestionair;
         return(
-          <GestionairCard key={userID} userName={userName} id={id} email={email} domain={domain} type={type} />
+          <GestionairCard key={userID} userName={userName} id={id} email={email} domain={domain} userID={userID} type={type} />
         )
        })}
         <div className='flex justify-between'>

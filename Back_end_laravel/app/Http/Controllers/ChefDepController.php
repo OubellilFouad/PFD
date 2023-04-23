@@ -15,7 +15,11 @@ class ChefDepController extends Controller
     public function getEnseignantByDepId($depId) {
         $enseignants = Enseignant::where('depID', $depId)->get();
         return response()->json($enseignants);
-      }
+    }
+    public function getEnseignantById($userID) {
+        $enseignants = Enseignant::where('userID', $userID)->first();
+        return response()->json($enseignants);
+    }
     public function ajouterEnseignant(Request $request)
     {
         $validatedData = $request->validate([
@@ -26,6 +30,7 @@ class ChefDepController extends Controller
             'depID' => 'required',
             'grad' => 'required',            
             'role' => 'required',            
+            'type' => 'required',            
         ]);
 
         // Check if the user already exists
@@ -48,6 +53,7 @@ class ChefDepController extends Controller
             'depID' => $validatedData['depID'],
             'grad' => $validatedData['grad'],
             'role' => $validatedData['role'],
+            'type' => $validatedData['type'],
         ]);
 
         return response()->json([

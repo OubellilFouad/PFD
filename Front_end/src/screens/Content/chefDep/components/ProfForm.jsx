@@ -5,6 +5,7 @@ import Input from '../../../Auth/components/Input';
 import { useAuth } from '../../../../../context/AuthContext';
 import { useAdmin } from '../../admin/context/AdminContext';
 import { useChef } from '../context/ChefContext';
+import Select from './Select';
 
 const ProfForm = () => {
   const {user,setShow,setAddMessage,setColor} = useAuth();  
@@ -15,6 +16,8 @@ const ProfForm = () => {
   const [date,setDate] = useState('');
   const [grad,setGrad] = useState('');
   const [error,setError] = useState('');
+  const [type,setType] = useState('');
+  const typeArr = ['Permanant','Vaccatair']
   const handleAdd = () => {
     const userID = matricule;
     const role = 3;
@@ -27,7 +30,8 @@ const ProfForm = () => {
       dateNaiss,
       role, 
       grad,
-      depID
+      depID,
+      type
     }
     if(userName === ''){
       setError('Name field must not be empty');
@@ -67,7 +71,7 @@ const ProfForm = () => {
   }  
   return (
     <div className={`w-full h-full absolute z-30 bg-[rgba(0,0,0,0.5)] top-0 left-0 ${openProf?'flex':'hidden'} justify-center items-center`}>
-        <div className='h-[80%] aspect-[9/10] bg-white justify-between rounded-xl flex flex-col'>
+        <div className='h-[95%] aspect-[9/10] bg-white justify-between rounded-xl flex flex-col'>
           <div className='flex-1 flex justify-between px-3 items-center'>
             <p className='text-base py-4 font-bold'>Add Enseignant</p>
             <MdClose onClick={() => setOpenProf(false)} className='text-2xl cursor-pointer'/>
@@ -86,6 +90,7 @@ const ProfForm = () => {
                 </select>
               </div>
             </div>
+            <Select name={'Type'} array={typeArr} setData={setType} />
           </div>
           <div className='flex-1 flex justify-between items-center px-3 pb-3'>
             <p className='text-red'> {error} </p>

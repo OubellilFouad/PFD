@@ -12,19 +12,12 @@ const GestForm = () => {
   const [email,setEmail] = useState('');
   const [matricule,setMatricule] = useState('');
   const [date,setDate] = useState('');
-  const [domainState,setDomain] = useState('');
   const [type,setType] = useState('');
   const [error,setError] = useState('');
   const handleAdd = () => {
     const userID = matricule;
     const role = 2;
     const dateNaiss = date;
-    let domain;
-    if(domainState === ''){
-      domain = 0;
-    }else{
-      domain = domainState
-    }
     const formData = {
       userName,
       email,
@@ -32,7 +25,6 @@ const GestForm = () => {
       dateNaiss,
       role, 
       type,
-      domain
     }
     if(userName === ''){
       setError('Name field must not be empty');
@@ -67,7 +59,7 @@ const GestForm = () => {
   }  
   return (
     <div className={`w-full h-full absolute z-30 bg-[rgba(0,0,0,0.5)] top-0 left-0 ${openGest?'flex':'hidden'} justify-center items-center`}>
-        <div className='h-[80%] aspect-[9/10] bg-white justify-between rounded-xl flex flex-col'>
+        <div className='h-[90%] aspect-[9/10] bg-white justify-between rounded-xl flex flex-col'>
           <div className='flex-1 flex justify-between px-3 items-center'>
             <p className='text-base py-4 font-bold'>Add Gestionair</p>
             <MdClose onClick={() => setOpenGest(false)} className='text-2xl cursor-pointer'/>
@@ -82,11 +74,10 @@ const GestForm = () => {
                 <label htmlFor='type' className='text-paleMain text-base font-medium cursor-pointer'>Type</label>
                 <select onChange={(e) => setType(e.target.value)} name="dropDown" id='type' className='px-2 pb-2 h-8 border-b-paleMain text-main font-bold border-b-2 bg-transparent outline-none' placeholder='Domains'>
                     <option className='bg-separator hover:bg-black text-black' unselectable='on'>Type</option>
-                    <option value="domain" className='bg-separator hover:bg-black text-black'>Domain</option>
-                    <option value="trancC" className='bg-separator hover:bg-black text-black'>tranc commun</option>
+                    <option value="Department" className='bg-separator hover:bg-black text-black'>Departement</option>
+                    <option value="Tranc Commun" className='bg-separator hover:bg-black text-black'>tranc commun</option>
                 </select>
               </div>
-              {type === 'domain' && (<Drop name={'Domain'} setData={setDomain} />)}
             </div>
           </div>
           <div className='flex-1 flex justify-between items-center px-3 pb-3'>

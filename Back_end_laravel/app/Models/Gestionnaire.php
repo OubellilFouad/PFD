@@ -19,6 +19,5 @@ class Gestionnaire extends Model
         'dateNaiss', 
         'type', 
         'role',
-        'domain',
     ];
 }
