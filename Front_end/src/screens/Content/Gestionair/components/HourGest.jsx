@@ -113,7 +113,6 @@ const HourGest = ({hour,day,aff,semestree}) => {
       tc
     }
     addEdts(formData);
-    console.log(formData);
   }
   const reset = () => {
     if(!edtid){

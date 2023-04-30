@@ -6,6 +6,7 @@ use App\Http\Controllers\authController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\ChefDepController;
 use App\Http\Controllers\EnseignantController;
+use App\Http\Controllers\EtudiantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,5 +72,10 @@ Route::group(['prefix' => 'prof'], function() {
     Route::get('/enseignants-disponibilité/{id}', [EnseignantController::class,'getDisponibiliteByEnseignantId']);
 
     Route::get('/enseignants-cours/{id}', [EnseignantController::class,'getCourByEnseignantId']);
+
+});
+Route::group(['prefix' => 'student'], function() {
+
+    Route::post('signup', [EtudiantController::class,'RegisterEtudiant']);
 
 });

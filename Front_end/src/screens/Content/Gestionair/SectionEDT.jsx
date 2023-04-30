@@ -228,9 +228,9 @@ const SectionEDT = () => {
   },[edtTc,semestre])
   return (
     <div className='flex flex-col gap-2 -mt-6 overflow-hidden'>
-        <div className='flex justify-between items-center'>
-            <p className='text-xl font-bold flex-1'>Emploi du temps de la section : {sec?.nom}</p>
-            <motion.div ref={carousel} className='cursor-grab overflow-hidden flex-1 carousel p-2 border-separator border-2 rounded-md'>
+        <div className='flex justify-between items-center gap-6'>
+            <p className='text-xl font-bold text-main w-[10%]'>{sec?.nom}</p>
+            <motion.div ref={carousel} className='cursor-grab w-[100%] overflow-hidden carousel p-2 border-separator border-2 rounded-md'>
                 <motion.div drag='x' dragConstraints={{right:0,left: -width}} className='flex gap-2'>
                     {chambre.map((cham) => {
                         const {nom,capacite,type,chambreid} = cham;

@@ -5,6 +5,7 @@ import { useAuth } from '../../../../../context/AuthContext';
 import { useGest } from '../context/GestContext';
 import { BsCheckCircle } from 'react-icons/bs';
 import { SlClose } from 'react-icons/sl';
+import { useProf } from '../../Prof/context/ProfContext';
 const getModules = 'https://pfeboumerdes.pythonanywhere.com/module/';
 const getTcModules = 'https://pfeboumerdes.pythonanywhere.com/moduletc/';
 const getChambres = 'https://pfeboumerdes.pythonanywhere.com/chambre/';
@@ -13,6 +14,8 @@ const getProfs = 'http://127.0.0.1:8000/api/chefdep/get-enseignantbyid/';
 const HourGrp = ({hour,day,affSec,aff}) => {
   const {setShow,setAddMessage,setColor} = useAuth();
   const {edts,addEdts,deleteEdt,profG,salleG} = useGest();
+  const {avails} = useProf();
+  const [avail,setAvail] = useState(false);
   const [all,setAll] = useState([]);
   const [place,setPlace] = useState(false);
   const [color,setColorr] = useState(false);
@@ -141,13 +144,20 @@ const HourGrp = ({hour,day,affSec,aff}) => {
   useEffect(() => {
     if(profG){
       let exists = edts.filter(edt => edt.profid === profG);
+      let avais = avails.filter(av => av.profid === profG);
       exists.map((ex) => {
         if(ex.day === day && ex.hour === hour){
           setColorr(true);
         }
       })
+      avais.map((av) => {
+        if(av.day === day && av.hour === hour){
+          setAvail(true);
+        }
+      })
     }else{
-      setColorr(false)
+      setColorr(false);
+      setAvail(false);
     }
   },[profG])
   useEffect(() => {
@@ -269,7 +279,7 @@ const HourGrp = ({hour,day,affSec,aff}) => {
     setAll(edts);
   },[edts]);
   return (
-    <div ref={drop} data-value='08h00-09h30' className={`flex justify-between py-1 flex-col border-gray-300 border items-center font-bold ${isOver && !color && !place && 'bg-main text-white'} ${Object.keys(affSec).length !== 0 && '!bg-blue-500 !text-white'} ${edtid && '!bg-main !text-white'} relative group ${color && !edtid && !place && Object.keys(affSec).length === 0 && '!bg-red'} ${place && !edtid && !color && '!bg-orange-500'}`}>
+    <div ref={drop} data-value='08h00-09h30' className={`flex justify-between py-1 flex-col border-gray-300 border items-center font-bold ${isOver && !color && !place && 'bg-main text-white'} ${Object.keys(affSec).length !== 0 && '!bg-blue-500 !text-white'} ${edtid && '!bg-main !text-white'} relative group ${color && !edtid && !place && Object.keys(affSec).length === 0 && '!bg-red'} ${place && !edtid && !color && '!bg-orange-500'} ${avail && !place && !color && !edtid && !module && 'bg-green-500'}`}>
         {Object.keys(affSec).length === 0 && Object.keys(aff).length === 0 && (
           <>
           <p className={`${isOver?'text-white':'text-main'} font-normal`}>{Object.keys(oneModule).length !== 0 && oneModule.abbr}</p>

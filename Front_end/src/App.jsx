@@ -63,6 +63,8 @@ function App() {
                 <Route path='paliers' element={<Paliers/>}/>
                 <Route path='modules' element={<Modules/>}/>
                 <Route path='charge' element={<ChargeTest/>}/>
+                <Route path='edtprof' element={<ProfEDT/>}/>
+                <Route path='edtp' element={<EDTP/>}/>
               </>
             )}
             {user?.role === 2 && (

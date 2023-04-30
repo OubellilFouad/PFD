@@ -29,6 +29,7 @@ const chef = [
     {path:'sections',name:'Les Sections',icon: <BsFillCollectionFill/>,page: 'Sections'},
     {path:'modules',name:'Les Modules',icon: <ImBooks/>,page: 'Modules'},
     {path:'charge',name:'La charge',icon: <MdWork/>,page: 'Charge'},
+    {path:'edtprof',name:'Teachers',icon: <BsFillPersonLinesFill className='text-lg'/>,page: 'CEDT'},
 ]
 const gest = [
     {path:'',name:'Dashboard',icon: <MdOutlineSpaceDashboard/>,page: 'Main'},
@@ -74,7 +75,7 @@ const Sidebar = () => {
   },[user])
   return (
     <div className='border-r border-r-[#DBDBDB] flex flex-col sidebar overflow-hidden'>
-        {location?.state?.page !== 'EDT' && location?.state?.page !== 'PEDT' && (
+        {location?.state?.page !== 'EDT' && location?.state?.page !== 'PEDT' && location?.state?.page !== 'CEDT' && (
             <div className='py-7 flex flex-col px-6 gap-5'>
                 {nav.map((item,index) => {
                     const {name,path,icon,page} = item;
@@ -107,6 +108,11 @@ const Sidebar = () => {
                         <Department key={id} type={'prof'} depid={depid} />
                     )
                 })}
+            </div>
+        )}
+        {location?.state?.page === 'CEDT' && (
+            <div className='py-7 flex flex-col px-6 gap-4 overflow-y-scroll'>
+                <Department type={'profC'} depid={user?.depID} />
             </div>
         )}
     </div>

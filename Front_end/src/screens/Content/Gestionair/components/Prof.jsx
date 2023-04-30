@@ -2,10 +2,10 @@ import React from 'react'
 import { IoMdPerson } from 'react-icons/io'
 import { NavLink } from 'react-router-dom'
 
-const Prof = ({nom,profid}) => {
+const Prof = ({nom,profid,type}) => {
   return (
     <NavLink to={'edtp'} state={{
-        page: 'PEDT',
+        page: type === 'C'?'CEDT':'PEDT',
         profid,
         name: 'Time tables'
     }} >

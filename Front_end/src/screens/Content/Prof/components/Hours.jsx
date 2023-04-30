@@ -6,7 +6,7 @@ const addDes = 'http://localhost:8000/api/prof/disponibilité-enseignant/';
 const Hours = () => {
   return (
     <>
-        <div className='border border-gray-300 py-3 flex justify-center cursor-pointer hover:bg-main hover:text-white'>
+        <div className='border border-gray-300 py-3'>
             
         </div>
         <div className='border border-gray-300 py-3 flex justify-center'>

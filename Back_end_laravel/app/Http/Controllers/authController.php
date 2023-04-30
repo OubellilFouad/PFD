@@ -27,16 +27,16 @@ class AuthController extends Controller
 
         $etudiant = Etudiant::where('email', $request->email)->orWhere('userID', $request->userID)->first();        
         if($etudiant){
-            return response([
-                "message" => "Success",
-            ]);
-            }
-            else{
-                if(!Hash::check($request->password, $etudiant->password)) return response(["message" => "Invalid pw"]);
-                if($request->email != $etudiant->email) return response(["message" => "Invalid email"]);
-                if($request->userID != $etudiant->userID) return response(["message" => "Invalid ID"]);
+            if(!Hash::check($request->password, $etudiant->password)) return response(["message" => "Invalid pw"]);
+            if($request->email != $etudiant->email) return response(["message" => "Invalid email"]);
+            if($request->userID != $etudiant->userID) return response(["message" => "Invalid ID"]);
             
-        }   
+            $token = $etudiant->createToken('myApp')->plainTextToken;
+            $cookie = cookie('jwt' , $token , 3600);
+            return response([
+                "message"=> 'Success',
+            ])->withCookie($cookie);
+        }  
         
 
         $enseignant = Enseignant::where('email', $request->email)->orWhere('userID', $request->userID)->first();        

@@ -49,7 +49,7 @@ const Department = ({depid,type}) => {
             <AiFillCaretRight onClick={() => setOpen(!open)} className={`text-sm cursor-pointer transition-[rotate_150ms] ${open?'rotate-90':'rotate-0'}`}/>
             {type === 'tc'?'Tranc commun':oneDep?.nom}
         </div>
-        {type !== 'prof' && type !== 'tc' && (
+        {type !== 'prof' && type !== 'tc' && type !== 'profC' && (
           <div className={`flex-col pl-2 z-10 transition-[height_250ms] -mt-1 gap-3 ${open?'flex':'hidden'}`}>
             {spes.map((spe) => {
                 const {nom,speid} = spe;
@@ -65,6 +65,16 @@ const Department = ({depid,type}) => {
                 const {userName,userID} = prof;
                 return(
                     <Prof nom={userName} profid={userID} />
+                )
+            })}
+          </div>
+        )}
+        {type === 'profC' && (
+          <div className={`flex-col pl-2 z-10 transition-[height_250ms] -mt-1 gap-3 ${open?'flex':'hidden'}`}>
+            {profs.map((prof) => {
+                const {userName,userID} = prof;
+                return(
+                    <Prof nom={userName} type='C' profid={userID} />
                 )
             })}
           </div>
