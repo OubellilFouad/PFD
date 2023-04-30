@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai';
 import { MdClose } from 'react-icons/md';
 import { useAuth } from '../../../../../context/AuthContext';
@@ -15,6 +15,7 @@ const PalierForm = ({speid,array,obj}) => {
   const [arr,setArr] = useState([]);
   const [nbrsec,setNbrsec] = useState(null);
   const [nbrgrp,setNbrgrp] = useState(null);
+  const form = useRef();
   let an = [1,2,3,4,5];
   let annee = [];
   let intersection;
@@ -28,7 +29,7 @@ const PalierForm = ({speid,array,obj}) => {
       nbrgrp
     }
     addPalier(formData);
-    console.log(formData)
+    form.current.reset();
     setAnnee(null);
     setNom('');
     setOpenPalier(false);
@@ -51,7 +52,7 @@ const PalierForm = ({speid,array,obj}) => {
             <p className='text-base py-4 font-bold'>Add Palier</p>
             <MdClose onClick={() => setOpenPalier(false)} className='text-2xl cursor-pointer'/>
           </div>
-          <div className='flex-[8] px-10 py-4 items-center gap-6 flex flex-col'>
+          <form ref={form} className='flex-[8] px-10 py-4 items-center gap-6 flex flex-col'>
             <Input name={'Nom'} type={'text'} data={nom} setData={setNom} />
             <div className='flex flex-col w-full'>
                 <label htmlFor={'annee'} className='text-paleMain text-base font-medium cursor-pointer'>Annee</label>
@@ -66,7 +67,7 @@ const PalierForm = ({speid,array,obj}) => {
             </div>
             <Input name={'Nombre de sections'} type={'number'} data={nbrsec} setData={setNbrsec} />
             <Input name={'Nombre de group'} type={'number'} data={nbrgrp} setData={setNbrgrp} />
-          </div>
+          </form>
           <div className='flex-1 flex justify-end items-center px-3 pb-3'>
             <button onClick={handleAdd} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
           </div>

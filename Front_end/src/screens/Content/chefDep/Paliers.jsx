@@ -32,7 +32,6 @@ const Paliers = () => {
   return (
     <>
         <div className='flex flex-col gap-8'>
-            <p className='text-2xl font-bold'>List des Palier</p>
             <div className='grid grid-cols-3 gap-14'>
                 {paliers.map((pal) => {
                     const {palid,speid,nom,annee} = pal;

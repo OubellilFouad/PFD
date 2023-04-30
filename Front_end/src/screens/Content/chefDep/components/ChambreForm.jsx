@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { MdClose } from 'react-icons/md';
 import { useAuth } from '../../../../../context/AuthContext';
 import Input from '../../../Auth/components/Input';
@@ -10,7 +10,9 @@ const ChambreForm = () => {
   const [nom,setNom] = useState('');
   const [capacite,setCapacite] = useState('');
   const [type,setType] = useState('');
-  const handleAdd = () => {
+  const form = useRef();
+  const handleAdd = (e) => {
+    e.preventDefault();
     const formData = {
       nom,
       capacite,
@@ -21,6 +23,7 @@ const ChambreForm = () => {
     setShow(true);
     setAddMessage('Added chambre successfuly');
     setColor(true);
+    form.current.reset();
   }
   return (
     <div className={`w-full h-full absolute z-30 bg-[rgba(0,0,0,0.5)] top-0 left-0 ${openSalle?'flex':'hidden'} justify-center items-center`}>
@@ -29,7 +32,7 @@ const ChambreForm = () => {
             <p className='text-base py-4 font-bold'>Add Chambre</p>
             <MdClose onClick={() => setOpenSalle(false)} className='text-2xl cursor-pointer'/>
           </div>
-          <div className='flex-[8] px-10 py-4 gap-6 flex flex-col'>
+          <form ref={form} className='flex-[8] px-10 py-4 gap-6 flex flex-col'>
             <Input name={'Nom'} type={'text'} setData={setNom} />
             <Input name={'capacite'} type={'number'} setData={setCapacite} />
             <div className='flex flex-col w-full'>
@@ -39,10 +42,10 @@ const ChambreForm = () => {
                   <option value="Salle" className='bg-separator hover:bg-black text-black'>Salle</option>
                   <option value="Amphi" className='bg-separator hover:bg-black text-black'>Amphi</option>
               </select>
-          </div>
-          </div>
+            </div>
+          </form>
           <div className='flex-1 flex justify-end items-center px-3 pb-3'>
-            <button onClick={handleAdd} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
+            <button onClick={(e) => handleAdd(e)} type='submit' className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
           </div>
         </div>
     </div>

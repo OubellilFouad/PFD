@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { MdClose } from 'react-icons/md'
 import Drop from '../../../Auth/components/Drop'
 import { useAdmin } from '../context/AdminContext'
@@ -8,7 +8,9 @@ const GestDepForm = ({setOpenGestDep,openDepGest,gestid}) => {
   const {addGestDeps} = useAdmin();  
   const {setShow,setAddMessage,setColor} = useAuth();
   const [depid,setDepid] = useState(null);
-  const handleSubmit = () => {
+  const form = useRef();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const formData = {
         depid: parseInt(depid),
         gestid: parseInt(gestid)
@@ -22,7 +24,8 @@ const GestDepForm = ({setOpenGestDep,openDepGest,gestid}) => {
         setOpenGestDep(false);
         setShow(true);
         setAddMessage('Added dep for gestionair successfully');
-        setColor(true)
+        setColor(true);
+        form.current.reset();
     }
   }
   return (
@@ -32,11 +35,11 @@ const GestDepForm = ({setOpenGestDep,openDepGest,gestid}) => {
             <p className='text-base font-bold'>Add departement</p>
             <MdClose onClick={() => setOpenGestDep(false)} className='text-2xl cursor-pointer'/>
           </div>
-          <div className='flex-[8] flex flex-col items-center px-10 py-8 gap-10'>
-            <DepSelect name={'Departments'} setData={setDepid}/>
-          </div>
+          <form ref={form} className='flex-[8] flex flex-col w-full items-center px-10 py-8 gap-10'>
+            <DepSelect name={'Departments'} setData={setDepid} type={'full'}/>
+          </form>
           <div className='flex-1 flex justify-end items-center px-3 pb-3'>
-            <button onClick={() => handleSubmit()} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
+            <button onClick={(e) => handleSubmit(e)} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
           </div>
         </div>
     </div>

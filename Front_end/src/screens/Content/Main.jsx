@@ -15,12 +15,15 @@ import FormaForm from './admin/components/FormaForm';
 import { useAdmin } from './admin/context/AdminContext';
 import TcSectionForm from './admin/components/TcSectionForm';
 import TcModForm from './admin/components/TcModForm';
+import Select from './chefDep/components/Select';
+import { useGest } from './Gestionair/context/GestContext';
 
 const Main = () => {
   const location = useLocation();
   const {user} = useAuth();
   const {setOpenForm,setOpenPaliers,setOpenSections,setOpenTcModules} = useAdmin()
   const {setOpenSec,setOpenModule,setOpenSpe,setOpenSalle,setOpenPalier} = useChef();
+  const {setSem} = useGest();
   const [title,setTitle] = useState('Dashboard');
   const [page,setPage] = useState('Main');
   const [open,setOpen] = useState(false);
@@ -30,8 +33,8 @@ const Main = () => {
   },[location.state?.name,location.state?.page])  
   return (
     <div className='pt-7 pb-4 px-12 flex flex-col gap-8 main overflow-hidden'>
-        <div className='text-5xl font-semibold flex justify-between items-center'>
-            <p>{title}</p>
+        <div className='flex justify-between items-center'>
+            <p className='text-4xl font-semibold'>{title}</p>
             {page === 'Main' && user?.role === 0 && (
                 <button onClick={() => setOpen(true)} className='flex items-center text-base gap-2 py-2 px-4 border rounded-lg hover:text-main hover:border-main'>
                     <AiOutlinePlus className='p-1 bg-palerMain text-main text-xl rounded-md'/>
@@ -92,6 +95,15 @@ const Main = () => {
                     Add Module
                 </button>
             )}
+            {page === 'EDT' && (<div className='flex items-center justify-end'>
+                <Select name={'Tranche'} no={true} array={['first','second']} setData={setSem}/>
+            </div>)}
+            {page === 'PEDT' && (<div className='flex items-center justify-end'>
+                <Select name={'Tranche'} no={true} array={['first','second']} setData={setSem}/>
+            </div>)}
+            {page === 'EDTP' && (<div className='flex items-center justify-end'>
+                <Select name={'Tranche'} no={true} array={['first','second']} setData={setSem}/>
+            </div>)}
         </div>
         <Outlet/>
         <DepForm open={open} setOpen={setOpen}/>

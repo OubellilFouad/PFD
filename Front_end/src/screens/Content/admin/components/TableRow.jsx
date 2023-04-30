@@ -9,7 +9,7 @@ const TableRow = ({type,nom,email,dateNaiss,grad,id,userID}) => {
   const {setOpenProf,deleteProf} = useChef();
   if(type === 'header'){
     return(
-        <div className='flex gap-3 p-2 text-xs text-dimText font-bold uppercase border-b border-b-separator items-center'>
+        <div className='flex gap-3 p-2 text-xs text-dimText font-bold uppercase items-center'>
             <div className='flex-[0.3]'>ID</div>
             <div className='flex-[0.7]'>User name</div>
             <div className='flex-1'>Email</div>
@@ -42,18 +42,6 @@ const TableRow = ({type,nom,email,dateNaiss,grad,id,userID}) => {
         </div>
     )
   }
-//   {type === 'row' && (
-//     <div className='flex gap-3 p-2 text-sm font-bold'>
-//         <div className='flex-[0.5]'>1</div>
-//         <div className='flex-1'>User name</div>
-//         <div className='flex-1'>basanib467@terkoer.com</div>
-//         <div className='flex-1'>03/04/86</div>
-//         <div className='flex-1'>Grad</div>
-//         <div className='flex-1 flex justify-end pr-4'>
-//             <button>Add prof</button>
-//         </div>
-//     </div>
-//   )}
 }
 
 export default TableRow

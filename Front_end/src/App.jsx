@@ -23,6 +23,13 @@ import TCformation from './screens/Content/admin/TCformation'
 import TCPaliers from './screens/Content/admin/TCPalier'
 import TcSection from './screens/Content/admin/TcSection'
 import TcModule from './screens/Content/admin/TcModule'
+import GestDashboard from './screens/Content/Gestionair/GestDashboard'
+import EDT from './screens/Content/Gestionair/EDT'
+import SectionEDT from './screens/Content/Gestionair/SectionEDT'
+import GroupEDT from './screens/Content/Gestionair/GroupEDT'
+import EDTProf from './screens/Content/Prof/EDTProf'
+import ProfEDT from './screens/Content/Gestionair/ProfEDT'
+import EDTP from './screens/Content/Gestionair/components/EDTP'
 
 function App() {
   const {user} = useAuth();
@@ -58,10 +65,21 @@ function App() {
                 <Route path='charge' element={<ChargeTest/>}/>
               </>
             )}
+            {user?.role === 2 && (
+              <>
+                <Route path='' element={<GestDashboard/>}/>
+                <Route path='edt' element={<EDT/>}/>
+                <Route path='sec' element={<SectionEDT/>}/>
+                <Route path='grp' element={<GroupEDT/>}/>
+                <Route path='edtprof' element={<ProfEDT/>}/>
+                <Route path='edtp' element={<EDTP/>}/>
+              </>
+            )}
             {user?.role === 3 && (
               <>
                 <Route path='' element={<Desponibilité/>}/>
                 <Route path='choix' element={<Choix/>}/>
+                <Route path='edt' element={<EDTProf/>}/>
               </>
             )}
           </Route>

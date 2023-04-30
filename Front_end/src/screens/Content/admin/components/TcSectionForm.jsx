@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { MdClose } from 'react-icons/md';
 import axios from 'axios';
 import { useAdmin } from '../context/AdminContext';
@@ -20,7 +20,9 @@ const TcSectionForm = () => {
   const [dep1,setDep1] = useState(null);
   const [dep2,setDep2] = useState(null);
   const [dep3,setDep3] = useState(null);
-  const handleAdd = () => {
+  const form = useRef()
+  const handleAdd = (e) => {
+    e.preventDefault();
     const formData = {
       nom,
       capacite: parseInt(capacite),
@@ -31,6 +33,7 @@ const TcSectionForm = () => {
       dep3: parseInt(dep3)
     }
     addTcSec(formData);
+    form.current.reset();
     setNom('');
     setCapacite(0);
     setSpeid(0);
@@ -62,7 +65,7 @@ const TcSectionForm = () => {
             <p className='text-base py-4 font-bold'>Add Section</p>
             <MdClose onClick={() => setOpenSections(false)} className='text-2xl cursor-pointer'/>
           </div>
-          <div className='flex-[8] px-10 py-4 gap-6 flex flex-col'>
+          <form ref={form} className='flex-[8] px-10 py-4 gap-6 flex flex-col'>
             <Input name={'Nom'} type={'text'} setData={setNom} data={nom} />
             <Input name={'Capacité'} type={'number'} setData={setCapacite} data={capacite} />
             <div className='flex flex-col w-full'>
@@ -94,9 +97,9 @@ const TcSectionForm = () => {
                 <DepSelect name={'Departments'} setData={setDep2}/>
                 <DepSelect name={'Departments'} setData={setDep3}/>
             </div>
-          </div>
+          </form>
           <div className='flex-1 flex justify-end items-center px-3 pb-3'>
-            <button onClick={handleAdd} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
+            <button onClick={(e) => handleAdd(e)} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
           </div>
         </div>
     </div>

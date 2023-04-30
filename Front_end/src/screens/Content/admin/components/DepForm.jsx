@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai';
 import { MdClose } from 'react-icons/md'
 import Drop from '../../../Auth/components/Drop';
@@ -14,7 +14,9 @@ const DepForm = ({open,setOpen}) => {
   const [domainOpen,setDomainOpen] = useState(false);
   const [domainName,setDomainName] = useState('');
   const [error,setError] = useState('');
-  const handleAdd = () => {
+  const form = useRef();
+  const handleAdd = (e) => {
+    e.preventDefault();
     const formData = {
       nom,
       domainid,
@@ -23,6 +25,7 @@ const DepForm = ({open,setOpen}) => {
       setError('Name field must not be empty');
       return;
     }
+    console.log(formData);
     addDep(formData);
     setError('');
     setNom('');
@@ -31,6 +34,7 @@ const DepForm = ({open,setOpen}) => {
     setShow(true);
     setAddMessage('Added department successfully');
     setColor(true);
+    form.current.reset();
   }  
   const handleDomain = () => {
     const nom = domainName;
@@ -51,8 +55,8 @@ const DepForm = ({open,setOpen}) => {
             <p className='text-base font-bold'>Add departement</p>
             <MdClose onClick={() => setOpen(false)} className='text-2xl cursor-pointer'/>
           </div>
-          <div className='flex-[8] flex flex-col items-center px-10 py-8 gap-10'>
-            <Input name={'Nom'} type={'text'} data={nom} setData={setNom} />
+          <form ref={form} className='flex-[8] flex flex-col items-center px-10 py-8 gap-10'>
+            <Input name={'Nom'} type={'text'} setData={setNom} />
             <div className='flex w-full items-end gap-5'>
               <Drop name={'Domains'} data={domainid} setData={setDomain} />
               <button onClick={() => setDomainOpen(!domainOpen)} className='flex items-center text-base gap-2 py-2 px-4 border rounded-lg hover:text-main hover:border-main'>
@@ -63,10 +67,10 @@ const DepForm = ({open,setOpen}) => {
               <Input name={'Domain'} type='text' data={domainName} setData={setDomainName} />
               <button onClick={handleDomain} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
             </div>
-          </div>
+          </form>
           <div className='flex-1 flex justify-between items-center px-3 pb-3'>
             <p className='text-red'>{error}</p>
-            <button onClick={handleAdd} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
+            <button onClick={(e) => handleAdd(e)} type='submit' className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
           </div>
         </div>
     </div>
