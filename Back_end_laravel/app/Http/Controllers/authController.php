@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Models\ChefDep;
 use App\Models\Enseignant;
+use App\Models\Etudiant;
 use App\Models\Gestionnaire;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +22,22 @@ class AuthController extends Controller
         ]);
         $email = $request->email;
         $password = $request->password;
+
+        // etudant
+
+        $etudiant = Etudiant::where('email', $request->email)->orWhere('userID', $request->userID)->first();        
+        if($etudiant){
+            return response([
+                "message" => "Success",
+            ]);
+            }
+            else{
+                if(!Hash::check($request->password, $etudiant->password)) return response(["message" => "Invalid pw"]);
+                if($request->email != $etudiant->email) return response(["message" => "Invalid email"]);
+                if($request->userID != $etudiant->userID) return response(["message" => "Invalid ID"]);
+            
+        }   
+        
 
         $enseignant = Enseignant::where('email', $request->email)->orWhere('userID', $request->userID)->first();        
         if($enseignant){
