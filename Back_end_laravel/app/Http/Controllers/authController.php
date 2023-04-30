@@ -27,9 +27,11 @@ class AuthController extends Controller
 
         $etudiant = Etudiant::where('email', $request->email)->orWhere('userID', $request->userID)->first();        
         if($etudiant){
+            $token = $etudiant->createToken('myApp')->plainTextToken;
+            $cookie = cookie('jwt' , $token , 3600);
             return response([
-                "message" => "Success",
-            ]);
+                "message"=> 'Success',
+            ])->withCookie($cookie);
             }
             else{
                 if(!Hash::check($request->password, $etudiant->password)) return response(["message" => "Invalid pw"]);
