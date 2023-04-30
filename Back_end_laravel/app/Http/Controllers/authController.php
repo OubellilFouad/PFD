@@ -33,7 +33,8 @@ class AuthController extends Controller
             
             $token = $etudiant->createToken('myApp')->plainTextToken;
             $cookie = cookie('jwt' , $token , 3600);
-            return response([
+            
+            return response([ 
                 "message"=> 'Success',
             ])->withCookie($cookie);
         }  
