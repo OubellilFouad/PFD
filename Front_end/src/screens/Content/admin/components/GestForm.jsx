@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { MdClose } from 'react-icons/md';
 import Drop from '../../../Auth/components/Drop';
 import Input from '../../../Auth/components/Input';
@@ -14,7 +14,9 @@ const GestForm = () => {
   const [date,setDate] = useState('');
   const [type,setType] = useState('');
   const [error,setError] = useState('');
-  const handleAdd = () => {
+  const form = useRef();
+  const handleAdd = (e) => {
+    e.preventDefault();
     const userID = matricule;
     const role = 2;
     const dateNaiss = date;
@@ -50,6 +52,7 @@ const GestForm = () => {
       setError('type field must not be empty');
       return;
     }
+    form.current.reset();
     addGestionair(formData);
     setError('');
     setOpenGest(false);
@@ -64,11 +67,11 @@ const GestForm = () => {
             <p className='text-base py-4 font-bold'>Add Gestionair</p>
             <MdClose onClick={() => setOpenGest(false)} className='text-2xl cursor-pointer'/>
           </div>
-          <div className='flex-[8] px-10 py-4 gap-6 flex flex-col'>
-            <Input name={'Full name'} type={'text'}  data={userName} setData={setUserName} />
-            <Input name={'Email'} type={'email'}  data={email} setData={setEmail} />
-            <Input name={'Matricule'} type={'text'}  data={matricule} setData={setMatricule} />
-            <Input name={'Date naissance'} type={'date'}  data={date} setData={setDate} />
+          <form ref={form} className='flex-[8] px-10 py-4 gap-6 flex flex-col'>
+            <Input name={'Full name'} type={'text'} setData={setUserName} />
+            <Input name={'Email'} type={'email'} setData={setEmail} />
+            <Input name={'Matricule'} type={'text'} setData={setMatricule} />
+            <Input name={'Date naissance'} type={'date'} setData={setDate} />
             <div className='flex gap-3'>
               <div className='flex flex-col w-full'>
                 <label htmlFor='type' className='text-paleMain text-base font-medium cursor-pointer'>Type</label>
@@ -79,10 +82,10 @@ const GestForm = () => {
                 </select>
               </div>
             </div>
-          </div>
+          </form>
           <div className='flex-1 flex justify-between items-center px-3 pb-3'>
             <p className='text-red'> {error} </p>
-            <button onClick={handleAdd} className='py-2 px-5 rounded-lg text-white bg-main'>Add</button>
+            <button onClick={(e) => handleAdd(e)} type='submit' className='py-2 px-5 rounded-lg text-white bg-main'>Add</button>
           </div>
         </div>
     </div>

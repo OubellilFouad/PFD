@@ -5,10 +5,12 @@ import ChoixModuleCard from './ChoixModuleCard';
 const ChoixCard = ({choix}) => {
   const [modules,setModules] = useState([]);  
   useEffect(() => {
-    if(choix){
-        setModules(Object.values(JSON.parse(choix)));
+    const {choix1,choix2,choix3,choix4,choix5} = choix;
+    if(choix1 && choix2 && choix3 && choix4 && choix5){
+        let arr = [JSON.parse(choix1),JSON.parse(choix2),JSON.parse(choix3),JSON.parse(choix4),JSON.parse(choix5)];
+        setModules(arr);
     }
-  },[])  
+  },[choix])  
   return (
     <div className='flex justify-between flex-col border rounded-lg px-4 py-3 gap-2'>
         <div className='border-[#DADADA] flex-[40%] flex gap-4'>
@@ -22,10 +24,10 @@ const ChoixCard = ({choix}) => {
         <p className='text-xl font-bold'>Modules</p>
         <div className='grid grid-cols-5 gap-3'>
             {modules.length === 0 && (<p className='text-base font-bold'>Teacher didn't make a choice yet</p>)}
-            {modules.map((module) => {
+            {modules.map((module,index) => {
                 const {moduleID,type} = module;
                 return(
-                    <ChoixModuleCard moduleID={moduleID} type={type}/>
+                    <ChoixModuleCard key={index} moduleID={moduleID} type={type}/>
                 )
             })}
         </div>

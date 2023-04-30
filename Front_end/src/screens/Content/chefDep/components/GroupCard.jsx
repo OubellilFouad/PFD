@@ -19,7 +19,8 @@ const GroupCard = ({nom,type,capacite,grpid}) => {
     <div className='rounded-xl bg-separator h-20 p-4 gap-3'>
         <div className='flex justify-between items-center'>
           <p className='text-base font-bold'>{nom}</p>
-          {user?.role === 0 && (<AiFillDelete onClick={() => handleDelete()} className='text-lg cursor-pointer hover:text-red'/>)}
+          {user?.role === 0 && type === 'commun' && (<AiFillDelete onClick={() => handleDelete()} className='text-lg cursor-pointer hover:text-red'/>)}
+          {user?.role !== 0 && type !== 'commun' && (<AiFillDelete onClick={() => handleDelete()} className='text-lg cursor-pointer hover:text-red'/>)}
         </div>
         <span className='text-xs font-bold'>{capacite} students</span>
     </div>

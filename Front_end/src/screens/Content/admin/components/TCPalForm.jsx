@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { MdClose } from 'react-icons/md';
 import { useAuth } from '../../../../../context/AuthContext';
 import Input from '../../../Auth/components/Input';
@@ -12,10 +12,12 @@ const TCPalForm = ({speid,obj}) => {
   const [arr,setArr] = useState([]);
   const [nbrsec,setNbrsec] = useState(null);
   const [nbrgrp,setNbrgrp] = useState(null);
+  const form = useRef();
   let an = [1,2];
   let annee = [];
   let intersection;
-  const handleAdd = () => {
+  const handleAdd = (e) => {
+    e.preventDefault();
     let annee = parseInt(annees)
     const formData = {
       nom,
@@ -25,7 +27,7 @@ const TCPalForm = ({speid,obj}) => {
       nbrgrp
     }
     addPaliers(formData);
-    console.log(formData)
+    form.current.reset();
     setAnnee(null);
     setNom('');
     setOpenPaliers(false);
@@ -48,7 +50,7 @@ const TCPalForm = ({speid,obj}) => {
             <p className='text-base py-4 font-bold'>Add Palier</p>
             <MdClose onClick={() => setOpenPaliers(false)} className='text-2xl cursor-pointer'/>
           </div>
-          <div className='flex-[8] px-10 py-4 items-center gap-6 flex flex-col'>
+          <form ref={form} className='flex-[8] px-10 py-4 items-center gap-6 flex flex-col'>
             <Input name={'Nom'} type={'text'} data={nom} setData={setNom} />
             <div className='flex flex-col w-full'>
                 <label htmlFor={'annee'} className='text-paleMain text-base font-medium cursor-pointer'>Annee</label>
@@ -63,9 +65,9 @@ const TCPalForm = ({speid,obj}) => {
             </div>
             <Input name={'Nombre de sections'} type={'number'} data={nbrsec} setData={setNbrsec} />
             <Input name={'Nombre de group'} type={'number'} data={nbrgrp} setData={setNbrgrp} />
-          </div>
+          </form>
           <div className='flex-1 flex justify-end items-center px-3 pb-3'>
-            <button onClick={handleAdd} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
+            <button onClick={(e) => handleAdd(e)} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
           </div>
         </div>
     </div>

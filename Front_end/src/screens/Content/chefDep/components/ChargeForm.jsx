@@ -12,8 +12,9 @@ const getGroups = 'https://pfeboumerdes.pythonanywhere.com/groupes/'
 const getTcGroups = 'https://pfeboumerdes.pythonanywhere.com/groupestc/'
 const getModules = 'https://pfeboumerdes.pythonanywhere.com/modules/';
 const getTcModules = 'https://pfeboumerdes.pythonanywhere.com/modulestc/';
+const getChoix = 'https://pfeboumerdes.pythonanywhere.com/veuxs/';
 
-const ChargeForm = ({choix,speid,palid,one,setOpenCharge,openCharge,semestre,profid,cours,tc}) => {
+const ChargeForm = ({speid,palid,one,setOpenCharge,openCharge,semestre,profid,cours,tc}) => {
   const {setShow,setAddMessage,setColor} = useAuth();
   const {addAffect} = useChef();
   const [level,setLevel] = useState('');
@@ -26,12 +27,14 @@ const ChargeForm = ({choix,speid,palid,one,setOpenCharge,openCharge,semestre,pro
   const [moduleArr,setModuleArr] = useState([]);
   const [type,setType] = useState([]);
   const [show,setShoww] = useState(false);
+  const [choix,setChoix] = useState({});
   const [submit,setSubmit] = useState(false);
   const [exists,setExists] = useState(false);
   const levelArr = ['section','group'];
   const courss = useRef();
   const tp = useRef();
   const td = useRef();
+  const form = useRef();
   const select = useRef();
   const select2 = useRef();
   const select3 = useRef();
@@ -52,6 +55,10 @@ const ChargeForm = ({choix,speid,palid,one,setOpenCharge,openCharge,semestre,pro
     const {data} = await axios.get(`${getTcGroups}${section}`);
     setGroups(data);
   }
+  const getChoice = async () => {
+    const {data} = await axios.get(`${getChoix}${profid}`);
+    setChoix(data);
+  }
   const getModule = async () => {
     const {data} = await axios.get(`${getModules}pal/${palid}`);
     setModules(data);
@@ -60,6 +67,9 @@ const ChargeForm = ({choix,speid,palid,one,setOpenCharge,openCharge,semestre,pro
     const {data} = await axios.get(`${getTcModules}pal/${palid}`);
     setModules(data);
   }
+  useEffect(() => {
+    getChoice();
+  },[])
   useEffect(() => {
     cours?.map((cour) => {
       if(level === 'section' && cour.module === parseInt(module) && cour.section === parseInt(section)){
@@ -84,7 +94,6 @@ const ChargeForm = ({choix,speid,palid,one,setOpenCharge,openCharge,semestre,pro
     }
   },[level])
   useEffect(() => {
-    console.log(speid,palid)
     if(palid && speid){
       if(tc){
         getTCSection();
@@ -137,9 +146,9 @@ const ChargeForm = ({choix,speid,palid,one,setOpenCharge,openCharge,semestre,pro
       module: parseInt(module),
       section: parseInt(section),
       groupe: level === 'group'?parseInt(group):null,
-      type: JSON.stringify(type)
+      type: JSON.stringify(type),
+      tc
     }
-    console.log(formData);
     addAffect(formData);
     setSubmit(true)
     setModule(null);
@@ -149,6 +158,7 @@ const ChargeForm = ({choix,speid,palid,one,setOpenCharge,openCharge,semestre,pro
     courss.current.checked = false;
     tp.current.checked = false;
     td.current.checked = false;
+    form.current.reset();
     setOpenCharge(false);
     setShow(true);
     setAddMessage('Added cours successfuly');
@@ -163,7 +173,7 @@ const ChargeForm = ({choix,speid,palid,one,setOpenCharge,openCharge,semestre,pro
           </div>
           <div className='flex-[8] px-10 py-4 gap-3 flex flex-col'>
             <ChoixCard choix={choix}/>
-            <div className='gap-4 flex flex-col border rounded-lg px-4 py-3'>
+            <form ref={form} className='gap-4 flex flex-col border rounded-lg px-4 py-3'>
                 <div className='flex gap-4'>
                       <Select name={'Level'} submit={submit} setSubmit={setSubmit} array={levelArr} setData={setLevel}/>
                       {level === 'group' && (<div className='flex flex-1 gap-2'>
@@ -242,7 +252,7 @@ const ChargeForm = ({choix,speid,palid,one,setOpenCharge,openCharge,semestre,pro
                         </div>
                       </div>
                 </div>
-            </div>
+            </form>
           </div>
           <div className='flex-1 flex justify-between items-center px-3 pb-3 gap-3'>
             <p className='text-base w-96 text-red'>{exists && ('this module is already being taught in this section, please pick another section or module')}</p>

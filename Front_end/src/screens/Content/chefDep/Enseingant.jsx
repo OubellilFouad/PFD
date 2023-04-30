@@ -17,12 +17,13 @@ const Enseingant = () => {
     getProf();
   },[profs])
   return (
-    <div className='flex flex-col gap-8'>
-        <p className='text-2xl font-bold'>List des enseignant</p>
-        <div className='border border-[#F2F2F2] rounded-lg'>
-            <TableRow type='header'/>
+    <div className='flex flex-col overflow-hidden'>
+        <div className='border border-t-separator border-l-separator border-b-transparent border-r-separator rounded-t-lg '>
+          <TableRow type='header'/>
+        </div>
+        <div className='border border-b-separator border-l-separator border-r-separator border-t-separator rounded-b-lg  overflow-y-scroll'>
             {prof.map((prof) => {
-              const {id,userName,depID,email,userID,dateNaiss,grad} = prof;
+              const {id,userName,email,userID,dateNaiss,grad} = prof;
               return(
                 <TableRow key={id} id={id} nom={userName} email={email} grad={grad} dateNaiss={dateNaiss} userID={userID} type='row'/>
               )

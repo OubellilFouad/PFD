@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai';
 import { MdClose } from 'react-icons/md';
 import { useAuth } from '../../../../../context/AuthContext';
@@ -15,8 +15,10 @@ const SpeForm = () => {
   const [nom,setNom] = useState('');
   const [fillid,setFillid] = useState(0);
   const [cycle,setCycle] = useState('');
+  const form = useRef();
   const cycleArr = ['Licence','Master'];
-  const handleAdd = () => {
+  const handleAdd = (e) => {
+    e.preventDefault();
     const depid = user?.depID;
     const formData = {
       nom,
@@ -32,6 +34,7 @@ const SpeForm = () => {
     setShow(true);
     setAddMessage('Added speciality successfuly');
     setColor(true);
+    form.current.reset();
   }
   const handleFil = () => {
     const nom = filName;
@@ -50,8 +53,8 @@ const SpeForm = () => {
             <p className='text-base py-4 font-bold'>Add Spécialités</p>
             <MdClose onClick={() => setOpenSpe(false)} className='text-2xl cursor-pointer'/>
           </div>
-          <div className='flex-[8] px-10 py-4 items-center gap-6 flex flex-col'>
-            <Input name={'Nom'} type={'text'} data={nom} setData={setNom} />
+          <form ref={form} className='flex-[8] px-10 py-4 items-center gap-6 flex flex-col'>
+            <Input name={'Nom'} type={'text'} setData={setNom} />
             <div className='flex w-full'><Select name={'Cycle'} setData={setCycle} array={cycleArr}/></div>
             <div className='flex w-full items-end gap-5'>
               <FillSelect name={'Filliérs'} setData={setFillid} />
@@ -63,9 +66,9 @@ const SpeForm = () => {
               <Input name={'Filliére'} type='text' data={filName} setData={setFilName} />
               <button onClick={handleFil} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
             </div>
-          </div>
+          </form>
           <div className='flex-1 flex justify-end items-center px-3 pb-3'>
-            <button onClick={handleAdd} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
+            <button onClick={(e) => handleAdd(e)} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
           </div>
         </div>
     </div>

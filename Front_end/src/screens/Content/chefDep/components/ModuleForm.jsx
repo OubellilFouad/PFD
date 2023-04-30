@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { MdClose } from 'react-icons/md';
 import Input from '../../../Auth/components/Input';
 import { useChef } from '../context/ChefContext'
@@ -33,6 +33,7 @@ const ModuleForm = () => {
   const [pal,setPal] = useState([]);
   const [spes,setSpes] = useState([]);
   const [semestreArr,setSemestreArr] = useState([]);
+  const form = useRef();
   const semestre1 = [1,2];
   const semestre2 = [3,4];
   const semestre3 = [5,6];
@@ -54,8 +55,7 @@ const ModuleForm = () => {
     setOnePal(data);
   }
   const handleAdd = async () => {
-    await getOneSpe(speid);
-    const fillid = await spe.fillid;
+    const fillid = spe.fillid;
     const depid = user?.depID;
     const formData = {
       nom,
@@ -70,12 +70,7 @@ const ModuleForm = () => {
       semestre,
       palid
     }
-    if(formData.fillid === undefined){
-      setAgain(true);
-      return;
-    }
     setAgain(false)
-    console.log(formData)
     addModule(formData)
     setOpenModule(false);
     setShow(true);
@@ -89,7 +84,8 @@ const ModuleForm = () => {
     setHtp(null);
     setAbbr('');
     setSemestre('');
-    setPalid(null)
+    setPalid(null);
+    form.current.reset();
   }
   useEffect(() => {
     getSpe();
@@ -97,6 +93,7 @@ const ModuleForm = () => {
   useEffect(() => {
     if(speid){
       getPal();
+      getOneSpe(speid);
     }
   },[speid])
   useEffect(() => {
@@ -130,7 +127,7 @@ const ModuleForm = () => {
             <p className='text-base py-4 font-bold'>Add Module</p>
             <MdClose onClick={() => setOpenModule(false)} className='text-2xl cursor-pointer'/>
           </div>
-          <div className='flex-[8] px-10 py-4 gap-3 flex flex-col'>
+          <form ref={form} className='flex-[8] px-10 py-4 gap-3 flex flex-col'>
             <Input name={'Full name'} data={nom} type={'text'} setData={setNom} />
             <div className='flex flex-col w-full'>
                 <label htmlFor={'pallier'} className='text-paleMain text-base font-medium cursor-pointer'>Specialities</label>
@@ -173,7 +170,7 @@ const ModuleForm = () => {
             </div>
             <Input name={'Abbreviation'} data={abbr} type={'text'} setData={setAbbr} />
             <Select name={'Le semestre'} data={semestre} setData={setSemestre} array={semestreArr}/>
-          </div>
+          </form>
           <div className='flex-1 flex justify-end items-center px-3 pb-3 gap-3'>
             <p className={`text-red text-sm ${again?'block':'hidden'}`}>Click again!</p>
             <button onClick={handleAdd} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>

@@ -11,6 +11,7 @@ const getTcpal = 'https://pfeboumerdes.pythonanywhere.com/palierstc/';
 const getSpe = 'https://pfeboumerdes.pythonanywhere.com/specialites/';
 const getTcSpe = 'https://pfeboumerdes.pythonanywhere.com/formationstc/';
 const getOnepals = 'https://pfeboumerdes.pythonanywhere.com/palier/';
+const getOneTcpals = 'https://pfeboumerdes.pythonanywhere.com/paliertc/';
 const getDepProfs = 'http://127.0.0.1:8000/api/chefdep/get-enseignantbydepid/';
 
 const ChargeTest = () => {
@@ -52,6 +53,10 @@ const ChargeTest = () => {
     const {data} = await axios.get(`${getOnepals}${palid}`);
     setOnePals(data);
   }
+  const getOneTcpal = async () => {
+    const {data} = await axios.get(`${getOneTcpals}${palid}`);
+    setOnePals(data);
+  }
   const getProf = async () => {
     const  {data} = await axios.get(`${getDepProfs}${user?.depID}`);
     setProf(data);
@@ -71,7 +76,11 @@ const ChargeTest = () => {
   },[speid])
   useEffect(() => {
     if(palid){
-      getOnepal();
+      if(tc){
+        getOneTcpal()
+      }else{
+        getOnepal();
+      }
     }
   },[palid])
   useEffect(() => {

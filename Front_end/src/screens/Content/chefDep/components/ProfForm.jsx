@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { MdClose } from 'react-icons/md';
 import Drop from '../../../Auth/components/Drop';
 import Input from '../../../Auth/components/Input';
@@ -17,6 +17,7 @@ const ProfForm = () => {
   const [grad,setGrad] = useState('');
   const [error,setError] = useState('');
   const [type,setType] = useState('');
+  const form = useRef();
   const typeArr = ['Permanant','Vaccatair']
   const handleAdd = () => {
     const userID = matricule;
@@ -68,6 +69,7 @@ const ProfForm = () => {
     setShow(true);
     setAddMessage('Added prof successfuly');
     setColor(true);
+    form.current.reset();
   }  
   return (
     <div className={`w-full h-full absolute z-30 bg-[rgba(0,0,0,0.5)] top-0 left-0 ${openProf?'flex':'hidden'} justify-center items-center`}>
@@ -76,11 +78,11 @@ const ProfForm = () => {
             <p className='text-base py-4 font-bold'>Add Enseignant</p>
             <MdClose onClick={() => setOpenProf(false)} className='text-2xl cursor-pointer'/>
           </div>
-          <div className='flex-[8] px-10 py-4 gap-6 flex flex-col'>
-            <Input name={'Full name'} type={'text'}  data={userName} setData={setUserName} />
-            <Input name={'Email'} type={'email'}  data={email} setData={setEmail} />
-            <Input name={'Matricule'} type={'text'}  data={matricule} setData={setMatricule} />
-            <Input name={'Date naissance'} type={'date'}  data={date} setData={setDate} />
+          <form ref={form} className='flex-[8] px-10 py-4 gap-6 flex flex-col'>
+            <Input name={'Full name'} type={'text'} setData={setUserName} />
+            <Input name={'Email'} type={'email'} setData={setEmail} />
+            <Input name={'Matricule'} type={'text'} setData={setMatricule} />
+            <Input name={'Date naissance'} type={'date'} setData={setDate} />
             <div className='flex gap-3'>
               <div className='flex flex-col w-full'>
                 <label htmlFor='grad' className='text-paleMain text-base font-medium cursor-pointer'>Grad</label>
@@ -91,7 +93,7 @@ const ProfForm = () => {
               </div>
             </div>
             <Select name={'Type'} array={typeArr} setData={setType} />
-          </div>
+          </form>
           <div className='flex-1 flex justify-between items-center px-3 pb-3'>
             <p className='text-red'> {error} </p>
             <button onClick={handleAdd} className='py-2 px-5 rounded-lg text-white bg-main'>Add</button>

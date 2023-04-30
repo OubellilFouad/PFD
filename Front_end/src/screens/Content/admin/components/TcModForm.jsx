@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { MdClose } from 'react-icons/md';
 import { useAuth } from '../../../../../context/AuthContext';
 import Input from '../../../Auth/components/Input';
@@ -8,7 +8,7 @@ import { useAdmin } from '../context/AdminContext';
 import DepSelect from './DepSelect';
 const getTcSpes = 'https://pfeboumerdes.pythonanywhere.com/formationstc';
 const getTcPalier = 'https://pfeboumerdes.pythonanywhere.com/palierstc/';
-const getOnePalier = 'https://pfeboumerdes.pythonanywhere.com/palier/';
+const getOnePalier = 'https://pfeboumerdes.pythonanywhere.com/paliertc/';
 
 const TcModForm = () => {
   const {openTcModules,setOpenTcModules,addTcMod} = useAdmin();
@@ -30,6 +30,7 @@ const TcModForm = () => {
   const [dep1,setDep1] = useState(null);
   const [dep2,setDep2] = useState(null);
   const [dep3,setDep3] = useState(null);
+  const form = useRef();
   const semestre1 = [1,2];
   const semestre2 = [3,4];
   const getTcPal = async () => {
@@ -44,7 +45,8 @@ const TcModForm = () => {
     const {data} = await axios.get(getTcSpes);
     setTcSpes(data);
   }
-  const handleAdd = async () => {
+  const handleAdd = async (e) => {
+    e.preventDefault();
     const formData = {
       nom,
       speid: parseInt(speid),
@@ -59,7 +61,8 @@ const TcModForm = () => {
       dep2: parseInt(dep2),
       dep3: parseInt(dep3)
     }
-    addTcMod(formData)
+    addTcMod(formData);
+    form.current.reset();
     setOpenTcModules(false);
     setShow(true);
     setAddMessage('Added module successfuly');
@@ -104,7 +107,7 @@ const TcModForm = () => {
             <p className='text-base py-4 font-bold'>Add TC Module</p>
             <MdClose onClick={() => setOpenTcModules(false)} className='text-2xl cursor-pointer'/>
           </div>
-          <div className='flex-[8] px-10 py-4 gap-3 flex flex-col'>
+          <form ref={form} className='flex-[8] px-10 py-4 gap-3 flex flex-col'>
             <Input name={'Full name'} data={nom} type={'text'} setData={setNom} />
             <div className='flex gap-4'>
                 <div className='flex flex-col w-full'>
@@ -148,16 +151,16 @@ const TcModForm = () => {
               </div>
             </div>
             <Input name={'Abbreviation'} data={abbr} type={'text'} setData={setAbbr} />
-            <Select name={'Le semestre'} data={semestre} setData={setSemestre} array={semestreArr}/>
+            <Select name={'Le semestre'} setData={setSemestre} array={semestreArr}/>
             <div className='flex gap-4 items-center w-full'>
                 <DepSelect name={'Departments'} setData={setDep1}/>
                 <DepSelect name={'Departments'} setData={setDep2}/>
                 <DepSelect name={'Departments'} setData={setDep3}/>
             </div>
-          </div>
+          </form>
           <div className='flex-1 flex justify-end items-center px-3 pb-3 gap-3'>
             <p className={`text-red text-sm ${again?'block':'hidden'}`}>Click again!</p>
-            <button onClick={handleAdd} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
+            <button onClick={(e) => handleAdd(e)} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
           </div>
         </div>
     </div>

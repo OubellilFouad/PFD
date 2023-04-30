@@ -4,11 +4,14 @@ import {HiOutlineUsers} from 'react-icons/hi'
 import {FaChalkboardTeacher} from 'react-icons/fa'
 import {ImBooks} from 'react-icons/im'
 import {GiTheater} from 'react-icons/gi'
-import Dep from './admin/components/Dep'
 import Link from './admin/components/NavLink'
 import { useAuth } from '../../../context/AuthContext'
-import { useAdmin } from './admin/context/AdminContext'
-import { BsFillCollectionFill, BsListCheck } from 'react-icons/bs'
+import { BsFillCollectionFill, BsFillPersonLinesFill, BsListCheck } from 'react-icons/bs'
+import { BiCalendarEvent } from 'react-icons/bi'
+import { useLocation } from 'react-router-dom'
+import Department from './Gestionair/components/Department'
+import axios from 'axios'
+const getDeps = 'https://pfeboumerdes.pythonanywhere.com/gestdeps/'
 
 const admin = [
     {path:'',name:'Dashboard',icon: <MdOutlineSpaceDashboard/>,page: 'Main'},
@@ -27,16 +30,30 @@ const chef = [
     {path:'modules',name:'Les Modules',icon: <ImBooks/>,page: 'Modules'},
     {path:'charge',name:'La charge',icon: <MdWork/>,page: 'Charge'},
 ]
-
+const gest = [
+    {path:'',name:'Dashboard',icon: <MdOutlineSpaceDashboard/>,page: 'Main'},
+    {path:'edt',name:'Time tables',icon: <BiCalendarEvent/>,page: 'EDT'},
+    {path:'edtprof',name:'Teachers',icon: <BsFillPersonLinesFill className='text-lg'/>,page: 'PEDT'},
+]
+const gestTc = [
+    {path:'',name:'Dashboard',icon: <MdOutlineSpaceDashboard/>,page: 'Main'},
+    {path:'edt',name:'Time tables',icon: <BiCalendarEvent/>,page: 'EDT'},
+]
 const prof = [
     {path:'',name:'Disponibilité',icon: <MdEventAvailable/>,page: 'Disponibilité'},
     {path:'choix',name:'Choix de modules',icon: <BsListCheck/>,page: 'Choix'},
+    {path:'edt',name:'Emploi du temps',icon: <BiCalendarEvent/>,page: 'EDTP'},
 ]
 
 const Sidebar = () => {
+  const location = useLocation();  
   const {user} = useAuth();
-  const {getDeps,deps} = useAdmin();
   const [nav,setNav] = useState([]);  
+  const [deps,setDeps] = useState([]);
+  const getGestDep = async () => {
+    const {data} = await axios.get(`${getDeps}${user?.userID}`);
+    setDeps(data);
+  }
   useEffect(() => {
     if(user?.role === 0){
         setNav(admin);
@@ -44,36 +61,54 @@ const Sidebar = () => {
     if(user?.role === 1){
         setNav(chef)
     }
+    if(user?.role === 2 && user?.type === 'Department'){
+        setNav(gest)
+        getGestDep();
+    }
+    if(user?.role === 2 && user?.type === 'Tranc Commun'){
+        setNav(gestTc)
+    }
     if(user?.role === 3){
         setNav(prof)
     }
-  },[user])  
+  },[user])
   return (
-    <div className='border-r border-r-[#DBDBDB] flex flex-col sidebar'>
-        <div className='flex-[50%] py-7 flex flex-col px-6 gap-5'>
-            {nav.map((item,index) => {
-                const {name,path,icon,page} = item;
-                return(
-                    <Link key={index} path={path} page={page} name={name} icon={icon} />
-                )
-            })}
-        </div>
-        {/* {user?.role === 0 && (
-            <div className='flex-[50%] flex flex-col px-3 pb-4 gap-7'>
-                <hr />
-                <div className='flex flex-col gap-5'>
-                    <p className='text-[#787486] text-xs font-bold uppercase'>Mes departement</p>
-                    <div className='flex flex-col gap-4 overflow-x-scroll'>
-                        {deps.map((dep) => {
-                            const {nom,domainid,depid} = dep;
-                            return(
-                                <Dep nom={nom} depid={depid} domainid={domainid} key={depid} />
-                            )
-                        })}
-                    </div>
-                </div>
+    <div className='border-r border-r-[#DBDBDB] flex flex-col sidebar overflow-hidden'>
+        {location?.state?.page !== 'EDT' && location?.state?.page !== 'PEDT' && (
+            <div className='py-7 flex flex-col px-6 gap-5'>
+                {nav.map((item,index) => {
+                    const {name,path,icon,page} = item;
+                    return(
+                        <Link key={index} path={path} page={page} name={name} icon={icon} />
+                    )
+                })}
             </div>
-        )} */}
+        )}
+        {location?.state?.page === 'EDT' && user?.type === 'Department' && (
+            <div className='py-7 flex flex-col px-6 gap-4 overflow-y-scroll'>
+                {deps.map((dep) => {
+                    const {depid,id} = dep
+                    return(
+                        <Department key={id} depid={depid} />
+                    )
+                })}
+            </div>
+        )}
+        {location?.state?.page === 'EDT' && user?.type === 'Tranc Commun' && (
+            <div className='py-7 flex flex-col px-6 gap-4 overflow-y-scroll'>
+                <Department type={'tc'} />
+            </div>
+        )}
+        {location?.state?.page === 'PEDT' && (
+            <div className='py-7 flex flex-col px-6 gap-4 overflow-y-scroll'>
+                {deps.map((dep) => {
+                    const {depid,id} = dep
+                    return(
+                        <Department key={id} type={'prof'} depid={depid} />
+                    )
+                })}
+            </div>
+        )}
     </div>
   )
 }

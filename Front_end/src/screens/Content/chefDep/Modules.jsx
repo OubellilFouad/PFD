@@ -27,12 +27,11 @@ const Modules = () => {
   },[modules])
   return (
     <div className='flex flex-col gap-8 overflow-hidden'>
-        <p className='text-2xl font-bold'>List des Modules</p>
         <div className='grid grid-cols-3 gap-14 overflow-x-scroll'>
             {module.map((module) => {
-              const {nom,speid,fillid,modid} = module;
+              const {nom,speid,fillid,modid,abbr} = module;
               return (
-                <ModuleCard key={modid} nom={nom} speid={speid} fillid={fillid} moduleid={modid} />
+                <ModuleCard key={modid} nom={nom} speid={speid} abbr={abbr} fillid={fillid} moduleid={modid} />
               )
             })}
             {tcmodule.map((module) => {

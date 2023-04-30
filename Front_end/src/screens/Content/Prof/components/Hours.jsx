@@ -3,31 +3,11 @@ import { useAuth } from '../../../../../context/AuthContext';
 import axios from 'axios';
 const addDes = 'http://localhost:8000/api/prof/disponibilité-enseignant/';
 
-const Hours = ({first,second,third,fourth,fifth}) => {
-  const {user,setShow,setAddMessage} = useAuth();
-  const  add = async (formData) => {
-    const {data,status} = await axios.post(`${addDes}${user?.id}`,formData);
-    console.log(data);
-  }
-  const handleSubmit = () => {
-    const formData = {
-        first,
-        second,
-        third,
-        fourth,
-        fifth
-    }
-    const result = {
-        disponibility: JSON.stringify(formData)
-    }
-    add(result);
-    setShow(true);
-    setAddMessage('Added disponibility successfully');
-  }  
+const Hours = () => {
   return (
     <>
-        <div onClick={() => handleSubmit()} className='border border-gray-300 py-3 flex justify-center cursor-pointer hover:bg-main hover:text-white'>
-            Submit
+        <div className='border border-gray-300 py-3 flex justify-center cursor-pointer hover:bg-main hover:text-white'>
+            
         </div>
         <div className='border border-gray-300 py-3 flex justify-center'>
             08h00 - 09h30
@@ -43,6 +23,9 @@ const Hours = ({first,second,third,fourth,fifth}) => {
         </div>
         <div className='border border-gray-300 py-3 flex justify-center'>
             14h40 - 16h10
+        </div>
+        <div className='border border-gray-300 py-3 flex justify-center'>
+            16h20 - 17h50
         </div>
     </>
   )
