@@ -46,6 +46,7 @@ class EtudiantController extends Controller
             'userName' => $validatedData['userName'],
             'email' => $validatedData['email'],
             'userID' => $validatedData['userID'],
+            'password' =>bcrypt($validatedData['password']),
             'dateNaiss' => $validatedData['dateNaiss'],
             'dep' => $validatedData['specialite'],
             'specialite' => $validatedData['specialite'],
@@ -55,9 +56,9 @@ class EtudiantController extends Controller
             'role' => $validatedData['role'],
         ]);
 
-        $pw = Hash::make($request->password);
-        $etudiant->password = $pw;
-        $etudiant->save();
+        // $pw = Hash::make($request->password);
+        // $etudiant->password = $pw;
+        // $etudiant->save();
 
         return response()->json([
             'success' => true,
