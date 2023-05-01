@@ -24,20 +24,19 @@ class AuthController extends Controller
         $password = $request->password;
 
         // etudant
-        $credentials = [
-            'userID' => $request->userID,
-            'email' => $request->email,
-            'password' => $request->password,
-        ];
-        if(Auth::attempt($credentials)){
-            $etudiant = Auth::etudiant();
-            $cookie = cookie('etudiant_id',$etudiant->id,1440);
-            return redirect()->intended('/')->withCookie($cookie);
+        $etudiant = Enseignant::where('email', $request->email)->orWhere('userID', $request->userID)->first();        
+        if($etudiant){
+            if(!Hash::check($request->password, $etudiant->password)) return response(["message" => "Invalid pw"]);
+            if($request->email != $etudiant->email) return response(["message" => "Invalid email"]);
+            if($request->userID != $etudiant->userID) return response(["message" => "Invalid ID"]);     
+            $token = $etudiant->createToken('myApp')->plainTextToken;
+            $cookie = cookie('jwt' , $token , 3600);
+            return response([
+                "message"=> 'Success',
+            ])->withCookie($cookie); 
         
-        }
-        return back()->withErrors([
-            'email'=> 'Credentials do not match' 
-        ]);
+        } 
+       
 
 
         $enseignant = Enseignant::where('email', $request->email)->orWhere('userID', $request->userID)->first();        
