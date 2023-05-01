@@ -35,6 +35,7 @@ const ModuleSec = ({module,afecid,profid,section,groupe,type,semestre,tc,chef}) 
   const getChef = async (id) => {
     const {data} = await axios.get(`${getOneChefs}${profid}`);
     setProf(data);
+    console.log(data)
   }
   const handleClick = () => {
     setClick(!click)
@@ -52,10 +53,11 @@ const ModuleSec = ({module,afecid,profid,section,groupe,type,semestre,tc,chef}) 
     }else{
       getOneMod();
     }
+    console.log(chef)
     if(chef){
       getChef();
     }else{
-      getProf()
+      getProf();
     } 
   },[])
   return (
