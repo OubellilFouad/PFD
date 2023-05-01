@@ -79,3 +79,13 @@ Route::group(['prefix' => 'student'], function() {
     Route::post('signup', [EtudiantController::class,'RegisterEtudiant']);
 
 });
+
+
+
+Route::group(['prefix' => 'etudiant'], function() {
+
+    Route::get('/get-etudiant', [EtudiantController::class,'getEtudiant'])->name('get-etudiant');
+    Route::post('/register-etudiant', [EtudiantController::class,'RegisterEtudiant'])->name('register-etudiant');
+    Route::post('/login-etudiant', [EtudiantController::class,'loginEtudiant'])->name('login-etudiant');
+
+});

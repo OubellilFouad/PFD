@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Etudiant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class EtudiantController extends Controller
 {
@@ -15,6 +17,7 @@ class EtudiantController extends Controller
         return response()->json($etudiant);
     }
     public function RegisterEtudiant(Request $request){
+        var_dump($request->username);
         $validatedData = $request->validate([
             'userName' => 'required',
             'dateNaiss' => 'required|date',
@@ -58,6 +61,23 @@ class EtudiantController extends Controller
             'success' => true,
             'message' => 'User created successfully',
             'data' => $etudiant
+        ]);
+    }
+    public function loginEtudiant(Request $request)
+    {
+        $credentials = [
+            'userID' => $request->userID,
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
+        if(Auth::attempt($credentials)){
+            $etudiant = Auth::etudiant();
+            $cookie = cookie('etudiant_id',$etudiant->id,1440);
+            return redirect()->intended('/')->withCookie($cookie);
+        
+        }
+        return back()->withErrors([
+            'email'=> 'Credentials do not match' 
         ]);
     }
     
