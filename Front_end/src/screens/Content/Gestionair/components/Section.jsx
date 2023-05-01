@@ -108,9 +108,9 @@ const Section = ({nom,secid,annee,type}) => {
         {type !== 'tc' && (
           <div className={`flex-col pl-2 transition-[height_250ms] gap-3 ${open?'flex':'hidden'} pal`}>
             {affSem.map((a) => {
-                const {afecid,module,profid,section,groupe,type,semestre,tc} = a;
+                const {afecid,module,profid,section,groupe,type,semestre,tc,chef} = a;
                 return(
-                    <ModuleSec key={afecid} semestre={semestre} tc={tc} module={module} afecid={afecid} profid={profid} section={section} groupe={groupe} type={type} />
+                    <ModuleSec key={afecid} semestre={semestre} tc={tc} chef={chef} module={module} afecid={afecid} profid={profid} section={section} groupe={groupe} type={type} />
                 )
             })}
             {grps.map((grp) => {

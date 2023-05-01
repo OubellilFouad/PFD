@@ -33,6 +33,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('/get-chefdep', [adminController::class,'getChefDep'])->name('get-chefdep');
 
     Route::get('/get-chefdepbydepid/{depId}', [adminController::class,'getChefDepByDepId'])->name('get-chefdepbydepid');
+    Route::get('/get-chefdepbyid/{userID}', [adminController::class,'getChefDepById'])->name('get-chefdepbyid');
     Route::delete('/supprimer-chefdep/{id}', [adminController::class,'deleteChefDep'])->name('supprimer-chefdep');
 
 

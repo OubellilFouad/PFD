@@ -16,7 +16,11 @@ class adminController extends Controller
     public function getChefDepByDepId($depId) {
         $oneChefDep = ChefDep::where('depID', $depId)->first();
         return response()->json($oneChefDep);
-      }
+    }
+    public function getChefDepById($userID) {
+        $oneChefDep = ChefDep::where('userID', $userID)->first();
+        return response()->json($oneChefDep);
+    }
     public function ajouterChefDep(Request $request)
     {
         $validatedData = $request->validate([

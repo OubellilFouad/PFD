@@ -14,7 +14,7 @@ const getModules = 'https://pfeboumerdes.pythonanywhere.com/modules/';
 const getTcModules = 'https://pfeboumerdes.pythonanywhere.com/modulestc/';
 const getChoix = 'https://pfeboumerdes.pythonanywhere.com/veuxs/';
 
-const ChargeForm = ({speid,palid,one,setOpenCharge,openCharge,semestre,profid,cours,tc}) => {
+const ChargeForm = ({speid,palid,one,setOpenCharge,openCharge,semestre,profid,cours,tc,typpe}) => {
   const {setShow,setAddMessage,setColor} = useAuth();
   const {addAffect} = useChef();
   const [level,setLevel] = useState('');
@@ -147,7 +147,8 @@ const ChargeForm = ({speid,palid,one,setOpenCharge,openCharge,semestre,profid,co
       section: parseInt(section),
       groupe: level === 'group'?parseInt(group):null,
       type: JSON.stringify(type),
-      tc
+      tc,
+      chef: typpe === 'chef'?true:false
     }
     addAffect(formData);
     setSubmit(true)

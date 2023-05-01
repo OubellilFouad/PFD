@@ -188,6 +188,7 @@ const ChargeTest = () => {
             </div>
         </div>
         <div className='flex flex-col gap-8 overflow-x-scroll scroll-smooth con'>
+        <Teacher key={user?.userID} tc={tc} nom={user?.userName} palid={palid} speid={speid} one={onePals} annee={onePals.annee} semester={sem} profid={user?.userID} type='chef' />
           {!on && prof.map((pro) => {
                 const {userName,userID} = pro;
                 return(

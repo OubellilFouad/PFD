@@ -89,9 +89,9 @@ const Group = ({nom,grpid,annee,type}) => {
         </div>
         <div className={`flex-col pl-2 transition-[height_250ms] gap-3 ${open?'flex':'hidden'} pal`}>
             {affSem.map((a) => {
-                const {afecid,module,profid,section,groupe,type,semestre,tc} = a;
+                const {afecid,module,profid,section,groupe,type,semestre,tc,chef} = a;
                 return(
-                    <ModuleGrp key={afecid} module={module} tc={tc} afecid={afecid} semestre={semestre} profid={profid} section={section} groupe={groupe} type={type} />
+                    <ModuleGrp key={afecid} module={module} tc={tc} chef={chef} afecid={afecid} semestre={semestre} profid={profid} section={section} groupe={groupe} type={type} />
                 )
             })}
         </div>
