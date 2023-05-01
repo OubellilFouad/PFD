@@ -6,11 +6,12 @@ import { useGest } from '../context/GestContext';
 const getOneModule = 'https://pfeboumerdes.pythonanywhere.com/module/'; 
 const getOneTcModule = 'https://pfeboumerdes.pythonanywhere.com/moduletc/';
 const getProfs = 'http://127.0.0.1:8000/api/chefdep/get-enseignantbyid/';
+const getOneChefs = 'http://localhost:8000/api/admin/get-chefdepbyid/';
 
-const ModuleGrp = ({afecid,module,profid,section,groupe,type,semestre,tc}) => {
+const ModuleGrp = ({afecid,module,profid,section,groupe,type,semestre,tc,chef}) => {
   const [{isDraggin},drag] = useDrag(() => ({
     type: "group",
-    item: {afecid,module,profid,section,groupe,type,semestre,tc,nature:'module'},
+    item: {afecid,module,profid,section,groupe,type,semestre,tc,nature:'module',chef},
     collect: (monitor) => ({
         isDraggin: !!monitor.isDragging(),
     })
@@ -32,6 +33,10 @@ const ModuleGrp = ({afecid,module,profid,section,groupe,type,semestre,tc}) => {
     const {data} = await axios.get(`${getProfs}${profid}`);
     setProf(data);
   }
+  const getChef = async (id) => {
+    const {data} = await axios.get(`${getOneChefs}${profid}`);
+    setProf(data);
+  }
   const handleClick = () => {
     setClick(!click)
     if(!click){
@@ -49,7 +54,11 @@ const ModuleGrp = ({afecid,module,profid,section,groupe,type,semestre,tc}) => {
     }else{
       getOneMod();
     }
-    getProf();
+    if(chef){
+      getChef();
+    }else{
+      getProf();
+    }
   },[])
   return (
     <div ref={drag} onClick={() => {handleClick()}} className={`py-1 pl-2 rounded-md text-sm font-semibold flex flex-col gap-2 forma cursor-grab ${isDraggin && 'text-main'} ${click?'bg-main text-white':'bg-separator'} group`}>

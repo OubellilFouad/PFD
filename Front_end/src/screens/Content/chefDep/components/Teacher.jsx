@@ -7,7 +7,7 @@ import { useChef } from '../context/ChefContext';
 import axios from 'axios';
 const getSpeCours = 'https://pfeboumerdes.pythonanywhere.com/affectations/prof/';
 
-const Teacher = ({nom,speid,annee,palid,one,semester,profid,tc}) => {
+const Teacher = ({nom,speid,annee,palid,one,semester,profid,tc,type}) => {
   const [cour,setCour] = useState([]);
   const {afects} = useChef();
   const [openCharge,setOpenCharge] = useState(false);
@@ -69,7 +69,7 @@ const Teacher = ({nom,speid,annee,palid,one,semester,profid,tc}) => {
                 <FiPlus className='text-2xl group-hover:text-main'/>
             </div>
         </div>
-        <ChargeForm setOpenCharge={setOpenCharge} tc={tc} openCharge={openCharge} one={one} palid={palid} annee={annee} speid={speid} cours={cour} profid={profid} setCour={setCour} semestre={semester} cour={cour} />
+        <ChargeForm setOpenCharge={setOpenCharge} tc={tc} openCharge={openCharge} one={one} palid={palid} annee={annee} speid={speid} cours={cour} profid={profid} setCour={setCour} semestre={semester} typpe={type} cour={cour} />
     </div>
   )
 }

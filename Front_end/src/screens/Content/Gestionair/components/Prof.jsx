@@ -2,7 +2,7 @@ import React from 'react'
 import { IoMdPerson } from 'react-icons/io'
 import { NavLink } from 'react-router-dom'
 
-const Prof = ({nom,profid,type}) => {
+const Prof = ({nom,profid,type,chef}) => {
   return (
     <NavLink to={'edtp'} state={{
         page: type === 'C'?'CEDT':'PEDT',

@@ -10,6 +10,7 @@ const getModules = 'https://pfeboumerdes.pythonanywhere.com/module/';
 const getTcModules = 'https://pfeboumerdes.pythonanywhere.com/moduletc/';
 const getChambres = 'https://pfeboumerdes.pythonanywhere.com/chambre/';
 const getProfs = 'http://127.0.0.1:8000/api/chefdep/get-enseignantbyid/';
+const getOneChefs = 'http://localhost:8000/api/admin/get-chefdepbyid/';
 
 const HourGrp = ({hour,day,affSec,aff}) => {
   const {setShow,setAddMessage,setColor} = useAuth();
@@ -31,9 +32,11 @@ const HourGrp = ({hour,day,affSec,aff}) => {
   const [oneProf,setOneProf] = useState({}); 
   const [oneChambre,setOneChambre] = useState({}); 
   const [tc,setTc] = useState(false);
+  const [chef,setChef] = useState(false);
   const [item,setItem] = useState({});
   // Aff sec 
   const [tcSec,setTcSec] = useState(false);
+  const [cheftc,setCheftc] = useState(false);
   const [edtidSec,setEdtidSec] = useState(null);
   const [moduleSec,setModuleSec] = useState(null);
   const [profidSec,setProfidSec] = useState(null);
@@ -81,6 +84,7 @@ const HourGrp = ({hour,day,affSec,aff}) => {
           setGroupe(item.groupe);
           setSemestre(item.semestre);
           setTc(item.tc);
+          setChef(item.chef);
         }
       }
     }else{
@@ -101,6 +105,10 @@ const HourGrp = ({hour,day,affSec,aff}) => {
     const {data} = await axios.get(`${getProfs}${id}`);
     setOneProf(data);
   }
+  const getChef = async (id) => {
+    const {data} = await axios.get(`${getOneChefs}${id}`);
+    setOneProf(data);
+  }
   const getChambre = async (id) => {
     const {data} = await axios.get(`${getChambres}${id}`);
     setOneChambre(data);
@@ -116,7 +124,8 @@ const HourGrp = ({hour,day,affSec,aff}) => {
       day,
       hour,
       place: chambreid,
-      tc
+      tc,
+      chef
     }
     addEdts(formData);
   }
@@ -185,7 +194,11 @@ const HourGrp = ({hour,day,affSec,aff}) => {
   },[module])
   useEffect(() => {
     if(profid){
-        getProf(profid)
+        if(chef){
+          getChef(profid);
+        }else{
+          getProf(profid)
+        }
     }else{
       setOneProf({});
     }
@@ -199,7 +212,6 @@ const HourGrp = ({hour,day,affSec,aff}) => {
   },[chambreid])
   useEffect(() => {
     if(moduleSec){
-      console.log(moduleSec,tcSec);
       if(tcSec){
         getTcModule(moduleSec)
       }else{
@@ -211,7 +223,11 @@ const HourGrp = ({hour,day,affSec,aff}) => {
   },[moduleSec])
   useEffect(() => {
     if(profidSec){
-      getProf(profidSec);
+      if(cheftc){
+        getChef(profidSec);
+      }else{
+        getProf(profidSec);
+      }
     }else{
       setOneProf({});
     }
@@ -234,7 +250,7 @@ const HourGrp = ({hour,day,affSec,aff}) => {
       setGroupeSec(affSec?.groupe);
       setChambreidSec(affSec.place)
       setTcSec(affSec?.tc);
-      console.log(affSec.tc);
+      setCheftc(affSec.chef);
     }else{
       setEdtidSec(null);
       setModuleSec(null);
@@ -245,6 +261,7 @@ const HourGrp = ({hour,day,affSec,aff}) => {
       setSemestreSec('');
       setChambreidSec(null);
       setTcSec(false);
+      setCheftc(false);
     }
   },[affSec])
   useEffect(() => {
@@ -257,7 +274,8 @@ const HourGrp = ({hour,day,affSec,aff}) => {
       setSection(aff?.section);
       setGroupe(aff?.groupe);
       setChambreid(aff.place);
-      setTc(aff.tc)
+      setTc(aff.tc);
+      setChef(aff.chef);
     }else{
       setEdtid(null);
       setModule(null);
@@ -268,6 +286,7 @@ const HourGrp = ({hour,day,affSec,aff}) => {
       setSemestre('');
       setChambreid(null);
       setTc(false);
+      setChef(false);
     }
   },[aff])
   useEffect(() => {

@@ -7,6 +7,7 @@ const getOnedep = 'https://pfeboumerdes.pythonanywhere.com/dep/';
 const getSpes = 'https://pfeboumerdes.pythonanywhere.com/specialites/';
 const getTcSpes = 'https://pfeboumerdes.pythonanywhere.com/formationstc';
 const getProfs = 'http://127.0.0.1:8000/api/chefdep/get-enseignantbydepid/';
+const getOneChefs = 'http://localhost:8000/api/admin/get-chefdepbydepid/';
 
 const Department = ({depid,type}) => {
   const [open,setOpen] = useState(false)  
@@ -14,6 +15,7 @@ const Department = ({depid,type}) => {
   const [spes,setSpes] = useState([]);
   const [spestc,setSpestc] = useState([]);
   const [profs,setProfs] = useState([]);
+  const [chef,setChef] = useState([]);
   const forma = useRef();
   const getOneDep = async () => {
     const {data} = await axios.get(`${getOnedep}${depid}`);
@@ -26,6 +28,10 @@ const Department = ({depid,type}) => {
   const getProf = async () => {
     const {data} = await axios.get(`${getProfs}${oneDep.depid}`);
     setProfs(data);
+  }
+  const getChef = async () => {
+    const {data} = await axios.get(`${getOneChefs}${depid}`);
+    setChef(data);
   }
   const getSpeTc = async () => {
     const {data} = await axios.get(getTcSpes);
@@ -42,6 +48,7 @@ const Department = ({depid,type}) => {
         getSpe();
         getProf();
     }
+    getChef();
   },[oneDep])
   return (
     <>
@@ -61,6 +68,7 @@ const Department = ({depid,type}) => {
         )}
         {type === 'prof' && (
           <div className={`flex-col pl-2 z-10 transition-[height_250ms] -mt-1 gap-3 ${open?'flex':'hidden'}`}>
+            <Prof nom={chef.userName} profid={chef.userID} chef={true}/>
             {profs.map((prof) => {
                 const {userName,userID} = prof;
                 return(
