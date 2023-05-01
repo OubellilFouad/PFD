@@ -12,7 +12,7 @@ const getSecs = 'https://pfeboumerdes.pythonanywhere.com/sections/pal/';
 const getTcSecs = 'https://pfeboumerdes.pythonanywhere.com/sectionstc/pal/';
 const getGrps = 'https://pfeboumerdes.pythonanywhere.com/groupes/sec/';
 const getTcGrps = 'https://pfeboumerdes.pythonanywhere.com/groupestc/';
-const signups = 'http://localhost:8000/api/student/signup';
+const signups = 'http://localhost:8000/api/etudiant/register-etudiant';
 
 const Signup = () => {
   const {deps} = useAdmin()
@@ -91,6 +91,7 @@ const Signup = () => {
       group: parseInt(group),
       role: 4
     }
+    console.log(formData)
     signup(formData);
   }
   useEffect(() => {

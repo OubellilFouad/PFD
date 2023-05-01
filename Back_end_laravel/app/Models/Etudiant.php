@@ -11,5 +11,5 @@ class Etudiant extends Model
     use HasFactory, HasApiTokens;
 
     protected $table = 'etudiant';
-    protected $fillable = [ 'userName' , 'password' , 'userID' , 'email', 'dateNaiss','specialite','dep','section','groupe','pallier' ];
+    protected $fillable = [ 'userName' , 'password' , 'userID' , 'email', 'dateNaiss','specialite','dep','section','group','pallier', 'role' ];
 }

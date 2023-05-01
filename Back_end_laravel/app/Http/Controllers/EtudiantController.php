@@ -21,13 +21,14 @@ class EtudiantController extends Controller
         $validatedData = $request->validate([
             'userName' => 'required',
             'dateNaiss' => 'required|date',
-            'email' => 'required|email|unique:etudiants,email',
+            'email' => 'required|email|unique:etudiant,email',
             'userID' => 'required|unique:etudiant,userID',
             'dep' => 'required',            
             'specialite' => 'required',            
             'section' => 'required',            
             'group' => 'required',            
             'pallier' => 'required',
+            'role' => 'required',
         ]);
 
         // Check if the user already exists
@@ -49,8 +50,9 @@ class EtudiantController extends Controller
             'dep' => $validatedData['specialite'],
             'specialite' => $validatedData['specialite'],
             'section' => $validatedData['section'],
-            'groupe' => $validatedData['groupe'],
+            'group' => $validatedData['group'],
             'pallier' => $validatedData['pallier'],
+            'role' => $validatedData['role'],
         ]);
 
         $pw = Hash::make($request->password);

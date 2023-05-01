@@ -25,7 +25,7 @@ return new class extends Migration
             $table->integer('section');
             $table->integer('group');
             $table->integer('pallier');
-            $table->integer('password');
+            $table->integer('password')->nullable();
 
             $table->timestamps();
         });
