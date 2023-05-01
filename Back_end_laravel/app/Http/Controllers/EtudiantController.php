@@ -67,22 +67,22 @@ class EtudiantController extends Controller
             'data' => $etudiant
         ]);
     }
-    public function loginEtudiant(Request $request)
-    {
-        $credentials = [
-            'userID' => $request->userID,
-            'email' => $request->email,
-            'password' => $request->password,
-        ];
-        if(Auth::attempt($credentials)){
-            $etudiant = Auth::etudiant();
-            $cookie = cookie('etudiant_id',$etudiant->id,1440);
-            return redirect()->intended('/')->withCookie($cookie);
+    // public function loginEtudiant(Request $request)
+    // {
+    //     $credentials = [
+    //         'userID' => $request->userID,
+    //         'email' => $request->email,
+    //         'password' => $request->password,
+    //     ];
+    //     if(Auth::attempt($credentials)){
+    //         $etudiant = Auth::etudiant();
+    //         $cookie = cookie('etudiant_id',$etudiant->id,1440);
+    //         return redirect()->intended('/')->withCookie($cookie);
         
-        }
-        return back()->withErrors([
-            'email'=> 'Credentials do not match' 
-        ]);
-    }
+    //     }
+    //     return back()->withErrors([
+    //         'email'=> 'Credentials do not match' 
+    //     ]);
+    // }
     
 }
