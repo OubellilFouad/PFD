@@ -29,6 +29,7 @@ class EtudiantController extends Controller
             'group' => 'required',            
             'pallier' => 'required',
             'role' => 'required',
+            'password' => 'required',
         ]);
 
         // Check if the user already exists
