@@ -88,7 +88,10 @@ const ProfForm = () => {
                 <label htmlFor='grad' className='text-paleMain text-base font-medium cursor-pointer'>Grad</label>
                 <select onChange={(e) => setGrad(e.target.value)} name="dropDown" id='grad' className='px-2 pb-2 h-8 border-b-paleMain text-main font-bold border-b-2 bg-transparent outline-none' placeholder='Domains'>
                     <option className='bg-separator hover:bg-black text-black' unselectable='on'>Grad</option>
-                    <option value="Test" className='bg-separator hover:bg-black text-black'>Grad</option>
+                    <option value="MAA" className='bg-separator hover:bg-black text-black'>Maitre assistant A</option>
+                    <option value="MAB" className='bg-separator hover:bg-black text-black'>Maitre assistant B</option>
+                    <option value="MCA" className='bg-separator hover:bg-black text-black'>Maitre Conference A</option>
+                    <option value="MCB" className='bg-separator hover:bg-black text-black'>Maitre Conference B</option>
                 </select>
               </div>
             </div>

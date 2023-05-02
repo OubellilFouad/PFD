@@ -7,7 +7,7 @@ import { useChef } from '../context/ChefContext';
 import axios from 'axios';
 const getSpeCours = 'https://pfeboumerdes.pythonanywhere.com/affectations/prof/';
 
-const Teacher = ({nom,speid,annee,palid,one,semester,profid,tc,type}) => {
+const Teacher = ({nom,speid,annee,palid,one,semester,profid,tc,type,grad}) => {
   const [cour,setCour] = useState([]);
   const {afects} = useChef();
   const [openCharge,setOpenCharge] = useState(false);
@@ -49,7 +49,7 @@ const Teacher = ({nom,speid,annee,palid,one,semester,profid,tc,type}) => {
             </div>
             <div className='flex justify-between items-center'>
                 <div className='flex flex-col justify-between'>
-                    <span className='text-sm text-[#828282]'>Teacher</span>
+                    <span className='text-sm text-[#828282] font-bold'>{grad}</span>
                     <p className='text-2xl font-semibold'>{nom}</p>
                 </div>
             </div>

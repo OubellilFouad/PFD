@@ -10,12 +10,14 @@ import { useAuth } from '../../../../../context/AuthContext';
 const getEdt = 'https://pfeboumerdes.pythonanywhere.com/edts/prof/';
 const getDeps = 'https://pfeboumerdes.pythonanywhere.com/dep/';
 const getProfs = 'http://127.0.0.1:8000/api/chefdep/get-enseignantbyid/';
+const getOneChefs = 'http://localhost:8000/api/admin/get-chefdepbyid/';
 
 const EDTP = () => {
   const {user} = useAuth();
   const {sem} = useGest();
   const location = useLocation(); 
   const [edt,setEdt] = useState([]);
+  const [edtSem,setEdtSem] = useState([]);
   const [dep,setDep] = useState({});
   const [prof,setProf] = useState({});
 
@@ -48,9 +50,14 @@ const EDTP = () => {
   const getEdts = async (id) => {
     const {data} = await axios.get(`${getEdt}${id}`);
     setEdt(data);
+    console.log(data)
   }
   const getProf = async (id) => {
     const {data} = await axios.get(`${getProfs}${id}`);
+    setProf(data);
+  }
+  const getChef = async (id) => {
+    const {data} = await axios.get(`${getOneChefs}${id}`);
     setProf(data);
   }
   useEffect(() => {
@@ -62,9 +69,31 @@ const EDTP = () => {
     setEdt([]);
     if(location.state.profid){
         getEdts(location.state.profid);
-        getProf(location.state.profid);
+        if(location.state.chef){
+          getChef(location.state.profid)
+        }else{
+          getProf(location.state.profid);
+        }
     }
   },[location.state.profid])
+  useEffect(() => {
+    if(sem === 'first'){
+      if(edt.length !== 0){
+        let here = edt.filter(e => parseInt(e.semestre) === 5 || parseInt(e.semestre) === 3 || parseInt(e.semestre) === 1);
+        setEdtSem(here);
+      }else{
+        setEdtSem([]);
+      }
+    }
+    if(sem === 'second'){
+      if(edt.length !== 0){
+        let here = edt.filter(e => parseInt(e.semestre) === 6 || parseInt(e.semestre) === 4 || parseInt(e.semestre) === 2);
+        setEdtSem(here);
+      }else{
+        setEdtSem([]);
+      }
+    }
+  },[edt,sem])
   useEffect(() => {
     setEdt1([]);
     let arr1 = [];
@@ -78,8 +107,8 @@ const EDTP = () => {
     let arr5 = [];
     setEdt6([]);
     let arr6 = [];
-    if(edt.lenght !== 0){
-      edt.map((edt) => {
+    if(edtSem.lenght !== 0){
+      edtSem.map((edt) => {
         if(edt.day === 1){
             arr1.push(edt);
             setEdt1(arr1);
@@ -106,7 +135,7 @@ const EDTP = () => {
       }
       })
     }
-    if(edt.length === 0){
+    if(edtSem.length === 0){
       setEdt1([]);
       setEdt2([]);
       setEdt3([]);
@@ -114,7 +143,7 @@ const EDTP = () => {
       setEdt5([]);
       setEdt6([]);
     }
-  },[edt])
+  },[edtSem])
   return (
     <div className='flex flex-col gap-4 overflow-hidden'>
         <div className='flex justify-between items-center'>

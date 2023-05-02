@@ -188,11 +188,11 @@ const ChargeTest = () => {
             </div>
         </div>
         <div className='flex flex-col gap-8 overflow-x-scroll scroll-smooth con'>
-        <Teacher key={user?.userID} tc={tc} nom={user?.userName} palid={palid} speid={speid} one={onePals} annee={onePals.annee} semester={sem} profid={user?.userID} type='chef' />
+        <Teacher key={user?.userID} grad={'Chef dep'} tc={tc} nom={user?.userName} palid={palid} speid={speid} one={onePals} annee={onePals.annee} semester={sem} profid={user?.userID} type='chef' />
           {!on && prof.map((pro) => {
-                const {userName,userID} = pro;
+                const {userName,userID,grad} = pro;
                 return(
-                  <Teacher key={userID} tc={tc} nom={userName} palid={palid} speid={speid} one={onePals} annee={onePals.annee} semester={sem} profid={userID} />
+                  <Teacher key={userID} tc={tc} grad={grad} nom={userName} palid={palid} speid={speid} one={onePals} annee={onePals.annee} semester={sem} profid={userID} />
                 )
           })}
           {on && teachers.map((teacher) => {

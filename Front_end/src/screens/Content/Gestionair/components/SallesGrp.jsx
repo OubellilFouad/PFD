@@ -32,7 +32,7 @@ const SalleGrp = ({nom,type,capacity,chambreid}) => {
     }
   },[typeG])
   return (
-    <motion.div className={`py-2 px-3 rounded-md text-sm border-separator border-2 min-w-[230px] hidden ${!salle?'!flex':'hidden'} ${salle && type === 'Salle' && '!flex'}`}>
+    <motion.div className={`py-2 px-3 rounded-md text-sm border-separator border-2 min-w-[230px] hidden ${!salle?'!flex':'hidden'} ${salle && type !== 'Amphi' && '!flex'}`}>
         <p onClick={()=>handleClick()} ref={drag} className={`py-1 px-2 ${click?'bg-main text-white':'bg-separator text-black'} rounded-md flex items-center justify-center w-full`}>
             <span className='font-bold'>{nom}</span> / <span className='font-bold'>{capacity}</span> places / <span className='font-bold'>{type}</span> 
         </p>        

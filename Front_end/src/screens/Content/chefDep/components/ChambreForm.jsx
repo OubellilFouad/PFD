@@ -41,6 +41,7 @@ const ChambreForm = () => {
                   <option value="First" className='bg-separator hover:bg-black text-black' unselectable='Domains'>Type</option>
                   <option value="Salle" className='bg-separator hover:bg-black text-black'>Salle</option>
                   <option value="Amphi" className='bg-separator hover:bg-black text-black'>Amphi</option>
+                  <option value="Labo" className='bg-separator hover:bg-black text-black'>Labo</option>
               </select>
             </div>
           </form>

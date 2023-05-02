@@ -77,6 +77,13 @@ const HourProf = ({aff}) => {
         }
         getPlace(aff.place);
         setType(aff.type)
+    }else{
+      setOneModule({});
+      setOneChambre({});
+      setOneSec({});
+      setOneGrp({});
+      setSpe({});
+      setPal({});
     }
   },[aff])  
   useEffect(() => {
