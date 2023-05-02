@@ -35,9 +35,9 @@ const Modules = () => {
               )
             })}
             {tcmodule.map((module) => {
-              const {nom,speid,fillid,modid} = module;
+              const {nom,speid,fillid,modid,abbr} = module;
               return (
-                <ModuleCard key={modid} type={'commun'} nom={nom} speid={speid} fillid={fillid} moduleid={modid} />
+                <ModuleCard key={modid} type={'commun'} nom={nom} abbr={abbr} speid={speid} fillid={fillid} moduleid={modid} />
               )
             })}
         </div>

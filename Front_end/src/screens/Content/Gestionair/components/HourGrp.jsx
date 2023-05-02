@@ -12,7 +12,7 @@ const getChambres = 'https://pfeboumerdes.pythonanywhere.com/chambre/';
 const getProfs = 'http://127.0.0.1:8000/api/chefdep/get-enseignantbyid/';
 const getOneChefs = 'http://localhost:8000/api/admin/get-chefdepbyid/';
 
-const HourGrp = ({hour,day,affSec,aff}) => {
+const HourGrp = ({hour,day,affSec,aff,student}) => {
   const {setShow,setAddMessage,setColor} = useAuth();
   const {edts,addEdts,deleteEdt,profG,salleG} = useGest();
   const {avails} = useProf();
@@ -321,7 +321,7 @@ const HourGrp = ({hour,day,affSec,aff}) => {
           </>
         )}
         <BsCheckCircle onClick={() => accept()} className={`hidden absolute right-2 top-2/4 -translate-y-2/4 ${chambreid && !isOver && !edtid && !place ?'group-hover:block':'hidden'} cursor-pointer hover:text-main text-xl z-10`}/>
-        <SlClose onClick={() => reset()} className={`hidden absolute left-2 top-2/4 -translate-y-2/4 ${!isOver && !place && !color && Object.keys(affSec).length === 0?'group-hover:block':'hidden'} cursor-pointer hover:text-red text-xl z-10`}/>
+        <SlClose onClick={() => reset()} className={`hidden absolute left-2 top-2/4 -translate-y-2/4 ${!isOver && !place && !color && Object.keys(affSec).length === 0 && !student ?'group-hover:block':'hidden'} cursor-pointer hover:text-red text-xl z-10`}/>
     </div>
   )
 }

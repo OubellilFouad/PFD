@@ -30,6 +30,8 @@ import GroupEDT from './screens/Content/Gestionair/GroupEDT'
 import EDTProf from './screens/Content/Prof/EDTProf'
 import ProfEDT from './screens/Content/Gestionair/ProfEDT'
 import EDTP from './screens/Content/Gestionair/components/EDTP'
+import StudentDashboard from './screens/Content/Student/StudentDashboard'
+import Emplois from './screens/Content/Student/Emplois'
 
 function App() {
   const {user} = useAuth();
@@ -65,6 +67,7 @@ function App() {
                 <Route path='charge' element={<ChargeTest/>}/>
                 <Route path='edtprof' element={<ProfEDT/>}/>
                 <Route path='edtp' element={<EDTP/>}/>
+                <Route path='disp' element={<Desponibilité/>}/>
               </>
             )}
             {user?.role === 2 && (
@@ -82,6 +85,11 @@ function App() {
                 <Route path='' element={<Desponibilité/>}/>
                 <Route path='choix' element={<Choix/>}/>
                 <Route path='edt' element={<EDTProf/>}/>
+              </>
+            )}
+            {user?.role === 4 && (
+              <>
+                <Route path='' element={<Emplois/>}/>
               </>
             )}
           </Route>

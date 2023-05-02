@@ -10,7 +10,7 @@ const getTcGrp = 'https://pfeboumerdes.pythonanywhere.com/groupestc/';
 const getaff = 'https://pfeboumerdes.pythonanywhere.com/affectations/sec/';
 
 const Section = ({nom,secid,annee,type}) => {
-  const {sem} = useGest();
+  const {sem,setSection,setGroup,setCommun} = useGest();
   const [open,setOpen] = useState(false);
   const [grps,setGrps] = useState([]);
   const [grpstc,setGrpstc] = useState([]);
@@ -34,9 +34,11 @@ const Section = ({nom,secid,annee,type}) => {
     if(type === 'tc'){
       getTcGrps();
       getAffs();
+      setCommun(true);
     }else{
       getGrps();
       getAffs();
+      setCommun(false);
     }
   },[])
   useEffect(() => {
@@ -96,7 +98,10 @@ const Section = ({nom,secid,annee,type}) => {
     <>
         <div className='py-1 pl-2 bg-separator rounded-md text-base font-semibold flex items-center gap-2 forma'>
             <AiFillCaretRight onClick={() => setOpen(!open)} className={`text-sm cursor-pointer transition-[rotate_150ms] ${open?'rotate-90':'rotate-0'}`}/>
-            <NavLink to={'sec'} end state={{
+            <NavLink to={'sec'} onClick={() => {
+              setSection(secid);
+              setGroup(null);
+            }} end state={{
               page: 'EDT',
               secid,
               name: 'Time tables',

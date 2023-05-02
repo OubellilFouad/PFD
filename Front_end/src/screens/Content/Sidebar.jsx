@@ -30,6 +30,7 @@ const chef = [
     {path:'modules',name:'Les Modules',icon: <ImBooks/>,page: 'Modules'},
     {path:'charge',name:'La charge',icon: <MdWork/>,page: 'Charge'},
     {path:'edtprof',name:'Teachers',icon: <BsFillPersonLinesFill className='text-lg'/>,page: 'CEDT'},
+    {path:'disp',name:'Disponibilité',icon: <MdEventAvailable/>,page: 'Disponibilité'},
 ]
 const gest = [
     {path:'',name:'Dashboard',icon: <MdOutlineSpaceDashboard/>,page: 'Main'},
@@ -44,6 +45,9 @@ const prof = [
     {path:'',name:'Disponibilité',icon: <MdEventAvailable/>,page: 'Disponibilité'},
     {path:'choix',name:'Choix de modules',icon: <BsListCheck/>,page: 'Choix'},
     {path:'edt',name:'Emploi du temps',icon: <BiCalendarEvent/>,page: 'EDTP'},
+]
+const student = [
+    {path:'',name:'Emploi du temps',icon: <BiCalendarEvent/>,page: 'EDTS'},
 ]
 
 const Sidebar = () => {
@@ -71,6 +75,9 @@ const Sidebar = () => {
     }
     if(user?.role === 3){
         setNav(prof)
+    }
+    if(user?.role === 4){
+        setNav(student)
     }
   },[user])
   return (

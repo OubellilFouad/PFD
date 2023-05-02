@@ -23,9 +23,9 @@ const Enseingant = () => {
         </div>
         <div className='border border-b-separator border-l-separator border-r-separator border-t-separator rounded-b-lg  overflow-y-scroll'>
             {prof.map((prof) => {
-              const {id,userName,email,userID,dateNaiss,grad} = prof;
+              const {id,userName,email,userID,dateNaiss,grad,type} = prof;
               return(
-                <TableRow key={id} id={id} nom={userName} email={email} grad={grad} dateNaiss={dateNaiss} userID={userID} type='row'/>
+                <TableRow key={id} id={id} nom={userName} typeT={type} email={email} grad={grad} dateNaiss={dateNaiss} userID={userID} type='row'/>
               )
             })}
         </div>

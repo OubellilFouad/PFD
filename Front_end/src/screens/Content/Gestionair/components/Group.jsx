@@ -7,7 +7,7 @@ import { useGest } from '../context/GestContext';
 const getAffs = 'https://pfeboumerdes.pythonanywhere.com/affectations/grp/';
 
 const Group = ({nom,grpid,annee,type}) => {
-  const {sem} = useGest();
+  const {sem,setSection,setGroup,setCommun} = useGest();
   const [open,setOpen] = useState(false);  
   const [affects,setAffects] = useState([]);
   const [affSem,setAffSem] = useState([]);
@@ -58,7 +58,9 @@ const Group = ({nom,grpid,annee,type}) => {
     if(type === 'tc'){
       let here = affects.filter(a => a.tc === true);
       setAfftc(here);
+      setCommun(true);
     }else{
+      setCommun(false);
       if(semestre){
         let here = affects.filter(a => parseInt(a.semestre) === semestre);
         setAffSem(here);
@@ -77,7 +79,10 @@ const Group = ({nom,grpid,annee,type}) => {
     <>
         <div className='py-1 pl-2 bg-separator rounded-md text-base font-semibold flex items-center gap-2 forma'>
             <AiFillCaretRight onClick={() => setOpen(!open)} className={`text-sm cursor-pointer transition-[rotate_150ms] ${open?'rotate-90':'rotate-0'}`}/>
-            <NavLink to={'grp'} end state={{
+            <NavLink to={'grp'} onClick={() => {
+              setGroup(grpid);
+              setSection(null);
+            }} end state={{
               page: 'EDT',
               grpid,
               name: 'Time tables',

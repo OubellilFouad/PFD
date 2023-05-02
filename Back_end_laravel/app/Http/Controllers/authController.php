@@ -22,9 +22,8 @@ class AuthController extends Controller
         ]);
         $email = $request->email;
         $password = $request->password;
-
         // etudant
-        $etudiant = Enseignant::where('email', $request->email)->orWhere('userID', $request->userID)->first();        
+        $etudiant = Etudiant::where('email', $request->email)->orWhere('userID', $request->userID)->first();        
         if($etudiant){
             if(!Hash::check($request->password, $etudiant->password)) return response(["message" => "Invalid pw"]);
             if($request->email != $etudiant->email) return response(["message" => "Invalid email"]);

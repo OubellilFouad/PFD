@@ -24,6 +24,7 @@ const EDTP = () => {
   const [edt3,setEdt3] = useState([]);
   const [edt4,setEdt4] = useState([]);
   const [edt5,setEdt5] = useState([]);
+  const [edt6,setEdt6] = useState([]);
 
   const [before,setBefore] = useState(false);
 
@@ -75,6 +76,8 @@ const EDTP = () => {
     let arr4 = [];
     setEdt5([]);
     let arr5 = [];
+    setEdt6([]);
+    let arr6 = [];
     if(edt.lenght !== 0){
       edt.map((edt) => {
         if(edt.day === 1){
@@ -97,6 +100,10 @@ const EDTP = () => {
             arr5.push(edt);
             setEdt5(arr5);
         }
+        if(edt.day === 6){
+          arr6.push(edt);
+          setEdt6(arr6);
+      }
       })
     }
     if(edt.length === 0){
@@ -105,15 +112,16 @@ const EDTP = () => {
       setEdt3([]);
       setEdt4([]);
       setEdt5([]);
+      setEdt6([]);
     }
   },[edt])
   return (
-    <div className='flex flex-col gap-6 overflow-hidden'>
+    <div className='flex flex-col gap-4 overflow-hidden'>
         <div className='flex justify-between items-center'>
             <p className='text-xl font-bold flex-1'>Emploi du temps : {prof?.userName}</p>
             <button onClick={handlePrint} className='flex gap-2 items-center bg-red text-white py-1 px-3 rounded-lg hover:bg-darkRed'><SiAdobeacrobatreader/> Print PDF</button>
         </div>
-        <div ref={edtDiv} className='flex flex-col items-center gap-3'>
+        <div ref={edtDiv} className='flex flex-col items-center overflow-hidden'>
           {before && (
             <div className='flex flex-col items-center gap-1'>
               <div className='flex flex-col items-center mt-5 font-bold'>
@@ -129,13 +137,16 @@ const EDTP = () => {
               <p>{sem === 'first'?'First Semester':'Second Semester'}</p>
             </div>
           )}
+          <div className='grid grid-cols-7 overflow-x-scroll w-full z-20 border-b-gray-300 border-b mt-3'>
+            <HoursGest before={true}/>
+          </div>
           <div className='grid grid-cols-7 overflow-x-scroll w-full'>
-              <HoursGest before={true} />
               <DayProf day={1} edt={edt1}/>
               <DayProf day={2} edt={edt2}/>
               <DayProf day={3} edt={edt3}/>
               <DayProf day={4} edt={edt4}/>
               <DayProf day={5} edt={edt5}/>
+              <DayProf day={6} edt={edt6}/>
           </div>
         </div>
     </div>

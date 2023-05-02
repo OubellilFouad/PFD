@@ -4,7 +4,7 @@ import { BsThreeDots } from 'react-icons/bs'
 import { useAuth } from '../../../../../context/AuthContext'
 import { useChef } from '../../chefDep/context/ChefContext'
 
-const TableRow = ({type,nom,email,dateNaiss,grad,id,userID}) => {
+const TableRow = ({type,nom,email,dateNaiss,grad,id,userID,typeT}) => {
   const {user} = useAuth();
   const {setOpenProf,deleteProf} = useChef();
   if(type === 'header'){
@@ -15,6 +15,7 @@ const TableRow = ({type,nom,email,dateNaiss,grad,id,userID}) => {
             <div className='flex-1'>Email</div>
             <div className='flex-1'>Date of birth</div>
             <div className='flex-1'>Grad</div>
+            <div className='flex-[0.7]'>Type</div>
             <div className='flex-1 flex justify-end pr-4'>
                 {user?.role === 1 && (
                   <button onClick={() => setOpenProf(true)} className='flex items-center text-sm gap-2 hover:text-main hover:border-main'>
@@ -34,6 +35,7 @@ const TableRow = ({type,nom,email,dateNaiss,grad,id,userID}) => {
             <div className='flex-1'>{email}</div>
             <div className='flex-1'>{dateNaiss}</div>
             <div className='flex-1'>{grad}</div>
+            <div className='flex-[0.7]'>{typeT}</div>
             <div className='flex-1 flex justify-end pr-4'>
                 <button>
                   <AiFillDelete onClick={() => deleteProf(id)} className='text-lg cursor-pointer hover:text-red'/>

@@ -17,24 +17,79 @@ import TcSectionForm from './admin/components/TcSectionForm';
 import TcModForm from './admin/components/TcModForm';
 import Select from './chefDep/components/Select';
 import { useGest } from './Gestionair/context/GestContext';
+import axios from 'axios';
+const getSecs = 'https://pfeboumerdes.pythonanywhere.com/section/';
+const getTcSecs = 'https://pfeboumerdes.pythonanywhere.com/sectiontc/';
+const getGrps = 'https://pfeboumerdes.pythonanywhere.com/groupe/';
+const getTcGrps = 'https://pfeboumerdes.pythonanywhere.com/groupetc/';
 
 const Main = () => {
   const location = useLocation();
   const {user} = useAuth();
   const {setOpenForm,setOpenPaliers,setOpenSections,setOpenTcModules} = useAdmin()
   const {setOpenSec,setOpenModule,setOpenSpe,setOpenSalle,setOpenPalier} = useChef();
-  const {setSem} = useGest();
+  const {setSem,section,group,commun} = useGest();
   const [title,setTitle] = useState('Dashboard');
   const [page,setPage] = useState('Main');
   const [open,setOpen] = useState(false);
+  const [sec,setSec] = useState({});
+  const [grp,setGrp] = useState({});
+  const getSection = async (id) => {
+    const {data} = await axios.get(`${getSecs}${id}`);
+    setSec(data);
+  }
+  const getTcSection = async (id) => {
+    const {data} = await axios.get(`${getTcSecs}${id}`);
+    setSec(data);
+  }
+  const getGroup = async (id) => {
+    const {data} = await axios.get(`${getGrps}${id}`);
+    setGrp(data);
+  }
+  const getTcGroup = async (id) => {
+    const {data} = await axios.get(`${getTcGrps}${id}`);
+    setGrp(data);
+  }
   useEffect(() => {
     location.state?.name? setTitle(location.state.name):setTitle(title);
     location.state?.page? setPage(location.state.page):setPage(page);
-  },[location.state?.name,location.state?.page])  
+  },[location.state?.name,location.state?.page]) 
+  useEffect(() => {
+    if(user.role === 4){
+        setTitle('Emploi du temps');
+        setPage('EDTS');
+    }
+  },[user]); 
+  useEffect(() => {
+    if(section){
+        if(commun){
+            getTcSection(section);
+        }else{
+            getSection(section);
+        }
+    }else{
+        setSec({});
+    }
+  },[section])
+  useEffect(() => {
+    if(group){
+        if(commun){
+            getTcGroup(group);
+        }else{
+            getGroup(group);
+        }
+    }else{
+        setSec({});
+    }
+  },[group])
   return (
     <div className='pt-7 pb-4 px-12 flex flex-col gap-8 main overflow-hidden'>
         <div className='flex justify-between items-center'>
-            <p className='text-4xl font-semibold'>{title}</p>
+            <p className='text-4xl font-semibold'>
+                {title}
+                {Object.keys(sec).length !== 0 && (<span className='text-3xl text-main'>{page === 'EDT' && section && `: ${sec.nom}`}</span>)}
+                {Object.keys(grp).length !== 0 && (<span className='text-3xl text-main'>{page === 'EDT' && group && `: ${grp.nom}`}</span>)}
+            </p>
             {page === 'Main' && user?.role === 0 && (
                 <button onClick={() => setOpen(true)} className='flex items-center text-base gap-2 py-2 px-4 border rounded-lg hover:text-main hover:border-main'>
                     <AiOutlinePlus className='p-1 bg-palerMain text-main text-xl rounded-md'/>
@@ -102,6 +157,9 @@ const Main = () => {
                 <Select name={'Tranche'} no={true} array={['first','second']} setData={setSem}/>
             </div>)}
             {page === 'EDTP' && (<div className='flex items-center justify-end'>
+                <Select name={'Tranche'} no={true} array={['first','second']} setData={setSem}/>
+            </div>)}
+            {page === 'EDTS' && (<div className='flex items-center justify-end'>
                 <Select name={'Tranche'} no={true} array={['first','second']} setData={setSem}/>
             </div>)}
         </div>

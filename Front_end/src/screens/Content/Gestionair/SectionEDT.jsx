@@ -37,6 +37,7 @@ const SectionEDT = () => {
   const [edt3,setEdt3] = useState([]);
   const [edt4,setEdt4] = useState([]);
   const [edt5,setEdt5] = useState([]);
+  const [edt6,setEdt6] = useState([]);
 
   const [semEdt,setSemEdt] = useState([]);
   const [semestre,setSemestre] = useState(null);
@@ -127,6 +128,8 @@ const SectionEDT = () => {
     let arr4 = [];
     setEdt5([]);
     let arr5 = [];
+    setEdt6([]);
+    let arr6 = [];
     if(semEdt.lenght !== 0){
       semEdt.map((edt) => {
         if(edt.day === 1){
@@ -149,6 +152,10 @@ const SectionEDT = () => {
             arr5.push(edt);
             setEdt5(arr5);
         }
+        if(edt.day === 6){
+          arr6.push(edt);
+          setEdt6(arr6);
+      }
       })
     }
     if(semEdt.length === 0){
@@ -157,6 +164,7 @@ const SectionEDT = () => {
       setEdt3([]);
       setEdt4([]);
       setEdt5([]);
+      setEdt6([]);
     }
   },[semEdt])
   useEffect(() => {
@@ -229,7 +237,6 @@ const SectionEDT = () => {
   return (
     <div className='flex flex-col gap-2 -mt-6 overflow-hidden'>
         <div className='flex justify-between items-center gap-6'>
-            <p className='text-xl font-bold text-main w-[10%]'>{sec?.nom}</p>
             <motion.div ref={carousel} className='cursor-grab w-[100%] overflow-hidden carousel p-2 border-separator border-2 rounded-md'>
                 <motion.div drag='x' dragConstraints={{right:0,left: -width}} className='flex gap-2'>
                     {chambre.map((cham) => {
@@ -241,7 +248,7 @@ const SectionEDT = () => {
                 </motion.div>
             </motion.div>
         </div>
-        <div ref={edtDiv} className='flex flex-col items-center gap-3'>
+        <div ref={edtDiv} className='flex flex-col items-center overflow-hidden'>
           {before && (
             <div className='flex flex-col items-center gap-1'>
               <div className='flex flex-col items-center mt-5 font-bold'>
@@ -258,13 +265,16 @@ const SectionEDT = () => {
               <p className='text-lg font-bold'>{sec.nom}</p>
             </div>
           )}
+          <div className='grid grid-cols-7 overflow-x-scroll w-full z-20 border-b-gray-300 border-b mt-3'>
+            <HoursGest handleprint={handlePrint} before={before} />
+          </div>
           <div className='grid grid-cols-7 overflow-x-scroll w-full'>
-              <HoursGest handleprint={handlePrint} before={before} />
               <DayGest day={1} edt={edt1} semestre={semestre}/>
               <DayGest day={2} edt={edt2} semestre={semestre}/>
               <DayGest day={3} edt={edt3} semestre={semestre}/>
               <DayGest day={4} edt={edt4} semestre={semestre}/>
               <DayGest day={5} edt={edt5} semestre={semestre}/>
+              <DayGest day={6} edt={edt6} semestre={semestre}/>
           </div>
         </div>
     </div>

@@ -23,6 +23,7 @@ const EDTProf = () => {
   const [edt3,setEdt3] = useState([]);
   const [edt4,setEdt4] = useState([]);
   const [edt5,setEdt5] = useState([]);
+  const [edt6,setEdt6] = useState([]);
 
   const edtDiv = useRef();
 
@@ -66,6 +67,8 @@ const EDTProf = () => {
     let arr4 = [];
     setEdt5([]);
     let arr5 = [];
+    setEdt6([]);
+    let arr6 = [];
     if(edt.lenght !== 0){
       edt.map((edt) => {
         if(edt.day === 1){
@@ -88,6 +91,10 @@ const EDTProf = () => {
             arr5.push(edt);
             setEdt5(arr5);
         }
+        if(edt.day === 6){
+          arr6.push(edt);
+          setEdt6(arr6);
+      }
       })
     }
     if(edt.length === 0){
@@ -96,6 +103,7 @@ const EDTProf = () => {
       setEdt3([]);
       setEdt4([]);
       setEdt5([]);
+      setEdt6([]);
     }
   },[edt])
   return (
@@ -120,7 +128,7 @@ const EDTProf = () => {
               <p>{sem === 'first'?'First Semester':'Second Semester'}</p>
             </div>
           )}
-          <div className='grid grid-cols-7 w-full mt-3'>
+          <div className='grid grid-cols-7 overflow-x-scroll w-full z-20 border-b-gray-300 border-b mt-3'>
             <HoursGest before={true}/>
           </div>
           <div className='grid grid-cols-7 w-full overflow-x-scroll'>
@@ -129,6 +137,7 @@ const EDTProf = () => {
               <DayProf day={3} edt={edt3}/>
               <DayProf day={4} edt={edt4}/>
               <DayProf day={5} edt={edt5}/>
+              <DayProf day={6} edt={edt6}/>
           </div>
         </div>
     </div>

@@ -1,12 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react'
-import { motion } from 'framer-motion';
-import HoursGest from './components/HoursGest';
-import SalleGrp from './components/SallesGrp';
-import DayGrp from './components/DayGrp';
-import { useLocation } from 'react-router-dom';
-import { useGest } from './context/GestContext';
 import { useReactToPrint } from 'react-to-print';
+import HoursGest from '../Gestionair/components/HoursGest';
+import DayGrp from '../Gestionair/components/DayGrp';
+import { useGest } from '../Gestionair/context/GestContext';
+import { useAuth } from '../../../../context/AuthContext';
+import { SiAdobeacrobatreader } from 'react-icons/si';
+
 const getGrp = 'https://pfeboumerdes.pythonanywhere.com/groupe/';
 const getTcGrp = 'https://pfeboumerdes.pythonanywhere.com/groupetc/';
 const getChambre = 'https://pfeboumerdes.pythonanywhere.com/chambres';
@@ -20,12 +20,12 @@ const getPal = 'https://pfeboumerdes.pythonanywhere.com/palier/';
 const getTcSpes = 'https://pfeboumerdes.pythonanywhere.com/formationtc/';
 const getTcPal = 'https://pfeboumerdes.pythonanywhere.com/paliertc/';
 
-const GroupEDT = () => {
-  const {edts,sem} = useGest();
+const Emplois = () => {
+  const {user} = useAuth();  
+  const {edts,sem,speType} = useGest();
   const [chambre,setChambre] = useState([]); 
   const [grpid,setGrpid] = useState(null);
   const [groupe,setGroup] = useState({});
-  const [width,setWidth] = useState(0);
   const [edtSec,setEdtSec] = useState([]);
   const [edtTcSec,setEdtTcSec] = useState([]);
   const [edt,setEdt] = useState([]);
@@ -52,9 +52,7 @@ const GroupEDT = () => {
   const [edt4,setEdt4] = useState([]);
   const [edt5,setEdt5] = useState([]);
   const [edt6,setEdt6] = useState([]);
-  const group = useRef();
   const edtDiv = useRef();
-  const location = useLocation();
 
   const handlePrint = useReactToPrint({
     content: () => edtDiv.current,
@@ -118,17 +116,14 @@ const GroupEDT = () => {
   }
   // 
   useEffect(() => {
-    setWidth(group.current.scrollWidth - group.current.offsetWidth);
-  },[chambre])
-  useEffect(() => {
     getchambres();
   },[])
   useEffect(() => {
-    setGrpid(location.state.grpid);
-  },[location.state.grpid])
+    setGrpid(user?.group);
+  },[])
   useEffect(() => {
     if(grpid){
-      if(location.state.type === 'tc'){
+      if(speType === 'Tranc commun'){
         getTcGroup();
       }else{
         getGroup();
@@ -138,7 +133,7 @@ const GroupEDT = () => {
   },[grpid,edts])
   useEffect(() => {
     if(Object.keys(groupe)){
-      if(location.state.type === 'tc'){
+      if(speType === 'Tranc commun'){
         getTcSpe(groupe.speid);
         getTcSec(groupe.secid);
       }else{
@@ -151,7 +146,7 @@ const GroupEDT = () => {
   },[groupe])
   useEffect(() => {
     if(Object.keys(sec).length !== 0){
-      if(location.state.type === 'tc'){
+      if(speType === 'Tranc commun'){
         getOneTcPal(sec.palid);
       }else{
         getOnePal(sec.palid);
@@ -160,7 +155,7 @@ const GroupEDT = () => {
   },[sec])
   // 
   useEffect(() => {
-    if(location.state.type === 'tc'){
+    if(speType === 'Tranc commun'){
       if(Object.keys(edtSec).length !== 0){
         let here = edtSec.filter(e => e.tc === true);
         setEdtTcSec(here);
@@ -230,7 +225,7 @@ const GroupEDT = () => {
   },[semEdtSec])
   // 
   useEffect(() => {
-    if(location.state.type === 'tc'){
+    if(speType === 'Tranc commun'){
       if(Object.keys(edt).length !== 0){
         let here = edt.filter(e => e.tc === true);
         setEdtTc(here);
@@ -336,18 +331,10 @@ const GroupEDT = () => {
   }
 },[sem,pal])
   return (
-    <div className='flex flex-col gap-2 -mt-6 overflow-hidden'>
+    <div className='flex flex-col gap-4 overflow-hidden'>
         <div className='flex justify-between items-center'>
-            <motion.div ref={group} className='cursor-grab overflow-hidden w-[100%] carousel p-2 border-separator border-2 rounded-md'>
-                <motion.div drag='x' dragConstraints={{right:0,left: -width}} className='flex gap-2'>
-                    {chambre.map((cham) => {
-                        const {nom,capacite,type,chambreid} = cham;
-                        return(
-                            <SalleGrp key={chambreid} nom={nom} capacity={capacite} type={type} chambreid={chambreid} />
-                        )
-                    })}
-                </motion.div>
-            </motion.div>
+            <p className='font-bold'>Scroll to see all the days</p>
+            <button onClick={handlePrint} className='flex gap-2 items-center bg-red text-white py-1 px-3 rounded-lg hover:bg-darkRed'><SiAdobeacrobatreader/> Print PDF</button>
         </div>
         <div ref={edtDiv} className='flex flex-col items-center overflow-hidden'>
           {before && (
@@ -367,19 +354,19 @@ const GroupEDT = () => {
             </div>
           )}
           <div className='grid grid-cols-7 overflow-x-scroll w-full z-20 border-b-gray-300 border-b mt-3'>
-              <HoursGest handleprint={handlePrint} before={before} />
+            <HoursGest before={true} />
           </div>
           <div className='grid grid-cols-7 overflow-x-scroll w-full'>
-              <DayGrp day={1} edtSec={edtSec1} edt={edt1}/>
-              <DayGrp day={2} edtSec={edtSec2} edt={edt2}/>
-              <DayGrp day={3} edtSec={edtSec3} edt={edt3}/>
-              <DayGrp day={4} edtSec={edtSec4} edt={edt4}/>
-              <DayGrp day={5} edtSec={edtSec5} edt={edt5}/>
-              <DayGrp day={6} edtSec={edtSec6} edt={edt6}/>
+              <DayGrp day={1} edtSec={edtSec1} edt={edt1} student={true}/>
+              <DayGrp day={2} edtSec={edtSec2} edt={edt2} student={true}/>
+              <DayGrp day={3} edtSec={edtSec3} edt={edt3} student={true}/>
+              <DayGrp day={4} edtSec={edtSec4} edt={edt4} student={true}/>
+              <DayGrp day={5} edtSec={edtSec5} edt={edt5} student={true}/>
+              <DayGrp day={6} edtSec={edtSec6} edt={edt6} student={true}/>
           </div>
         </div>
     </div>
   )
 }
 
-export default GroupEDT
+export default Emplois

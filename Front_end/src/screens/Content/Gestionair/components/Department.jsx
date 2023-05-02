@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { AiFillCaretRight } from 'react-icons/ai'
 import Formation from './Formation';
 import Prof from './Prof';
+import { useAuth } from '../../../../../context/AuthContext';
 const getOnedep = 'https://pfeboumerdes.pythonanywhere.com/dep/';
 const getSpes = 'https://pfeboumerdes.pythonanywhere.com/specialites/';
 const getTcSpes = 'https://pfeboumerdes.pythonanywhere.com/formationstc';
@@ -10,6 +11,7 @@ const getProfs = 'http://127.0.0.1:8000/api/chefdep/get-enseignantbydepid/';
 const getOneChefs = 'http://localhost:8000/api/admin/get-chefdepbydepid/';
 
 const Department = ({depid,type}) => {
+  const {user} = useAuth();
   const [open,setOpen] = useState(false)  
   const [oneDep,setOneDep] = useState({});
   const [spes,setSpes] = useState([]);
@@ -79,6 +81,7 @@ const Department = ({depid,type}) => {
         )}
         {type === 'profC' && (
           <div className={`flex-col pl-2 z-10 transition-[height_250ms] -mt-1 gap-3 ${open?'flex':'hidden'}`}>
+            <Prof nom={user.userName} type='C' profid={user.userID} />
             {profs.map((prof) => {
                 const {userName,userID} = prof;
                 return(

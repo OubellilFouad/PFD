@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import HourGrp from './HourGrp';
 
-const DayGrp = ({day,edtSec,edt}) => {
+const DayGrp = ({day,edtSec,edt,student}) => {
   const [dayName,setDayName] = useState('');
 
   const [hour1,setHour1] = useState({});
@@ -34,6 +34,9 @@ const DayGrp = ({day,edtSec,edt}) => {
             break;
         case 5:
             setDayName('Wednesday');
+            break;
+        case 6:
+            setDayName('Thursday');
             break;
         default: 
             setDayName('')
@@ -110,12 +113,12 @@ const DayGrp = ({day,edtSec,edt}) => {
   return (
     <>
         <div className='flex justify-center py-6 border border-gray-300'>{dayName}</div>
-        <HourGrp hour={1} day={day} affSec={hourSec1} aff={hour1}/>
-        <HourGrp hour={2} day={day} affSec={hourSec2} aff={hour2}/>
-        <HourGrp hour={3} day={day} affSec={hourSec3} aff={hour3}/>
-        <HourGrp hour={4} day={day} affSec={hourSec4} aff={hour4}/>
-        <HourGrp hour={5} day={day} affSec={hourSec5} aff={hour5}/>
-        <HourGrp hour={6} day={day} affSec={hourSec6} aff={hour6}/>
+        <HourGrp hour={1} day={day} affSec={hourSec1} aff={hour1} student={student} />
+        <HourGrp hour={2} day={day} affSec={hourSec2} aff={hour2} student={student} />
+        <HourGrp hour={3} day={day} affSec={hourSec3} aff={hour3} student={student} />
+        <HourGrp hour={4} day={day} affSec={hourSec4} aff={hour4} student={student} />
+        <HourGrp hour={5} day={day} affSec={hourSec5} aff={hour5} student={student} />
+        <HourGrp hour={6} day={day} affSec={hourSec6} aff={hour6} student={student} />
     </>
   )
 }
