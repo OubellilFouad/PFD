@@ -6,7 +6,7 @@ import { useAdmin } from "../context/AdminContext";
 const getOneDomainUrl = 'https://pfeboumerdes.pythonanywhere.com/domain/';
 
 const Card = ({nom,depid,domainid}) => { 
-  const {deleteDep} = useAdmin();
+  const {deleteDep,deleteAllGestDeps} = useAdmin();
   const [name,setName] = useState('');
   const getOneDomain = async () => {
     const response = await axios.get(`${getOneDomainUrl}${domainid}`);
@@ -22,7 +22,10 @@ const Card = ({nom,depid,domainid}) => {
             <div className='flex flex-col gap-2 h-24 w-full'>
                 <div className='flex justify-between items-center'>
                 <p className='text-xl font-bold'>{nom}</p>
-                  <AiFillDelete onClick={() => deleteDep(depid)} className='text-lg cursor-pointer hover:text-red'/>
+                  <AiFillDelete onClick={() => {
+                    deleteDep(depid);
+                    deleteAllGestDeps(depid);
+                  }} className='text-lg cursor-pointer hover:text-red'/>
                 </div>
                 <span className='text-sm font-semibold'>{name}</span>
             </div>

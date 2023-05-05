@@ -6,7 +6,7 @@ import axios from 'axios'
 import { useAuth } from '../../../../context/AuthContext'
 import { useAdmin } from '../admin/context/AdminContext'
 const getSections = 'https://pfeboumerdes.pythonanywhere.com/sections/';
-const getTcSections = 'https://pfeboumerdes.pythonanywhere.com/sectionstc/dep';
+const getTcSections = 'https://pfeboumerdes.pythonanywhere.com/sectionstc/dep/';
 
 const Sections = () => {
   const {sections} = useChef();
@@ -32,13 +32,13 @@ const Sections = () => {
             {section.map((section) => {
               const {nom,speid,capacite,secid} = section; 
                 return (
-                  <SectionCard key={speid} nom={nom} capacite={capacite} speid={speid} secid={secid} />
+                  <SectionCard key={secid} nom={nom} capacite={capacite} speid={speid} secid={secid} />
                 )
             })}
             {tcSections.map((section) => {
               const {nom,speid,capacite,secid} = section; 
                 return (
-                  <SectionCard key={speid} nom={nom} type={'commun'} capacite={capacite} speid={speid} secid={secid} />
+                  <SectionCard key={secid} nom={nom} type={'commun'} capacite={capacite} speid={speid} secid={secid} />
                 )
             })}
         </div>

@@ -18,7 +18,9 @@ use App\Http\Controllers\EtudiantController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+Route::get('test',function(){
+    return 'Hello';
+});
 Route::post('login',[authController::class,'login']);
 Route::middleware('auth:sanctum')->group(function(){
     Route::get('user',[authController::class,'user']);

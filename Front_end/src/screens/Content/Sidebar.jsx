@@ -28,9 +28,9 @@ const chef = [
     {path:'speciality',name:'Les Formations',icon: <MdFolderSpecial/>,page: 'Formations'},
     {path:'sections',name:'Les Sections',icon: <BsFillCollectionFill/>,page: 'Sections'},
     {path:'modules',name:'Les Modules',icon: <ImBooks/>,page: 'Modules'},
+    {path:'disp',name:'Disponibilité',icon: <MdEventAvailable/>,page: 'Disponibilité'},
     {path:'charge',name:'La charge',icon: <MdWork/>,page: 'Charge'},
     {path:'edtprof',name:'Teachers',icon: <BsFillPersonLinesFill className='text-lg'/>,page: 'CEDT'},
-    {path:'disp',name:'Disponibilité',icon: <MdEventAvailable/>,page: 'Disponibilité'},
 ]
 const gest = [
     {path:'',name:'Dashboard',icon: <MdOutlineSpaceDashboard/>,page: 'Main'},

@@ -156,6 +156,9 @@ const Main = () => {
             {page === 'PEDT' && (<div className='flex items-center justify-end'>
                 <Select name={'Tranche'} no={true} array={['first','second']} setData={setSem}/>
             </div>)}
+            {page === 'CEDT' && (<div className='flex items-center justify-end'>
+                <Select name={'Tranche'} no={true} array={['first','second']} setData={setSem}/>
+            </div>)}
             {page === 'EDTP' && (<div className='flex items-center justify-end'>
                 <Select name={'Tranche'} no={true} array={['first','second']} setData={setSem}/>
             </div>)}

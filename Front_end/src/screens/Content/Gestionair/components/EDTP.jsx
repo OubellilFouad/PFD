@@ -69,6 +69,7 @@ const EDTP = () => {
     setEdt([]);
     if(location.state.profid){
         getEdts(location.state.profid);
+        console.log(location.state.chef);
         if(location.state.chef){
           getChef(location.state.profid)
         }else{
@@ -145,7 +146,17 @@ const EDTP = () => {
     }
   },[edtSem])
   return (
-    <div className='flex flex-col gap-4 overflow-hidden'>
+    <div className='flex flex-col gap-1 overflow-hidden'>
+        <div className='flex gap-2'>
+            <div className='flex gap-1 items-center'>
+              <span className='w-4 h-4 border bg-main'></span>
+              <p>Cours</p>
+            </div>
+            <div className='flex gap-1 items-center'>
+              <span className='w-4 h-4 border bg-blue-500'></span>
+              <p>Tp/Td</p>
+            </div>
+        </div>
         <div className='flex justify-between items-center'>
             <p className='text-xl font-bold flex-1'>Emploi du temps : {prof?.userName}</p>
             <button onClick={handlePrint} className='flex gap-2 items-center bg-red text-white py-1 px-3 rounded-lg hover:bg-darkRed'><SiAdobeacrobatreader/> Print PDF</button>
@@ -166,7 +177,7 @@ const EDTP = () => {
               <p>{sem === 'first'?'First Semester':'Second Semester'}</p>
             </div>
           )}
-          <div className='grid grid-cols-7 overflow-x-scroll w-full z-20 border-b-gray-300 border-b mt-3'>
+          <div className={`grid grid-cols-7 overflow-x-scroll w-full z-20 border-b-gray-300 border-b ${before && 'mt-3'}`}>
             <HoursGest before={true}/>
           </div>
           <div className='grid grid-cols-7 overflow-x-scroll w-full'>

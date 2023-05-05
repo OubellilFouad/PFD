@@ -36,7 +36,8 @@ const SpeForm = () => {
     setColor(true);
     form.current.reset();
   }
-  const handleFil = () => {
+  const handleFil = (e) => {
+    e.preventDefault();
     const nom = filName;
     const depid = user?.depID;
     const formData = {
@@ -58,13 +59,16 @@ const SpeForm = () => {
             <div className='flex w-full'><Select name={'Cycle'} setData={setCycle} array={cycleArr}/></div>
             <div className='flex w-full items-end gap-5'>
               <FillSelect name={'Filliérs'} setData={setFillid} />
-              <button onClick={() => setopenFil(!openFil)} className='flex items-center text-base gap-2 py-2 px-4 border rounded-lg hover:text-main hover:border-main'>
+              <button onClick={(e) => {
+                setopenFil(!openFil);
+                e.preventDefault();
+              }} className='flex items-center text-base gap-2 py-2 px-4 border rounded-lg hover:text-main hover:border-main'>
                   <AiOutlinePlus className='p-1 bg-palerMain text-main text-xl rounded-md'/>
               </button>
             </div>
             <div className={`p-4 w-2/3 bottom-16 gap-4 ${openFil?'flex':'hidden'} flex-col border rounded-lg absolute`}>
               <Input name={'Filliére'} type='text' data={filName} setData={setFilName} />
-              <button onClick={handleFil} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
+              <button onClick={(e) => handleFil(e)} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
             </div>
           </form>
           <div className='flex-1 flex justify-end items-center px-3 pb-3'>

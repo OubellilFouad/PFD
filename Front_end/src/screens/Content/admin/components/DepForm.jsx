@@ -36,7 +36,8 @@ const DepForm = ({open,setOpen}) => {
     setColor(true);
     form.current.reset();
   }  
-  const handleDomain = () => {
+  const handleDomain = (e) => {
+    e.preventDefault();
     const nom = domainName;
     const formData = {
       nom,
@@ -59,13 +60,16 @@ const DepForm = ({open,setOpen}) => {
             <Input name={'Nom'} type={'text'} setData={setNom} />
             <div className='flex w-full items-end gap-5'>
               <Drop name={'Domains'} data={domainid} setData={setDomain} />
-              <button onClick={() => setDomainOpen(!domainOpen)} className='flex items-center text-base gap-2 py-2 px-4 border rounded-lg hover:text-main hover:border-main'>
+              <button onClick={(e) => {
+                setDomainOpen(!domainOpen);
+                e.preventDefault();
+              }} className='flex items-center text-base gap-2 py-2 px-4 border rounded-lg hover:text-main hover:border-main'>
                   <AiOutlinePlus className='p-1 bg-palerMain text-main text-xl rounded-md'/>
               </button>
             </div>
             <div className={`p-4 w-2/3 bottom-16 gap-4 ${domainOpen?'flex':'hidden'} flex-col border rounded-lg absolute`}>
               <Input name={'Domain'} type='text' data={domainName} setData={setDomainName} />
-              <button onClick={handleDomain} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
+              <button onClick={(e) => handleDomain(e)} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
             </div>
           </form>
           <div className='flex-1 flex justify-between items-center px-3 pb-3'>

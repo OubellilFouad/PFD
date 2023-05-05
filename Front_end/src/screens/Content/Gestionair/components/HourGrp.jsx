@@ -31,6 +31,7 @@ const HourGrp = ({hour,day,affSec,aff,student}) => {
   const [oneModule,setOneModule] = useState({}); 
   const [oneProf,setOneProf] = useState({}); 
   const [oneChambre,setOneChambre] = useState({}); 
+  const [depid,setDepid] = useState(null); 
   const [tc,setTc] = useState(false);
   const [chef,setChef] = useState(false);
   const [item,setItem] = useState({});
@@ -85,6 +86,7 @@ const HourGrp = ({hour,day,affSec,aff,student}) => {
           setSemestre(item.semestre);
           setTc(item.tc);
           setChef(item.chef);
+          setDepid(item.depid);
         }
       }
     }else{
@@ -125,7 +127,8 @@ const HourGrp = ({hour,day,affSec,aff,student}) => {
       hour,
       place: chambreid,
       tc,
-      chef
+      chef,
+      depid
     }
     addEdts(formData);
   }
@@ -138,6 +141,7 @@ const HourGrp = ({hour,day,affSec,aff,student}) => {
       setGroupe(null);
       setSemestre('');
       setChambreid(null);
+      setDepid(null);
     }else{
       deleteEdt(edtid);
       setEdtid(null);
@@ -148,6 +152,7 @@ const HourGrp = ({hour,day,affSec,aff,student}) => {
       setGroupe(null);
       setSemestre('');
       setChambreid(null);
+      setDepid(null);
     }
   }
   useEffect(() => {
@@ -276,6 +281,7 @@ const HourGrp = ({hour,day,affSec,aff,student}) => {
       setChambreid(aff.place);
       setTc(aff.tc);
       setChef(aff.chef);
+      setDepid(aff.depid);
     }else{
       setEdtid(null);
       setModule(null);
@@ -287,6 +293,7 @@ const HourGrp = ({hour,day,affSec,aff,student}) => {
       setChambreid(null);
       setTc(false);
       setChef(false);
+      setDepid(null);
     }
   },[aff])
   useEffect(() => {

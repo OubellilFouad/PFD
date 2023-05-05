@@ -235,7 +235,14 @@ const SectionEDT = () => {
     }
   },[edtTc,semestre])
   return (
-    <div className='flex flex-col gap-2 -mt-6 overflow-hidden'>
+    <div className='flex flex-col gap-1 -mt-6 overflow-hidden'>
+        <div className='flex gap-2'>
+            <div className='flex gap-1 items-center'>
+              <span className='w-4 h-4 border bg-main'></span>
+              <p>Cours</p>
+            </div>
+            <div></div>
+        </div>
         <div className='flex justify-between items-center gap-6'>
             <motion.div ref={carousel} className='cursor-grab w-[100%] overflow-hidden carousel p-2 border-separator border-2 rounded-md'>
                 <motion.div drag='x' dragConstraints={{right:0,left: -width}} className='flex gap-2'>
@@ -265,7 +272,7 @@ const SectionEDT = () => {
               <p className='text-lg font-bold'>{sec.nom}</p>
             </div>
           )}
-          <div className='grid grid-cols-7 overflow-x-scroll w-full z-20 border-b-gray-300 border-b mt-3'>
+          <div className={`grid grid-cols-7 overflow-x-scroll w-full z-20 border-b-gray-300 border-b ${before && 'mt-3'}`}>
             <HoursGest handleprint={handlePrint} before={before} />
           </div>
           <div className='grid grid-cols-7 overflow-x-scroll w-full'>

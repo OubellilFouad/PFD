@@ -32,6 +32,7 @@ const HourGest = ({hour,day,aff,semestree}) => {
   const [section,setSection] = useState(null);
   const [groupe,setGroupe] = useState(null);
   const [tc,setTc] = useState(false);
+  const [depid,setDepid] = useState(null);
   const [oneModule,setOneModule] = useState({}); 
   const [oneProf,setOneProf] = useState({}); 
   const [oneChambre,setOneChambre] = useState({}); 
@@ -77,7 +78,8 @@ const HourGest = ({hour,day,aff,semestree}) => {
           setGroupe(item.groupe);
           setSemestre(item.semestre);
           setTc(item.tc);
-          setChef(item.chef)
+          setChef(item.chef);
+          setDepid(item.depid);
         }
     }
     if(Object.keys(aff).length !== 0 && Object.keys(item).length === 0){
@@ -118,7 +120,8 @@ const HourGest = ({hour,day,aff,semestree}) => {
       hour,
       place: chambreid,
       tc,
-      chef
+      chef,
+      depid
     }
     addEdts(formData);
   }
@@ -133,6 +136,7 @@ const HourGest = ({hour,day,aff,semestree}) => {
       setChambreid(null);
       setItem({});
       setTc(false);
+      setDepid(null);
     }else{
       deleteEdt(edtid);
       setEdtid(null);
@@ -145,6 +149,7 @@ const HourGest = ({hour,day,aff,semestree}) => {
       setChambreid(null);
       setItem({});
       setTc(false);
+      setDepid(null);
     }
   }
   useEffect(() => {
@@ -189,6 +194,7 @@ const HourGest = ({hour,day,aff,semestree}) => {
     setChambreid(null);
     setTc(false);
     setChef(false);
+    setDepid(null);
   },[location.state.secid])
   useEffect(() => {
     if(Object.keys(aff).length !== 0){
@@ -202,6 +208,7 @@ const HourGest = ({hour,day,aff,semestree}) => {
       setChambreid(aff.place)
       setTc(aff.tc);
       setChef(aff.chef);
+      setDepid(aff.depid);
     }else{
       setEdtid(null);
       setModule(null);
@@ -212,7 +219,8 @@ const HourGest = ({hour,day,aff,semestree}) => {
       setSemestre('');
       setChambreid(null);
       setTc(false);
-      setChef(false)
+      setChef(false);
+      setDepid(null);
     }
   },[aff])
   useEffect(() => {

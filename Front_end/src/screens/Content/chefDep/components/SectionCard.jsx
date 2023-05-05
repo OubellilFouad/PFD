@@ -14,14 +14,14 @@ const getTcGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupestc/';
 
 const SectionCard = ({nom,capacite,speid,secid,type}) => {
   const {user} = useAuth();
-  const {tcGroupes,deleteSec} = useAdmin();  
-  const {setOpenGroup,groupes,deleteSection} = useChef();  
+  const {tcGroupes,deleteSec,deleteAllGroup} = useAdmin();  
+  const {groupes,deleteSection,deleteAllSecGroup} = useChef(); 
+  const [openGroup,setOpenGroup] = useState(false); 
   const [groupesSec,setGroupesSec] = useState([]);
   const getGroup = async (id) => {
     const response = await axios.get(`${getGroupes}${id}`);
     const result = await response.data;
     setGroupesSec(result);
-    console.log(result)
   }
   const getTcGroup = async () => {
     const {data} = await axios.get(`${getTcGroupes}${secid}`);
@@ -29,12 +29,15 @@ const SectionCard = ({nom,capacite,speid,secid,type}) => {
   }
   const handleDelete = () => {
     if(type === 'commun'){
-      deleteSec(secid)
+      deleteSec(secid);
+      deleteAllGroup(secid);
     }else{
-      deleteSection(secid)
+      deleteSection(secid);
+      deleteAllSecGroup(secid);
     }
   }
   useEffect(() => {
+    console.log(secid);
     if(type === 'commun'){
       getTcGroup();
     }else{
@@ -73,7 +76,7 @@ const SectionCard = ({nom,capacite,speid,secid,type}) => {
                 <FiPlus className='text-2xl group-hover:text-main'/>
             </div>)}
         </div>
-        <GroupForm speid={speid} secid={secid} type={type} />
+        <GroupForm speid={speid} secid={secid} type={type} openGroup={openGroup} setOpenGroup={setOpenGroup} />
     </div>
   )
 }

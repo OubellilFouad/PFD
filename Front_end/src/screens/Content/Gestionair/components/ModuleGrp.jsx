@@ -8,10 +8,10 @@ const getOneTcModule = 'https://pfeboumerdes.pythonanywhere.com/moduletc/';
 const getProfs = 'http://127.0.0.1:8000/api/chefdep/get-enseignantbyid/';
 const getOneChefs = 'http://localhost:8000/api/admin/get-chefdepbyid/';
 
-const ModuleGrp = ({afecid,module,profid,section,groupe,type,semestre,tc,chef}) => {
+const ModuleGrp = ({afecid,module,profid,section,groupe,type,semestre,tc,chef,depid}) => {
   const [{isDraggin},drag] = useDrag(() => ({
     type: "group",
-    item: {afecid,module,profid,section,groupe,type,semestre,tc,nature:'module',chef},
+    item: {afecid,module,profid,section,groupe,type,semestre,tc,nature:'module',chef,depid},
     collect: (monitor) => ({
         isDraggin: !!monitor.isDragging(),
     })

@@ -10,7 +10,7 @@ const ModuleCard = ({nom,speid,moduleid,type,abbr}) => {
   const [spe,setSpe] = useState({});
   const {user} = useAuth();
   const {deleteTcMod} = useAdmin();
-  const {deleteModule} = useChef();
+  const {deleteModule,deleteAllModAffect} = useChef();
   const getOneSpe = async (id) => {
     const response = await axios.get(`${getOneSpes}${id}`);
     const result = await response.data;
@@ -20,7 +20,8 @@ const ModuleCard = ({nom,speid,moduleid,type,abbr}) => {
     if(type === 'commun'){
       deleteTcMod(id)
     }else{
-      deleteModule(id)
+      deleteModule(id);
+      deleteAllModAffect(moduleid);
     }
   }
   useEffect(() => {

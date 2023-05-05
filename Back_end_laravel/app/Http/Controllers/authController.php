@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Cookie;
 
 class AuthController extends Controller
 {
+    public function test(){
+        return response([
+            "message"=> 'Success',
+        ]);
+    }
     public function login(Request $request){
         $credentials = $request->validate([
             "email" => ["required" , 'string'],

@@ -81,7 +81,7 @@ const Department = ({depid,type}) => {
         )}
         {type === 'profC' && (
           <div className={`flex-col pl-2 z-10 transition-[height_250ms] -mt-1 gap-3 ${open?'flex':'hidden'}`}>
-            <Prof nom={user.userName} type='C' profid={user.userID} />
+            <Prof nom={user.userName} type='C' chef={true} profid={user.userID} />
             {profs.map((prof) => {
                 const {userName,userID} = prof;
                 return(

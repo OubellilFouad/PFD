@@ -10,7 +10,7 @@ const getGest = 'https://pfeboumerdes.pythonanywhere.com/gestdeps/'
 
 const GestionairCard = ({userName,type,userID,id}) => {
   const [openGestDep,setOpenGestDep] = useState(false);  
-  const {gestDep,deleteGestionair} = useAdmin();
+  const {gestDep,deleteGestionair,deleteAllGestDeps} = useAdmin();
   const [gests,setGests] = useState([]);
   const getSpeGestDep = async () => {
     const {data} = await axios.get(`${getGest}${userID}`);
@@ -30,15 +30,18 @@ const GestionairCard = ({userName,type,userID,id}) => {
                     <span className='text-sm text-[#828282]'>Gestionair</span>
                     <p className='text-2xl font-semibold'>{userName}</p>
                 </div>
-                <AiFillDelete onClick={() => deleteGestionair(id)} className='text-lg cursor-pointer hover:text-red'/>
+                <AiFillDelete onClick={() => {
+                    deleteGestionair(id);
+                    deleteAllGestDeps(userID);
+                }} className='text-lg cursor-pointer hover:text-red'/>
             </div>
         </div>
         <p className='text-xl font-bold'>Departments to supervise</p>
         <div className='grid grid-cols-5 gap-3 items-center'>
             {gests.map((gest) => {
-                const {depid,id} = gest;
+                const {depid,id,gestid} = gest;
                 return(
-                    <GestDepCard depid={depid} id={id} type={type}/>
+                    <GestDepCard key={id} depid={depid} id={id} type={type}/>
                 )
             })}
             {type === 'Tranc Commun' && (

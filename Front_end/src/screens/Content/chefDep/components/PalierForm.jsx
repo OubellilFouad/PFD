@@ -9,7 +9,7 @@ import SpeSelect from './SpeSelect'
 
 const PalierForm = ({speid,array,obj}) => {
   const {openPalier,setOpenPalier,addPalier} = useChef();  
-  const {setShow,setAddMessage,setColor} = useAuth();
+  const {user,setShow,setAddMessage,setColor} = useAuth();
   const [nom,setNom] = useState('');
   const [annees,setAnnee] = useState(null);
   const [arr,setArr] = useState([]);
@@ -26,7 +26,8 @@ const PalierForm = ({speid,array,obj}) => {
       speid,
       annee,
       nbrsec,
-      nbrgrp
+      nbrgrp,
+      depid: user.depID
     }
     addPalier(formData);
     form.current.reset();
@@ -42,7 +43,6 @@ const PalierForm = ({speid,array,obj}) => {
       annee.push(pal.annee);
     })
     intersection = an.filter(x => !annee.includes(x));
-    console.log(intersection)
     setArr(intersection)
   },[obj])
   return (

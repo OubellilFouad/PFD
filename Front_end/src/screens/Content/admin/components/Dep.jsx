@@ -4,9 +4,10 @@ import { BsThreeDots } from 'react-icons/bs'
 import { useAdmin } from '../context/AdminContext'
 
 const Dep = ({nom,domainid,depid}) => {
-  const {deleteDep} = useAdmin();
+  const {deleteDep,gestdepsgestdeps} = useAdmin();
   const handleDelete = () => {
     deleteDep(depid);
+    deleteAllGestDeps(depid);
   }
   return (
     <div className='flex items-center justify-between bg-palerMain px-3 py-1 rounded-lg relative'>

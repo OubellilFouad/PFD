@@ -28,6 +28,7 @@ const deleteTCFormation = 'https://pfeboumerdes.pythonanywhere.com/formationtc/'
 const getTCPalier = 'https://pfeboumerdes.pythonanywhere.com/palierstc';
 const addTCPalier = 'https://pfeboumerdes.pythonanywhere.com/paliertc';
 const deleteTCPalier = 'https://pfeboumerdes.pythonanywhere.com/paliertc/';
+const deleteAllTCPalier = 'https://pfeboumerdes.pythonanywhere.com/palierstc/';
 // Sections
 const getTCSections = 'https://pfeboumerdes.pythonanywhere.com/sectionstc';
 const addTCSections = 'https://pfeboumerdes.pythonanywhere.com/sectiontc';
@@ -36,10 +37,12 @@ const deleteTCSections = 'https://pfeboumerdes.pythonanywhere.com/sectiontc/';
 const getTcGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupestc';
 const addTcGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupetc';
 const deleteTcGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupetc/';
+const deleteAllTcGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupestc/';
 // GestDep
 const getGestDep = 'https://pfeboumerdes.pythonanywhere.com/gestdeps';
 const addGestDep = 'https://pfeboumerdes.pythonanywhere.com/gestdep';
 const deleteGestDep = 'https://pfeboumerdes.pythonanywhere.com/gestdep/';
+const deleteAllGestDep = 'https://pfeboumerdes.pythonanywhere.com/gestdeps/';
 // Modules
 const getTcModules = 'https://pfeboumerdes.pythonanywhere.com/modulestc';
 const addTcModules = 'https://pfeboumerdes.pythonanywhere.com/moduletc';
@@ -158,6 +161,11 @@ export const AdminContext = ({children}) => {
     await axios.delete(`${deleteTCPalier}${id}`);
     getPaliers();
   }
+  const deleteAllTcPaliers = async (speid) => {
+    const {data} = await axios.delete(`${deleteAllTCPalier}${speid}`);
+    console.log(data)
+    getPaliers();
+  }
   // TCSections
   const getTcSec = async () => {
     const {data} = await axios.get(getTCSections);
@@ -184,6 +192,10 @@ export const AdminContext = ({children}) => {
     await axios.delete(`${deleteTcGroupes}${id}`);
     getTcGroupe();
   }
+  const deleteAllGroup = async (secid) => {
+    await axios.delete(`${deleteAllTcGroupes}${secid}`);
+    getTcGroupe();
+  }
   // GestDep
   const getGestDeps = async () => {
     const {data} = await axios.get(getGestDep);
@@ -196,6 +208,11 @@ export const AdminContext = ({children}) => {
   }
   const deleteGestDeps = async (id) => {
     await axios.delete(`${deleteGestDep}${id}`)
+    getGestDeps();
+  }
+  const deleteAllGestDeps = async (depid) => {
+    const {data} = await axios.delete(`${deleteAllGestDep}${depid}`);
+    console.log(data)
     getGestDeps();
   }
   // Modules
@@ -222,7 +239,7 @@ export const AdminContext = ({children}) => {
     getTcMod();
   },[])
   return (
-    <Admin.Provider value={{openGest,setOpenGest,openChef,setOpenChef,deps,getDeps,addDep,getDomains,domains,addDomain,deleteDep, addChef, modifyChef,openEdit,setOpenEdit,deleteChef, gestionairs, addGestionair,modifyGestionair,deleteGestionair,chefs,tcform,addFormation,openForm,setOpenForm,gestDep,addGestDeps,deleteGestDeps,tcPal,addPaliers,openPalier,setOpenPaliers,deletePaliers,deleteFormation,tcSections,addTcSec,setOpenSections,openSection,tcGroupes,addTcGroup,deleteGroup,tcModules,addTcMod,setOpenTcModules,openTcModules,deleteTcMod,deleteSec}}>
+    <Admin.Provider value={{openGest,setOpenGest,openChef,setOpenChef,deps,getDeps,addDep,getDomains,domains,addDomain,deleteDep, addChef, modifyChef,openEdit,setOpenEdit,deleteChef, gestionairs, addGestionair,modifyGestionair,deleteGestionair,chefs,tcform,addFormation,openForm,setOpenForm,gestDep,addGestDeps,deleteGestDeps,tcPal,addPaliers,openPalier,setOpenPaliers,deletePaliers,deleteFormation,tcSections,addTcSec,setOpenSections,openSection,tcGroupes,addTcGroup,deleteGroup,tcModules,addTcMod,setOpenTcModules,openTcModules,deleteTcMod,deleteSec,deleteAllTcPaliers,deleteAllGroup,deleteAllGestDeps}}>
         {children}
     </Admin.Provider>
   )

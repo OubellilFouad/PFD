@@ -1,13 +1,13 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { MdClose } from 'react-icons/md';
 import Input from '../../../Auth/components/Input';
 import { useChef } from '../context/ChefContext'
 import { useAuth } from '../../../../../context/AuthContext';
 import { useAdmin } from '../../admin/context/AdminContext';
 
-const GroupForm = ({speid,secid,type}) => {
+const GroupForm = ({speid,secid,type,openGroup,setOpenGroup}) => {
   const {addTcGroup} = useAdmin();
-  const {openGroup,setOpenGroup,addGroupe} = useChef();  
+  const {addGroupe} = useChef();  
   const {user,setShow,setAddMessage,setColor} = useAuth();
   const [nom,setNom] = useState('');
   const [capacite,setCapacite] = useState(0);
@@ -27,12 +27,16 @@ const GroupForm = ({speid,secid,type}) => {
     }else{
       addGroupe(formData)
     }
+    console.log(formData)
     form.current.reset();
     setOpenGroup(false);
     setShow(true);
     setAddMessage('Added group successfuly');
     setColor(true);
   }
+  useEffect(() => {
+    console.log(secid)
+  },[])
   return (
     <div className={`w-full h-full absolute z-30 bg-[rgba(0,0,0,0.5)] top-0 left-0 ${openGroup?'flex':'hidden'} justify-center items-center`}>
         <div className='h-[50%] aspect-[9/10] bg-white justify-between rounded-xl flex flex-col'>

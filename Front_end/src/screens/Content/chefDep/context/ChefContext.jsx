@@ -35,6 +35,7 @@ const addGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupe';
 const getOneGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupe/';
 const deleteGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupe/';
 const editGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupe/';
+const deleteAllSecGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupes/sec/';
 // Profs 
 const getProfs = 'http://127.0.0.1:8000/api/chefdep/get-enseignant';
 const addProfs = 'http://127.0.0.1:8000/api/chefdep/ajouter-enseignant';
@@ -43,10 +44,13 @@ const deleteProfs = 'http://127.0.0.1:8000/api/chefdep/supprimer-enseignant/';
 const getPaliers = 'https://pfeboumerdes.pythonanywhere.com/paliers';
 const addPaliers = 'https://pfeboumerdes.pythonanywhere.com/palier';
 const deletePaliers = 'https://pfeboumerdes.pythonanywhere.com/palier/';
+const deleteAllPaliers = 'https://pfeboumerdes.pythonanywhere.com/paliers/dep/';
+const deleteAllSpePaliers = 'https://pfeboumerdes.pythonanywhere.com/paliers/spe/';
 // Affectation
 const getAffects = 'https://pfeboumerdes.pythonanywhere.com/affectations';
 const addAffects = 'https://pfeboumerdes.pythonanywhere.com/affectation';
 const deleteAffects = 'https://pfeboumerdes.pythonanywhere.com/affectation/';
+const deleteAllModAffects = 'https://pfeboumerdes.pythonanywhere.com/affectations/mod/';
 
 export const ChefContext = ({children}) => {
   const [openSec,setOpenSec] = useState(false);  
@@ -146,6 +150,10 @@ export const ChefContext = ({children}) => {
     await axios.delete(`${deleteGroupes}${id}`)
     getGroup();
   }
+  const deleteAllSecGroup = async (secid) => {
+    await axios.delete(`${deleteAllSecGroupes}${secid}`);
+    getGroup();
+  }
   // Profs
   const getProf = async () => {
     const {data} = await axios.get(getProfs);
@@ -165,11 +173,20 @@ export const ChefContext = ({children}) => {
     setPalier(data);
   }
   const addPalier = async (formData) => {
-    await axios.post(addPaliers,formData);
+    const {data} = await axios.post(addPaliers,formData);
+    console.log(data)
     getPalier();
   }
   const deletePal = async (id) => {
     await axios.delete(`${deletePaliers}${id}`);
+    getPalier();
+  }
+  const deleteAllSpePal = async (speid) => {
+    await axios.delete(`${deleteAllSpePaliers}${speid}`);
+    getPalier();
+  }
+  const deleteAllDepPal = async (speid) => {
+    await axios.delete(`${deleteAllPaliers}${speid}`);
     getPalier();
   }
   // Affectation
@@ -186,6 +203,10 @@ export const ChefContext = ({children}) => {
     await axios.delete(`${deleteAffects}${id}`);
     getAffect();
   }
+  const deleteAllModAffect = async (modid) => {
+    await axios.delete(`${deleteAllModAffects}${modid}`);
+    getAffect();
+  }
   useEffect(() => {
     getSpe();
     getFil();
@@ -198,7 +219,7 @@ export const ChefContext = ({children}) => {
     getAffect();
   },[])
   return (
-    <Chef.Provider value={{openSec,setOpenSec,setOpenGroup,openGroup,openModule,setOpenModule,openSpe,setOpenSpe,addSpe,spes,fils,addFil,addModule,deleteModule,modules,openSalle,setOpenSalle,addChambre,chambre,deleteChambre,sections,addSection,addGroupe,groupes,deleteGroup,openProf,setOpenProf,addProf,profs,deleteProf,openPalier,setOpenPalier,addPalier,palier,afects,addAffect,deleteAffect,deleteSection,deleteSpe,deletePal}}>
+    <Chef.Provider value={{openSec,setOpenSec,setOpenGroup,openGroup,openModule,setOpenModule,openSpe,setOpenSpe,addSpe,spes,fils,addFil,addModule,deleteModule,modules,openSalle,setOpenSalle,addChambre,chambre,deleteChambre,sections,addSection,addGroupe,groupes,deleteGroup,openProf,setOpenProf,addProf,profs,deleteProf,openPalier,setOpenPalier,addPalier,palier,afects,addAffect,deleteAffect,deleteSection,deleteSpe,deletePal,deleteAllSpePal,deleteAllSecGroup,deleteAllModAffect}}>
         {children}
     </Chef.Provider>
   )

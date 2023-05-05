@@ -15,7 +15,7 @@ const getTcModules = 'https://pfeboumerdes.pythonanywhere.com/modulestc/';
 const getChoix = 'https://pfeboumerdes.pythonanywhere.com/veuxs/';
 
 const ChargeForm = ({speid,palid,one,setOpenCharge,openCharge,semestre,profid,cours,tc,typpe}) => {
-  const {setShow,setAddMessage,setColor} = useAuth();
+  const {setShow,setAddMessage,setColor,user} = useAuth();
   const {addAffect} = useChef();
   const [level,setLevel] = useState('');
   const [sections,setSections] = useState([]);
@@ -134,12 +134,10 @@ const ChargeForm = ({speid,palid,one,setOpenCharge,openCharge,semestre,profid,co
                 return data;
             }
         })
-        console.log(newArr)
         setType(newArr);
     }
   }
   const handleSubmit = () => {
-    console.log()
     const formData = {
       profid,
       semestre,
@@ -148,7 +146,8 @@ const ChargeForm = ({speid,palid,one,setOpenCharge,openCharge,semestre,profid,co
       groupe: level === 'group'?parseInt(group):null,
       type: JSON.stringify(type),
       tc,
-      chef: typpe === 'chef'?true:false
+      chef: typpe === 'chef'?true:false,
+      depid: user.depID
     }
     addAffect(formData);
     setSubmit(true)
