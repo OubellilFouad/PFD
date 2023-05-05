@@ -2,11 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChefDep;
 use App\Models\Enseignant;
 use Illuminate\Http\Request;
 
 class ChefDepController extends Controller
 {
+
+
+
+        //delete chef dep
+        public function deleteChefDep($depID){
+            $chefdep = ChefDep::where('depID',$depID)->first();
+            if($chefdep){
+                $chefdep->delete();
+                return response()->json(['message' => 'Chef Departement supprimé']);
+            }
+            else{
+                return response()->json(['message' => 'Chef Departement non trouvé']);
+                
+            }
+        }
     public function getEnseignant()
     {
         $enseignant = Enseignant::all();
