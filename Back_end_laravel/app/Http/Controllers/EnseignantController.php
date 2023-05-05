@@ -9,6 +9,20 @@ use App\Models\Enseignant;
 
 class EnseignantController extends Controller
 {
+
+
+    //delete enseignant
+    public function deleteEnseignant($depID, $id){
+        $enseignant = Enseignant::where('depID',$depID)->find($id);
+        if($enseignant){
+            $enseignant->delete();
+            return response()->json(['message' => 'Enseignant supprimé']);
+        }
+        else{
+            return response()->json(['message' => 'Enseignant non trouvé']);
+            
+        }
+    }
        // get Choix
 
     public function getEnseignantChoix()

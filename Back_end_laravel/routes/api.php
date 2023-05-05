@@ -56,7 +56,7 @@ Route::group(['prefix' => 'chefdep'], function() {
     Route::delete('/supprimer-enseignant/{id}', [ChefDepController::class,'deleteEnseignant'])->name('supprimer-enseignant');
     Route::get('/get-enseignantbydepid/{depId}', [ChefDepController::class,'getEnseignantByDepId'])->name('get-enseignantbydepid');
     Route::get('/get-enseignantbyid/{userID}', [ChefDepController::class,'getEnseignantById'])->name('get-enseignantbyid');
-
+    Route::delete('/dep/{depID}/chefDep',[ChefDepController::class,'deleteChefDep']);
 });
 Route::group(['prefix' => 'prof'], function() {
 
@@ -75,6 +75,8 @@ Route::group(['prefix' => 'prof'], function() {
     Route::get('/enseignants-disponibilité/{id}', [EnseignantController::class,'getDisponibiliteByEnseignantId']);
 
     Route::get('/enseignants-cours/{id}', [EnseignantController::class,'getCourByEnseignantId']);
+    
+    Route::delete('/dep/{depID}/enseignant/{id}',[EnseignantController::class,'deleteEnseignant']);
 
 });
 Route::group(['prefix' => 'student'], function() {
