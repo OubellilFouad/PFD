@@ -18,9 +18,7 @@ use App\Http\Controllers\EtudiantController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('test',function(){
-    return 'Hello';
-});
+
 Route::post('login',[authController::class,'login']);
 Route::middleware('auth:sanctum')->group(function(){
     Route::get('user',[authController::class,'user']);
@@ -76,7 +74,7 @@ Route::group(['prefix' => 'prof'], function() {
 
     Route::get('/enseignants-cours/{id}', [EnseignantController::class,'getCourByEnseignantId']);
     
-    Route::delete('/dep/{depID}/enseignant/{id}',[EnseignantController::class,'deleteEnseignant']);
+    Route::delete('/departments/{depID}/teachers', [EnseignantController::class,'deleteEnseignantByDepID']);
 
 });
 Route::group(['prefix' => 'student'], function() {

@@ -16,6 +16,7 @@ const getOneChefs = 'http://localhost:8000/api/admin/get-chefdepbyid/';
 const HourGest = ({hour,day,aff,semestree}) => {
   const {setShow,setAddMessage,setColor} = useAuth();
   const {addEdts,deleteEdt,edts,profG,salleG} = useGest();
+  const {user} = useAuth();
   const {avails} = useProf();
   const [all,setAll] = useState([]);
   const [item,setItem] = useState({});
@@ -37,6 +38,7 @@ const HourGest = ({hour,day,aff,semestree}) => {
   const [oneProf,setOneProf] = useState({}); 
   const [oneChambre,setOneChambre] = useState({}); 
   const location = useLocation();
+  const [affid,setAffid] = useState(null);
   const [{isOver},drop] = useDrop(() => ({
       accept: 'section',
       drop: (item) => setItem(item),
@@ -80,6 +82,7 @@ const HourGest = ({hour,day,aff,semestree}) => {
           setTc(item.tc);
           setChef(item.chef);
           setDepid(item.depid);
+          setAffid(item.afecid);
         }
     }
     if(Object.keys(aff).length !== 0 && Object.keys(item).length === 0){
@@ -121,7 +124,10 @@ const HourGest = ({hour,day,aff,semestree}) => {
       place: chambreid,
       tc,
       chef,
-      depid
+      depid,
+      affid,
+      gestid: user.userID,
+      profname: oneProf.userName
     }
     addEdts(formData);
   }
@@ -137,6 +143,7 @@ const HourGest = ({hour,day,aff,semestree}) => {
       setItem({});
       setTc(false);
       setDepid(null);
+      setAffid(null);
     }else{
       deleteEdt(edtid);
       setEdtid(null);
@@ -150,6 +157,7 @@ const HourGest = ({hour,day,aff,semestree}) => {
       setItem({});
       setTc(false);
       setDepid(null);
+      setAffid(null);
     }
   }
   useEffect(() => {
@@ -195,6 +203,7 @@ const HourGest = ({hour,day,aff,semestree}) => {
     setTc(false);
     setChef(false);
     setDepid(null);
+    setAffid(null);
   },[location.state.secid])
   useEffect(() => {
     if(Object.keys(aff).length !== 0){
@@ -209,6 +218,7 @@ const HourGest = ({hour,day,aff,semestree}) => {
       setTc(aff.tc);
       setChef(aff.chef);
       setDepid(aff.depid);
+      setAffid(aff.afecid);
     }else{
       setEdtid(null);
       setModule(null);
@@ -221,6 +231,7 @@ const HourGest = ({hour,day,aff,semestree}) => {
       setTc(false);
       setChef(false);
       setDepid(null);
+      setAffid(null);
     }
   },[aff])
   useEffect(() => {

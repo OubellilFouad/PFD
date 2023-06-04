@@ -15,6 +15,7 @@ const getChefs = 'http://localhost:8000/api/admin/get-chefdep';
 const addChefs = 'http://localhost:8000/api/admin/ajouter-chefdep';
 const modifyChefs = 'http://localhost:8000/api/admin/modifier-chefdep/';
 const deleteChefs = 'http://localhost:8000/api/admin/supprimer-chefdep/';
+const deleteAllChefs = 'http://localhost:8000/api/chefdep/dep/';
 // Gestionairs URL*
 const getGestionairs = 'http://localhost:8000/api/admin/get-gestionnaire';
 const addGestionairs = 'http://localhost:8000/api/admin/ajouter-gestionnaire';
@@ -42,7 +43,7 @@ const deleteAllTcGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupestc/';
 const getGestDep = 'https://pfeboumerdes.pythonanywhere.com/gestdeps';
 const addGestDep = 'https://pfeboumerdes.pythonanywhere.com/gestdep';
 const deleteGestDep = 'https://pfeboumerdes.pythonanywhere.com/gestdep/';
-const deleteAllGestDep = 'https://pfeboumerdes.pythonanywhere.com/gestdeps/';
+const deleteAllGestDep = 'https://pfeboumerdes.pythonanywhere.com/gestdeps/dep/';
 // Modules
 const getTcModules = 'https://pfeboumerdes.pythonanywhere.com/modulestc';
 const addTcModules = 'https://pfeboumerdes.pythonanywhere.com/moduletc';
@@ -112,6 +113,10 @@ export const AdminContext = ({children}) => {
   }
   const modifyChef = async (formData,id) => {
     const response = await axios.put(`${modifyChefs}${id}`,formData);
+    getChef();
+  }
+  const deleteAllChef = async (depid) => {
+    await axios.delete(`${deleteAllChefs}${depid}/chefDep`);
     getChef();
   }
   // Gestionair
@@ -211,8 +216,7 @@ export const AdminContext = ({children}) => {
     getGestDeps();
   }
   const deleteAllGestDeps = async (depid) => {
-    const {data} = await axios.delete(`${deleteAllGestDep}${depid}`);
-    console.log(data)
+    await axios.delete(`${deleteAllGestDep}${depid}`);
     getGestDeps();
   }
   // Modules
@@ -239,7 +243,7 @@ export const AdminContext = ({children}) => {
     getTcMod();
   },[])
   return (
-    <Admin.Provider value={{openGest,setOpenGest,openChef,setOpenChef,deps,getDeps,addDep,getDomains,domains,addDomain,deleteDep, addChef, modifyChef,openEdit,setOpenEdit,deleteChef, gestionairs, addGestionair,modifyGestionair,deleteGestionair,chefs,tcform,addFormation,openForm,setOpenForm,gestDep,addGestDeps,deleteGestDeps,tcPal,addPaliers,openPalier,setOpenPaliers,deletePaliers,deleteFormation,tcSections,addTcSec,setOpenSections,openSection,tcGroupes,addTcGroup,deleteGroup,tcModules,addTcMod,setOpenTcModules,openTcModules,deleteTcMod,deleteSec,deleteAllTcPaliers,deleteAllGroup,deleteAllGestDeps}}>
+    <Admin.Provider value={{openGest,setOpenGest,openChef,setOpenChef,deps,getDeps,addDep,getDomains,domains,addDomain,deleteDep, addChef, modifyChef,openEdit,setOpenEdit,deleteChef, gestionairs, addGestionair,modifyGestionair,deleteGestionair,chefs,tcform,addFormation,openForm,setOpenForm,gestDep,addGestDeps,deleteGestDeps,tcPal,addPaliers,openPalier,setOpenPaliers,deletePaliers,deleteFormation,tcSections,addTcSec,setOpenSections,openSection,tcGroupes,addTcGroup,deleteGroup,tcModules,addTcMod,setOpenTcModules,openTcModules,deleteTcMod,deleteSec,deleteAllTcPaliers,deleteAllGroup,deleteAllGestDeps,deleteAllChef}}>
         {children}
     </Admin.Provider>
   )

@@ -7,12 +7,13 @@ module.exports = {
   theme: {
     extend: {
       colors:{
-        main: '#5030E5',
-        paleMain: 'rgba(80,48,229,0.6)',
-        palerMain: 'rgba(80, 48, 229, 0.08)',
+        main: '#3C486B',
+        'blue-500': '#F9D949',
+        paleMain: 'rgba(60,72,107,0.6)',
+        palerMain: 'rgba(60, 72, 107, 0.08)',
         separator: '#e9ecef',
         dimText: '#828282',
-        red: '#E53030',
+        red: '#F45050',
         darkRed: '#c22929'
       },
       fontFamily: {

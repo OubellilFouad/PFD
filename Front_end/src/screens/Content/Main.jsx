@@ -59,6 +59,10 @@ const Main = () => {
         setTitle('Emploi du temps');
         setPage('EDTS');
     }
+    if(user.role === 1){
+        setTitle('Les Enseignants');
+        setPage('Enseignants');
+    }
   },[user]); 
   useEffect(() => {
     if(section){
@@ -83,9 +87,9 @@ const Main = () => {
     }
   },[group])
   return (
-    <div className='pt-7 pb-4 px-12 flex flex-col gap-8 main overflow-hidden'>
+    <div className='pt-7 pb-4 md:px-12 px-6 flex flex-col gap-8 main overflow-hidden'>
         <div className='flex justify-between items-center'>
-            <p className='text-4xl font-semibold'>
+            <p className='md:text-4xl text-3xl font-semibold'>
                 {title}
                 {Object.keys(sec).length !== 0 && (<span className='text-3xl text-main'>{page === 'EDT' && section && `: ${sec.nom}`}</span>)}
                 {Object.keys(grp).length !== 0 && (<span className='text-3xl text-main'>{page === 'EDT' && group && `: ${grp.nom}`}</span>)}

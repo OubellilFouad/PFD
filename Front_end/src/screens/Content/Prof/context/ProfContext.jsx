@@ -6,6 +6,7 @@ const Prof = createContext();
 const getChoix = 'https://pfeboumerdes.pythonanywhere.com/veuxs';
 const addChoix = 'https://pfeboumerdes.pythonanywhere.com/veux';
 const deleteChoix = 'https://pfeboumerdes.pythonanywhere.com/veux/';
+const deleteAllChoix = 'https://pfeboumerdes.pythonanywhere.com/veuxs/';
 // Availability
 const getAv = 'https://pfeboumerdes.pythonanywhere.com/availabilitys';
 const addAv = 'https://pfeboumerdes.pythonanywhere.com/availability';
@@ -27,6 +28,10 @@ export const ProfContext = ({children}) => {
     await axios.delete(`${deleteChoix}${id}`);
     getChoice();
   }
+  const deleteAllChoice = async (profid) => {
+    await axios.delete(`${deleteAllChoix}${profid}`);
+    getChoice();
+  }
   // Availability
   const getAvail = async () => {
     const {data} = await axios.get(getAv);
@@ -45,7 +50,7 @@ export const ProfContext = ({children}) => {
     getAvail();
   },[])
   return (
-    <Prof.Provider value={{choix,addChoice,deleteChoice,avails,addAvail,deleteAvail}}>
+    <Prof.Provider value={{choix,addChoice,deleteChoice,avails,addAvail,deleteAvail,deleteAllChoice}}>
         {children}
     </Prof.Provider>
   )

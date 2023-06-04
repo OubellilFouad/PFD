@@ -343,8 +343,8 @@ const Emplois = () => {
             </div>
         </div>
         <div className='flex justify-between items-center'>
-            <p className='font-bold'>Scroll to see all the days</p>
-            <button onClick={handlePrint} className='flex gap-2 items-center bg-red text-white py-1 px-3 rounded-lg hover:bg-darkRed'><SiAdobeacrobatreader/> Print PDF</button>
+            <p className='font-bold md:text-base text-sm'>Scroll to see all the days</p>
+            <button onClick={handlePrint} className='flex gap-2 items-center bg-red text-white md:text-base text-xs py-1 px-3 rounded-lg hover:bg-darkRed'><SiAdobeacrobatreader/> Print PDF</button>
         </div>
         <div ref={edtDiv} className='flex flex-col items-center overflow-hidden'>
           {before && (

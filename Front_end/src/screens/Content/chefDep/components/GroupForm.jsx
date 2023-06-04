@@ -5,7 +5,7 @@ import { useChef } from '../context/ChefContext'
 import { useAuth } from '../../../../../context/AuthContext';
 import { useAdmin } from '../../admin/context/AdminContext';
 
-const GroupForm = ({speid,secid,type,openGroup,setOpenGroup}) => {
+const GroupForm = ({speid,secid,type,openGroup,setOpenGroup,palid}) => {
   const {addTcGroup} = useAdmin();
   const {addGroupe} = useChef();  
   const {user,setShow,setAddMessage,setColor} = useAuth();
@@ -20,7 +20,8 @@ const GroupForm = ({speid,secid,type,openGroup,setOpenGroup}) => {
       speid,
       secid,
       capacite,
-      depid
+      depid,
+      palid
     }
     if(type === 'commun'){
       addTcGroup(formData)

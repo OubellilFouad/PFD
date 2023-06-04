@@ -39,7 +39,6 @@ const Choix = () => {
 
   const getOneChoice = async () => {
     const {data} = await axios.get(`${getOneChoix}${user?.userID}`);
-    console.log(data);
     setChoices(data);
   }
   useEffect(() => {
@@ -48,7 +47,6 @@ const Choix = () => {
   useEffect(() => {
     if(choices){
         const {choix1,choix2,choix3,choix4,choix5} = choices;
-        console.log(choix1 && JSON.parse(choix1).type)
         setMod1(choix1?JSON.parse(choix1).moduleID:null);
         setMod2(choix2?JSON.parse(choix2).moduleID:null);
         setMod3(choix3?JSON.parse(choix3).moduleID:null);
@@ -139,6 +137,11 @@ const Choix = () => {
                             <button onClick={()=>deleteChoice(choices?.veuxid)} className='rounded-l text-red text-lg font-semibold'>Reset</button>
                         </div>
                     )}
+                    {Object.keys(choices).length === 0 && (
+                        <div className='flex justify-end pt-4'>
+                            <button onClick={()=>handleSubmit()} className='font-bold hover:text-paleMain text-main'>Submit</button>
+                        </div>
+                    )}
                 </div>
             </div>
             <Choice modules={module} setModule={setMod1} module={mod1} type={type1} setType={setType1} setPalid={setPalid1} setSpeid={setSpeid1} />
@@ -146,11 +149,7 @@ const Choix = () => {
             <Choice modules={module} setModule={setMod3} module={mod3} type={type3} setType={setType3} setPalid={setPalid3} setSpeid={setSpeid3} />
             <Choice modules={module} setModule={setMod4} module={mod4} type={type4} setType={setType4} setPalid={setPalid4} setSpeid={setSpeid4} />
             <Choice modules={module} setModule={setMod5} module={mod5} type={type5} setType={setType5} setPalid={setPalid5} setSpeid={setSpeid5} />
-            {Object.keys(choices).length === 0 && (
-                <div className='flex justify-end pt-4'>
-                    <button onClick={()=>handleSubmit()} className='py-2 px-5 rounded-lg text-white bg-main'>Submit</button>
-                </div>
-            )}
+            
         </div>
     </div>
   )

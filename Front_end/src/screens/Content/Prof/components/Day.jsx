@@ -26,6 +26,9 @@ const Day = ({day,avail}) => {
             case 5:
                 setDayName('Wednesday');
                 break;
+            case 6:
+                setDayName('Thursday');
+                break;
             default: 
                 setDayName('')
         }

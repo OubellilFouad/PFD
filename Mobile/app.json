@@ -5,6 +5,9 @@
       "bundler": "metro"
     },
     "name": "Mobile",
-    "slug": "Mobile"
+    "slug": "Mobile",
+    "splash":{
+      "image": "./assets/splash.png"
+    }
   }
 }

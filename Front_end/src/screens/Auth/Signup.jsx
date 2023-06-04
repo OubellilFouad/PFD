@@ -282,7 +282,7 @@ const Signup = () => {
     }
   },[number])
   return (
-    <div className='px-20 w-full flex flex-col items-center gap-10'>
+    <div className='md:px-20 px-10 w-full flex flex-col items-center gap-10'>
         <h1 className='text-3xl text-main font-bold'>Get started</h1>
         <div ref={con} className='flex overflow-x-hidden w-full relative'>
           <div ref={div} className='w-full flex flex-col gap-8 flex-shrink-0 absolute'>

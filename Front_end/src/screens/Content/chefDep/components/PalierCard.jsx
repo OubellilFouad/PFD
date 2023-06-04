@@ -8,7 +8,7 @@ const getOneSpe = 'https://pfeboumerdes.pythonanywhere.com/specialite/';
 const getOneTcSpe = 'https://pfeboumerdes.pythonanywhere.com/formationtc/';
 const PalierCard = ({nom,speid,type,palid}) => {
   const {deletePaliers} = useAdmin();
-  const {deletePal} = useChef();
+  const {deletePal,deleteAllPalSection,deleteAllPalGroup,deleteAllPalModule} = useChef();
   const [spe,setSpe] = useState({});
   const getSpe = async () => {
     const {data} = await axios.get(`${getOneSpe}${speid}`);
@@ -29,7 +29,10 @@ const PalierCard = ({nom,speid,type,palid}) => {
     if(type === 'commun'){
       deletePaliers(palid)
     }else{
-      deletePal(palid)
+      deletePal(palid);
+      deleteAllPalSection(palid);
+      deleteAllPalGroup(palid);
+      deleteAllPalModule(palid);
     }
   }
   return (

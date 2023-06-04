@@ -3,10 +3,14 @@ import React, { useEffect, useState } from 'react'
 import { AiFillDelete } from 'react-icons/ai';
 import { NavLink } from 'react-router-dom'
 import { useAdmin } from "../context/AdminContext";
+import { useChef } from '../../chefDep/context/ChefContext';
+import { useGest } from '../../Gestionair/context/GestContext';
 const getOneDomainUrl = 'https://pfeboumerdes.pythonanywhere.com/domain/';
 
 const Card = ({nom,depid,domainid}) => { 
-  const {deleteDep,deleteAllGestDeps} = useAdmin();
+  const {deleteDep,deleteAllGestDeps,deleteAllChef} = useAdmin();
+  const {deleteAllDepAffect,deleteAllDepPal,deleteAllProf,deleteAllDepGroup,deleteAllDepSection,deleteAllDepFils,deleteAllDepSpe,deleteAllDepModule} = useChef();
+  const {deleteAllDepEdt} = useGest();
   const [name,setName] = useState('');
   const getOneDomain = async () => {
     const response = await axios.get(`${getOneDomainUrl}${domainid}`);
@@ -25,6 +29,16 @@ const Card = ({nom,depid,domainid}) => {
                   <AiFillDelete onClick={() => {
                     deleteDep(depid);
                     deleteAllGestDeps(depid);
+                    deleteAllDepAffect(depid);
+                    deleteAllDepPal(depid);
+                    deleteAllProf(depid);
+                    deleteAllDepGroup(depid);
+                    deleteAllDepSection(depid);
+                    deleteAllDepFils(depid);
+                    deleteAllDepSpe(depid);
+                    deleteAllDepModule(depid);
+                    deleteAllChef(depid);
+                    deleteAllDepEdt(depid);
                   }} className='text-lg cursor-pointer hover:text-red'/>
                 </div>
                 <span className='text-sm font-semibold'>{name}</span>

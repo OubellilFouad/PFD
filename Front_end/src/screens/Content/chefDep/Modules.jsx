@@ -27,7 +27,7 @@ const Modules = () => {
   },[modules])
   return (
     <div className='flex flex-col gap-8 overflow-hidden'>
-        <div className='grid grid-cols-3 gap-14 overflow-x-scroll'>
+        <div className='grid grid-cols-4 gap-14 overflow-x-scroll'>
             {module.map((module) => {
               const {nom,speid,fillid,modid,abbr} = module;
               return (

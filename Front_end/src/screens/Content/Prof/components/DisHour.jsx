@@ -17,9 +17,6 @@ const DisHour = ({hour,day,av}) => {
       deleteAvail(av.avaid);
     }
   }
-  useEffect(() => {
-    console.log(av);
-  },[av])
   return (
     <div onClick={() => handleClick()} className={`flex justify-center border-gray-300 border items-center font-bold cursor-pointer text-white ${Object.keys(av).length !== 0?'bg-main':'hover:bg-paleMain'}`}>
         {Object.keys(av).length !== 0?'Selected':'Select'}

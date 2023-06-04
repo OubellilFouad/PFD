@@ -12,17 +12,17 @@ class ChefDepController extends Controller
 
 
         //delete chef dep
-        public function deleteChefDep($depID){
-            $chefdep = ChefDep::where('depID',$depID)->first();
-            if($chefdep){
-                $chefdep->delete();
-                return response()->json(['message' => 'Chef Departement supprimé']);
-            }
-            else{
-                return response()->json(['message' => 'Chef Departement non trouvé']);
-                
-            }
+    public function deleteChefDep($depID){
+        $chefdep = ChefDep::where('depID',$depID)->first();
+        if($chefdep){
+            $chefdep->delete();
+            return response()->json(['message' => 'Chef Departement supprimé']);
         }
+        else{
+            return response()->json(['message' => 'Chef Departement non trouvé']);
+            
+        }
+    }
     public function getEnseignant()
     {
         $enseignant = Enseignant::all();

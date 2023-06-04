@@ -58,8 +58,7 @@ function App() {
             )}
             {user?.role === 1 && (
               <>
-                <Route path='' element={<ChefDashboard/>}/>
-                <Route path='enseignant' element={<Enseingant/>}/>
+                <Route path='' element={<Enseingant/>}/>
                 <Route path='sections' element={<Sections/>}/>
                 <Route path='speciality' element={<Speciality/>}/>
                 <Route path='paliers' element={<Paliers/>}/>
@@ -68,6 +67,7 @@ function App() {
                 <Route path='edtprof' element={<ProfEDT/>}/>
                 <Route path='edtp' element={<EDTP/>}/>
                 <Route path='disp' element={<Desponibilité/>}/>
+                <Route path='choix' element={<Choix/>}/>
               </>
             )}
             {user?.role === 2 && (

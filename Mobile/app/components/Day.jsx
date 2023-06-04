@@ -1,7 +1,8 @@
+import { View, Text } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import HourGrp from './HourGrp';
+import Hour from './Hour'
 
-const DayGrp = ({day,edtSec,edt,student}) => {
+const Day = ({day,edtSec,edt}) => {
   const [dayName,setDayName] = useState('');
 
   const [hour1,setHour1] = useState({});
@@ -41,7 +42,8 @@ const DayGrp = ({day,edtSec,edt,student}) => {
         default: 
             setDayName('')
     }
-  },[])  
+  },[])
+
   useEffect(() => {
     if(edtSec.lenght !== 0){
         edtSec.map((ed) => {
@@ -76,6 +78,7 @@ const DayGrp = ({day,edtSec,edt,student}) => {
         setHourSec6({});
     }
   },[edtSec])
+
   useEffect(() => {
     if(edt.lenght !== 0){
         edt.map((ed) => {
@@ -111,16 +114,16 @@ const DayGrp = ({day,edtSec,edt,student}) => {
     }
   },[edt])
   return (
-    <>
-        <div className='flex justify-center text-[7px] md:text-sm py-6 border border-gray-300'>{dayName}</div>
-        <HourGrp hour={1} day={day} affSec={hourSec1} aff={hour1} student={student} />
-        <HourGrp hour={2} day={day} affSec={hourSec2} aff={hour2} student={student} />
-        <HourGrp hour={3} day={day} affSec={hourSec3} aff={hour3} student={student} />
-        <HourGrp hour={4} day={day} affSec={hourSec4} aff={hour4} student={student} />
-        <HourGrp hour={5} day={day} affSec={hourSec5} aff={hour5} student={student} />
-        <HourGrp hour={6} day={day} affSec={hourSec6} aff={hour6} student={student} />
-    </>
+    <View style={{flexDirection:'row'}}>
+      <View style={{flex:1,borderColor:'lightgray',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center',paddingVertical:20}}><Text style={{fontSize:9}}>{dayName}</Text></View>
+      <Hour affSec={hourSec1} aff={hour1}/>
+      <Hour affSec={hourSec2} aff={hour2}/>
+      <Hour affSec={hourSec3} aff={hour3}/>
+      <Hour affSec={hourSec4} aff={hour4}/>
+      <Hour affSec={hourSec5} aff={hour5}/>
+      <Hour affSec={hourSec6} aff={hour6}/>
+    </View>
   )
 }
 
-export default DayGrp
+export default Day

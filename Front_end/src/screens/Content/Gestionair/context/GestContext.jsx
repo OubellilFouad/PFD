@@ -6,6 +6,13 @@ const Gestionair = createContext();
 const getEDT = 'https://pfeboumerdes.pythonanywhere.com/edts';
 const addEDT = 'https://pfeboumerdes.pythonanywhere.com/edt';
 const deleteEDT = 'https://pfeboumerdes.pythonanywhere.com/edt/';
+const deleteAllModEDT = 'https://pfeboumerdes.pythonanywhere.com/edts/mod/';
+const deleteAllSecEDT = 'https://pfeboumerdes.pythonanywhere.com/edts/sec/';
+const deleteAllGrpEDT = 'https://pfeboumerdes.pythonanywhere.com/edts/grp/';
+const deleteAllDepEDT = 'https://pfeboumerdes.pythonanywhere.com/edts/dep/';
+const deleteAllAffEDT = 'https://pfeboumerdes.pythonanywhere.com/edts/aff/';
+const deleteAllProfEDT = 'https://pfeboumerdes.pythonanywhere.com/edts/prof/';
+const deleteAllPlaceEDT = 'https://pfeboumerdes.pythonanywhere.com/edts/place/';
 
 export const GestContext = ({children}) => {
   const [edts,setEdts] = useState([]);
@@ -30,11 +37,39 @@ export const GestContext = ({children}) => {
     await axios.delete(`${deleteEDT}${id}`); 
     getEdts();
   }
+  const deleteAllModEdt = async (modid) => {
+    await axios.delete(`${deleteAllModEDT}${modid}`); 
+    getEdts();
+  }
+  const deleteAllSecEdt = async (secid) => {
+    await axios.delete(`${deleteAllSecEDT}${secid}`); 
+    getEdts();
+  }
+  const deleteAllGrpEdt = async (grpid) => {
+    await axios.delete(`${deleteAllGrpEDT}${grpid}`); 
+    getEdts();
+  }
+  const deleteAllDepEdt = async (depid) => {
+    await axios.delete(`${deleteAllDepEDT}${depid}`); 
+    getEdts();
+  }
+  const deleteAllAffEdt = async (affid) => {
+    await axios.delete(`${deleteAllAffEDT}${affid}`); 
+    getEdts();
+  }
+  const deleteAllProfEdt = async (profid) => {
+    await axios.delete(`${deleteAllProfEDT}${profid}`); 
+    getEdts();
+  }
+  const deleteAllPlaceEdt = async (placeid) => {
+    await axios.delete(`${deleteAllPlaceEDT}${placeid}`); 
+    getEdts();
+  }
   useEffect(() => {
     getEdts();
   },[])
   return (
-    <Gestionair.Provider value={{edts,addEdts,deleteEdt,profG,setProfG,typeG,setTypeG,salleG,setSalleG,sem,setSem,speType,setSpeType,section,setSection,group,setGroup,commun,setCommun}}>
+    <Gestionair.Provider value={{edts,addEdts,deleteEdt,profG,setProfG,typeG,setTypeG,salleG,setSalleG,sem,setSem,speType,setSpeType,section,setSection,group,setGroup,commun,setCommun,deleteAllModEdt,deleteAllSecEdt,deleteAllGrpEdt,deleteAllDepEdt,deleteAllAffEdt,deleteAllProfEdt,deleteAllPlaceEdt}}>
         {children}
     </Gestionair.Provider>
   )

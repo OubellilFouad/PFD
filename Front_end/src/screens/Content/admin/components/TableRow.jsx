@@ -3,10 +3,14 @@ import { AiFillDelete, AiOutlinePlus } from 'react-icons/ai'
 import { BsThreeDots } from 'react-icons/bs'
 import { useAuth } from '../../../../../context/AuthContext'
 import { useChef } from '../../chefDep/context/ChefContext'
+import {useGest} from '../../Gestionair/context/GestContext'
+import { useProf } from '../../Prof/context/ProfContext'
 
 const TableRow = ({type,nom,email,dateNaiss,grad,id,userID,typeT}) => {
   const {user} = useAuth();
-  const {setOpenProf,deleteProf} = useChef();
+  const {deleteAllChoice} = useProf();
+  const {deleteAllProfEdt} = useGest();
+  const {setOpenProf,deleteProf,deleteAllProfAffect} = useChef();
   if(type === 'header'){
     return(
         <div className='flex gap-3 p-2 text-xs text-dimText font-bold uppercase items-center'>
@@ -38,7 +42,12 @@ const TableRow = ({type,nom,email,dateNaiss,grad,id,userID,typeT}) => {
             <div className='flex-[0.7]'>{typeT}</div>
             <div className='flex-1 flex justify-end pr-4'>
                 <button>
-                  <AiFillDelete onClick={() => deleteProf(id)} className='text-lg cursor-pointer hover:text-red'/>
+                  <AiFillDelete onClick={() => {
+                    deleteProf(id);
+                    deleteAllChoice(userID);
+                    deleteAllProfAffect(userID);
+                    deleteAllProfEdt(userID);
+                  }} className='text-lg cursor-pointer hover:text-red'/>
                 </button>
             </div>
         </div>

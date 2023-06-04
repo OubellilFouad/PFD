@@ -9,7 +9,7 @@ const getOneFils = 'https://pfeboumerdes.pythonanywhere.com/filiere/';
 
 const SpeCard = ({nom,fillid,speid,type}) => {
   const [fil,setFil] = useState({});
-  const {deleteSpe,deleteAllSpePal} = useChef();
+  const {deleteSpe,deleteAllSpePal,deleteAllSpeModule,deleteAllSpeSection,deleteAllSpeGroup} = useChef();
   const {deleteFormation} = useAdmin();
   useEffect(() => {
     if(type !== 'commun'){
@@ -27,6 +27,9 @@ const SpeCard = ({nom,fillid,speid,type}) => {
     }else{
       deleteSpe(speid);
       deleteAllSpePal(speid);
+      deleteAllSpeModule(speid);
+      deleteAllSpeSection(speid);
+      deleteAllSpeGroup(speid);
     }
   }
   return (

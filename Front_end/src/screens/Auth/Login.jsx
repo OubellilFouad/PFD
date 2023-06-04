@@ -49,8 +49,8 @@ const Login = () => {
         navigate('/App');
       }
     } catch (error) {
-      console.log(error.response.data)
-      setErrors(Object.keys(error.response.data.errors));
+      console.log(error)
+      // setErrors(Object.keys(error.response.data.errors));
     }
   }
   const handleSubmit = async (e) => {
@@ -60,6 +60,7 @@ const Login = () => {
       password,
       userID
     }
+    console.log(formData)
     login(formData);
     setEmail('');
     setPassword('');
@@ -89,7 +90,7 @@ const Login = () => {
     }
   },[errors,userID,email,password])
   return (
-    <form ref={form} onSubmit={(e) => handleSubmit(e)} action="" className='w-full px-20 flex flex-col items-center gap-10'>
+    <form ref={form} onSubmit={(e) => handleSubmit(e)} action="" className='w-full md:px-20 px-10 flex flex-col items-center md:gap-10 gap-8 md:pb-0 pb-4'>
         <h1 className='text-3xl text-main font-bold'>Welcome back</h1>
         <div className='w-full flex flex-col gap-8'>
           <Input name={'Matricule'} type={'string'} setData={setUserID} err={idErr}/>

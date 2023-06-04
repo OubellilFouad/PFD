@@ -9,13 +9,15 @@ import axios from 'axios'
 import { useAdmin } from '../../admin/context/AdminContext'
 import { useAuth } from '../../../../../context/AuthContext'
 import { AiFillDelete } from 'react-icons/ai'
+import { useGest } from '../../Gestionair/context/GestContext'
 const getGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupes/sec/';
 const getTcGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupestc/';
 
-const SectionCard = ({nom,capacite,speid,secid,type}) => {
+const SectionCard = ({nom,capacite,speid,secid,type,palid}) => {
   const {user} = useAuth();
   const {tcGroupes,deleteSec,deleteAllGroup} = useAdmin();  
-  const {groupes,deleteSection,deleteAllSecGroup} = useChef(); 
+  const {groupes,deleteSection,deleteAllSecGroup,deleteAllSecAffect} = useChef(); 
+  const {deleteAllSecEdt} = useGest();
   const [openGroup,setOpenGroup] = useState(false); 
   const [groupesSec,setGroupesSec] = useState([]);
   const getGroup = async (id) => {
@@ -34,6 +36,8 @@ const SectionCard = ({nom,capacite,speid,secid,type}) => {
     }else{
       deleteSection(secid);
       deleteAllSecGroup(secid);
+      deleteAllSecAffect(secid);
+      deleteAllSecEdt(secid);
     }
   }
   useEffect(() => {
@@ -76,7 +80,7 @@ const SectionCard = ({nom,capacite,speid,secid,type}) => {
                 <FiPlus className='text-2xl group-hover:text-main'/>
             </div>)}
         </div>
-        <GroupForm speid={speid} secid={secid} type={type} openGroup={openGroup} setOpenGroup={setOpenGroup} />
+        <GroupForm speid={speid} palid={palid} secid={secid} type={type} openGroup={openGroup} setOpenGroup={setOpenGroup} />
     </div>
   )
 }

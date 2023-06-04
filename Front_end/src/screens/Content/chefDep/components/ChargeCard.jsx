@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { AiFillDelete } from 'react-icons/ai'
 import { useChef } from '../context/ChefContext';
+import { useGest } from '../../Gestionair/context/GestContext';
 const getSec = 'https://pfeboumerdes.pythonanywhere.com/section/';
 const getTcSec = 'https://pfeboumerdes.pythonanywhere.com/sectiontc/';
 const getGrp = 'https://pfeboumerdes.pythonanywhere.com/groupe/';
@@ -11,6 +12,7 @@ const getTcMod = 'https://pfeboumerdes.pythonanywhere.com/moduletc/';
 
 const ChargeCard = ({group,section,afectid,type,module,tc}) => {
   const {deleteAffect} = useChef();
+  const {deleteAllAffEdt} = useGest();
   const [sec,setSec] = useState({});
   const [grp,setGrp] = useState({});
   const [mod,setMod] = useState({});
@@ -59,7 +61,10 @@ const ChargeCard = ({group,section,afectid,type,module,tc}) => {
     <div className='rounded-xl bg-separator h-20 p-4 gap-3'>
         <div className='flex justify-between items-center'>
           <p className='text-base font-bold'>{mod?.abbr}</p>
-          <AiFillDelete onClick={() => deleteAffect(afectid)} className='text-lg cursor-pointer hover:text-red'/>
+          <AiFillDelete onClick={() => {
+            deleteAffect(afectid);
+            deleteAllAffEdt(afectid);
+          }} className='text-lg cursor-pointer hover:text-red'/>
         </div>
         <span className='text-xs font-bold'>{sec?.nom}{group && `,${grp?.nom}`}</span> /
         <span className='text-xs font-bold'> 

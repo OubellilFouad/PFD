@@ -3,16 +3,20 @@ import { useChef } from '../context/ChefContext'
 import { AiFillDelete } from 'react-icons/ai';
 import { useAdmin } from '../../admin/context/AdminContext';
 import { useAuth } from '../../../../../context/AuthContext';
+import { useGest } from '../../Gestionair/context/GestContext';
 
 const GroupCard = ({nom,type,capacite,grpid}) => {
   const {user} = useAuth();
-  const {deleteGroup} = useChef();
+  const {deleteGroup,deleteAllGrpAffect} = useChef();
   const {deleteGroup:deleteTcGroup} = useAdmin();
+  const {deleteAllGrpEdt} = useGest();
   const handleDelete = () => {
     if(type === 'commun'){
       deleteTcGroup(grpid);
     }else{
-      deleteGroup(grpid)
+      deleteGroup(grpid);
+      deleteAllGrpAffect(grpid);
+      deleteAllGrpEdt(grpid);
     }
   }
   return (

@@ -15,6 +15,7 @@ const getOneChefs = 'http://localhost:8000/api/admin/get-chefdepbyid/';
 const HourGrp = ({hour,day,affSec,aff,student}) => {
   const {setShow,setAddMessage,setColor} = useAuth();
   const {edts,addEdts,deleteEdt,profG,salleG} = useGest();
+  const {user} = useAuth();
   const {avails} = useProf();
   const [avail,setAvail] = useState(false);
   const [all,setAll] = useState([]);
@@ -34,6 +35,7 @@ const HourGrp = ({hour,day,affSec,aff,student}) => {
   const [depid,setDepid] = useState(null); 
   const [tc,setTc] = useState(false);
   const [chef,setChef] = useState(false);
+  const [affid,setAffid] = useState(null);
   const [item,setItem] = useState({});
   // Aff sec 
   const [tcSec,setTcSec] = useState(false);
@@ -87,6 +89,7 @@ const HourGrp = ({hour,day,affSec,aff,student}) => {
           setTc(item.tc);
           setChef(item.chef);
           setDepid(item.depid);
+          setAffid(item.afecid);
         }
       }
     }else{
@@ -128,7 +131,10 @@ const HourGrp = ({hour,day,affSec,aff,student}) => {
       place: chambreid,
       tc,
       chef,
-      depid
+      depid,
+      affid,
+      gestid: user.userID,
+      profname: oneProf.userName
     }
     addEdts(formData);
   }
@@ -142,6 +148,7 @@ const HourGrp = ({hour,day,affSec,aff,student}) => {
       setSemestre('');
       setChambreid(null);
       setDepid(null);
+      setAffid(null);
     }else{
       deleteEdt(edtid);
       setEdtid(null);
@@ -153,6 +160,7 @@ const HourGrp = ({hour,day,affSec,aff,student}) => {
       setSemestre('');
       setChambreid(null);
       setDepid(null);
+      setAffid(null);
     }
   }
   useEffect(() => {
@@ -282,6 +290,7 @@ const HourGrp = ({hour,day,affSec,aff,student}) => {
       setTc(aff.tc);
       setChef(aff.chef);
       setDepid(aff.depid);
+      setAffid(aff.affid);
     }else{
       setEdtid(null);
       setModule(null);
@@ -294,6 +303,7 @@ const HourGrp = ({hour,day,affSec,aff,student}) => {
       setTc(false);
       setChef(false);
       setDepid(null);
+      setAffid(null);
     }
   },[aff])
   useEffect(() => {
@@ -308,23 +318,23 @@ const HourGrp = ({hour,day,affSec,aff,student}) => {
     <div ref={drop} data-value='08h00-09h30' className={`flex justify-between py-1 flex-col border-gray-300 border items-center font-bold ${isOver && !color && !place && 'bg-main text-white'} ${Object.keys(affSec).length !== 0 && '!bg-blue-500 !text-white'} ${edtid && '!bg-main !text-white'} relative group ${color && !edtid && !place && Object.keys(affSec).length === 0 && '!bg-red'} ${place && !edtid && !color && '!bg-orange-500'} ${avail && !place && !color && !edtid && !module && 'bg-green-500'}`}>
         {Object.keys(affSec).length === 0 && Object.keys(aff).length === 0 && (
           <>
-          <p className={`${isOver?'text-white':'text-main'} font-normal`}>{Object.keys(oneModule).length !== 0 && oneModule.abbr}</p>
-          <p className='text-sm font-semibold'>{Object.keys(oneProf).length !== 0 && oneProf.userName}</p>
-          <p className={`text-xs gap-1 ${isOver?'text-white':'text-black'}`}>{`${type.toString()}`} {Object.keys(oneChambre).length !== 0 && `/ ${oneChambre.nom}`}</p>
+          <p className={`${isOver?'text-white':'text-main'} font-normal md:text-base text-xs`}>{Object.keys(oneModule).length !== 0 && oneModule.abbr}</p>
+          <p className='md:text-sm text-[8px] font-semibold'>{Object.keys(oneProf).length !== 0 && oneProf.userName}</p>
+          <p className={`md:text-xs text-[7px] gap-1 ${isOver?'text-white':'text-black'}`}>{`${type.toString()}`} {Object.keys(oneChambre).length !== 0 && `/ ${oneChambre.nom}`}</p>
           </>
         )}
         {Object.keys(affSec).length !== 0 && (
           <>
-          <p className={`font-normal`}>{Object.keys(oneModule).length !== 0 && oneModule.abbr}</p>
-          <p className='text-sm font-semibold'>{Object.keys(oneProf).length !== 0 && oneProf.userName}</p>
-          <p className={`text-xs gap-1`}>{`${typeSec.toString()}`} {Object.keys(oneChambre).length !== 0 && `/ ${oneChambre.nom}`}</p>
+          <p className={`font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] md:text-base text-xs`}>{Object.keys(oneModule).length !== 0 && oneModule.abbr}</p>
+          <p className='md:text-sm text-[8px] font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]'>{Object.keys(oneProf).length !== 0 && oneProf.userName}</p>
+          <p className={`md:text-xs text-[7px] gap-1 font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]`}>{`${typeSec.toString()}`} {Object.keys(oneChambre).length !== 0 && `/ ${oneChambre.nom}`}</p>
           </>
         )}
         {Object.keys(aff).length !== 0 && (
           <>
-          <p className={`font-normal`}>{Object.keys(oneModule).length !== 0 && oneModule.abbr}</p>
-          <p className='text-sm font-semibold'>{Object.keys(oneProf).length !== 0 && oneProf.userName}</p>
-          <p className={`text-xs gap-1`}>{`${type.toString()}`} {Object.keys(oneChambre).length !== 0 && `/ ${oneChambre.nom}`}</p>
+          <p className={`font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] md:text-base text-xs`}>{Object.keys(oneModule).length !== 0 && oneModule.abbr}</p>
+          <p className='md:text-sm text-[8px] font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]'>{Object.keys(oneProf).length !== 0 && oneProf.userName}</p>
+          <p className={`md:text-xs text-[7px] gap-1 font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]`}>{`${type.toString()}`} {Object.keys(oneChambre).length !== 0 && `/ ${oneChambre.nom}`}</p>
           </>
         )}
         <BsCheckCircle onClick={() => accept()} className={`hidden absolute right-2 top-2/4 -translate-y-2/4 ${chambreid && !isOver && !edtid && !place ?'group-hover:block':'hidden'} cursor-pointer hover:text-main text-xl z-10`}/>

@@ -4,6 +4,7 @@ import { useAuth } from '../../../context/AuthContext'
 import Header from './Header'
 import Sidebar from './Sidebar'
 import { BiLeftArrowAlt } from 'react-icons/bi'
+import horaZreg from '../../assets/hora zreg.png'
 
 const Content = () => {
   const {user} = useAuth();
@@ -21,11 +22,10 @@ const Content = () => {
     }
   },[user])
   return (
-    <div className='grid grid-cols-[1fr_5fr] grid-rows-[1fr_8fr] overflow-hidden h-screen'>
+    <div className='grid md:grid-cols-[1fr_5fr] grid-rows-[0.8fr_8fr] grid-cols-1 overflow-hidden h-screen'>
         {location.state?.page !== 'EDT' && location.state?.page !== 'PEDT' && location.state?.page !== 'CEDT' && (
-          <div className='flex items-center px-6 gap-3 border-b border-b-[#DBDBDB] border-r border-r-[#DBDBDB]'>
-            <span className='rounded-full w-6 h-6 bg-main'></span>
-            <p className='text-xl font-bold'>Project M.</p>
+          <div className='hidden items-center px-6 border-b md:flex border-b-[#DBDBDB] border-r border-r-[#DBDBDB] relative'>
+            <img src={horaZreg} className='w-20 absolute' alt="" />
           </div>
         )}
         {location.state?.page === 'EDT' && (

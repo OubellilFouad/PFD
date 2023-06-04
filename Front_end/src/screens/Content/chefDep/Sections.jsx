@@ -30,15 +30,15 @@ const Sections = () => {
     <div className='flex flex-col gap-8 overflow-hidden'>
         <div className='flex flex-col gap-8 overflow-x-scroll'>
             {section.map((section) => {
-              const {nom,speid,capacite,secid} = section; 
+              const {nom,speid,capacite,secid,palid} = section; 
                 return (
-                  <SectionCard key={secid} nom={nom} capacite={capacite} speid={speid} secid={secid} />
+                  <SectionCard key={secid} nom={nom} palid={palid} capacite={capacite} speid={speid} secid={secid} />
                 )
             })}
             {tcSections.map((section) => {
-              const {nom,speid,capacite,secid} = section; 
+              const {nom,speid,capacite,secid,palid} = section; 
                 return (
-                  <SectionCard key={secid} nom={nom} type={'commun'} capacite={capacite} speid={speid} secid={secid} />
+                  <SectionCard key={secid} nom={nom} palid={palid} type={'commun'} capacite={capacite} speid={speid} secid={secid} />
                 )
             })}
         </div>

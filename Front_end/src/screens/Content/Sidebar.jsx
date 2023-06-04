@@ -23,13 +23,14 @@ const admin = [
 ]
 
 const chef = [
-    {path:'',name:'Dashboard',icon: <MdOutlineSpaceDashboard/>,page: 'Main'},
-    {path:'enseignant',name:'Les Enseignants',icon: <FaChalkboardTeacher/>,page: 'Enseignants'},
+    {path:'',name:'Les Enseignants',icon: <FaChalkboardTeacher/>,page: 'Enseignants'},
     {path:'speciality',name:'Les Formations',icon: <MdFolderSpecial/>,page: 'Formations'},
     {path:'sections',name:'Les Sections',icon: <BsFillCollectionFill/>,page: 'Sections'},
     {path:'modules',name:'Les Modules',icon: <ImBooks/>,page: 'Modules'},
-    {path:'disp',name:'Disponibilité',icon: <MdEventAvailable/>,page: 'Disponibilité'},
     {path:'charge',name:'La charge',icon: <MdWork/>,page: 'Charge'},
+    {type:'line'},
+    {path:'disp',name:'Disponibilité',icon: <MdEventAvailable/>,page: 'Disponibilité'},
+    {path:'choix',name:'Choix de modules',icon: <BsListCheck/>,page: 'Choix'},
     {path:'edtprof',name:'Teachers',icon: <BsFillPersonLinesFill className='text-lg'/>,page: 'CEDT'},
 ]
 const gest = [
@@ -81,14 +82,21 @@ const Sidebar = () => {
     }
   },[user])
   return (
-    <div className='border-r border-r-[#DBDBDB] flex flex-col sidebar overflow-hidden'>
+    <div className='border-r border-r-[#DBDBDB] md:flex hidden flex-col sidebar overflow-hidden'>
         {location?.state?.page !== 'EDT' && location?.state?.page !== 'PEDT' && location?.state?.page !== 'CEDT' && (
             <div className='py-7 flex flex-col px-6 gap-5'>
                 {nav.map((item,index) => {
-                    const {name,path,icon,page} = item;
-                    return(
-                        <Link key={index} path={path} page={page} name={name} icon={icon} />
-                    )
+                    const {name,path,icon,page,type} = item;
+                    if(type !== 'line'){
+                        return(
+                            <Link key={index} path={path} page={page} name={name} icon={icon} />
+                        )
+                    }
+                    if(type === 'line'){
+                        return(
+                            <p className='w-full border'></p>
+                        )
+                    }
                 })}
             </div>
         )}

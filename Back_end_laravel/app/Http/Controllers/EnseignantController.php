@@ -12,16 +12,15 @@ class EnseignantController extends Controller
 
 
     //delete enseignant
-    public function deleteEnseignant($depID, $id){
-        $enseignant = Enseignant::where('depID',$depID)->find($id);
-        if($enseignant){
+    public function deleteEnseignantByDepID($depID)
+    {
+        $enseignants = Enseignant::where('depID', $depID)->get();
+
+        foreach ($enseignants as $enseignant) {
             $enseignant->delete();
-            return response()->json(['message' => 'Enseignant supprimé']);
         }
-        else{
-            return response()->json(['message' => 'Enseignant non trouvé']);
-            
-        }
+
+        return response()->json(['message' => 'Teachers deleted successfully.']);
     }
        // get Choix
 
