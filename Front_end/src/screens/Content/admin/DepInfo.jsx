@@ -10,7 +10,7 @@ import TableRow from './components/TableRow';
 import { useAdmin } from './context/AdminContext';
 import { useAuth } from '../../../../context/AuthContext';
 import { useChef } from '../chefDep/context/ChefContext';
-const getOneUrl = 'https://pfeboumerdes.pythonanywhere.com/dep/';
+const getOneUrl = 'http://127.0.0.1:5000/dep/';
 const getOneChefs = 'http://localhost:8000/api/admin/get-chefdepbydepid/';
 const getDepProfs = 'http://127.0.0.1:8000/api/chefdep/get-enseignantbydepid/';
 

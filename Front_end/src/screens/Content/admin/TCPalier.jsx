@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useAdmin } from './context/AdminContext'
 import TCPalierCard from './components/TCPalCard'
 import TCPalForm from './components/TCPalForm'
-const getPalier = 'https://pfeboumerdes.pythonanywhere.com/palierstc/';
+const getPalier = 'http://127.0.0.1:5000/palierstc/';
 
 const TCPaliers = () => {
   const {tcPal} = useAdmin();

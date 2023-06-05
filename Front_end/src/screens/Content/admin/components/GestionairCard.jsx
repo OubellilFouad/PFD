@@ -6,7 +6,7 @@ import GestDepForm from './GestDepForm'
 import axios from 'axios'
 import GestDepCard from './GestDepCard'
 import { AiFillDelete } from 'react-icons/ai'
-const getGest = 'https://pfeboumerdes.pythonanywhere.com/gestdeps/'
+const getGest = 'http://127.0.0.1:5000/gestdeps/'
 
 const GestionairCard = ({userName,type,userID,id}) => {
   const [openGestDep,setOpenGestDep] = useState(false);  

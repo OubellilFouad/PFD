@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { AiFillDelete } from 'react-icons/ai';
 import { useAdmin } from '../context/AdminContext';
-const getOneSpe = 'https://pfeboumerdes.pythonanywhere.com/formationtc/';
+const getOneSpe = 'http://127.0.0.1:5000/formationtc/';
 const TCPalierCard = ({nom,speid,palid}) => {
   const {deletePaliers} = useAdmin();
   const [spe,setSpe] = useState({});

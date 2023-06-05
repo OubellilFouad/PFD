@@ -6,7 +6,7 @@ import datetime
 ##pip install PyMySQL SQLAlchemy flask-cors flask
 
 # engine = create_engine('mariadb+pymysql://root:toor@localhost:3306/pfe')
-engine = create_engine('mariadb+pymysql://root:toor@localhost:3306/pfe')
+engine = create_engine('mariadb+pymysql://root:@localhost:3306/pfe')
 
 ##username:password@host:port/database
 Base = declarative_base()

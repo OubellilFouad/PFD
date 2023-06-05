@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Card from './components/Card'
 import { useAdmin } from './context/AdminContext';
-const getUrl = 'https://pfeboumerdes.pythonanywhere.com/deps';
+const getUrl = 'http://127.0.0.1:5000/deps';
 
 const AdminDashboard = () => {
   const {deps} = useAdmin();

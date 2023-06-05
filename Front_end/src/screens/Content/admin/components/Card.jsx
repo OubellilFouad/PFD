@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 import { useAdmin } from "../context/AdminContext";
 import { useChef } from '../../chefDep/context/ChefContext';
 import { useGest } from '../../Gestionair/context/GestContext';
-const getOneDomainUrl = 'https://pfeboumerdes.pythonanywhere.com/domain/';
+const getOneDomainUrl = 'http://127.0.0.1:5000/domain/';
 
 const Card = ({nom,depid,domainid}) => { 
   const {deleteDep,deleteAllGestDeps,deleteAllChef} = useAdmin();

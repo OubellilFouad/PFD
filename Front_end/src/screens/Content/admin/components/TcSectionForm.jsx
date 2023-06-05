@@ -5,8 +5,8 @@ import { useAdmin } from '../context/AdminContext';
 import { useAuth } from '../../../../../context/AuthContext';
 import Input from '../../../Auth/components/Input';
 import DepSelect from './DepSelect';
-const getTcPal = 'https://pfeboumerdes.pythonanywhere.com/palierstc/';
-const getTcSpe = 'https://pfeboumerdes.pythonanywhere.com/formationstc';
+const getTcPal = 'http://127.0.0.1:5000/palierstc/';
+const getTcSpe = 'http://127.0.0.1:5000/formationstc';
 
 const TcSectionForm = () => {
   const {openSection,setOpenSections,addTcSec,tcform} = useAdmin(); 

@@ -6,9 +6,9 @@ import Input from '../../../Auth/components/Input';
 import Select from '../../chefDep/components/Select';
 import { useAdmin } from '../context/AdminContext';
 import DepSelect from './DepSelect';
-const getTcSpes = 'https://pfeboumerdes.pythonanywhere.com/formationstc';
-const getTcPalier = 'https://pfeboumerdes.pythonanywhere.com/palierstc/';
-const getOnePalier = 'https://pfeboumerdes.pythonanywhere.com/paliertc/';
+const getTcSpes = 'http://127.0.0.1:5000/formationstc';
+const getTcPalier = 'http://127.0.0.1:5000/palierstc/';
+const getOnePalier = 'http://127.0.0.1:5000/paliertc/';
 
 const TcModForm = () => {
   const {openTcModules,setOpenTcModules,addTcMod} = useAdmin();

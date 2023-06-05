@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { AiFillDelete } from 'react-icons/ai';
 import { useAdmin } from '../context/AdminContext';
-const getDep = 'https://pfeboumerdes.pythonanywhere.com/dep/';
+const getDep = 'http://127.0.0.1:5000/dep/';
 
 const GestDepCard = ({depid,type,id}) => {
   const {deleteGestDeps} = useAdmin();  
