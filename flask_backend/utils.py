@@ -2,7 +2,8 @@ import sqlalchemy as sql
 from sqlalchemy.dialects.mysql import insert
 
 def get_or_create(conn, model, **kwargs):
-	instance = conn.execute(sql.insert(model).values(**kwargs))		
+	instance = conn.execute(insert(model).values(**kwargs))
+	conn.commit()	
 	return {"id": instance.inserted_primary_key[0]}
 
 def get_or_none(conn, model, **kwargs):
@@ -14,9 +15,11 @@ def get_or_none(conn, model, **kwargs):
 
 def delete(conn, model, **kwargs):
 	instance = conn.execute(sql.delete(model).filter_by(**kwargs))
+	conn.commit()
 
 def update(conn, model, data):
 	instance = conn.execute(insert(model).values(data).on_duplicate_key_update(data))
+	conn.commit()
 	
 	return {"id": instance.inserted_primary_key[0]}
 
@@ -25,5 +28,5 @@ def get_all(conn, model, **kwargs):
 		instances = conn.execute(sql.select(model).filter_by(**kwargs)).all()
 	else:
 		instances = conn.execute(sql.select(model)).all()
-		
+	
 	return [dict(row._mapping) for row in instances]
