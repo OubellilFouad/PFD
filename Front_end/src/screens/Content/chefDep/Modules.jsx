@@ -4,8 +4,8 @@ import ModuleCard from './components/ModuleCard'
 import { useChef } from './context/ChefContext'
 import axios from 'axios';
 import { useAuth } from '../../../../context/AuthContext';
-const getModules = 'https://pfeboumerdes.pythonanywhere.com/modules/';
-const getTcModules = 'https://pfeboumerdes.pythonanywhere.com/modulestc/dep/';
+const getModules = 'http://127.0.0.1:5000/modules/';
+const getTcModules = 'http://127.0.0.1:5000/modulestc/dep/';
 
 const Modules = () => {
   const {modules} = useChef();

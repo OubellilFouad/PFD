@@ -4,8 +4,8 @@ import { AiFillDelete } from 'react-icons/ai';
 import { NavLink } from 'react-router-dom'
 import { useChef } from '../context/ChefContext';
 import { useAdmin } from '../../admin/context/AdminContext';
-const getOneDomainUrl = 'https://pfeboumerdes.pythonanywhere.com/domain/';
-const getOneFils = 'https://pfeboumerdes.pythonanywhere.com/filiere/';
+const getOneDomainUrl = 'http://127.0.0.1:5000/domain/';
+const getOneFils = 'http://127.0.0.1:5000/filiere/';
 
 const SpeCard = ({nom,fillid,speid,type}) => {
   const [fil,setFil] = useState({});

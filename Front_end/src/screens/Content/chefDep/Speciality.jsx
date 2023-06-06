@@ -3,8 +3,8 @@ import SpeCard from './components/SpeCard'
 import { useChef } from './context/ChefContext'
 import axios from 'axios';
 import { useAuth } from '../../../../context/AuthContext';
-const getSpes = 'https://pfeboumerdes.pythonanywhere.com/specialites/';
-const getTcspes = 'https://pfeboumerdes.pythonanywhere.com/formationstc/'
+const getSpes = 'http://127.0.0.1:5000/specialites/';
+const getTcspes = 'http://127.0.0.1:5000/formationstc/'
 
 const Speciality = () => {
   const {spes} = useChef();

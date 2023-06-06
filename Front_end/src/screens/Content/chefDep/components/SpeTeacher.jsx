@@ -5,7 +5,7 @@ import ChargeCard from './ChargeCard';
 import ChargeForm from './ChargeForm';
 import { useChef } from '../context/ChefContext';
 import axios from 'axios';
-const getSpeCours = 'https://pfeboumerdes.pythonanywhere.com/affectations/';
+const getSpeCours = 'http://127.0.0.1:5000/affectations/';
 const getTeacher = 'http://localhost:8000/api/chefdep/get-enseignantbyid/';
 const SpeTeacher = ({speid,annee,palid,one,semester,profid}) => {
   const [cour,setCour] = useState([]);

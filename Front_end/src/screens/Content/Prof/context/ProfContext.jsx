@@ -3,14 +3,14 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 
 const Prof = createContext();
 // Choix
-const getChoix = 'https://pfeboumerdes.pythonanywhere.com/veuxs';
-const addChoix = 'https://pfeboumerdes.pythonanywhere.com/veux';
-const deleteChoix = 'https://pfeboumerdes.pythonanywhere.com/veux/';
-const deleteAllChoix = 'https://pfeboumerdes.pythonanywhere.com/veuxs/';
+const getChoix = 'http://127.0.0.1:5000/veuxs';
+const addChoix = 'http://127.0.0.1:5000/veux';
+const deleteChoix = 'http://127.0.0.1:5000/veux/';
+const deleteAllChoix = 'http://127.0.0.1:5000/veuxs/';
 // Availability
-const getAv = 'https://pfeboumerdes.pythonanywhere.com/availabilitys';
-const addAv = 'https://pfeboumerdes.pythonanywhere.com/availability';
-const deleteAv = 'https://pfeboumerdes.pythonanywhere.com/availability/';
+const getAv = 'http://127.0.0.1:5000/availabilitys';
+const addAv = 'http://127.0.0.1:5000/availability';
+const deleteAv = 'http://127.0.0.1:5000/availability/';
 
 export const ProfContext = ({children}) => {
   const [choix,setChoix] = useState([]);

@@ -3,70 +3,70 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 
 const Chef = createContext();
 // Modules
-const addModules = 'https://pfeboumerdes.pythonanywhere.com/module';
-const getModules = 'https://pfeboumerdes.pythonanywhere.com/modules';
-const deleteModules = 'https://pfeboumerdes.pythonanywhere.com/module/';
-const editModules = 'https://pfeboumerdes.pythonanywhere.com/module/';
-const deleteAllDepModules = 'https://pfeboumerdes.pythonanywhere.com/modules/dep/';
-const deleteAllSpeModules = 'https://pfeboumerdes.pythonanywhere.com/modules/spe/';
-const deleteAllPalModules = 'https://pfeboumerdes.pythonanywhere.com/modules/pal/';
+const addModules = 'http://127.0.0.1:5000/module';
+const getModules = 'http://127.0.0.1:5000/modules';
+const deleteModules = 'http://127.0.0.1:5000/module/';
+const editModules = 'http://127.0.0.1:5000/module/';
+const deleteAllDepModules = 'http://127.0.0.1:5000/modules/dep/';
+const deleteAllSpeModules = 'http://127.0.0.1:5000/modules/spe/';
+const deleteAllPalModules = 'http://127.0.0.1:5000/modules/pal/';
 // Specialities
-const addSpes = 'https://pfeboumerdes.pythonanywhere.com/specialite';
-const getSpes = 'https://pfeboumerdes.pythonanywhere.com/specialites';
-const deleteSpes = 'https://pfeboumerdes.pythonanywhere.com/specialite/';
-const editSpes = 'https://pfeboumerdes.pythonanywhere.com/specialite/';
-const deleteAllDepSpes = 'https://pfeboumerdes.pythonanywhere.com/specialites/';
+const addSpes = 'http://127.0.0.1:5000/specialite';
+const getSpes = 'http://127.0.0.1:5000/specialites';
+const deleteSpes = 'http://127.0.0.1:5000/specialite/';
+const editSpes = 'http://127.0.0.1:5000/specialite/';
+const deleteAllDepSpes = 'http://127.0.0.1:5000/specialites/';
 // Filliére
-const getFils = 'https://pfeboumerdes.pythonanywhere.com/filieres';
-const addFils = 'https://pfeboumerdes.pythonanywhere.com/filiere';
-const deleteFils = 'https://pfeboumerdes.pythonanywhere.com/filiere/';
-const editFils = 'https://pfeboumerdes.pythonanywhere.com/filiere/';
-const deleteAllFils = 'https://pfeboumerdes.pythonanywhere.com/filieres/';
+const getFils = 'http://127.0.0.1:5000/filieres';
+const addFils = 'http://127.0.0.1:5000/filiere';
+const deleteFils = 'http://127.0.0.1:5000/filiere/';
+const editFils = 'http://127.0.0.1:5000/filiere/';
+const deleteAllFils = 'http://127.0.0.1:5000/filieres/';
 // Chambres
-const getChambres = 'https://pfeboumerdes.pythonanywhere.com/chambres';
-const addChambres = 'https://pfeboumerdes.pythonanywhere.com/chambre';
-const getOneChambres = 'https://pfeboumerdes.pythonanywhere.com/chambre/';
-const deleteChambres = 'https://pfeboumerdes.pythonanywhere.com/chambre/';
-const editChambres = 'https://pfeboumerdes.pythonanywhere.com/chambre/';
+const getChambres = 'http://127.0.0.1:5000/chambres';
+const addChambres = 'http://127.0.0.1:5000/chambre';
+const getOneChambres = 'http://127.0.0.1:5000/chambre/';
+const deleteChambres = 'http://127.0.0.1:5000/chambre/';
+const editChambres = 'http://127.0.0.1:5000/chambre/';
 // Sections
-const getSections = 'https://pfeboumerdes.pythonanywhere.com/sections';
-const addSections = 'https://pfeboumerdes.pythonanywhere.com/section';
-const getOneSections = 'https://pfeboumerdes.pythonanywhere.com/section/';
-const deleteSections = 'https://pfeboumerdes.pythonanywhere.com/section/';
-const editSections = 'https://pfeboumerdes.pythonanywhere.com/section/';
-const deleteAllDepSections = 'https://pfeboumerdes.pythonanywhere.com/sections/dep/';
-const deleteAllSpeSections = 'https://pfeboumerdes.pythonanywhere.com/sections/spe/';
-const deleteAllPalSections = 'https://pfeboumerdes.pythonanywhere.com/sections/pal/';
+const getSections = 'http://127.0.0.1:5000/sections';
+const addSections = 'http://127.0.0.1:5000/section';
+const getOneSections = 'http://127.0.0.1:5000/section/';
+const deleteSections = 'http://127.0.0.1:5000/section/';
+const editSections = 'http://127.0.0.1:5000/section/';
+const deleteAllDepSections = 'http://127.0.0.1:5000/sections/dep/';
+const deleteAllSpeSections = 'http://127.0.0.1:5000/sections/spe/';
+const deleteAllPalSections = 'http://127.0.0.1:5000/sections/pal/';
 // Groupes 
-const getGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupes';
-const addGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupe';
-const getOneGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupe/';
-const deleteGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupe/';
-const editGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupe/';
-const deleteAllSecGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupes/sec/';
-const deleteAllDepGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupes/dep/';
-const deleteAllSpeGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupes/spe/';
-const deleteAllPalGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupes/pal/';
+const getGroupes = 'http://127.0.0.1:5000/groupes';
+const addGroupes = 'http://127.0.0.1:5000/groupe';
+const getOneGroupes = 'http://127.0.0.1:5000/groupe/';
+const deleteGroupes = 'http://127.0.0.1:5000/groupe/';
+const editGroupes = 'http://127.0.0.1:5000/groupe/';
+const deleteAllSecGroupes = 'http://127.0.0.1:5000/groupes/sec/';
+const deleteAllDepGroupes = 'http://127.0.0.1:5000/groupes/dep/';
+const deleteAllSpeGroupes = 'http://127.0.0.1:5000/groupes/spe/';
+const deleteAllPalGroupes = 'http://127.0.0.1:5000/groupes/pal/';
 // Profs 
 const getProfs = 'http://127.0.0.1:8000/api/chefdep/get-enseignant';
 const addProfs = 'http://127.0.0.1:8000/api/chefdep/ajouter-enseignant';
 const deleteProfs = 'http://127.0.0.1:8000/api/chefdep/supprimer-enseignant/';
 const deleteAllProfs = 'http://127.0.0.1:8000/api/prof/departments/';
 // Palier
-const getPaliers = 'https://pfeboumerdes.pythonanywhere.com/paliers';
-const addPaliers = 'https://pfeboumerdes.pythonanywhere.com/palier';
-const deletePaliers = 'https://pfeboumerdes.pythonanywhere.com/palier/';
-const deleteAllPaliers = 'https://pfeboumerdes.pythonanywhere.com/paliers/dep/';
-const deleteAllSpePaliers = 'https://pfeboumerdes.pythonanywhere.com/paliers/spe/';
+const getPaliers = 'http://127.0.0.1:5000/paliers';
+const addPaliers = 'http://127.0.0.1:5000/palier';
+const deletePaliers = 'http://127.0.0.1:5000/palier/';
+const deleteAllPaliers = 'http://127.0.0.1:5000/paliers/dep/';
+const deleteAllSpePaliers = 'http://127.0.0.1:5000/paliers/spe/';
 // Affectation
-const getAffects = 'https://pfeboumerdes.pythonanywhere.com/affectations';
-const addAffects = 'https://pfeboumerdes.pythonanywhere.com/affectation';
-const deleteAffects = 'https://pfeboumerdes.pythonanywhere.com/affectation/';
-const deleteAllModAffects = 'https://pfeboumerdes.pythonanywhere.com/affectations/mod/';
-const deleteAllSecAffects = 'https://pfeboumerdes.pythonanywhere.com/affectations/sec/';
-const deleteAllGrpAffects = 'https://pfeboumerdes.pythonanywhere.com/affectations/grp/';
-const deleteAllDepAffects = 'https://pfeboumerdes.pythonanywhere.com/affectations/dep/';
-const deleteAllProfAffects = 'https://pfeboumerdes.pythonanywhere.com/affectations/prof/';
+const getAffects = 'http://127.0.0.1:5000/affectations';
+const addAffects = 'http://127.0.0.1:5000/affectation';
+const deleteAffects = 'http://127.0.0.1:5000/affectation/';
+const deleteAllModAffects = 'http://127.0.0.1:5000/affectations/mod/';
+const deleteAllSecAffects = 'http://127.0.0.1:5000/affectations/sec/';
+const deleteAllGrpAffects = 'http://127.0.0.1:5000/affectations/grp/';
+const deleteAllDepAffects = 'http://127.0.0.1:5000/affectations/dep/';
+const deleteAllProfAffects = 'http://127.0.0.1:5000/affectations/prof/';
 
 export const ChefContext = ({children}) => {
   const [openSec,setOpenSec] = useState(false);  

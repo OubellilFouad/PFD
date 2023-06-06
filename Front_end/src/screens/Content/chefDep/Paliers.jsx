@@ -4,8 +4,8 @@ import PalierForm from './components/PalierForm'
 import PalierCard from './components/PalierCard'
 import axios from 'axios'
 import { useChef } from './context/ChefContext'
-const getPalier = 'https://pfeboumerdes.pythonanywhere.com/paliers/';
-const getTcPaliers = 'https://pfeboumerdes.pythonanywhere.com/palierstc/';
+const getPalier = 'http://127.0.0.1:5000/paliers/';
+const getTcPaliers = 'http://127.0.0.1:5000/palierstc/';
 
 const Paliers = () => {
   const {palier} = useChef();  

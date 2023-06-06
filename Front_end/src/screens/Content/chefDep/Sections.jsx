@@ -5,8 +5,8 @@ import { useChef } from './context/ChefContext'
 import axios from 'axios'
 import { useAuth } from '../../../../context/AuthContext'
 import { useAdmin } from '../admin/context/AdminContext'
-const getSections = 'https://pfeboumerdes.pythonanywhere.com/sections/';
-const getTcSections = 'https://pfeboumerdes.pythonanywhere.com/sectionstc/dep/';
+const getSections = 'http://127.0.0.1:5000/sections/';
+const getTcSections = 'http://127.0.0.1:5000/sectionstc/dep/';
 
 const Sections = () => {
   const {sections} = useChef();

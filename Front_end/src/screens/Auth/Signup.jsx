@@ -5,14 +5,14 @@ import Select from '../Content/chefDep/components/Select';
 import {useAdmin} from '../Content/admin/context/AdminContext'
 import axios from 'axios';
 import { useGest } from '../Content/Gestionair/context/GestContext';
-const getTCFormation = 'https://pfeboumerdes.pythonanywhere.com/formationstc/';
-const getSpes = 'https://pfeboumerdes.pythonanywhere.com/specialites/';
-const getPals = 'https://pfeboumerdes.pythonanywhere.com/paliers/';
-const getTcPals = 'https://pfeboumerdes.pythonanywhere.com/palierstc/';
-const getSecs = 'https://pfeboumerdes.pythonanywhere.com/sections/pal/';
-const getTcSecs = 'https://pfeboumerdes.pythonanywhere.com/sectionstc/pal/';
-const getGrps = 'https://pfeboumerdes.pythonanywhere.com/groupes/sec/';
-const getTcGrps = 'https://pfeboumerdes.pythonanywhere.com/groupestc/';
+const getTCFormation = 'http://127.0.0.1:5000/formationstc/';
+const getSpes = 'http://127.0.0.1:5000/specialites/';
+const getPals = 'http://127.0.0.1:5000/paliers/';
+const getTcPals = 'http://127.0.0.1:5000/palierstc/';
+const getSecs = 'http://127.0.0.1:5000/sections/pal/';
+const getTcSecs = 'http://127.0.0.1:5000/sectionstc/pal/';
+const getGrps = 'http://127.0.0.1:5000/groupes/sec/';
+const getTcGrps = 'http://127.0.0.1:5000/groupestc/';
 const signups = 'http://localhost:8000/api/etudiant/register-etudiant';
 
 const Signup = () => {

@@ -8,12 +8,12 @@ import SpeSelect from './SpeSelect';
 import { useAuth } from '../../../../../context/AuthContext';
 import MiniInput from './MiniInput';
 import Select from './Select';
-const getOneSpes = 'https://pfeboumerdes.pythonanywhere.com/specialite/';
-const getSpes = 'https://pfeboumerdes.pythonanywhere.com/specialites/';
-const getTcSpes = 'https://pfeboumerdes.pythonanywhere.com/formationstc/';
-const getPalier = 'https://pfeboumerdes.pythonanywhere.com/paliers/';
-const getTcPalier = 'https://pfeboumerdes.pythonanywhere.com/palierstc/';
-const getOnePalier = 'https://pfeboumerdes.pythonanywhere.com/palier/';
+const getOneSpes = 'http://127.0.0.1:5000/specialite/';
+const getSpes = 'http://127.0.0.1:5000/specialites/';
+const getTcSpes = 'http://127.0.0.1:5000/formationstc/';
+const getPalier = 'http://127.0.0.1:5000/paliers/';
+const getTcPalier = 'http://127.0.0.1:5000/palierstc/';
+const getOnePalier = 'http://127.0.0.1:5000/palier/';
 
 const ModuleForm = () => {
   const {openModule,setOpenModule,addModule} = useChef();

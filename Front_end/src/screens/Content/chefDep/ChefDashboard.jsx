@@ -4,9 +4,9 @@ import { useChef } from './context/ChefContext';
 import { useAuth } from '../../../../context/AuthContext';
 import axios from 'axios';
 const getDepProfs = 'http://127.0.0.1:8000/api/chefdep/get-enseignantbydepid/';
-const getSpes = 'https://pfeboumerdes.pythonanywhere.com/specialites/';
-const getChambres = 'https://pfeboumerdes.pythonanywhere.com/chambres/';
-const getModules = 'https://pfeboumerdes.pythonanywhere.com/modules/';
+const getSpes = 'http://127.0.0.1:5000/specialites/';
+const getChambres = 'http://127.0.0.1:5000/chambres/';
+const getModules = 'http://127.0.0.1:5000/modules/';
 
 const ChefDashboard = () => {
   const {spes,modules,chambre,profs} = useChef();

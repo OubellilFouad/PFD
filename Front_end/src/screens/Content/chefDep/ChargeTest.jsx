@@ -6,12 +6,12 @@ import Teacher from './components/Teacher';
 import Select from './components/Select';
 import { useProf } from '../Prof/context/ProfContext';
 import SpeTeacher from './components/SpeTeacher';
-const getpal = 'https://pfeboumerdes.pythonanywhere.com/paliers/';
-const getTcpal = 'https://pfeboumerdes.pythonanywhere.com/palierstc/';
-const getSpe = 'https://pfeboumerdes.pythonanywhere.com/specialites/';
-const getTcSpe = 'https://pfeboumerdes.pythonanywhere.com/formationstc/';
-const getOnepals = 'https://pfeboumerdes.pythonanywhere.com/palier/';
-const getOneTcpals = 'https://pfeboumerdes.pythonanywhere.com/paliertc/';
+const getpal = 'http://127.0.0.1:5000/paliers/';
+const getTcpal = 'http://127.0.0.1:5000/palierstc/';
+const getSpe = 'http://127.0.0.1:5000/specialites/';
+const getTcSpe = 'http://127.0.0.1:5000/formationstc/';
+const getOnepals = 'http://127.0.0.1:5000/palier/';
+const getOneTcpals = 'http://127.0.0.1:5000/paliertc/';
 const getDepProfs = 'http://127.0.0.1:8000/api/chefdep/get-enseignantbydepid/';
 
 const ChargeTest = () => {

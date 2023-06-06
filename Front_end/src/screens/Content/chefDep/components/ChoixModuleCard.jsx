@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-const getOneModule = 'https://pfeboumerdes.pythonanywhere.com/module/';
+const getOneModule = 'http://127.0.0.1:5000/module/';
 
 const ChoixModuleCard = ({moduleID,type}) => {
   const [module,setModule] = useState({});

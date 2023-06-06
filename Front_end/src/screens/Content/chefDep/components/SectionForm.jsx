@@ -5,10 +5,10 @@ import { useChef } from '../context/ChefContext'
 import SpeSelect from './SpeSelect';
 import { useAuth } from '../../../../../context/AuthContext';
 import axios from 'axios';
-const getPal = 'https://pfeboumerdes.pythonanywhere.com/paliers/';
-const getTcPal = 'https://pfeboumerdes.pythonanywhere.com/palierstc/';
-const getSpe = 'https://pfeboumerdes.pythonanywhere.com/specialites/';
-const getTcSpe = 'https://pfeboumerdes.pythonanywhere.com/formationstc/';
+const getPal = 'http://127.0.0.1:5000/paliers/';
+const getTcPal = 'http://127.0.0.1:5000/palierstc/';
+const getSpe = 'http://127.0.0.1:5000/specialites/';
+const getTcSpe = 'http://127.0.0.1:5000/formationstc/';
 
 const SectionForm = () => {
   const {openSec,setOpenSec,addSection,spes} = useChef(); 

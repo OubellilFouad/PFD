@@ -10,8 +10,8 @@ import { useAdmin } from '../../admin/context/AdminContext'
 import { useAuth } from '../../../../../context/AuthContext'
 import { AiFillDelete } from 'react-icons/ai'
 import { useGest } from '../../Gestionair/context/GestContext'
-const getGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupes/sec/';
-const getTcGroupes = 'https://pfeboumerdes.pythonanywhere.com/groupestc/';
+const getGroupes = 'http://127.0.0.1:5000/groupes/sec/';
+const getTcGroupes = 'http://127.0.0.1:5000/groupestc/';
 
 const SectionCard = ({nom,capacite,speid,secid,type,palid}) => {
   const {user} = useAuth();

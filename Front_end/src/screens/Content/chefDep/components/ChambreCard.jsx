@@ -4,7 +4,7 @@ import { AiFillDelete } from 'react-icons/ai';
 import { HiOutlineDotsCircleHorizontal } from 'react-icons/hi'
 import { useChef } from '../context/ChefContext';
 import { useGest } from '../../Gestionair/context/GestContext';
-const getOneDeps = 'https://pfeboumerdes.pythonanywhere.com/dep/';
+const getOneDeps = 'http://127.0.0.1:5000/dep/';
 
 const ChambreCard = ({nom,depid,capacite,type,chambreid}) => {
   const {deleteChambre} = useChef();

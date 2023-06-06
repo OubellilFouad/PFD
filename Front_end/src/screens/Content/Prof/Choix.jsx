@@ -5,7 +5,7 @@ import { useChef } from '../chefDep/context/ChefContext'
 import axios from 'axios';
 import { useAuth } from '../../../../context/AuthContext';
 import { useProf } from './context/ProfContext';
-const getOneChoix = 'https://pfeboumerdes.pythonanywhere.com/veuxs/';
+const getOneChoix = 'http://127.0.0.1:5000/veuxs/';
 
 const Choix = () => {
   const {modules} = useChef(); 

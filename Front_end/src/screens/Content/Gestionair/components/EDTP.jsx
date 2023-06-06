@@ -7,8 +7,8 @@ import { useGest } from '../context/GestContext';
 import { useReactToPrint } from 'react-to-print';
 import { SiAdobeacrobatreader } from 'react-icons/si';
 import { useAuth } from '../../../../../context/AuthContext';
-const getEdt = 'https://pfeboumerdes.pythonanywhere.com/edts/prof/';
-const getDeps = 'https://pfeboumerdes.pythonanywhere.com/dep/';
+const getEdt = 'http://127.0.0.1:5000/edts/prof/';
+const getDeps = 'http://127.0.0.1:5000/dep/';
 const getProfs = 'http://127.0.0.1:8000/api/chefdep/get-enseignantbyid/';
 const getOneChefs = 'http://localhost:8000/api/admin/get-chefdepbyid/';
 

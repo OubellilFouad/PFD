@@ -3,7 +3,7 @@ import ChambreCard from './components/ChambreCard'
 import { useChef } from './context/ChefContext'
 import { useAuth } from '../../../../context/AuthContext';
 import axios from 'axios';
-const getChambres = 'https://pfeboumerdes.pythonanywhere.com/chambres/';
+const getChambres = 'http://127.0.0.1:5000/chambres/';
 
 const Chambres = () => {
   const {chambre} = useChef();

@@ -6,13 +6,13 @@ import ChoixCard from './ChoixCard';
 import {useAuth} from '../../../../../context/AuthContext'
 import Select from './Select';
 import axios from 'axios';
-const getSections = 'https://pfeboumerdes.pythonanywhere.com/sections/';
-const getTcSections = 'https://pfeboumerdes.pythonanywhere.com/sectionstc/spe/';
-const getGroups = 'https://pfeboumerdes.pythonanywhere.com/groupes/'
-const getTcGroups = 'https://pfeboumerdes.pythonanywhere.com/groupestc/'
-const getModules = 'https://pfeboumerdes.pythonanywhere.com/modules/';
-const getTcModules = 'https://pfeboumerdes.pythonanywhere.com/modulestc/';
-const getChoix = 'https://pfeboumerdes.pythonanywhere.com/veuxs/';
+const getSections = 'http://127.0.0.1:5000/sections/';
+const getTcSections = 'http://127.0.0.1:5000/sectionstc/spe/';
+const getGroups = 'http://127.0.0.1:5000/groupes/'
+const getTcGroups = 'http://127.0.0.1:5000/groupestc/'
+const getModules = 'http://127.0.0.1:5000/modules/';
+const getTcModules = 'http://127.0.0.1:5000/modulestc/';
+const getChoix = 'http://127.0.0.1:5000/veuxs/';
 
 const ChargeForm = ({speid,palid,one,setOpenCharge,openCharge,semestre,profid,cours,tc,typpe}) => {
   const {setShow,setAddMessage,setColor,user} = useAuth();

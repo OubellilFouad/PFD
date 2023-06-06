@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react'
 import { AiFillDelete } from 'react-icons/ai'
 import { useChef } from '../context/ChefContext';
 import { useGest } from '../../Gestionair/context/GestContext';
-const getSec = 'https://pfeboumerdes.pythonanywhere.com/section/';
-const getTcSec = 'https://pfeboumerdes.pythonanywhere.com/sectiontc/';
-const getGrp = 'https://pfeboumerdes.pythonanywhere.com/groupe/';
-const getTcGrp = 'https://pfeboumerdes.pythonanywhere.com/groupetc/';
-const getMod = 'https://pfeboumerdes.pythonanywhere.com/module/';
-const getTcMod = 'https://pfeboumerdes.pythonanywhere.com/moduletc/';
+const getSec = 'http://127.0.0.1:5000/section/';
+const getTcSec = 'http://127.0.0.1:5000/sectiontc/';
+const getGrp = 'http://127.0.0.1:5000/groupe/';
+const getTcGrp = 'http://127.0.0.1:5000/groupetc/';
+const getMod = 'http://127.0.0.1:5000/module/';
+const getTcMod = 'http://127.0.0.1:5000/moduletc/';
 
 const ChargeCard = ({group,section,afectid,type,module,tc}) => {
   const {deleteAffect} = useChef();

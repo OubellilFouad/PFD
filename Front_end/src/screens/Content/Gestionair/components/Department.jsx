@@ -4,9 +4,9 @@ import { AiFillCaretRight } from 'react-icons/ai'
 import Formation from './Formation';
 import Prof from './Prof';
 import { useAuth } from '../../../../../context/AuthContext';
-const getOnedep = 'https://pfeboumerdes.pythonanywhere.com/dep/';
-const getSpes = 'https://pfeboumerdes.pythonanywhere.com/specialites/';
-const getTcSpes = 'https://pfeboumerdes.pythonanywhere.com/formationstc';
+const getOnedep = 'http://127.0.0.1:5000/dep/';
+const getSpes = 'http://127.0.0.1:5000/specialites/';
+const getTcSpes = 'http://127.0.0.1:5000/formationstc';
 const getProfs = 'http://127.0.0.1:8000/api/chefdep/get-enseignantbydepid/';
 const getOneChefs = 'http://localhost:8000/api/admin/get-chefdepbydepid/';
 

@@ -2,8 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { AiFillCaretRight } from 'react-icons/ai';
 import Palier from './Palier';
-const getPals = 'https://pfeboumerdes.pythonanywhere.com/paliers/';
-const getTcPals = 'https://pfeboumerdes.pythonanywhere.com/palierstc/';
+const getPals = 'http://127.0.0.1:5000/paliers/';
+const getTcPals = 'http://127.0.0.1:5000/palierstc/';
 
 const Formation = ({nom,speid,type}) => {
   const [open,setOpen] = useState(false); 

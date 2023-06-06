@@ -4,7 +4,7 @@ import { AiFillCaretRight } from 'react-icons/ai'
 import ModuleGrp from './ModuleGrp';
 import { NavLink } from 'react-router-dom';
 import { useGest } from '../context/GestContext';
-const getAffs = 'https://pfeboumerdes.pythonanywhere.com/affectations/grp/';
+const getAffs = 'http://127.0.0.1:5000/affectations/grp/';
 
 const Group = ({nom,grpid,annee,type}) => {
   const {sem,setSection,setGroup,setCommun} = useGest();

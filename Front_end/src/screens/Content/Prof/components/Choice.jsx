@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react'
 import { useAuth } from '../../../../../context/AuthContext';
-const getOneModule = 'https://pfeboumerdes.pythonanywhere.com/module/';
+const getOneModule = 'http://127.0.0.1:5000/module/';
 
 const Choice = ({setModule,modules,module,type,setType,setPalid,setSpeid}) => {
   const [speModule,setSpeModule] = useState({});
@@ -11,6 +11,8 @@ const Choice = ({setModule,modules,module,type,setType,setPalid,setSpeid}) => {
   useEffect(() => {
     if(module){
       getOne();
+    }else{
+      setSpeModule({});
     }
   },[module])
   useEffect(() => {
@@ -31,8 +33,10 @@ const Choice = ({setModule,modules,module,type,setType,setPalid,setSpeid}) => {
     }
   },[type])
   useEffect(() => {
-    setPalid(speModule.palid);
-    setSpeid(speModule.speid);
+    if(Object.keys(speModule).length !== 0){
+      setPalid(speModule.palid);
+      setSpeid(speModule.speid);
+    }
   },[speModule])
   const getOne = async () => {
     const {data} = await axios.get(`${getOneModule}${module}`);
@@ -58,7 +62,7 @@ const Choice = ({setModule,modules,module,type,setType,setPalid,setSpeid}) => {
       <div className='flex flex-col w-2/3'>
           <select onChange={(e) => setModule(parseInt(e.target.value))} name="dropDown" className='px-2 pb-2 h-8 border-b-paleMain text-main font-bold border-b-2 bg-transparent outline-none' placeholder='Domains'>
               <option value={null} className='bg-separator hover:bg-black text-black'>Les module</option>
-              {Object.keys(speModule).length !== 0 && (<option key={speModule.modid} value={speModule.modid} selected> {speModule.nom} </option>)}
+              {Object.keys(speModule).length !== 0?(<option key={speModule.modid} value={speModule.modid} selected> {speModule.nom} </option>):(null)}
               {modules.map((modul) => {
                 const {nom,modid} = modul;
                 return(

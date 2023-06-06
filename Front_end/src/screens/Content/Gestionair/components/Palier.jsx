@@ -2,8 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { AiFillCaretRight } from 'react-icons/ai'
 import Section from './Section';
-const getSecs = 'https://pfeboumerdes.pythonanywhere.com/sections/pal/';
-const getTcSecs = 'https://pfeboumerdes.pythonanywhere.com/sectionstc/pal/';
+const getSecs = 'http://127.0.0.1:5000/sections/pal/';
+const getTcSecs = 'http://127.0.0.1:5000/sectionstc/pal/';
 
 const Palier = ({nom,palid,annee,type}) => {
   const [open,setOpen] = useState(false); 

@@ -18,10 +18,10 @@ import TcModForm from './admin/components/TcModForm';
 import Select from './chefDep/components/Select';
 import { useGest } from './Gestionair/context/GestContext';
 import axios from 'axios';
-const getSecs = 'https://pfeboumerdes.pythonanywhere.com/section/';
-const getTcSecs = 'https://pfeboumerdes.pythonanywhere.com/sectiontc/';
-const getGrps = 'https://pfeboumerdes.pythonanywhere.com/groupe/';
-const getTcGrps = 'https://pfeboumerdes.pythonanywhere.com/groupetc/';
+const getSecs = 'http://127.0.0.1:5000/section/';
+const getTcSecs = 'http://127.0.0.1:5000/sectiontc/';
+const getGrps = 'http://127.0.0.1:5000/groupe/';
+const getTcGrps = 'http://127.0.0.1:5000/groupetc/';
 
 const Main = () => {
   const location = useLocation();

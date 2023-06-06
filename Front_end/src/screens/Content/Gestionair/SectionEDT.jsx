@@ -7,15 +7,15 @@ import {motion} from 'framer-motion'
 import SalleGest from './components/SalleGest';
 import { useGest } from './context/GestContext';
 import { useReactToPrint } from 'react-to-print';
-const getSection = 'https://pfeboumerdes.pythonanywhere.com/section/';
-const getTcSection = 'https://pfeboumerdes.pythonanywhere.com/sectiontc/';
-const getPal = 'https://pfeboumerdes.pythonanywhere.com/palier/';
-const getTcPal = 'https://pfeboumerdes.pythonanywhere.com/paliertc/';
-const getChambre = 'https://pfeboumerdes.pythonanywhere.com/chambres';
-const getEdts = 'https://pfeboumerdes.pythonanywhere.com/edts/sec/';
-const getDeps = 'https://pfeboumerdes.pythonanywhere.com/dep/';
-const getSpes = 'https://pfeboumerdes.pythonanywhere.com/specialite/';
-const getTcSpes = 'https://pfeboumerdes.pythonanywhere.com/formationtc/';
+const getSection = 'http://127.0.0.1:5000/section/';
+const getTcSection = 'http://127.0.0.1:5000/sectiontc/';
+const getPal = 'http://127.0.0.1:5000/palier/';
+const getTcPal = 'http://127.0.0.1:5000/paliertc/';
+const getChambre = 'http://127.0.0.1:5000/chambres';
+const getEdts = 'http://127.0.0.1:5000/edts/sec/';
+const getDeps = 'http://127.0.0.1:5000/dep/';
+const getSpes = 'http://127.0.0.1:5000/specialite/';
+const getTcSpes = 'http://127.0.0.1:5000/formationtc/';
 
 const SectionEDT = () => {
   const {edts,typeG,sem} = useGest();  

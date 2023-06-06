@@ -5,8 +5,8 @@ import { useChef } from '../chefDep/context/ChefContext'
 import { useAdmin } from '../admin/context/AdminContext'
 import axios from 'axios'
 import Piee from './components/Pie'
-const getDeps = 'https://pfeboumerdes.pythonanywhere.com/gestdeps/';
-const getEdts = 'https://pfeboumerdes.pythonanywhere.com/edts/gestid/';
+const getDeps = 'http://127.0.0.1:5000/gestdeps/';
+const getEdts = 'http://127.0.0.1:5000/edts/gestid/';
 
 const GestDashboard = () => {
   const {user} = useAuth();

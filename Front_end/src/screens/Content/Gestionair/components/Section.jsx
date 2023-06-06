@@ -5,9 +5,9 @@ import Group from './Group';
 import ModuleSec from './ModuleSec';
 import { NavLink } from 'react-router-dom';
 import { useGest } from '../context/GestContext';
-const getGrp = 'https://pfeboumerdes.pythonanywhere.com/groupes/sec/';
-const getTcGrp = 'https://pfeboumerdes.pythonanywhere.com/groupestc/';
-const getaff = 'https://pfeboumerdes.pythonanywhere.com/affectations/sec/';
+const getGrp = 'http://127.0.0.1:5000/groupes/sec/';
+const getTcGrp = 'http://127.0.0.1:5000/groupestc/';
+const getaff = 'http://127.0.0.1:5000/affectations/sec/';
 
 const Section = ({nom,secid,annee,type}) => {
   const {sem,setSection,setGroup,setCommun} = useGest();

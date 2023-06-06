@@ -3,16 +3,16 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 const Gestionair = createContext();
 
 // EDTs
-const getEDT = 'https://pfeboumerdes.pythonanywhere.com/edts';
-const addEDT = 'https://pfeboumerdes.pythonanywhere.com/edt';
-const deleteEDT = 'https://pfeboumerdes.pythonanywhere.com/edt/';
-const deleteAllModEDT = 'https://pfeboumerdes.pythonanywhere.com/edts/mod/';
-const deleteAllSecEDT = 'https://pfeboumerdes.pythonanywhere.com/edts/sec/';
-const deleteAllGrpEDT = 'https://pfeboumerdes.pythonanywhere.com/edts/grp/';
-const deleteAllDepEDT = 'https://pfeboumerdes.pythonanywhere.com/edts/dep/';
-const deleteAllAffEDT = 'https://pfeboumerdes.pythonanywhere.com/edts/aff/';
-const deleteAllProfEDT = 'https://pfeboumerdes.pythonanywhere.com/edts/prof/';
-const deleteAllPlaceEDT = 'https://pfeboumerdes.pythonanywhere.com/edts/place/';
+const getEDT = 'http://127.0.0.1:5000/edts';
+const addEDT = 'http://127.0.0.1:5000/edt';
+const deleteEDT = 'http://127.0.0.1:5000/edt/';
+const deleteAllModEDT = 'http://127.0.0.1:5000/edts/mod/';
+const deleteAllSecEDT = 'http://127.0.0.1:5000/edts/sec/';
+const deleteAllGrpEDT = 'http://127.0.0.1:5000/edts/grp/';
+const deleteAllDepEDT = 'http://127.0.0.1:5000/edts/dep/';
+const deleteAllAffEDT = 'http://127.0.0.1:5000/edts/aff/';
+const deleteAllProfEDT = 'http://127.0.0.1:5000/edts/prof/';
+const deleteAllPlaceEDT = 'http://127.0.0.1:5000/edts/place/';
 
 export const GestContext = ({children}) => {
   const [edts,setEdts] = useState([]);

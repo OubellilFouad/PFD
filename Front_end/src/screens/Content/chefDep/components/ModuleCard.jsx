@@ -5,7 +5,7 @@ import { useChef } from '../context/ChefContext';
 import { useAdmin } from '../../admin/context/AdminContext';
 import { useAuth } from '../../../../../context/AuthContext';
 import { useGest } from '../../Gestionair/context/GestContext';
-const getOneSpes = 'https://pfeboumerdes.pythonanywhere.com/specialite/';
+const getOneSpes = 'http://127.0.0.1:5000/specialite/';
 
 const ModuleCard = ({nom,speid,moduleid,type,abbr}) => {
   const [spe,setSpe] = useState({});

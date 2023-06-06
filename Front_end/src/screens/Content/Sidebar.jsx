@@ -11,7 +11,7 @@ import { BiCalendarEvent } from 'react-icons/bi'
 import { useLocation } from 'react-router-dom'
 import Department from './Gestionair/components/Department'
 import axios from 'axios'
-const getDeps = 'https://pfeboumerdes.pythonanywhere.com/gestdeps/'
+const getDeps = 'http://127.0.0.1:5000/gestdeps/'
 
 const admin = [
     {path:'',name:'Dashboard',icon: <MdOutlineSpaceDashboard/>,page: 'Main'},

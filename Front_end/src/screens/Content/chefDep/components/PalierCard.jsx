@@ -4,8 +4,8 @@ import { AiFillDelete } from 'react-icons/ai';
 import { NavLink } from 'react-router-dom'
 import { useAdmin } from '../../admin/context/AdminContext';
 import { useChef } from '../context/ChefContext';
-const getOneSpe = 'https://pfeboumerdes.pythonanywhere.com/specialite/';
-const getOneTcSpe = 'https://pfeboumerdes.pythonanywhere.com/formationtc/';
+const getOneSpe = 'http://127.0.0.1:5000/specialite/';
+const getOneTcSpe = 'http://127.0.0.1:5000/formationtc/';
 const PalierCard = ({nom,speid,type,palid}) => {
   const {deletePaliers} = useAdmin();
   const {deletePal,deleteAllPalSection,deleteAllPalGroup,deleteAllPalModule} = useChef();

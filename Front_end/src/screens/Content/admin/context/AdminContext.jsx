@@ -67,7 +67,7 @@ export const AdminContext = ({children}) => {
   const [tcGroupes,setTcGroupes] = useState([]);
   const [tcModules,setTcModules] = useState([]);
   const [gestDep,setGestDep] = useState([]);
-  // Departement
+  // Departementit 
   const getDeps = async () => {
     const response = await axios.get(getUrl);
     const result = await response.data;

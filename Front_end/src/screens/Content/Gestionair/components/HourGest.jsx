@@ -7,9 +7,9 @@ import { useGest } from '../context/GestContext';
 import {useAuth} from '../../../../../context/AuthContext'
 import { useLocation } from 'react-router-dom';
 import { useProf } from '../../Prof/context/ProfContext';
-const getModules = 'https://pfeboumerdes.pythonanywhere.com/module/';
-const getTcModules = 'https://pfeboumerdes.pythonanywhere.com/moduletc/';
-const getChambres = 'https://pfeboumerdes.pythonanywhere.com/chambre/';
+const getModules = 'http://127.0.0.1:5000/module/';
+const getTcModules = 'http://127.0.0.1:5000/moduletc/';
+const getChambres = 'http://127.0.0.1:5000/chambre/';
 const getProfs = 'http://127.0.0.1:8000/api/chefdep/get-enseignantbyid/';
 const getOneChefs = 'http://localhost:8000/api/admin/get-chefdepbyid/';
 

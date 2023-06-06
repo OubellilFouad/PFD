@@ -1,16 +1,16 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-const getMod = 'https://pfeboumerdes.pythonanywhere.com/module/';
-const getTcMod = 'https://pfeboumerdes.pythonanywhere.com/moduletc/';
-const getCham = 'https://pfeboumerdes.pythonanywhere.com/chambre/';
-const getSecs = 'https://pfeboumerdes.pythonanywhere.com/section/';
-const getTcSecs = 'https://pfeboumerdes.pythonanywhere.com/sectiontc/';
-const getGrps = 'https://pfeboumerdes.pythonanywhere.com/groupe/';
-const getTcGrps = 'https://pfeboumerdes.pythonanywhere.com/groupetc/';
-const getSpes = 'https://pfeboumerdes.pythonanywhere.com/specialite/';
-const getTcSpes = 'https://pfeboumerdes.pythonanywhere.com/formationtc/';
-const getPal = 'https://pfeboumerdes.pythonanywhere.com/palier/';
-const getTcPal = 'https://pfeboumerdes.pythonanywhere.com/paliertc/';
+const getMod = 'http://127.0.0.1:5000/module/';
+const getTcMod = 'http://127.0.0.1:5000/moduletc/';
+const getCham = 'http://127.0.0.1:5000/chambre/';
+const getSecs = 'http://127.0.0.1:5000/section/';
+const getTcSecs = 'http://127.0.0.1:5000/sectiontc/';
+const getGrps = 'http://127.0.0.1:5000/groupe/';
+const getTcGrps = 'http://127.0.0.1:5000/groupetc/';
+const getSpes = 'http://127.0.0.1:5000/specialite/';
+const getTcSpes = 'http://127.0.0.1:5000/formationtc/';
+const getPal = 'http://127.0.0.1:5000/palier/';
+const getTcPal = 'http://127.0.0.1:5000/paliertc/';
 
 const HourProf = ({aff}) => {
   const [oneModule,setOneModule] = useState({});

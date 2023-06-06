@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { useDrag } from 'react-dnd';
 import { RxDragHandleDots2 } from 'react-icons/rx'
 import { useGest } from '../context/GestContext';
-const getOneModule = 'https://pfeboumerdes.pythonanywhere.com/module/'; 
-const getOneTcModule = 'https://pfeboumerdes.pythonanywhere.com/moduletc/';
+const getOneModule = 'http://127.0.0.1:5000/module/'; 
+const getOneTcModule = 'http://127.0.0.1:5000/moduletc/';
 const getProfs = 'http://127.0.0.1:8000/api/chefdep/get-enseignantbyid/';
 const getOneChefs = 'http://localhost:8000/api/admin/get-chefdepbyid/';
 
