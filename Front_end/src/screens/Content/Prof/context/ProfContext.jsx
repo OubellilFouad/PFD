@@ -42,7 +42,8 @@ export const ProfContext = ({children}) => {
     getAvail();
   }
   const deleteAvail = async (id) => {
-    await axios.delete(`${deleteAv}${id}`);
+    const {data} = await axios.delete(`${deleteAv}${id}`);
+    console.log(data)
     getAvail();
   }
   useEffect(() => {

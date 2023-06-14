@@ -35,6 +35,12 @@ const Day = ({day,avail}) => {
     },[])
     useEffect(() => {
         if(avail.lenght !== 0){
+            setHour1({});
+            setHour2({});
+            setHour3({});
+            setHour4({});
+            setHour5({});
+            setHour6({});
             avail.map((ed) => {
                 switch (ed.hour) {
                     case 1:

@@ -18,7 +18,7 @@ const Teacher = ({nom,speid,annee,palid,one,semester,profid,tc,type,grad}) => {
   }
   useEffect(() => {
     getSpeCour();
-  },[afects])
+  },[afects]);
   useEffect(() => {
     let val = 0;
     if(cour.length > 0){

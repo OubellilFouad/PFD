@@ -5,9 +5,9 @@ import ChargeCard from './ChargeCard';
 import ChargeForm from './ChargeForm';
 import { useChef } from '../context/ChefContext';
 import axios from 'axios';
-const getSpeCours = 'http://127.0.0.1:5000/affectations/';
+const getSpeCours = 'http://127.0.0.1:5000/affectations/prof/';
 const getTeacher = 'http://localhost:8000/api/chefdep/get-enseignantbyid/';
-const SpeTeacher = ({speid,annee,palid,one,semester,profid}) => {
+const SpeTeacher = ({speid,annee,palid,one,semester,profid,on}) => {
   const [cour,setCour] = useState([]);
   const {afects} = useChef();
   const [openCharge,setOpenCharge] = useState(false);
@@ -27,7 +27,7 @@ const SpeTeacher = ({speid,annee,palid,one,semester,profid}) => {
   },[])
   useEffect(() => {
     getSpeCour();
-  },[afects])
+  },[afects,on])
   useEffect(() => {
     let val = 0;
     if(cour.length > 0){
@@ -69,9 +69,9 @@ const SpeTeacher = ({speid,annee,palid,one,semester,profid}) => {
         <p className='text-xl font-bold'>Modules to teach</p>
         <div className='grid grid-cols-4 gap-3'>
             {cour.map((c) => {
-                const {afecid,groupe,section,semestre,type} = c;
+                const {afecid,groupe,section,semestre,type, module,tc} = c;
                 return(
-                    <ChargeCard key={afecid} afectid={afecid} group={groupe} section={section} semestre={semestre} type={type} />  
+                    <ChargeCard key={afecid} afectid={afecid} module={module} tc={tc} group={groupe} section={section} semestre={semestre} type={type} />  
                 )
             })}
             <div onClick={() => setOpenCharge(true)} className='rounded-xl group hover:border-main border-2 border-separator h-20 flex justify-center items-center cursor-pointer'>

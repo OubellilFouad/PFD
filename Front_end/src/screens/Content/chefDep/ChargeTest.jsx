@@ -188,7 +188,7 @@ const ChargeTest = () => {
             </div>
         </div>
         <div className='flex flex-col gap-8 overflow-x-scroll scroll-smooth con'>
-        <Teacher key={user?.userID} grad={'Chef dep'} tc={tc} nom={user?.userName} palid={palid} speid={speid} one={onePals} annee={onePals.annee} semester={sem} profid={user?.userID} type='chef' />
+          {!on && (<Teacher key={user?.userID} grad={'Chef dep'} tc={tc} nom={user?.userName} palid={palid} speid={speid} one={onePals} annee={onePals.annee} semester={sem} profid={user?.userID} type='chef' />)}
           {!on && prof.map((pro) => {
                 const {userName,userID,grad} = pro;
                 return(
@@ -197,7 +197,7 @@ const ChargeTest = () => {
           })}
           {on && teachers.map((teacher) => {
                 return(
-                  <SpeTeacher key={teacher} tc={tc} profid={teacher} palid={palid} speid={speid} one={onePals} annee={onePals.annee} semester={sem} />
+                  <SpeTeacher on={on} key={teacher} tc={tc} profid={teacher} palid={palid} speid={speid} one={onePals} annee={onePals.annee} semester={sem} />
                 )
           })}
         </div>

@@ -75,7 +75,7 @@ const ProfForm = () => {
     <div className={`w-full h-full absolute z-30 bg-[rgba(0,0,0,0.5)] top-0 left-0 ${openProf?'flex':'hidden'} justify-center items-center`}>
         <div className='h-[95%] aspect-[9/10] bg-white justify-between rounded-xl flex flex-col'>
           <div className='flex-1 flex justify-between px-3 items-center'>
-            <p className='text-base py-4 font-bold'>Add Enseignant</p>
+            <p className='text-base py-4 font-bold'>Add Prof</p>
             <MdClose onClick={() => setOpenProf(false)} className='text-2xl cursor-pointer'/>
           </div>
           <form ref={form} className='flex-[8] px-10 py-4 gap-6 flex flex-col'>
