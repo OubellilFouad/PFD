@@ -31,13 +31,15 @@ import EDTProf from './screens/Content/Prof/EDTProf'
 import ProfEDT from './screens/Content/Gestionair/ProfEDT'
 import EDTP from './screens/Content/Gestionair/components/EDTP'
 import Emplois from './screens/Content/Student/Emplois'
+import Landing from './screens/Content/Landing'
 
 function App() {
   const {user} = useAuth();
   const Routes = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/'>
-        <Route path='/' element={<Auth/>}>
+        <Route index element={<Landing/>}/>
+        <Route path='/auth' element={<Auth/>}>
           <Route index element={<Signup/>}></Route>
           <Route path='login' element={<Login/>}></Route>
         </Route>

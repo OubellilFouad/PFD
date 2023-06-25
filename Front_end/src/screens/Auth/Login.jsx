@@ -90,9 +90,9 @@ const Login = () => {
     }
   },[errors,userID,email,password])
   return (
-    <form ref={form} onSubmit={(e) => handleSubmit(e)} action="" className='w-full md:px-20 px-10 flex flex-col items-center md:gap-10 gap-8 md:pb-0 pb-4'>
+    <form ref={form} onSubmit={(e) => handleSubmit(e)} action="" className='w-full md:px-20 px-10 flex flex-col items-center gap-10 md:pb-0 pb-4'>
         <h1 className='text-3xl text-main font-bold'>Welcome back</h1>
-        <div className='w-full flex flex-col gap-8'>
+        <div className='w-full flex flex-col gap-8 h-[272px]'>
           <Input name={'Matricule'} type={'string'} setData={setUserID} err={idErr}/>
           <Input name={'Email'} type={'email'} setData={setEmail} err={emailErr}/>
           <Input name={'Password'} type={'password'} setData={setPassword} err={passErr}/>

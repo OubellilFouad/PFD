@@ -41,4 +41,9 @@
     .border{
         border: lightgray 2px solid;
     }
+    .landing{
+        background-image: url('./assets/landing.jpg');
+        background-size: cover;
+        background-position: right;
+    }
 }

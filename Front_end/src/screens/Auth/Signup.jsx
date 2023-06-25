@@ -388,9 +388,9 @@ const Signup = () => {
           }} className={`py-2 flex-1 items-center justify-center bg-main text-white rounded-lg ${number !== 4?'flex':'hidden'}`}>Next</button>
           <button onClick={handleSubmit} className={`py-2 flex-1 items-center justify-center bg-main text-white rounded-lg ${number === 4?'flex':'hidden'}`} >Signup</button>
         </div>
-        <div className='flex flex-col gap-1 -mt-6 mb-5 items-center relative w-full'>
-          <p className='text-sm text-paleMain'>Already have an account? <Link to={'login'} className='text-main font-bold'>Log in</Link></p>
-        </div>
+        <p className='text-sm text-paleMain'>Already have an account? <Link to={'login'} className='text-main font-bold'>Log in</Link></p>
+        {/* <div className='flex flex-col gap-1 items-center relative w-full'>
+        </div> */}
     </div>
   )
 }
