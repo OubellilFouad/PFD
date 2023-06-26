@@ -6,8 +6,16 @@
     },
     "name": "Mobile",
     "slug": "Mobile",
-    "splash":{
+    "splash": {
       "image": "./assets/splash.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0c06e361-7441-4769-8b00-069ce8447492"
+      }
+    },
+    "android": {
+      "package": "com.oubellil_fouad.Mobile"
     }
   }
 }

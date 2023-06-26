@@ -269,7 +269,6 @@ const HourGest = ({hour,day,aff,semestree}) => {
   },[edts]);
   useEffect(() => {
     if(Object.keys(item).length !== 0){
-      console.log(item);
       addItem(item);
     }
   },[item,edts]);
