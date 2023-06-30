@@ -44,6 +44,6 @@
     .landing{
         background-image: url('./assets/landing.jpg');
         background-size: cover;
-        background-position: right;
+        background-position: 60% 40%;
     }
 }

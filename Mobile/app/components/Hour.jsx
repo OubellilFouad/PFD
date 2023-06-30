@@ -158,24 +158,24 @@ const Hour = ({affSec,aff}) => {
     <View style={{flex:1,borderColor:'lightgray',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center',paddingVertical:10,gap:2, backgroundColor:Object.keys(affSec).length !== 0 && user === 'student'?'#F9D949':Object.keys(aff).length !== 0 && user === 'student'?'#3C486B':type[0] === 'cours' && user === 'teacher' ? 'rgb(59 130 246)' :user === 'teacher' && type !== 'cours' && Object.keys(aff).length !== 0 ? '#5030E5' :'transparent'}}>
         {Object.keys(affSec).length !== 0 && user === 'student' && (
             <>
-                <Text style={{fontSize:9,color:'white'}}>{Object.keys(oneModule).length !== 0 && oneModule.nom}</Text>
-                <Text style={{fontSize:7,color:'white'}}>Teacher name</Text>
-                <Text style={{fontSize:7,color:'white'}}>{typeSec}/{Object.keys(oneChambre).length !== 0 && oneChambre.nom}</Text>
+                <Text style={{fontSize:9,color:'white',textAlign:'center'}}>{Object.keys(oneModule).length !== 0 && oneModule.abbr}</Text>
+                <Text style={{fontSize:7,color:'white',textAlign:'center'}}>Teacher name</Text>
+                <Text style={{fontSize:6,color:'white',textAlign:'center'}}>{typeSec}/{Object.keys(oneChambre).length !== 0 && oneChambre.nom}</Text>
             </>
         )}
         {Object.keys(aff).length !== 0 && user === 'student' && (
             <>
-                <Text style={{fontSize:9,color:'white'}}>{Object.keys(oneModule).length !== 0 && oneModule.nom}</Text>
-                <Text style={{fontSize:7,color:'white'}}>Teacher name</Text>
-                <Text style={{fontSize:7,color:'white'}}>{type}/{Object.keys(oneChambre).length !== 0 && oneChambre.nom}</Text>
+                <Text style={{fontSize:9,color:'white',textAlign:'center'}}>{Object.keys(oneModule).length !== 0 && oneModule.abbr}</Text>
+                <Text style={{fontSize:7,color:'white',textAlign:'center'}}>Teacher name</Text>
+                <Text style={{fontSize:6,color:'white',textAlign:'center'}}>{type}/{Object.keys(oneChambre).length !== 0 && oneChambre.nom}</Text>
             </>
         )}
         {Object.keys(aff).length !== 0 && user === 'teacher' && (
             <>
-                <Text style={{fontSize:9,color:'white'}}>{Object.keys(oneModule).length !== 0 && oneModule.nom}</Text>
-                <Text style={{fontSize:6,color:'white'}}>{Object.keys(oneSpe).length !== 0 && oneSpe.nom}/{Object.keys(onePal).length !== 0 && ` / ${onePal.nom}`}</Text>
-                <Text style={{fontSize:5,color:'white'}}>{Object.keys(oneSection).length !== 0 && oneSection.nom}/{Object.keys(oneGroup).length !== 0 && ` / ${oneGroup.nom}`}</Text>
-                <Text style={{fontSize:7,color:'white'}}>{type}/{Object.keys(oneChambre).length !== 0 && oneChambre.nom}</Text> 
+                <Text style={{fontSize:9,color:'white',textAlign:'center'}}>{Object.keys(oneModule).length !== 0 && oneModule.abbr}</Text>
+                <Text style={{fontSize:6,color:'white',textAlign:'center'}}>{Object.keys(oneSpe).length !== 0 && oneSpe.nom}/{Object.keys(onePal).length !== 0 && ` / ${onePal.nom}`}</Text>
+                <Text style={{fontSize:5,color:'white',textAlign:'center'}}>{Object.keys(oneSection).length !== 0 && oneSection.nom}/{Object.keys(oneGroup).length !== 0 && ` / ${oneGroup.nom}`}</Text>
+                <Text style={{fontSize:6,color:'white',textAlign:'center'}}>{type}/{Object.keys(oneChambre).length !== 0 && oneChambre.nom}</Text> 
             </>
         )}
     </View>
