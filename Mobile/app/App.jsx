@@ -12,6 +12,7 @@ const App = ({navigation}) => {
   const [spe,setSpe] = useState(null);
   const [pal,setPal] = useState(null);
   const [sec,setSec] = useState(null);
+  const [pass,setPass] = useState(null);
   const [next,setNext] = useState(false);
   const [number,setNumber] = useState(1);
   const [depsArr,setDepsArr] = useState([]);
@@ -182,8 +183,9 @@ const App = ({navigation}) => {
           {user === 'teacher' && (
             <View style={{position:'relative',width:'100%',height:206,overflow:'hidden'}}>
               <View style={{gap:20,position:'absolute',width:'100%'}}>
-                <Input placeholder={'User name'} label={'user name'} setData={setEmail} value={email}/>
-                <Input placeholder={'Matricule'} label={'Matricule'} setData={setUserId} value={userId}/>
+                <Input placeholder={'User name'} label={'user name'} setData={setEmail} value={email} secure={false}/>
+                <Input placeholder={'Matricule'} label={'Matricule'} setData={setUserId} value={userId} secure={false}/>
+                <Input placeholder={'Password'} label={'Password'} setData={setPass} value={pass} secure={true}/>
               </View>
             </View>
           )}

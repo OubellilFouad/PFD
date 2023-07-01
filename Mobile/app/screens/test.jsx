@@ -195,8 +195,8 @@ const Test = () => {
         }}>
         </Stack.Screen>
       <Text style={{fontSize:25,marginHorizontal:20}}>Time table: 
-        {user === 'student' && (<Text style={{color:'#5030E5',fontSize:20}}>{Object.keys(group).length !== 0 && group.nom}</Text>)}
-        {user === 'teacher' && (<Text style={{color:'#5030E5',fontSize:20}}>{email}</Text>)}
+        {user === 'student' && (<Text style={{color:'#5030E5',fontSize:20}}>{Object.keys(group).length !== 0 && ` ${group.nom}`}</Text>)}
+        {user === 'teacher' && (<Text style={{color:'#5030E5',fontSize:20}}>{` ${email}`}</Text>)}
       </Text>
       <View style={{display:'flex',flexDirection:'column'}}>
         <Hours/>
