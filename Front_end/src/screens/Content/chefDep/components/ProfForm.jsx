@@ -99,7 +99,7 @@ const ProfForm = () => {
           </form>
           <div className='flex-1 flex justify-between items-center px-3 pb-3'>
             <p className='text-red'> {error} </p>
-            <button onClick={handleAdd} className='py-2 px-5 rounded-lg text-white bg-main'>Add</button>
+            <button onClick={handleAdd} className='py-2 px-5 rounded-lg text-white bg-main'>Ajouter</button>
           </div>
         </div>
     </div>

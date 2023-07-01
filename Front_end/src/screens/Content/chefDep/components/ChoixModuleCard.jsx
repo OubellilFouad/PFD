@@ -14,7 +14,7 @@ const ChoixModuleCard = ({moduleID,type}) => {
   return (
     <div className='rounded-xl bg-separator h-20 p-4 gap-3'>
         <div className='flex items-center'>
-          <p className='text-base font-bold'>{module.nom}</p>
+          <p className='text-base font-bold'>{module.abbr}</p>
         </div>
         <span className='text-xs font-bold'>
             {type.map((t,i) => {

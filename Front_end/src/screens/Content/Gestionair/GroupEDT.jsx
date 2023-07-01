@@ -339,11 +339,11 @@ const GroupEDT = () => {
     <div className='flex flex-col gap-1 -mt-6 overflow-hidden'>
         <div className='flex gap-2'>
             <div className='flex gap-1 items-center'>
-              <span className='w-4 h-4 border bg-main'></span>
+              <span className='w-4 h-4 border bg-blue-500'></span>
               <p>Cours</p>
             </div>
             <div className='flex gap-1 items-center'>
-              <span className='w-4 h-4 border bg-blue-500'></span>
+              <span className='w-4 h-4 border bg-main'></span>
               <p>Tp/Td</p>
             </div>
         </div>

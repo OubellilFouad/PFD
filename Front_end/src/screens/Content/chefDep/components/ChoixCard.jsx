@@ -18,12 +18,12 @@ const ChoixCard = ({choix}) => {
                 <BsFillCollectionFill/>
             </div>
             <div className='flex flex-col justify-center'>
-                <p className='text-2xl font-semibold'>The choices</p>
+                <p className='text-2xl font-semibold'>Les choix</p>
             </div>
         </div>
         <p className='text-xl font-bold'>Modules</p>
-        <div className='grid grid-cols-5 gap-3'>
-            {modules.length === 0 && (<p className='text-base font-bold'>Teacher didn't make a choice yet</p>)}
+        <div className={`grid grid-cols-5 gap-3`}>
+            {modules.length === 0 && (<p className='text-base font-bold'>Le professeur n'a pas encore fait de choix</p>)}
             {modules.map((module,index) => {
                 const {moduleID,type} = module;
                 return(

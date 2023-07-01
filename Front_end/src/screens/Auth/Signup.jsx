@@ -91,7 +91,7 @@ const Signup = () => {
       const response = await axios.post(signups,formData);
       const result = await response.data;
       if(result.split(' ')[0] === 'NULL\nsuccess'){
-        navigate('/login');
+        navigate('auth/login');
       }
     } catch (error) {
       console.log(Object.keys(JSON.parse(error.response.data.split('NULL\n')[1]).errors));
@@ -113,7 +113,6 @@ const Signup = () => {
       group: parseInt(group),
       role: 4
     }
-    console.log(formData)
     signup(formData);
   }
   useEffect(() => {

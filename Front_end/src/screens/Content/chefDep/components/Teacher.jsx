@@ -57,7 +57,7 @@ const Teacher = ({nom,speid,annee,palid,one,semester,profid,tc,type,grad}) => {
                 <p className={`py-1 px-3 ${number<9 && 'bg-orange-400'} ${number === 9 && 'bg-main'} ${number > 9 && 'bg-red'} text-white rounded-md`}>{number} seance</p>
             </div>
         </div>
-        <p className='text-xl font-bold'>Modules to teach</p>
+        <p className='text-xl font-bold'>Modules à enseigner</p>
         <div className='grid grid-cols-4 gap-3'>
             {cour.map((c) => {
                 const {afecid,groupe,section,semestre,type,module,tc} = c;

@@ -124,15 +124,15 @@ const ModuleForm = () => {
     <div className={`w-full h-full absolute z-30 bg-[rgba(0,0,0,0.5)] top-0 left-0 ${openModule?'flex':'hidden'} justify-center items-center`}>
         <div className='h-[95%] aspect-[9/10] bg-white justify-between rounded-xl flex flex-col'>
           <div className='flex-1 flex justify-between px-3 items-center'>
-            <p className='text-base py-4 font-bold'>Add Module</p>
+            <p className='text-base py-4 font-bold'>Ajouter Module</p>
             <MdClose onClick={() => setOpenModule(false)} className='text-2xl cursor-pointer'/>
           </div>
           <form ref={form} className='flex-[8] px-10 py-4 gap-3 flex flex-col'>
             <Input name={'Full name'} data={nom} type={'text'} setData={setNom} />
             <div className='flex flex-col w-full'>
-                <label htmlFor={'pallier'} className='text-paleMain text-base font-medium cursor-pointer'>Specialities</label>
+                <label htmlFor={'pallier'} className='text-paleMain text-base font-medium cursor-pointer'>Formations</label>
                 <select onChange={(e) => setSpeid(e.target.value)} name="dropDown" id={'pallier'} className='px-2 pb-2 h-8 border-b-paleMain text-main font-bold border-b-2 bg-transparent outline-none' placeholder='Domains'>
-                    <option value="First" className='bg-separator hover:bg-black text-black' unselectable='on'>Specialities</option>
+                    <option value="First" className='bg-separator hover:bg-black text-black' unselectable='on'>Formations</option>
                     {spes?.map((spe) => {
                       const {nom,speid} = spe;
                         return(
@@ -173,7 +173,7 @@ const ModuleForm = () => {
           </form>
           <div className='flex-1 flex justify-end items-center px-3 pb-3 gap-3'>
             <p className={`text-red text-sm ${again?'block':'hidden'}`}>Click again!</p>
-            <button onClick={handleAdd} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
+            <button onClick={handleAdd} className='py-2 px-5 rounded-lg text-white bg-main'>Ajouter</button>
           </div>
         </div>
     </div>

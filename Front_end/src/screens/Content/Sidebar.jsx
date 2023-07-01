@@ -31,12 +31,12 @@ const chef = [
     {type:'line'},
     {path:'disp',name:'Disponibilité',icon: <MdEventAvailable/>,page: 'Disponibilité'},
     {path:'choix',name:'Choix de modules',icon: <BsListCheck/>,page: 'Choix'},
-    {path:'edtprof',name:'Teachers',icon: <BsFillPersonLinesFill className='text-lg'/>,page: 'CEDT'},
+    {path:'edtprof',name:'Enseignants',icon: <BsFillPersonLinesFill className='text-lg'/>,page: 'CEDT'},
 ]
 const gest = [
     {path:'',name:'Dashboard',icon: <MdOutlineSpaceDashboard/>,page: 'Main'},
-    {path:'edt',name:'Time tables',icon: <BiCalendarEvent/>,page: 'EDT'},
-    {path:'edtprof',name:'Teachers',icon: <BsFillPersonLinesFill className='text-lg'/>,page: 'PEDT'},
+    {path:'edt',name:'les emplois du temps',icon: <BiCalendarEvent/>,page: 'EDT'},
+    {path:'edtprof',name:'Enseignants',icon: <BsFillPersonLinesFill className='text-lg'/>,page: 'PEDT'},
 ]
 const gestTc = [
     {path:'',name:'Dashboard',icon: <MdOutlineSpaceDashboard/>,page: 'Main'},

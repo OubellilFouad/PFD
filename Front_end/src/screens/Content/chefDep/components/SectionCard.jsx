@@ -65,7 +65,7 @@ const SectionCard = ({nom,capacite,speid,secid,type,palid}) => {
           </div>
           <AiFillDelete onClick={() => handleDelete()} className='text-lg cursor-pointer hover:text-red'/>
         </div>
-        <p className='text-xl font-bold'>Les groups</p>
+        <p className='text-xl font-bold'>Les groupes</p>
         <div className='grid grid-cols-4 gap-3'>
             {groupesSec.map((group) => {
                 const {nom,secid,speid,capacite,grpid} = group;

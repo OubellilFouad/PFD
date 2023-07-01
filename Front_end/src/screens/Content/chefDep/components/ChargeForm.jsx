@@ -231,7 +231,7 @@ const ChargeForm = ({speid,palid,one,setOpenCharge,openCharge,semestre,profid,co
                     </div>
                 </div>
                 <div className={`flex items-center gap-6 ${!show && 'hidden'} mt-4`}>
-                      <p>Select the type of class:</p>
+                      <p>Sélectionnez le type de classe:</p>
                       <div className='flex gap-6'>
                         <div className='flex items-center gap-3'>
                           <label htmlFor="">TD</label>
@@ -244,7 +244,7 @@ const ChargeForm = ({speid,palid,one,setOpenCharge,openCharge,semestre,profid,co
                       </div>
                 </div>
                 <div className={`flex items-center gap-6 ${show && 'hidden'} mt-4`}>
-                      <p>Select the type of class:</p>
+                      <p>Sélectionnez le type de classe:</p>
                       <div className='flex gap-6'>
                         <div className='flex items-center gap-3'>
                           <label htmlFor="">Cours</label>
@@ -256,7 +256,7 @@ const ChargeForm = ({speid,palid,one,setOpenCharge,openCharge,semestre,profid,co
           </div>
           <div className='flex-1 flex justify-between items-center px-3 pb-3 gap-3'>
             <p className='text-base w-96 text-red'>{exists && ('this module is already being taught in this section, please pick another section or module')}</p>
-            <button onClick={() => handleSubmit()} className={`py-2 px-5 rounded-lg text-white ${exists?'bg-paleMain pointer-events-none':'bg-main'}`}>Submit</button>
+            <button onClick={() => handleSubmit()} className={`py-2 px-5 rounded-lg text-white ${exists?'bg-paleMain pointer-events-none':'bg-main'}`}>Ajouter</button>
           </div>
         </div>
     </div>

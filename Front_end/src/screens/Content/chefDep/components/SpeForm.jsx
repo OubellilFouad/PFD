@@ -51,7 +51,7 @@ const SpeForm = () => {
     <div className={`w-full h-full absolute z-30 bg-[rgba(0,0,0,0.5)] top-0 left-0 ${openSpe?'flex':'hidden'} justify-center items-center`}>
         <div className='h-[80%] aspect-[9/10] bg-white justify-between rounded-xl flex flex-col relative'>
           <div className='flex-1 flex justify-between px-3 items-center'>
-            <p className='text-base py-4 font-bold'>Add Spécialités</p>
+            <p className='text-base py-4 font-bold'>Ajouter Formation</p>
             <MdClose onClick={() => setOpenSpe(false)} className='text-2xl cursor-pointer'/>
           </div>
           <form ref={form} className='flex-[8] px-10 py-4 items-center gap-6 flex flex-col'>
@@ -68,11 +68,11 @@ const SpeForm = () => {
             </div>
             <div className={`p-4 w-2/3 bottom-16 gap-4 ${openFil?'flex':'hidden'} flex-col border rounded-lg absolute`}>
               <Input name={'Filliére'} type='text' data={filName} setData={setFilName} />
-              <button onClick={(e) => handleFil(e)} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
+              <button onClick={(e) => handleFil(e)} className='py-2 px-5 rounded-lg text-white bg-main'>Ajouter</button>
             </div>
           </form>
           <div className='flex-1 flex justify-end items-center px-3 pb-3'>
-            <button onClick={(e) => handleAdd(e)} className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
+            <button onClick={(e) => handleAdd(e)} className='py-2 px-5 rounded-lg text-white bg-main'>Ajouter</button>
           </div>
         </div>
     </div>

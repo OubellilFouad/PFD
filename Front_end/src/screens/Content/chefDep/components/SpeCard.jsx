@@ -49,7 +49,7 @@ const SpeCard = ({nom,fillid,speid,type}) => {
               speid,
               type
             }}>
-              <button className='py-2 px-5 rounded-lg text-white bg-main'>Enter</button>
+              <button className='py-2 px-5 rounded-lg text-white bg-main'>Entrer</button>
             </NavLink>
         </div>
     </div>

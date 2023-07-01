@@ -127,7 +127,7 @@ const ChargeTest = () => {
     <div className='flex flex-col gap-6 overflow-hidden'>
         <div className='flex gap-6'>
             <div className='flex flex-1 flex-col w-full'>
-                  <label htmlFor={'module'} className='text-paleMain text-base font-medium cursor-pointer'>Specialities</label>
+                  <label htmlFor={'module'} className='text-paleMain text-base font-medium cursor-pointer'>Formations</label>
                   <select onChange={(e) => {
                     setSpeid(e.target.value)
                     if(e.target.options[e.target.options.selectedIndex].dataset.type === 'commun'){
@@ -136,7 +136,7 @@ const ChargeTest = () => {
                       setTc(false)
                     }
                   }} name="dropDown" id={'module'} className='px-2 pb-2 h-8 border-b-paleMain text-main font-bold border-b-2 bg-transparent outline-none' placeholder='Domains'>
-                      <option value={'modules'} className='bg-separator hover:bg-black text-black' unselectable='on'>Specialities</option>
+                      <option value={'modules'} className='bg-separator hover:bg-black text-black' unselectable='on'>Formations</option>
                       {spes?.map((spe) => {
                         const {nom,speid} = spe;
                           return(
@@ -170,7 +170,7 @@ const ChargeTest = () => {
               <p className='text-base font-bold'>Scroll to :</p>
               <div className='flex flex-1 flex-col'>
                   <select onChange={(e) => handleTranslate(e.target.value)} name="dropDown" id={'module'} className='px-2 pb-2 h-8 border-b-paleMain text-main font-bold border-b-2 bg-transparent outline-none w-60' placeholder='Domains'>
-                      <option value={'modules'} className='bg-separator hover:bg-black text-black' unselectable='on'>Teachers</option>
+                      <option value={'modules'} className='bg-separator hover:bg-black text-black' unselectable='on'>Enseignants</option>
                       {prof?.map((pro) => {
                         const {userName,userID} = pro;
                           return(
