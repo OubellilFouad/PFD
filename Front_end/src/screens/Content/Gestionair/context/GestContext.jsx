@@ -21,6 +21,8 @@ export const GestContext = ({children}) => {
   const [sem,setSem] = useState('');
   const [speType,setSpeType] = useState('');
   const [section,setSection] = useState(null);
+  const [activeSection,setActiveSection] = useState(null);
+  const [activeGroup,setActiveGroup] = useState(null);
   const [group,setGroup] = useState(null);
   const [commun,setCommun] = useState(true);
   const [salleG,setSalleG] = useState(null);
@@ -69,7 +71,7 @@ export const GestContext = ({children}) => {
     getEdts();
   },[])
   return (
-    <Gestionair.Provider value={{edts,addEdts,deleteEdt,profG,setProfG,typeG,setTypeG,salleG,setSalleG,sem,setSem,speType,setSpeType,section,setSection,group,setGroup,commun,setCommun,deleteAllModEdt,deleteAllSecEdt,deleteAllGrpEdt,deleteAllDepEdt,deleteAllAffEdt,deleteAllProfEdt,deleteAllPlaceEdt}}>
+    <Gestionair.Provider value={{edts,addEdts,deleteEdt,profG,setProfG,typeG,setTypeG,salleG,setSalleG,sem,setSem,speType,setSpeType,section,setSection,group,setGroup,commun,setCommun,deleteAllModEdt,deleteAllSecEdt,deleteAllGrpEdt,deleteAllDepEdt,deleteAllAffEdt,deleteAllProfEdt,deleteAllPlaceEdt,activeSection,setActiveSection,activeGroup,setActiveGroup}}>
         {children}
     </Gestionair.Provider>
   )

@@ -10,7 +10,7 @@ const getTcGrp = 'http://127.0.0.1:5000/groupestc/';
 const getaff = 'http://127.0.0.1:5000/affectations/sec/';
 
 const Section = ({nom,secid,annee,type}) => {
-  const {sem,setSection,setGroup,setCommun} = useGest();
+  const {sem,setSection,setGroup,setCommun,setActiveSection,setActiveGroup,activeSection,activeGroup} = useGest();
   const [open,setOpen] = useState(false);
   const [grps,setGrps] = useState([]);
   const [grpstc,setGrpstc] = useState([]);
@@ -18,6 +18,7 @@ const Section = ({nom,secid,annee,type}) => {
   const [afftc,setAfftc] = useState([]);
   const [affSem,setAffSem] = useState([]);
   const [semestre,setSemestre] = useState(null);
+  const [active,setActive] = useState(false);
   const getGrps = async () => {
     const {data} = await axios.get(`${getGrp}${secid}`);
     setGrps(data);
@@ -94,20 +95,29 @@ const Section = ({nom,secid,annee,type}) => {
       }
     }
   },[afftc,semestre])
+  useEffect(() => {
+    if(activeSection === secid){
+      setActive(true);
+    }else{
+      setActive(false);
+    }
+  },[activeSection,activeGroup])
   return (
     <>
-        <div className='py-1 pl-2 bg-separator rounded-md text-base font-semibold flex items-center gap-2 forma'>
+        <div className={`py-1 pl-2 bg-separator rounded-md text-base font-semibold flex items-center gap-2 forma ${active && '!bg-main text-white'}`}>
             <AiFillCaretRight onClick={() => setOpen(!open)} className={`text-sm cursor-pointer transition-[rotate_150ms] ${open?'rotate-90':'rotate-0'}`}/>
             <NavLink to={'sec'} onClick={() => {
               setSection(secid);
+              setActiveSection(secid);
               setGroup(null);
+              setActiveGroup(null);
             }} end state={{
               page: 'EDT',
               secid,
               name: 'Time tables',
               type
             }}>
-                  <p className='hover:text-main cursor-pointer'>{nom}</p>
+                  <p className={`hover:text-main cursor-pointer ${active && 'hover:!text-separator'}`}>{nom}</p>
             </NavLink>
         </div>
         {type !== 'tc' && (

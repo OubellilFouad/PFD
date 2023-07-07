@@ -5,9 +5,11 @@ import Header from './Header'
 import Sidebar from './Sidebar'
 import { BiLeftArrowAlt } from 'react-icons/bi'
 import horaZreg from '../../assets/hora zreg.png'
+import { useGest } from './Gestionair/context/GestContext'
 
 const Content = () => {
   const {user} = useAuth();
+  const {setActiveSection,setActiveGroup,setSem} = useGest();
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {
@@ -29,7 +31,11 @@ const Content = () => {
           </div>
         )}
         {location.state?.page === 'EDT' && (
-          <NavLink to={'../'} className='flex items-center px-6 gap-3 border-b group hover:text-main border-b-[#DBDBDB] border-r border-r-[#DBDBDB]' state={{
+          <NavLink to={'../'} onClick={() => {
+            setActiveGroup(null);
+            setActiveSection(null);
+            setSem(null);
+          }} className='flex items-center px-6 gap-3 border-b group hover:text-main border-b-[#DBDBDB] border-r border-r-[#DBDBDB]' state={{
             page: 'Main',
             name: 'Dashboard'
           }}>
