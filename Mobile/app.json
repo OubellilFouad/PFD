@@ -4,11 +4,12 @@
     "web": {
       "bundler": "metro"
     },
-    "name": "Mobile",
+    "name": "Hora",
     "slug": "Mobile",
     "splash": {
       "image": "./assets/splash.png"
     },
+    "icon": "./assets/icon.png",
     "extra": {
       "eas": {
         "projectId": "0c06e361-7441-4769-8b00-069ce8447492"

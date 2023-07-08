@@ -39,6 +39,7 @@ const ModuleForm = () => {
   const semestre3 = [5,6];
   const getSpe = async () => {
     const {data} = await axios.get(`${getSpes}${user?.depID}`);
+    console.log(data);
     setSpes(data);
   }
   const getOneSpe = async (id) => {
@@ -89,7 +90,7 @@ const ModuleForm = () => {
   }
   useEffect(() => {
     getSpe();
-  },[])
+  },[user?.depID])
   useEffect(() => {
     if(speid){
       getPal();

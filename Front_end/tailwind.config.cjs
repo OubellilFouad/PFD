@@ -14,7 +14,8 @@ module.exports = {
         separator: '#e9ecef',
         dimText: '#828282',
         red: '#F45050',
-        darkRed: '#c22929'
+        darkRed: '#c22929',
+        'green-500': '#26ba1f'
       },
       fontFamily: {
         nunito: ['"Nunito Sans"']

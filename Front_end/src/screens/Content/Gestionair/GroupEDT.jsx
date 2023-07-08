@@ -346,6 +346,10 @@ const GroupEDT = () => {
               <span className='w-4 h-4 border bg-main'></span>
               <p>Tp/Td</p>
             </div>
+            <div className='flex gap-1 items-center'>
+              <span className='w-4 h-4 border bg-green-500'></span>
+              <p>Available</p>
+            </div>
         </div>
         <div className='flex justify-between items-center'>
             <motion.div ref={group} className='cursor-grab overflow-hidden w-[100%] carousel p-2 border-separator border-2 rounded-md'>
