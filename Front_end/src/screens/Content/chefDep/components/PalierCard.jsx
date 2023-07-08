@@ -4,10 +4,12 @@ import { AiFillDelete } from 'react-icons/ai';
 import { NavLink } from 'react-router-dom'
 import { useAdmin } from '../../admin/context/AdminContext';
 import { useChef } from '../context/ChefContext';
+import { useAuth } from '../../../../../context/AuthContext';
 const getOneSpe = 'http://127.0.0.1:5000/specialite/';
 const getOneTcSpe = 'http://127.0.0.1:5000/formationtc/';
 const PalierCard = ({nom,speid,type,palid}) => {
   const {deletePaliers} = useAdmin();
+  const {user} = useAuth();
   const {deletePal,deleteAllPalSection,deleteAllPalGroup,deleteAllPalModule} = useChef();
   const [spe,setSpe] = useState({});
   const getSpe = async () => {
@@ -41,7 +43,7 @@ const PalierCard = ({nom,speid,type,palid}) => {
             <div className='flex flex-col gap-2 w-full'>
               <div className='flex justify-between items-center'>
                 <p className='text-xl font-bold'>{nom}</p>
-                <AiFillDelete onClick={() => handleDelete()} className='text-lg cursor-pointer hover:text-red'/>
+                {user.role === 1 && type !== 'commun' && <AiFillDelete onClick={() => handleDelete()} className='text-lg cursor-pointer hover:text-red'/>}
               </div>
               <span className='text-sm font-semibold'>{spe.nom}</span>
             </div>

@@ -30,6 +30,7 @@ const ChargeForm = ({speid,palid,one,setOpenCharge,openCharge,semestre,profid,co
   const [choix,setChoix] = useState({});
   const [submit,setSubmit] = useState(false);
   const [exists,setExists] = useState(false);
+  const [error,setError] = useState('');
   const levelArr = ['section','group'];
   const courss = useRef();
   const tp = useRef();
@@ -78,6 +79,7 @@ const ChargeForm = ({speid,palid,one,setOpenCharge,openCharge,semestre,profid,co
         setExists(false);
       }
     })
+    console.log(type)
   },[module,type,section])
   useEffect(() => {
     if(level === 'section'){
@@ -124,17 +126,10 @@ const ChargeForm = ({speid,palid,one,setOpenCharge,openCharge,semestre,profid,co
     }
   },[modules,semestre])
   const handleChange = (e) => {
-    let arr = type || [];
+    let arr = [];
     if(e.target.checked){
         arr.push(e.target.value);
         setType(arr);
-    }else{
-        let newArr = arr.filter((data) => {
-            if(data !== e.target.value){
-                return data;
-            }
-        })
-        setType(newArr);
     }
   }
   const handleSubmit = () => {
@@ -148,6 +143,22 @@ const ChargeForm = ({speid,palid,one,setOpenCharge,openCharge,semestre,profid,co
       tc,
       chef: typpe === 'chef'?true:false,
       depid: user.depID
+    }
+    if(section === null){
+      setError('Section field must not be empty');
+      return;
+    }
+    if(group === null && level === 'group'){
+      setError('Group field must not be empty');
+      return;
+    }
+    if(module === null){
+      setError('Module field must not be empty');
+      return;
+    }
+    if(type.length === 0){
+      setError('Choose class type');
+      return;
     }
     addAffect(formData);
     setSubmit(true)
@@ -169,7 +180,10 @@ const ChargeForm = ({speid,palid,one,setOpenCharge,openCharge,semestre,profid,co
         <div className='h-[95%] aspect-[15/10] bg-white justify-between rounded-xl flex flex-col'>
           <div className='flex-1 flex justify-between px-3 items-center'>
             <p className='text-base py-4 font-bold'>Charge</p>
-            <MdClose onClick={() => setOpenCharge(false)} className='text-2xl cursor-pointer'/>
+            <MdClose onClick={() => {
+              setOpenCharge(false);
+              setError('');
+            }} className='text-2xl cursor-pointer'/>
           </div>
           <div className='flex-[8] px-10 py-4 gap-3 flex flex-col'>
             <ChoixCard choix={choix}/>
@@ -235,11 +249,11 @@ const ChargeForm = ({speid,palid,one,setOpenCharge,openCharge,semestre,profid,co
                       <div className='flex gap-6'>
                         <div className='flex items-center gap-3'>
                           <label htmlFor="">TD</label>
-                          <input ref={td} onChange={(e) => handleChange(e)} type="checkbox" className='accent-main h-4' name="choice" id="td" value={'td'} />
+                          <input ref={td} onChange={(e) => handleChange(e)} type="radio" className='accent-main h-4' name="choice" id="td" value={'td'} />
                         </div>
                         <div className='flex items-center gap-3'>
                           <label htmlFor="">TP</label>
-                          <input ref={tp} onChange={(e) => handleChange(e)} type="checkbox" className='accent-main h-4' name="choice" id="tp" value={'tp'} />
+                          <input ref={tp} onChange={(e) => handleChange(e)} type="radio" className='accent-main h-4' name="choice" id="tp" value={'tp'} />
                         </div>
                       </div>
                 </div>
@@ -248,7 +262,7 @@ const ChargeForm = ({speid,palid,one,setOpenCharge,openCharge,semestre,profid,co
                       <div className='flex gap-6'>
                         <div className='flex items-center gap-3'>
                           <label htmlFor="">Cours</label>
-                          <input ref={courss} onChange={(e) => handleChange(e)} type="checkbox" className='accent-main h-4' name="choice" id="td" value={'cours'} />
+                          <input ref={courss} onChange={(e) => handleChange(e)} type="radio" className='accent-main h-4' name="choice" id="td" value={'cours'} />
                         </div>
                       </div>
                 </div>
@@ -256,6 +270,7 @@ const ChargeForm = ({speid,palid,one,setOpenCharge,openCharge,semestre,profid,co
           </div>
           <div className='flex-1 flex justify-between items-center px-3 pb-3 gap-3'>
             <p className='text-base w-96 text-red'>{exists && ('this module is already being taught in this section, please pick another section or module')}</p>
+            <p className='text-red'> {error} </p>
             <button onClick={() => handleSubmit()} className={`py-2 px-5 rounded-lg text-white ${exists?'bg-paleMain pointer-events-none':'bg-main'}`}>Ajouter</button>
           </div>
         </div>

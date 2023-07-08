@@ -13,8 +13,9 @@ const SpeForm = () => {
   const [openFil,setopenFil] = useState(false);
   const [filName,setFilName] = useState('');
   const [nom,setNom] = useState('');
-  const [fillid,setFillid] = useState(0);
+  const [fillid,setFillid] = useState(null);
   const [cycle,setCycle] = useState('');
+  const [error,setError] = useState('');
   const form = useRef();
   const cycleArr = ['Licence','Master'];
   const handleAdd = (e) => {
@@ -25,6 +26,18 @@ const SpeForm = () => {
       fillid,
       cycle,
       depid
+    }
+    if(nom === ''){
+      setError('Name field must not be empty');
+      return;
+    }
+    if(cycle === ''){
+      setError('Cycle field must not be empty');
+      return;
+    }
+    if(fillid === null || fillid === ''){
+      setError('Filiére field must not be empty');
+      return;
     }
     addSpe(formData);
     setCycle('');
@@ -52,7 +65,10 @@ const SpeForm = () => {
         <div className='h-[80%] aspect-[9/10] bg-white justify-between rounded-xl flex flex-col relative'>
           <div className='flex-1 flex justify-between px-3 items-center'>
             <p className='text-base py-4 font-bold'>Ajouter Formation</p>
-            <MdClose onClick={() => setOpenSpe(false)} className='text-2xl cursor-pointer'/>
+            <MdClose onClick={() => {
+              setOpenSpe(false);
+              setError('');
+            }} className='text-2xl cursor-pointer'/>
           </div>
           <form ref={form} className='flex-[8] px-10 py-4 items-center gap-6 flex flex-col'>
             <Input name={'Nom'} type={'text'} setData={setNom} />
@@ -71,7 +87,8 @@ const SpeForm = () => {
               <button onClick={(e) => handleFil(e)} className='py-2 px-5 rounded-lg text-white bg-main'>Ajouter</button>
             </div>
           </form>
-          <div className='flex-1 flex justify-end items-center px-3 pb-3'>
+          <div className='flex-1 flex justify-between items-center px-3 pb-3'>
+            <p className='text-red'> {error} </p>
             <button onClick={(e) => handleAdd(e)} className='py-2 px-5 rounded-lg text-white bg-main'>Ajouter</button>
           </div>
         </div>

@@ -14,13 +14,14 @@ const SectionForm = () => {
   const {openSec,setOpenSec,addSection,spes} = useChef(); 
   const {user,setShow,setAddMessage,setColor} = useAuth();
   const [nom,setNom] = useState(''); 
-  const [capacite,setCapacite] = useState(0); 
+  const [capacite,setCapacite] = useState(null); 
   const [speid,setSpeid] = useState(null); 
   const [tc,setTc] = useState(false);
   const [pals,setPals] = useState([]);
   const [spe,setSpe] = useState([]);
   const [tcspe,setTcSpe] = useState([]);
   const [palid,setPalid] = useState(null);
+  const [error,setError] = useState('');
   const form = useRef();
   const handleAdd = () => {
     const depid = user?.depID;
@@ -30,6 +31,22 @@ const SectionForm = () => {
       speid,
       depid,
       palid
+    }
+    if(nom === ''){
+      setError('Name field must not be empty');
+      return;
+    }
+    if(capacite === null){
+      setError('Capacité field must not be empty');
+      return;
+    }
+    if(speid === null){
+      setError('Formation field must not be empty');
+      return;
+    }
+    if(palid === ''){
+      setError('Palier field must not be empty');
+      return;
     }
     addSection(formData);
     setNom('');
@@ -76,7 +93,10 @@ const SectionForm = () => {
         <div className='h-[90%] aspect-[9/10] bg-white justify-between rounded-xl flex flex-col'>
           <div className='flex-1 flex justify-between px-3 items-center'>
             <p className='text-base py-4 font-bold'>Ajouter Section</p>
-            <MdClose onClick={() => setOpenSec(false)} className='text-2xl cursor-pointer'/>
+            <MdClose onClick={() => {
+              setOpenSec(false);
+              setError('');
+            }} className='text-2xl cursor-pointer'/>
           </div>
           <form ref={form} className='flex-[8] px-10 py-4 gap-6 flex flex-col'>
             <Input name={'Nom'} type={'text'} setData={setNom} />
@@ -109,7 +129,8 @@ const SectionForm = () => {
               </select>
             </div>
           </form>
-          <div className='flex-1 flex justify-end items-center px-3 pb-3'>
+          <div className='flex-1 flex justify-between items-center px-3 pb-3'>
+            <p className='text-red'> {error} </p>
             <button onClick={handleAdd} className='py-2 px-5 rounded-lg text-white bg-main'>Ajouter</button>
           </div>
         </div>

@@ -15,6 +15,7 @@ const PalierForm = ({speid,array,obj}) => {
   const [arr,setArr] = useState([]);
   const [nbrsec,setNbrsec] = useState(null);
   const [nbrgrp,setNbrgrp] = useState(null);
+  const [error,setError] = useState('');
   const form = useRef();
   let an = [1,2,3,4,5];
   let annee = [];
@@ -28,6 +29,22 @@ const PalierForm = ({speid,array,obj}) => {
       nbrsec,
       nbrgrp,
       depid: user.depID
+    }
+    if(nom === ''){
+      setError('Name field must not be empty');
+      return;
+    }
+    if(annees === null){
+      setError('Annee field must not be empty');
+      return;
+    }
+    if(nbrsec === ''){
+      setError('Provide the number of sections');
+      return;
+    }
+    if(nbrgrp === ''){
+      setError('Provide the numbers groups');
+      return;
     }
     addPalier(formData);
     form.current.reset();
@@ -50,7 +67,10 @@ const PalierForm = ({speid,array,obj}) => {
         <div className='h-[80%] aspect-[9/10] bg-white justify-between rounded-xl flex flex-col relative'>
           <div className='flex-1 flex justify-between px-3 items-center'>
             <p className='text-base py-4 font-bold'>Ajouter Palier</p>
-            <MdClose onClick={() => setOpenPalier(false)} className='text-2xl cursor-pointer'/>
+            <MdClose onClick={() => {
+              setOpenPalier(false);
+              setError('');
+            }} className='text-2xl cursor-pointer'/>
           </div>
           <form ref={form} className='flex-[8] px-10 py-4 items-center gap-6 flex flex-col'>
             <Input name={'Nom'} type={'text'} data={nom} setData={setNom} />
@@ -68,7 +88,8 @@ const PalierForm = ({speid,array,obj}) => {
             <Input name={'Nombre de sections'} type={'number'} data={nbrsec} setData={setNbrsec} />
             <Input name={'Nombre de group'} type={'number'} data={nbrgrp} setData={setNbrgrp} />
           </form>
-          <div className='flex-1 flex justify-end items-center px-3 pb-3'>
+          <div className='flex-1 flex justify-between items-center px-3 pb-3'>
+            <p className='text-red'> {error} </p>
             <button onClick={handleAdd} className='py-2 px-5 rounded-lg text-white bg-main'>Ajouter</button>
           </div>
         </div>

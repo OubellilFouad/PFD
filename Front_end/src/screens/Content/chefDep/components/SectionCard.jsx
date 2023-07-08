@@ -63,7 +63,8 @@ const SectionCard = ({nom,capacite,speid,secid,type,palid}) => {
                   <span className='text-sm text-[#828282]'>{capacite} etudiants</span>
               </div>
           </div>
-          <AiFillDelete onClick={() => handleDelete()} className='text-lg cursor-pointer hover:text-red'/>
+          {user.role === 1 && type !== 'commun' && <AiFillDelete onClick={() => handleDelete()} className='text-lg cursor-pointer hover:text-red'/>}
+          {user.role === 0 && <AiFillDelete onClick={() => handleDelete()} className='text-lg cursor-pointer hover:text-red'/>}
         </div>
         <p className='text-xl font-bold'>Les groupes</p>
         <div className='grid grid-cols-4 gap-3'>

@@ -4,11 +4,13 @@ import { AiFillDelete } from 'react-icons/ai';
 import { NavLink } from 'react-router-dom'
 import { useChef } from '../context/ChefContext';
 import { useAdmin } from '../../admin/context/AdminContext';
+import { useAuth } from '../../../../../context/AuthContext';
 const getOneDomainUrl = 'http://127.0.0.1:5000/domain/';
 const getOneFils = 'http://127.0.0.1:5000/filiere/';
 
 const SpeCard = ({nom,fillid,speid,type}) => {
   const [fil,setFil] = useState({});
+  const {user} = useAuth();
   const {deleteSpe,deleteAllSpePal,deleteAllSpeModule,deleteAllSpeSection,deleteAllSpeGroup} = useChef();
   const {deleteFormation} = useAdmin();
   useEffect(() => {
@@ -38,7 +40,7 @@ const SpeCard = ({nom,fillid,speid,type}) => {
             <div className='flex flex-col gap-2 h-24 w-full'>
                 <div className='flex items-center justify-between'>
                   <p className='text-xl font-bold'>{nom}</p>
-                  <AiFillDelete onClick={() => handleDelete()} className='text-lg cursor-pointer hover:text-red'/>
+                  {user.role === 1 && type !== 'commun' && <AiFillDelete onClick={() => handleDelete()} className='text-lg cursor-pointer hover:text-red'/>}
                 </div>
                 <span className='text-sm font-semibold'>{type === 'commun'?'Tranc commun':fil?.nom}</span>
             </div>
